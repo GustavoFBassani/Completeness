@@ -1,5 +1,7 @@
 App-Challenge 2 
+
 🧱 Architecture
+
 This project follows the Model-View-ViewModel (MVVM) architecture:
 Model: Represents the data and business logic of the application.
 View: Handles the UI, focusing only on presentation and user interaction.
