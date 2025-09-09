@@ -131,6 +131,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		C4CFA3572E70940100140530 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -144,7 +145,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint não instalado, instale com 'brew install swiftlint'\"\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [[ -x /opt/homebrew/bin/swiftlint ]]; then\n  /opt/homebrew/bin/swiftlint || true\nelse\n  echo \"warning: SwiftLint não encontrado. Instale com 'brew install swiftlint'\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
