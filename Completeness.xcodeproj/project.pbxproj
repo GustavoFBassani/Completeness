@@ -65,10 +65,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C4CFA3522E70416A00140530 /* Build configuration list for PBXNativeTarget "Completeness" */;
 			buildPhases = (
+				C4CFA3572E70940100140530 /* ShellScript */,
 				C4CFA3402E70416900140530 /* Sources */,
 				C4CFA3412E70416900140530 /* Frameworks */,
 				C4CFA3422E70416900140530 /* Resources */,
-				C4CFA3572E70940100140530 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -170,6 +170,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W35YJ39H5L;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Completeness/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -200,6 +201,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W35YJ39H5L;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Completeness/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
