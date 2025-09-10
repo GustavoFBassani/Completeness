@@ -38,6 +38,7 @@ only_rules:
   - redundant_void_return
 
   # ----------- Custom rules -----------
+  - custom_rules
   - swiftui_state_private
   - swiftui_environment_private
   - swiftui_environmentobject_private
