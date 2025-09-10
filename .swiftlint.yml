@@ -1,7 +1,7 @@
 # SwiftLint config focado em SwiftUI
 
 only_rules:
-  # ----------- Estilo geral (vale para qualquer projeto) -----------
+  # ----------- Estilo geral -----------
   - colon
   - comma
   - closing_brace
@@ -31,11 +31,18 @@ only_rules:
   - vertical_whitespace_opening_braces
 
   # ----------- SwiftUI específico -----------
-  - private_swiftui_state   # força @State ser privado
-  - private_unit_test       # mantém testes limpos
+  - private_swiftui_state
+  - private_unit_test
   - redundant_discardable_let
   - redundant_nil_coalescing
   - redundant_void_return
+
+  # ----------- Custom rules -----------
+  - swiftui_state_private
+  - swiftui_environment_private
+  - swiftui_environmentobject_private
+  - swiftui_scaledtofit
+  - swiftui_scaledtofill
 
 # ----------- Config extra -----------
 line_length:
