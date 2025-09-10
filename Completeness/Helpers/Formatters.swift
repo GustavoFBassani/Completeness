@@ -12,5 +12,3 @@
 //
 //  The goal is to avoid creating repeated formatter instances
 //  during runtime, improving performance and ensuring consistency.
-
-

@@ -18,8 +18,7 @@ enum TemplateState {
 
 // MARK: - ViewModel
 @Observable
-final class TemplateViewModel: TemplateProtocol {
-    
+final class TemplateViewModel: TemplateProtocol {    
     // MARK: - Properties
     var state: TemplateState = .idle
     var errorMessage: String?

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct TemplateView: View {
-    
     // MARK: - Dependencies
     //let viewModel: ViewModel
     
@@ -16,7 +15,7 @@ struct TemplateView: View {
     @Environment(\.modelContext) var context
     
     // MARK: - State
-    @State private var showDetails: Bool = false
+    @State private var showDetails = false
     
     // MARK: - Body
     var body: some View {
