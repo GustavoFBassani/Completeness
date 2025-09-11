@@ -13,7 +13,7 @@ final class Habit: Identifiable {
     var id = UUID()
     var habitName: String
     var habitIsCompleted = false
-    var habitCategory: String
+    var habitCategory: Categories.RawValue
     var habitDescription: String
     var habitColor: String
     var habitRecurrence: String

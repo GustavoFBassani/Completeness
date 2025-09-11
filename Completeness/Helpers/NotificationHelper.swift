@@ -22,7 +22,6 @@ struct NotificationHelper {
     }
     
     static func scheduleNotification(title: String, body: String, timeInterval: TimeInterval) {
-        
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body
@@ -46,6 +45,4 @@ struct NotificationHelper {
             }
         }
     }
-    
-    
 }
