@@ -9,7 +9,23 @@ import SwiftUI
 
 struct HabitView: View {
     var body: some View {
-        Text("Habit")
+        VStack{
+            Text("Habit")
+            
+            Button {
+                NotificationHelper.scheduleNotification(title: "Título Teste", body: "Corpo de teste", timeInterval: 5)
+                print("Botão clicado")
+            } label: {
+                Text("Notificação em 5 segundos")
+                    .padding(6)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+            }
+        }
+        .onAppear {
+            NotificationHelper.requestNotificationPermissions()
+        }
     }
 }
 
