@@ -24,7 +24,7 @@ struct CompletenessApp: App {
 
     var body: some Scene {
         WindowGroup {
-            TemplateView()
+            TabBar()
         }
         .modelContainer(sharedModelContainer)
     }
