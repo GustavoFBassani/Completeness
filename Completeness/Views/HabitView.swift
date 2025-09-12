@@ -8,27 +8,77 @@
 import SwiftUI
 
 struct HabitView: View {
+    
+    @State private var intervalText: String = ""
+    @State private var interval: Int = 0
+    @State private var notificationTitle: String = ""
+    @State private var notificationBody: String = ""
+    
+    @State private var selectedTime = Date()
+    @State private var repeatEveryday = true
+    @State private var selectedWeekdays: Set<Int> = []
+    
+    let weekdays = [
+        (1, "Domingo"),
+        (2, "Segunda"),
+        (3, "Terça"),
+        (4, "Quarta"),
+        (5, "Quinta"),
+        (6, "Sexta"),
+        (7, "Sábado")
+    ]
+    
     var body: some View {
         VStack{
             Text("Habit")
+                .font(.title)
+            
+            TextField("Digite o tempo em segundos", text: $intervalText)
+                .keyboardType(.numberPad)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.horizontal)
+            
+            TextField("Digite título da notificação", text: $notificationTitle)
+                .keyboardType(.default)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.horizontal)
+            
+            TextField("Digite o corpo da notificação", text: $notificationBody)
+                .keyboardType(.default)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.horizontal)
             
             Button {
-                NotificationHelper.scheduleNotification(title: "Título Teste", body: "Corpo de teste", timeInterval: 5)
-                print("Botão clicado")
+                if let time = Int(intervalText), time > 0 {
+                    interval = time
+                    NotificationHelper.regressiveNotification(
+                        title: notificationTitle,
+                        body: notificationBody,
+                        timeInterval: TimeInterval(interval)
+                    )
+                    print("Notificação agendada em \(interval) segundos")
+                } else {
+                    print("Digite um tempo válido")
+                }
+                
             } label: {
-                Text("Notificação em 5 segundos")
-                    .padding(6)
+                Text("Agendar Notificação")
+                    .padding(10)
+                    .frame(maxWidth: .infinity)
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(8)
+                    .padding(.horizontal)
             }
         }
         .onAppear {
             NotificationHelper.requestNotificationPermissions()
         }
+        
+        
     }
 }
 
-#Preview {
+#Preview() {
     HabitView()
 }
