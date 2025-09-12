@@ -7,16 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C4885F1F2E720C4800CE01BD /* CompletenessCompenion Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C4885F152E720C4700CE01BD /* CompletenessCompenion Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C49112232E74989400B988F5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C49112222E74989400B988F5 /* WidgetKit.framework */; };
+		C49112252E74989400B988F5 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C49112242E74989400B988F5 /* SwiftUI.framework */; };
+		C49112312E74989600B988F5 /* CompletenessWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C49112202E74989400B988F5 /* CompletenessWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6422396D2E74ADD50065A7AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C4CFA33C2E70416900140530 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C4CFA3432E70416900140530;
+			remoteInfo = Completeness;
+		};
 		C4885F1D2E720C4800CE01BD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C4CFA33C2E70416900140530 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C4885F142E720C4700CE01BD;
 			remoteInfo = "CompletenessCompenion Watch App";
+		};
+		C491122E2E74989600B988F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C4CFA33C2E70416900140530 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C491121F2E74989400B988F5;
+			remoteInfo = CompletenessWidgetsExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -27,15 +43,30 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				C4885F1F2E720C4800CE01BD /* CompletenessCompenion Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C49112302E74989600B988F5 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C49112312E74989600B988F5 /* CompletenessWidgetsExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		642239692E74ADD50065A7AE /* CompletenessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CompletenessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4885F152E720C4700CE01BD /* CompletenessCompenion Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CompletenessCompenion Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C49112202E74989400B988F5 /* CompletenessWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CompletenessWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C49112222E74989400B988F5 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		C49112242E74989400B988F5 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		C49112362E749B3000B988F5 /* CompletenessWidgetsExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CompletenessWidgetsExtensionRelease.entitlements; sourceTree = "<group>"; };
 		C4CFA3442E70416900140530 /* Completeness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Completeness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -50,9 +81,19 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		6422396A2E74ADD50065A7AE /* CompletenessTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CompletenessTests;
+			sourceTree = "<group>";
+		};
 		C4885F162E720C4700CE01BD /* CompletenessCompenion Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "CompletenessCompenion Watch App";
+			sourceTree = "<group>";
+		};
+		C49112262E74989400B988F5 /* CompletenessWidgets */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CompletenessWidgets;
 			sourceTree = "<group>";
 		};
 		C4CFA3462E70416900140530 /* Completeness */ = {
@@ -66,10 +107,26 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		642239662E74ADD50065A7AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C4885F122E720C4700CE01BD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C491121D2E74989400B988F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C49112252E74989400B988F5 /* SwiftUI.framework in Frameworks */,
+				C49112232E74989400B988F5 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,11 +140,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C49112212E74989400B988F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C49112222E74989400B988F5 /* WidgetKit.framework */,
+				C49112242E74989400B988F5 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C4CFA33B2E70416900140530 = {
 			isa = PBXGroup;
 			children = (
+				C49112362E749B3000B988F5 /* CompletenessWidgetsExtensionRelease.entitlements */,
 				C4CFA3462E70416900140530 /* Completeness */,
 				C4885F162E720C4700CE01BD /* CompletenessCompenion Watch App */,
+				C49112262E74989400B988F5 /* CompletenessWidgets */,
+				6422396A2E74ADD50065A7AE /* CompletenessTests */,
+				C49112212E74989400B988F5 /* Frameworks */,
 				C4CFA3452E70416900140530 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -97,6 +167,8 @@
 			children = (
 				C4CFA3442E70416900140530 /* Completeness.app */,
 				C4885F152E720C4700CE01BD /* CompletenessCompenion Watch App.app */,
+				C49112202E74989400B988F5 /* CompletenessWidgetsExtension.appex */,
+				642239692E74ADD50065A7AE /* CompletenessTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,6 +176,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		642239682E74ADD50065A7AE /* CompletenessTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 642239712E74ADD50065A7AE /* Build configuration list for PBXNativeTarget "CompletenessTests" */;
+			buildPhases = (
+				642239652E74ADD50065A7AE /* Sources */,
+				642239662E74ADD50065A7AE /* Frameworks */,
+				642239672E74ADD50065A7AE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6422396E2E74ADD50065A7AE /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				6422396A2E74ADD50065A7AE /* CompletenessTests */,
+			);
+			name = CompletenessTests;
+			packageProductDependencies = (
+			);
+			productName = CompletenessTests;
+			productReference = 642239692E74ADD50065A7AE /* CompletenessTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C4885F142E720C4700CE01BD /* CompletenessCompenion Watch App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C4885F202E720C4800CE01BD /* Build configuration list for PBXNativeTarget "CompletenessCompenion Watch App" */;
@@ -126,6 +221,28 @@
 			productReference = C4885F152E720C4700CE01BD /* CompletenessCompenion Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
+		C491121F2E74989400B988F5 /* CompletenessWidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C49112342E74989600B988F5 /* Build configuration list for PBXNativeTarget "CompletenessWidgetsExtension" */;
+			buildPhases = (
+				C491121C2E74989400B988F5 /* Sources */,
+				C491121D2E74989400B988F5 /* Frameworks */,
+				C491121E2E74989400B988F5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				C49112262E74989400B988F5 /* CompletenessWidgets */,
+			);
+			name = CompletenessWidgetsExtension;
+			packageProductDependencies = (
+			);
+			productName = CompletenessWidgetsExtension;
+			productReference = C49112202E74989400B988F5 /* CompletenessWidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		C4CFA3432E70416900140530 /* Completeness */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C4CFA3522E70416A00140530 /* Build configuration list for PBXNativeTarget "Completeness" */;
@@ -135,11 +252,13 @@
 				C4CFA3412E70416900140530 /* Frameworks */,
 				C4CFA3422E70416900140530 /* Resources */,
 				C4885F232E720C4800CE01BD /* Embed Watch Content */,
+				C49112302E74989600B988F5 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				C4885F1E2E720C4800CE01BD /* PBXTargetDependency */,
+				C491122F2E74989600B988F5 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				C4CFA3462E70416900140530 /* Completeness */,
@@ -158,10 +277,17 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1640;
+				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
+					642239682E74ADD50065A7AE = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = C4CFA3432E70416900140530;
+					};
 					C4885F142E720C4700CE01BD = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					C491121F2E74989400B988F5 = {
 						CreatedOnToolsVersion = 16.4;
 					};
 					C4CFA3432E70416900140530 = {
@@ -175,6 +301,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = C4CFA33B2E70416900140530;
 			minimizedProjectReferenceProxies = 1;
@@ -185,12 +312,28 @@
 			targets = (
 				C4CFA3432E70416900140530 /* Completeness */,
 				C4885F142E720C4700CE01BD /* CompletenessCompenion Watch App */,
+				C491121F2E74989400B988F5 /* CompletenessWidgetsExtension */,
+				642239682E74ADD50065A7AE /* CompletenessTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		642239672E74ADD50065A7AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C4885F132E720C4700CE01BD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C491121E2E74989400B988F5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -228,7 +371,21 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		642239652E74ADD50065A7AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C4885F112E720C4700CE01BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C491121C2E74989400B988F5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -245,14 +402,60 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6422396E2E74ADD50065A7AE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C4CFA3432E70416900140530 /* Completeness */;
+			targetProxy = 6422396D2E74ADD50065A7AE /* PBXContainerItemProxy */;
+		};
 		C4885F1E2E720C4800CE01BD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C4885F142E720C4700CE01BD /* CompletenessCompenion Watch App */;
 			targetProxy = C4885F1D2E720C4800CE01BD /* PBXContainerItemProxy */;
 		};
+		C491122F2E74989600B988F5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C491121F2E74989400B988F5 /* CompletenessWidgetsExtension */;
+			targetProxy = C491122E2E74989600B988F5 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		6422396F2E74ADD50065A7AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YBSTQNCUFV;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = vitor.CompletenessTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Completeness.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Completeness";
+			};
+			name = Debug;
+		};
+		642239702E74ADD50065A7AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YBSTQNCUFV;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = vitor.CompletenessTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Completeness.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Completeness";
+			};
+			name = Release;
+		};
 		C4885F212E720C4800CE01BD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -301,6 +504,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = "";
 				"DEVELOPMENT_TEAM[sdk=watchos*]" = W35YJ39H5L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -317,6 +521,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.academy.Completeness.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = CompletenessWatchOSProfile;
 				RESOURCES_TARGETED_DEVICE_FAMILY = "";
 				SDKROOT = watchos;
@@ -326,6 +531,79 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Release;
+		};
+		C49112322E74989600B988F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = W35YJ39H5L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CompletenessWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CompletenessWidgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = br.academy.Completeness.CompletenessWidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = CompletenesWidgetsPP;
+				REGISTER_APP_GROUPS = YES;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C49112332E74989600B988F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = CompletenessWidgetsExtensionRelease.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = W35YJ39H5L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CompletenessWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CompletenessWidgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = br.academy.Completeness.CompletenessWidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = CompletenesWidgetsPP;
+				REGISTER_APP_GROUPS = YES;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -359,7 +637,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.academy.Completeness;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = CompletenessiOSProfile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = CompletenessiOSPProfile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -399,7 +677,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.academy.Completeness;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = CompletenessiOSProfile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = CompletenessiOSPProfile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -472,6 +750,7 @@
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -533,6 +812,7 @@
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -541,11 +821,29 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		642239712E74ADD50065A7AE /* Build configuration list for PBXNativeTarget "CompletenessTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6422396F2E74ADD50065A7AE /* Debug */,
+				642239702E74ADD50065A7AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C4885F202E720C4800CE01BD /* Build configuration list for PBXNativeTarget "CompletenessCompenion Watch App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C4885F212E720C4800CE01BD /* Debug */,
 				C4885F222E720C4800CE01BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C49112342E74989600B988F5 /* Build configuration list for PBXNativeTarget "CompletenessWidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C49112322E74989600B988F5 /* Debug */,
+				C49112332E74989600B988F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
