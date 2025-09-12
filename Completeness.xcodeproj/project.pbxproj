@@ -6,10 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		C4885F1F2E720C4800CE01BD /* CompletenessCompenion Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C4885F152E720C4700CE01BD /* CompletenessCompenion Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		C4885F1D2E720C4800CE01BD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,7 +23,6 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				C4885F1F2E720C4800CE01BD /* CompletenessCompenion Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
