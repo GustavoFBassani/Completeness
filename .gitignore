@@ -49,3 +49,5 @@ fastlane/test_output
 # Xcode build output
 DerivedData/
 
+**/Features/Testing
+
