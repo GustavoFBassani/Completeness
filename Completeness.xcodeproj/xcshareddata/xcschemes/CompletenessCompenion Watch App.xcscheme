@@ -15,6 +15,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C4885F142E720C4700CE01BD"
+               BuildableName = "CompletenessCompenion Watch App.app"
+               BlueprintName = "CompletenessCompenion Watch App"
+               ReferencedContainer = "container:Completeness.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "C4CFA3432E70416900140530"
                BuildableName = "Completeness.app"
                BlueprintName = "Completeness"
@@ -57,9 +71,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C4CFA3432E70416900140530"
-            BuildableName = "Completeness.app"
-            BlueprintName = "Completeness"
+            BlueprintIdentifier = "C4885F142E720C4700CE01BD"
+            BuildableName = "CompletenessCompenion Watch App.app"
+            BlueprintName = "CompletenessCompenion Watch App"
             ReferencedContainer = "container:Completeness.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -74,9 +88,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C4CFA3432E70416900140530"
-            BuildableName = "Completeness.app"
-            BlueprintName = "Completeness"
+            BlueprintIdentifier = "C4885F142E720C4700CE01BD"
+            BuildableName = "CompletenessCompenion Watch App.app"
+            BlueprintName = "CompletenessCompenion Watch App"
             ReferencedContainer = "container:Completeness.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
