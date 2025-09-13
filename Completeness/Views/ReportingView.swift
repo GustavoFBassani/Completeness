@@ -25,7 +25,6 @@ struct ReportingView: View {
     
     var body: some View {
         NavigationView {
-
             VStack(spacing: 20) {
                 DatePicker("Horário", selection: $selectedTime, displayedComponents: .hourAndMinute)
                     .datePickerStyle(.wheel)

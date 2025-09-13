@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct HabitView: View {
-    
-    @State private var intervalText: String = ""
-    @State private var interval: Int = 0
-    @State private var notificationTitle: String = ""
-    @State private var notificationBody: String = ""
+    @State private var intervalText = ""
+    @State private var interval = 0
+    @State private var notificationTitle = ""
+    @State private var notificationBody = ""
     
     @State private var selectedTime = Date()
     @State private var repeatEveryday = true
@@ -60,7 +59,6 @@ struct HabitView: View {
                 } else {
                     print("Digite um tempo válido")
                 }
-                
             } label: {
                 Text("Agendar Notificação")
                     .padding(10)
@@ -74,8 +72,6 @@ struct HabitView: View {
         .onAppear {
             NotificationHelper.requestNotificationPermissions()
         }
-        
-        
     }
 }
 

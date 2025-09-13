@@ -43,7 +43,7 @@ struct SimpleEntry: TimelineEntry {
     let emoji: String
 }
 
-struct CompletenessWidgetsEntryView : View {
+struct CompletenessWidgetsEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {

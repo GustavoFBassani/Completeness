@@ -8,21 +8,23 @@
 import Foundation
 import UserNotifications
 
-    // MARK: - Função para solicitar permissão de envio de notificação, ela deve estar no .onApper da tela onde a notificação criada para ser disparada.
+/// Function to request notification permission.
+/// This should be called inside `.onAppear` of the screen
+/// where the notification will be scheduled to fire.
 struct NotificationHelper {
     static func requestNotificationPermissions() {
         UNUserNotificationCenter.current().requestAuthorization(
             options: [.alert, .badge, .sound]
         ) { granted, error in
             if granted {
-                    print(">>> Notification permission granted.")
+                print(">>> Notification permission granted.")
             } else {
                 print(">>> Notification permission denied.")
             }
         }
     }
     
-    // MARK: - Função que agenda uma notificação partindo de uma contagem regressiva
+    /// Function that schedules a notification based on a countdown.
     static func regressiveNotification(title: String, body: String, timeInterval: TimeInterval) {
         let content = UNMutableNotificationContent()
         content.title = title
@@ -48,6 +50,8 @@ struct NotificationHelper {
         }
     }
     
+    /// Function that schedules a daily notification.
+    /// If no weekdays are provided, it schedules daily without restrictions.
     static func scheduledDailyNotification(
         title: String,
         body: String,
@@ -61,7 +65,7 @@ struct NotificationHelper {
         content.sound = UNNotificationSound.default
         content.badge = 1
 
-        // Se não vier dia da semana, agenda diário sem restrição de weekday
+        // If no weekdays are provided, schedule daily without weekday restriction
         if weekdays.isEmpty {
             var dateComponents = DateComponents()
             dateComponents.hour = hour
@@ -82,7 +86,7 @@ struct NotificationHelper {
                 }
             }
         } else {
-            // Para cada dia da semana, cria um agendamento
+            // For each weekday, create a schedule
             weekdays.forEach { wk in
                 var dateComponents = DateComponents()
                 dateComponents.hour = hour
@@ -106,6 +110,4 @@ struct NotificationHelper {
             }
         }
     }
-    
-    
 }
