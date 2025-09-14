@@ -376,7 +376,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [[ -x /opt/homebrew/bin/swiftlint ]]; then\n  /opt/homebrew/bin/swiftlint || true\nelse\n  echo \"warning: SwiftLint não encontrado. Instale com 'brew install swiftlint'\"\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [[ -x /opt/homebrew/bin/swiftlint ]]; then\n  /opt/homebrew/bin/swiftlint || true\nfi\n\nexit 0\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
