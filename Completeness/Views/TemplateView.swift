@@ -34,6 +34,7 @@ struct TemplateView: View {
     // MARK: - Content
     @ViewBuilder
     private var content: some View {
+        EmptyView() 
 //        switch viewModel.state {
 //        case .idle:
 //            Color.clear

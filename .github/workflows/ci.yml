@@ -1,0 +1,27 @@
+name: iOS CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-13   
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: List simulators (debug)
+        run: xcrun simctl list devices
+
+      - name: Run tests
+        run: |
+          xcodebuild \
+            -project Completeness.xcodeproj \
+            -scheme Completeness \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.4' \
+            clean test
