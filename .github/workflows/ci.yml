@@ -23,5 +23,5 @@ jobs:
             -project Completeness.xcodeproj \
             -scheme Completeness \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.4' \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.6' \
             clean test
