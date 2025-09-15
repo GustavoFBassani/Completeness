@@ -15,9 +15,9 @@ struct TabBar: View {
                     HabitView()
                 }
             }
-            Tab("Reporting", systemImage: "circle.hexagongrid"){
+            Tab("Stats", systemImage: "circle.hexagongrid"){
                 NavigationStack{
-                    ReportingView()
+                    StatsView()
                 }
             }
             Tab("Settings", systemImage: "gear"){

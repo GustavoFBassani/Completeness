@@ -2,14 +2,16 @@
 //  ConfigView.swift
 //  Completeness
 //
-//  Created by Gustavo Melleu on 11/09/25.
+//  Created by Gustavo Ferreira bassani on 15/09/25.
 //
 
 import SwiftUI
 
 struct ConfigView: View {
     var body: some View {
-        Text("Settings")
+
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+
     }
 }
 
