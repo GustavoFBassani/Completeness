@@ -11,16 +11,16 @@ import SwiftData
 @Model
 final class Habit: Identifiable {
     var id = UUID()
-    var habitName: String
+    var habitName = ""
     var habitIsCompleted = false
-    var habitCategory: Categories.RawValue
-    var habitDescription: String
-    var habitColor: String
-    var habitRecurrence: String
-    var habitSimbol: String
-    var habitCompleteness: String
+    var habitCategory: Categories.RawValue = ""
+    var habitDescription = ""
+    var habitColor = ""
+    var habitRecurrence = ""
+    var habitSimbol = ""
+    var habitCompleteness = ""
     
-    var timestampHabit: Date
+    var timestampHabit = Date.now
 
 
     init(id: UUID,

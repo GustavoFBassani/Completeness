@@ -10,22 +10,25 @@ import SwiftData
 
 @main
 struct CompletenessApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+    let modelContainer: ModelContainer
+
+    init() {
+        let configuration = ModelConfiguration(cloudKitDatabase: .automatic)
+
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            self.modelContainer = try ModelContainer(
+                for: Habit.self,
+                configurations: configuration
+            )
         } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+            fatalError("Não foi possível criar o ModelContainer: \(error)")
         }
-    }()
+    }
 
     var body: some Scene {
         WindowGroup {
             TabBar()
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(modelContainer)
     }
 }
