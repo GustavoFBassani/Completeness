@@ -8,7 +8,7 @@
 import SwiftUI
 import UserNotifications
 
-struct ReportingView: View {
+struct Notification2Tests: View {
     @State private var selectedTime = Date()
     @State private var repeatEveryday = true
     @State private var selectedWeekdays: Set<Int> = []
@@ -111,5 +111,5 @@ struct MultipleSelectionRow: View {
 
 
 #Preview {
-    ReportingView()
+    Notification2Tests()
 }

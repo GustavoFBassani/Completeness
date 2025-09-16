@@ -10,25 +10,11 @@ import SwiftData
 
 @main
 struct CompletenessApp: App {
-    let modelContainer: ModelContainer
-
-    init() {
-        let configuration = ModelConfiguration(cloudKitDatabase: .automatic)
-
-        do {
-            self.modelContainer = try ModelContainer(
-                for: Habit.self,
-                configurations: configuration
-            )
-        } catch {
-            fatalError("Não foi possível criar o ModelContainer: \(error)")
-        }
-    }
-
+    @Environment(\.modelContext) var context
     var body: some Scene {
         WindowGroup {
             TabBar()
         }
-        .modelContainer(modelContainer)
+        .modelContainer(for: Habit.self)
     }
 }
