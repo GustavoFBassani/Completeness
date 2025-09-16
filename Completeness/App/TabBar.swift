@@ -25,7 +25,7 @@ struct TabBar: View {
             }
             Tab("Settings", systemImage: "gear"){
                 NavigationStack{
-                    ConfigView()
+                    ConfigTest()
                 }
             }
         }
