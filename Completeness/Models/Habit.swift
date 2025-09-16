@@ -19,8 +19,10 @@ final class Habit: Identifiable {
     var habitRecurrence = ""
     var habitSimbol = ""
     var timestampHabit = Date()
-    var count = 0
     var habitCompleteness: CompletionHabit?
+    
+    var howManyTimesToToggle = 1
+    var howManyTimesItWasDone = 0
     
     init(id: UUID = UUID(),
          habitName: String = "",
@@ -32,7 +34,8 @@ final class Habit: Identifiable {
          habitSimbol: String = "",
          timestampHabit: Date = .now,
          habitCompleteness: CompletionHabit? = .byToggle,
-         count: Int = 0) {
+         howManyTimesToToggle: Int,
+         howManyTimesItWasDone: Int = 0) {
         self.id = id
         self.habitName = habitName
         self.habitIsCompleted = habitIsCompleted
@@ -42,7 +45,8 @@ final class Habit: Identifiable {
         self.habitRecurrence = habitRecurrence
         self.habitSimbol = habitSimbol
         self.timestampHabit = timestampHabit
-        self.count = count
         self.habitCompleteness = habitCompleteness ?? .byToggle
+        self.howManyTimesToToggle = howManyTimesToToggle
+        self.howManyTimesItWasDone = howManyTimesItWasDone
     }
 }

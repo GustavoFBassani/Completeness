@@ -20,7 +20,7 @@ struct TabBar: View {
             }
             Tab("Stats", systemImage: "circle.hexagongrid"){
                 NavigationStack{
-                    StatsView()
+                    ConfigView()
                 }
             }
             Tab("Settings", systemImage: "gear"){

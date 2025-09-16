@@ -42,7 +42,8 @@ class HabitRepository {
                              habitRecurrence: habit.habitRecurrence,
                              habitSimbol: habit.habitSimbol,
                              timestampHabit: habit.timestampHabit,
-                             habitCompleteness: habit.habitCompleteness
+                             habitCompleteness: habit.habitCompleteness,
+                             howManyTimesToToggle: habit.howManyTimesToToggle
         )
         
         context.insert(newHabit)
@@ -50,9 +51,10 @@ class HabitRepository {
     }
     
     func editHabit() {
+        //edit habits
     }
     
     func deleteHabit() {
-        
+        //delete habits
     }
 }

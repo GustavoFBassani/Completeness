@@ -41,8 +41,8 @@ class HabitCompletionRepository {
     func completeByMultipleToggle(id: UUID, count: Int) {
         let habitToChange = getHabitById(id: id)
         if let habitToChange {
-            if habitToChange.count < count {
-                habitToChange.count += 1
+            if habitToChange.howManyTimesToToggle < count {
+                habitToChange.howManyTimesToToggle += 1
             } else {
                 habitToChange.habitIsCompleted.toggle()
                 try? context.save()
