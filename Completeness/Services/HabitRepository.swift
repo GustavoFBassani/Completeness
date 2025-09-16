@@ -8,20 +8,51 @@
 /// using the SwiftData `ModelContext`.
 
 import SwiftData
+import Foundation
 
-class PersistenceService {
+class HabitRepository {
     let context: ModelContext
     
     init(context: ModelContext) {
         self.context = context
     }
     
-    func createHabit() {
+    func getAllHabits() throws -> [Habit] {
+        let descriptor = FetchDescriptor<Habit>()
+        do {
+            let allHabits: [Habit] = try context.fetch(descriptor)
+            return allHabits
+        } catch {
+            print("error to catch Habits")
+        }
+        return []
+    }
+    
+    func getHabitById(id: UUID) -> Habit? {
+        try? getAllHabits().first {$0.id == id }
+    }
+    
+    func createHabit(habit: Habit) {
+        let newHabit = Habit(id: habit.id,
+                             habitName: habit.habitName,
+                             habitIsCompleted: habit.habitIsCompleted,
+                             habitCategory: habit.habitCategory,
+                             habitDescription: habit.habitDescription,
+                             habitColor: habit.habitColor,
+                             habitRecurrence: habit.habitRecurrence,
+                             habitSimbol: habit.habitSimbol,
+                             timestampHabit: habit.timestampHabit,
+                             habitCompleteness: habit.habitCompleteness
+        )
+        
+        context.insert(newHabit)
+        try? context.save()
     }
     
     func editHabit() {
     }
     
     func deleteHabit() {
+        
     }
 }

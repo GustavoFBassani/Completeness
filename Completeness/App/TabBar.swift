@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TabBar: View {
+    @Environment(\.modelContext) var context
+    
     var body: some View {
         TabView{
             Tab("Habit", systemImage: "house"){
-              NavigationStack{
+                NavigationStack{
                     HabitView()
                 }
             }
@@ -22,7 +25,8 @@ struct TabBar: View {
             }
             Tab("Settings", systemImage: "gear"){
                 NavigationStack{
-                    ConfigView()
+                    HabitsPOCView(habitCompletionPersistence: HabitCompletionRepository(context: context),
+                                  habitRepository: HabitRepository(context: context))
                 }
             }
         }

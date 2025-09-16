@@ -10,17 +10,17 @@ import SwiftData
 
 @Model
 final class Habit: Identifiable {
-    var id: UUID
-    var habitName: String
-    var habitIsCompleted: Bool
-    var habitCategory: Categories.RawValue
-    var habitDescription: String
-    var habitColor: String
-    var habitRecurrence: String
-    var habitSimbol: String
-    var timestampHabit: Date
-    var count: Int
-    var habitCompleteness: CompletionHabit
+    var id = UUID()
+    var habitName = ""
+    var habitIsCompleted = false
+    var habitCategory: Categories.RawValue = ""
+    var habitDescription = ""
+    var habitColor = ""
+    var habitRecurrence = ""
+    var habitSimbol = ""
+    var timestampHabit = Date()
+    var count = 0
+    var habitCompleteness: CompletionHabit?
     
     init(id: UUID = UUID(),
          habitName: String = "",
@@ -31,7 +31,7 @@ final class Habit: Identifiable {
          habitRecurrence: String = "",
          habitSimbol: String = "",
          timestampHabit: Date = .now,
-         habitCompleteness: CompletionHabit = .byToggle,
+         habitCompleteness: CompletionHabit? = .byToggle,
          count: Int = 0) {
         self.id = id
         self.habitName = habitName
@@ -43,6 +43,6 @@ final class Habit: Identifiable {
         self.habitSimbol = habitSimbol
         self.timestampHabit = timestampHabit
         self.count = count
-        self.habitCompleteness = habitCompleteness
+        self.habitCompleteness = habitCompleteness ?? .byToggle
     }
 }

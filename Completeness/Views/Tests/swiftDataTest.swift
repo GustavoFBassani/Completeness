@@ -21,7 +21,8 @@ struct swiftDataTest: View {
                                  habitColor: "",
                                  habitRecurrence: "",
                                  habitSimbol: "",
-                                 timestampHabit: Date.now, habitCompleteness: CompletionHabit.byToggle)
+                                 timestampHabit: Date.now,
+                                 habitCompleteness: CompletionHabit.byToggle)
             
             context.insert(newHabit)
             try? context.save()
