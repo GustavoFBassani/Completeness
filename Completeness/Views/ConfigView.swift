@@ -9,17 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct ConfigView: View {
-    @Environment(\.modelContext) var context
-    @Query private var habits: [Habit]
     var body: some View {
-        Button {
-            habits.forEach { habit in
-                context.delete(habit)
-                try? context.save()
-            }
-        } label: {
-            Text("Apagar dados")
-        }
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 

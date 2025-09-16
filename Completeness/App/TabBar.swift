@@ -20,13 +20,12 @@ struct TabBar: View {
             }
             Tab("Stats", systemImage: "circle.hexagongrid"){
                 NavigationStack{
-                    ConfigView()
+                    StatsView()
                 }
             }
             Tab("Settings", systemImage: "gear"){
                 NavigationStack{
-                    HabitsPOCView(habitCompletionPersistence: HabitCompletionRepository(context: context),
-                                  habitRepository: HabitRepository(context: context))
+                    ConfigView()
                 }
             }
         }
