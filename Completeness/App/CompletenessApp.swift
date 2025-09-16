@@ -8,13 +8,28 @@
 import SwiftUI
 import SwiftData
 
+
 @main
 struct CompletenessApp: App {
+    @AppStorage("selectedTheme") private var selectedTheme : String = "system"
     @Environment(\.modelContext) var context
     var body: some Scene {
         WindowGroup {
             TabBar()
+                .preferredColorScheme(getColorScheme())
         }
         .modelContainer(for: Habit.self)
     }
+    private func getColorScheme() -> ColorScheme? {
+        switch selectedTheme {
+            case "light" :
+                return .light
+            case "dark" :
+                return .dark
+            default :
+                return nil
+        }
+        
+    }
 }
+
