@@ -11,10 +11,32 @@ import SwiftData
 @main
 struct CompletenessApp: App {
     @Environment(\.modelContext) var context
+
+    @State private var appViewModel = AppViewModel()
+
+
     var body: some Scene {
         WindowGroup {
-            TabBar()
+            CompletenessAppContentView().environment(appViewModel)
         }
         .modelContainer(for: Habit.self)
+    }
+}
+
+struct CompletenessAppContentView: View {
+    @Environment(AppViewModel.self) private var appViewModel
+
+    var body: some View {
+        if appViewModel.isAuthenticated {
+            TabBar()
+        } else  {
+            VStack {
+                Text("FaceID")
+                ProgressView()
+            }
+            .task {
+                await appViewModel.autenticateIfNeeded()
+            }
+        }
     }
 }

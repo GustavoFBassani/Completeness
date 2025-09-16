@@ -23,7 +23,7 @@ struct NotificationHelper {
             }
         }
     }
-    
+
     /// Function that schedules a notification based on a countdown.
     static func regressiveNotification(title: String, body: String, timeInterval: TimeInterval) {
         let content = UNMutableNotificationContent()
@@ -32,15 +32,15 @@ struct NotificationHelper {
         content.sound = UNNotificationSound.default
         content.launchImageName = "LaunchImage"
         content.badge = 1 as NSNumber
-        
+
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
-        
+
         let request = UNNotificationRequest(
             identifier: UUID().uuidString,
             content: content,
             trigger: trigger
         )
-        
+
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
                 print("Error scheduling notification: \(error)")
@@ -49,7 +49,7 @@ struct NotificationHelper {
             }
         }
     }
-    
+
     /// Function that schedules a daily notification.
     /// If no weekdays are provided, it schedules daily without restrictions.
     static func scheduledDailyNotification(
@@ -70,14 +70,14 @@ struct NotificationHelper {
             var dateComponents = DateComponents()
             dateComponents.hour = hour
             dateComponents.minute = minute
-            
+
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
             let request = UNNotificationRequest(
                 identifier: UUID().uuidString,
                 content: content,
                 trigger: trigger
             )
-            
+
             UNUserNotificationCenter.current().add(request) { error in
                 if let error = error {
                     print("Error scheduling notification: \(error)")
@@ -92,14 +92,14 @@ struct NotificationHelper {
                 dateComponents.hour = hour
                 dateComponents.minute = minute
                 dateComponents.weekday = wk // 1 = Sunday, 2 = Monday, ... 7 = Saturday
-                
+
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
                 let request = UNNotificationRequest(
                     identifier: UUID().uuidString,
                     content: content,
                     trigger: trigger
                 )
-                
+
                 UNUserNotificationCenter.current().add(request) { error in
                     if let error = error {
                         print("Error scheduling notification for weekday \(wk): \(error)")

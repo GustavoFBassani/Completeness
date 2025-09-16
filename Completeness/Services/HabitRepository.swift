@@ -12,11 +12,11 @@ import Foundation
 
 class HabitRepository {
     let context: ModelContext
-    
+
     init(context: ModelContext) {
         self.context = context
     }
-    
+
     func getAllHabits() throws -> [Habit] {
         let descriptor = FetchDescriptor<Habit>()
         do {
@@ -27,11 +27,11 @@ class HabitRepository {
         }
         return []
     }
-    
+
     func getHabitById(id: UUID) -> Habit? {
         try? getAllHabits().first {$0.id == id }
     }
-    
+
     func createHabit(habit: Habit) {
         let newHabit = Habit(id: habit.id,
                              habitName: habit.habitName,
@@ -45,15 +45,15 @@ class HabitRepository {
                              habitCompleteness: habit.habitCompleteness,
                              howManyTimesToToggle: habit.howManyTimesToToggle
         )
-        
+
         context.insert(newHabit)
         try? context.save()
     }
-    
+
     func editHabit() {
         //edit habits
     }
-    
+
     func deleteHabit() {
         //delete habits
     }

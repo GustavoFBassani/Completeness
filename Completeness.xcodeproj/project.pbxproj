@@ -13,13 +13,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6422396D2E74ADD50065A7AE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C4CFA33C2E70416900140530 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C4CFA3432E70416900140530;
-			remoteInfo = Completeness;
-		};
 		C4885F1D2E720C4800CE01BD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C4CFA33C2E70416900140530 /* Project object */;
@@ -61,7 +54,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		642239692E74ADD50065A7AE /* CompletenessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CompletenessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4885F152E720C4700CE01BD /* CompletenessCompenion Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CompletenessCompenion Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C49112202E74989400B988F5 /* CompletenessWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CompletenessWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C49112222E74989400B988F5 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -88,11 +80,6 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		6422396A2E74ADD50065A7AE /* CompletenessTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = CompletenessTests;
-			sourceTree = "<group>";
-		};
 		C4885F162E720C4700CE01BD /* CompletenessCompenion Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "CompletenessCompenion Watch App";
@@ -117,13 +104,6 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		642239662E74ADD50065A7AE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C4885F122E720C4700CE01BD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -166,7 +146,6 @@
 				C4CFA3462E70416900140530 /* Completeness */,
 				C4885F162E720C4700CE01BD /* CompletenessCompenion Watch App */,
 				C49112262E74989400B988F5 /* CompletenessWidgets */,
-				6422396A2E74ADD50065A7AE /* CompletenessTests */,
 				C49112212E74989400B988F5 /* Frameworks */,
 				C4CFA3452E70416900140530 /* Products */,
 			);
@@ -178,7 +157,6 @@
 				C4CFA3442E70416900140530 /* Completeness.app */,
 				C4885F152E720C4700CE01BD /* CompletenessCompenion Watch App.app */,
 				C49112202E74989400B988F5 /* CompletenessWidgetsExtension.appex */,
-				642239692E74ADD50065A7AE /* CompletenessTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -186,29 +164,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		642239682E74ADD50065A7AE /* CompletenessTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 642239712E74ADD50065A7AE /* Build configuration list for PBXNativeTarget "CompletenessTests" */;
-			buildPhases = (
-				642239652E74ADD50065A7AE /* Sources */,
-				642239662E74ADD50065A7AE /* Frameworks */,
-				642239672E74ADD50065A7AE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6422396E2E74ADD50065A7AE /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				6422396A2E74ADD50065A7AE /* CompletenessTests */,
-			);
-			name = CompletenessTests;
-			packageProductDependencies = (
-			);
-			productName = CompletenessTests;
-			productReference = 642239692E74ADD50065A7AE /* CompletenessTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		C4885F142E720C4700CE01BD /* CompletenessCompenion Watch App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C4885F202E720C4800CE01BD /* Build configuration list for PBXNativeTarget "CompletenessCompenion Watch App" */;
@@ -287,13 +242,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1630;
-				LastUpgradeCheck = 1640;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1630;
 				TargetAttributes = {
-					642239682E74ADD50065A7AE = {
-						CreatedOnToolsVersion = 16.3;
-						TestTargetID = C4CFA3432E70416900140530;
-					};
 					C4885F142E720C4700CE01BD = {
 						CreatedOnToolsVersion = 16.4;
 					};
@@ -311,7 +262,6 @@
 			knownRegions = (
 				en,
 				Base,
-				"pt-BR",
 			);
 			mainGroup = C4CFA33B2E70416900140530;
 			minimizedProjectReferenceProxies = 1;
@@ -323,19 +273,11 @@
 				C4CFA3432E70416900140530 /* Completeness */,
 				C4885F142E720C4700CE01BD /* CompletenessCompenion Watch App */,
 				C491121F2E74989400B988F5 /* CompletenessWidgetsExtension */,
-				642239682E74ADD50065A7AE /* CompletenessTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		642239672E74ADD50065A7AE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C4885F132E720C4700CE01BD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -376,18 +318,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [[ -x /opt/homebrew/bin/swiftlint ]]; then\n  /opt/homebrew/bin/swiftlint || true\nfi\n\nexit 0\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [[ -x /opt/homebrew/bin/swiftlint ]]; then\n  /opt/homebrew/bin/swiftlint || true\nelse\n  echo \"warning: SwiftLint não encontrado. Instale com 'brew install swiftlint'\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		642239652E74ADD50065A7AE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C4885F112E720C4700CE01BD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -412,11 +347,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6422396E2E74ADD50065A7AE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C4CFA3432E70416900140530 /* Completeness */;
-			targetProxy = 6422396D2E74ADD50065A7AE /* PBXContainerItemProxy */;
-		};
 		C4885F1E2E720C4800CE01BD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C4885F142E720C4700CE01BD /* CompletenessCompenion Watch App */;
@@ -430,42 +360,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		6422396F2E74ADD50065A7AE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YBSTQNCUFV;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = vitor.CompletenessTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Completeness.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Completeness";
-			};
-			name = Debug;
-		};
-		642239702E74ADD50065A7AE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YBSTQNCUFV;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = vitor.CompletenessTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Completeness.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Completeness";
-			};
-			name = Release;
-		};
 		C4885F212E720C4800CE01BD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -647,7 +541,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.academy.Completeness;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = CompletenessiOSPProfile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = CompletenessiOSProfile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -703,7 +597,6 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -761,7 +654,6 @@
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -773,7 +665,6 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -824,7 +715,6 @@
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -833,15 +723,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		642239712E74ADD50065A7AE /* Build configuration list for PBXNativeTarget "CompletenessTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6422396F2E74ADD50065A7AE /* Debug */,
-				642239702E74ADD50065A7AE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		C4885F202E720C4800CE01BD /* Build configuration list for PBXNativeTarget "CompletenessCompenion Watch App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
