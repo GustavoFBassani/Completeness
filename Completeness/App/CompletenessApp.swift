@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import CoreData
 
 @main
 struct CompletenessApp: App {
