@@ -12,6 +12,9 @@ struct Notification2Tests: View {
     @State private var selectedTime = Date()
     @State private var repeatEveryday = true
     @State private var selectedWeekdays: Set<Int> = []
+    @State private var notificationTitle = ""
+    @State private var notificationBody = ""
+    
     
     let weekdays = [
         (1, "Domingo"),
@@ -26,6 +29,16 @@ struct Notification2Tests: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
+                TextField("Digite título da notificação", text: $notificationTitle)
+                    .keyboardType(.default)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal)
+                
+                TextField("Digite o corpo da notificação", text: $notificationBody)
+                    .keyboardType(.default)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal)
+                
                 DatePicker("Horário", selection: $selectedTime, displayedComponents: .hourAndMinute)
                     .datePickerStyle(.wheel)
                     .labelsHidden()
@@ -71,22 +84,22 @@ struct Notification2Tests: View {
         let hour = calendar.component(.hour, from: selectedTime)
         let minute = calendar.component(.minute, from: selectedTime)
         
-        if repeatEveryday {
-            NotificationHelper.scheduledDailyNotification(
-                title: "Lembrete Diário",
-                body: "Hora marcada chegou!",
-                hour: hour,
-                minute: minute
-            )
-        } else {
-            NotificationHelper.scheduledDailyNotification(
-                title: "Lembrete Semanal",
-                body: "Dia específico!",
-                hour: hour,
-                minute: minute,
-                weekdays: Array(selectedWeekdays)
-            )
-        }
+//        if repeatEveryday {
+//            NotificationHelper.scheduledDailyNotification(
+//                title: "Lembrete Diário",
+//                body: "Hora marcada chegou!",
+//                hour: hour,
+//                minute: minute
+//            )
+//        } else {
+//            NotificationHelper.scheduledDailyNotification(
+//                title: "Lembrete Semanal",
+//                body: "Dia específico!",
+//                hour: hour,
+//                minute: minute,
+//                weekdays: Array(selectedWeekdays)
+//            )
+//        }
     }
 }
 

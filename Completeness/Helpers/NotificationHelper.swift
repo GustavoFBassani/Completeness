@@ -25,7 +25,11 @@ struct NotificationHelper {
     }
     
     /// Function that schedules a notification based on a countdown.
-    static func regressiveNotification(title: String, body: String, timeInterval: TimeInterval) {
+    static func regressiveNotification(
+        title: String,
+        body: String,
+        timeInterval: TimeInterval
+    ) {
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body
