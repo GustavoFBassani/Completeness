@@ -9,6 +9,7 @@ import SwiftData
 
 struct HabitsPOCView: View {
     @Bindable var viewModel: HabitsViewModel
+    @State private var editHabitsSheet = false
     
     var body: some View {
         VStack(alignment: .center, spacing: 16){
@@ -38,9 +39,6 @@ struct HabitsPOCView: View {
 
             Button {
                 viewModel.createNewHabit()
-                viewModel.habits.forEach({habit
-                    in print(habit.habitName)
-                })
             } label: {
                 Text("Save New Habit")
             }
@@ -81,6 +79,10 @@ struct HabitsPOCView: View {
                         await viewModel.loadData()
                     }
                 })
+                .onTapGesture {
+                    viewModel.habitToEdit = habit
+                    editHabitsSheet = true
+                }
             }
         }
         .frame(alignment: .leading)
@@ -88,5 +90,8 @@ struct HabitsPOCView: View {
         .task {
             await viewModel.loadData()
         }
+        .sheet(isPresented: $editHabitsSheet, content: {
+            SheetToEditHabitsTest(habit: viewModel.habitToEdit, editHabit: {viewModel.editHabit()})
+        })
     }
 }
