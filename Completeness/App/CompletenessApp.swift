@@ -8,10 +8,9 @@
 import SwiftUI
 import SwiftData
 
-
 @main
 struct CompletenessApp: App {
-    @AppStorage("selectedTheme") private var selectedTheme : String = "system"
+    @AppStorage("selectedTheme") private var selectedTheme = "system"
     @Environment(\.modelContext) var context
 
     @State private var appViewModel = AppViewModel()
@@ -27,7 +26,7 @@ struct CompletenessApp: App {
 
 struct CompletenessAppContentView: View {
     @Environment(AppViewModel.self) private var appViewModel
-    @AppStorage("selectedTheme") private var selectedTheme : String = "system"
+    @AppStorage("selectedTheme") private var selectedTheme = "system"
 
     var body: some View {
         if appViewModel.isAuthenticated {
@@ -46,11 +45,11 @@ struct CompletenessAppContentView: View {
     
     private func getColorScheme() -> ColorScheme? {
         switch selectedTheme {
-            case "light" :
+            case "light":
                 return .light
-            case "dark" :
+            case "dark":
                 return .dark
-            default :
+            default:
                 return nil
         }
     }

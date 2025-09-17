@@ -40,7 +40,8 @@ class BiometricManager {
         }
 
         do {
-            let success = try await context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason)
+            let success = try await context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
+                                                           localizedReason: reason)
             if !success {
                 throw BiometricError.authenticationFailed
             }

@@ -10,7 +10,7 @@
 import SwiftData
 import Foundation
 
-class HabitCompletionRepository {
+class HabitCompletionRepository: HabitCompletionProtocol {
     let context: ModelContext
     init(context: ModelContext) {
         self.context = context
@@ -33,17 +33,19 @@ class HabitCompletionRepository {
         habitToChange?.habitIsCompleted.toggle()
         try? context.save()
     }
-    func completeByMultipleToggle(id: UUID, count: Int) {
+    
+    func completeByMultipleToggle(id: UUID) {
         let habitToChange = getHabitById(id: id)
         if let habitToChange {
-            if habitToChange.howManyTimesToToggle < count {
-                habitToChange.howManyTimesToToggle += 1
+            if habitToChange.howManyTimesToToggle >= habitToChange.howManyTimesItWasDone {
+                habitToChange.howManyTimesItWasDone += 1
             } else {
                 habitToChange.habitIsCompleted.toggle()
                 try? context.save()
             }
         }
     }
+    
     func completeWithTimer(id: UUID, after seconds: TimeInterval) {
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds ) {
             let habitToChange = self.getHabitById(id: id)
