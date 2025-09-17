@@ -75,6 +75,12 @@ struct HabitsPOCView: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
+                .onLongPressGesture(perform: {
+                    viewModel.deleteHabit(by: habit.id)
+                    Task {
+                        await viewModel.loadData()
+                    }
+                })
             }
         }
         .frame(alignment: .leading)

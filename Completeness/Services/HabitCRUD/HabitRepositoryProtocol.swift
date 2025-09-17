@@ -12,5 +12,5 @@ protocol HabitRepositoryProtocol {
     func getHabitById(id: UUID) -> Habit?
     func createHabit(habit: Habit)
     func editHabit()
-    func deleteHabit()
+    func deleteHabit(id: UUID)
 }

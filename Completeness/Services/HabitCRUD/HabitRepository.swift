@@ -52,7 +52,10 @@ class HabitRepository: HabitRepositoryProtocol {
     func editHabit() {
         //edit habits
     }
-    func deleteHabit() {
-        //delete habits
+    func deleteHabit(id: UUID) {
+        if let habitToDelete = getHabitById(id: id) {
+            context.delete(habitToDelete)
+            try? context.save()
+        }
     }
 }

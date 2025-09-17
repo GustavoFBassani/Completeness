@@ -67,6 +67,10 @@ final class HabitsViewModel: HabitsProtocol {
         self.completenessType == .byMultipleToggle
     }
     
+    func deleteHabit(by id: UUID) {
+        habitService.deleteHabit(id: id)
+    }
+    
     @MainActor
     func loadData() async {
         do {
