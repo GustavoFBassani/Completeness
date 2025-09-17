@@ -11,6 +11,7 @@ import SwiftData
 
 @main
 struct CompletenessApp: App {
+    @AppStorage("selectedTheme") private var selectedTheme : String = "system"
     @Environment(\.modelContext) var context
 
     @State private var appViewModel = AppViewModel()
@@ -22,7 +23,6 @@ struct CompletenessApp: App {
         }
         .modelContainer(for: Habit.self)
     }
-
 }
 
 struct CompletenessAppContentView: View {
