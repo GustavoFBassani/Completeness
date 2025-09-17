@@ -15,25 +15,21 @@ struct HabitsPOCView: View {
     @State private var textField = ""
     @State private var completenessType: CompletionHabit = .byToggle
     @State private var howManyTimesToCompleteHabit = 1
-
     var body: some View {
         VStack(alignment: .center, spacing: 16){
             TextField("New Habit Name ", text: $textField)
                 .frame(maxWidth: .infinity)
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 16).fill(.gray))
-
             Picker("Completion Type", selection: $completenessType) {
                 Text("Toggle simples").tag(CompletionHabit.byToggle)
                 Text("Toggle multiplo").tag(CompletionHabit.byMultipleToggle)
                 Text("By Timer").tag(CompletionHabit.byTimer)
             }
             .background(RoundedRectangle(cornerRadius: 16).fill(.brown))
-
             if completenessType == .byMultipleToggle {
                 HStack {
                     Text("choose how many times you want to do it for a day")
-
                     Picker("How many times", selection: $howManyTimesToCompleteHabit) {
                         ForEach(1..<10, id: \.self) { count in
                             Text("\(count)").tag(count)
@@ -53,13 +49,10 @@ struct HabitsPOCView: View {
             } label: {
                 Text("Save New Habit")
             }
-
             ForEach(habits) { habit in
                 HStack {
                     Text(habit.habitName)
-
                     Spacer()
-
                     if habit.howManyTimesToToggle <= habit.howManyTimesItWasDone + 1 {
                         Button {
                             habit.habitIsCompleted.toggle()

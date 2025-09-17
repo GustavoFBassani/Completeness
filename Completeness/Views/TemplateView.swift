@@ -10,13 +10,10 @@ import SwiftUI
 struct TemplateView: View {
     // MARK: - Dependencies
     //let viewModel: ViewModel
-
     // MARK: - Environment
     @Environment(\.modelContext) var context
-
     // MARK: - State
     @State private var showDetails = false
-
     // MARK: - Body
     var body: some View {
         NavigationStack {
@@ -30,7 +27,6 @@ struct TemplateView: View {
                 }
         }
     }
-
     // MARK: - Content
     @ViewBuilder
     private var content: some View {

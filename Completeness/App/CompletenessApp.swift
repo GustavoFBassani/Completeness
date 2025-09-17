@@ -53,6 +53,5 @@ struct CompletenessAppContentView: View {
             default :
                 return nil
         }
-        
     }
 }

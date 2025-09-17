@@ -22,12 +22,10 @@ final class TemplateViewModel: TemplateProtocol {
     // MARK: - Properties
     var state: TemplateState = .idle
     var errorMessage: String?
-
     // MARK: - Init
     init() {
         // Setup dependencies here
     }
-
     // MARK: - Functions
     func loadData() async {
         // Async data loading logic goes here

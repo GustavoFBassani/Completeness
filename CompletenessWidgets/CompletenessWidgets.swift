@@ -32,10 +32,10 @@ struct Provider: TimelineProvider {
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
-
-    //    func relevances() async -> WidgetRelevances<Void> {
-    //        // Generate a list containing the contexts this widget is relevant in.
-    //    }
+    
+//    func relevances() async -> WidgetRelevances<Void> {
+//        // Generate a list containing the contexts this widget is relevant in.
+//    }
 }
 
 struct SimpleEntry: TimelineEntry {
