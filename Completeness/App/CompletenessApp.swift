@@ -8,11 +8,9 @@
 import SwiftUI
 import SwiftData
 
-
 @main
 struct CompletenessApp: App {
-    @AppStorage("selectedTheme") private var selectedTheme : String = "system"
-    @Environment(\.modelContext) var context
+    @AppStorage("selectedTheme") private var selectedTheme = "system"
     var body: some Scene {
         WindowGroup {
             TabBar()
@@ -22,14 +20,12 @@ struct CompletenessApp: App {
     }
     private func getColorScheme() -> ColorScheme? {
         switch selectedTheme {
-            case "light" :
+            case "light":
                 return .light
-            case "dark" :
+            case "dark":
                 return .dark
-            default :
+            default:
                 return nil
         }
-        
     }
 }
-

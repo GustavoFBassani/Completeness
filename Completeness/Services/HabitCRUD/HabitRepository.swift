@@ -10,7 +10,7 @@
 import SwiftData
 import Foundation
 
-class HabitRepository {
+class HabitRepository: HabitRepositoryProtocol {
     let context: ModelContext
     
     init(context: ModelContext) {
@@ -47,7 +47,12 @@ class HabitRepository {
         )
         
         context.insert(newHabit)
-        try? context.save()
+        do {
+            try context.save()
+        } catch {
+            debugPrint(error)
+            fatalError()
+        }
     }
     
     func editHabit() {

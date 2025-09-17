@@ -28,6 +28,14 @@ struct TabBar: View {
                     ConfigView()
                 }
             }
+            
+            Tab("viewModelTests", systemImage: "circle.fill") {
+                NavigationStack {
+                    HabitsPOCView(viewModel: .init(habitCompletionService: HabitCompletionRepository(context: context),
+                                                             habitService: HabitRepository(context: context))
+                    )
+                }
+            }
         }
     }
 }
