@@ -12,7 +12,7 @@ struct Notification2Tests: View {
     @State private var selectedTime = Date()
     @State private var repeatEveryday = true
     @State private var selectedWeekdays: Set<Int> = []
-    
+
     let weekdays = [
         (1, "Domingo"),
         (2, "Segunda"),
@@ -22,17 +22,17 @@ struct Notification2Tests: View {
         (6, "Sexta"),
         (7, "Sábado")
     ]
-    
+
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
                 DatePicker("Horário", selection: $selectedTime, displayedComponents: .hourAndMinute)
                     .datePickerStyle(.wheel)
                     .labelsHidden()
-                
+
                 Toggle("Repetir todos os dias", isOn: $repeatEveryday)
                     .padding(.horizontal)
-                
+
                 if !repeatEveryday {
                     List(weekdays, id: \.0) { day in
                         MultipleSelectionRow(
@@ -48,7 +48,7 @@ struct Notification2Tests: View {
                     }
                     .frame(maxHeight: 250)
                 }
-                
+
                 Button(action: scheduleNotification) {
                     Text("Agendar Notificação")
                         .bold()
@@ -59,18 +59,18 @@ struct Notification2Tests: View {
                         .cornerRadius(12)
                 }
                 .padding(.horizontal)
-                
+
                 Spacer()
             }
             .navigationTitle("Teste Notificação")
         }
     }
-    
+
     private func scheduleNotification() {
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: selectedTime)
         let minute = calendar.component(.minute, from: selectedTime)
-        
+
         if repeatEveryday {
             NotificationHelper.scheduledDailyNotification(
                 title: "Lembrete Diário",
@@ -94,7 +94,7 @@ struct MultipleSelectionRow: View {
     var title: String
     var isSelected: Bool
     var action: () -> Void
-    
+
     var body: some View {
         Button(action: action) {
             HStack {

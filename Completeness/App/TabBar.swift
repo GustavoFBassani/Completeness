@@ -10,7 +10,7 @@ import SwiftData
 
 struct TabBar: View {
     @Environment(\.modelContext) var context
-    
+
     var body: some View {
         TabView{
             Tab("Habit", systemImage: "house"){
