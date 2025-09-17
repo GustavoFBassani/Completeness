@@ -12,11 +12,9 @@ struct notificationTest: View {
     @State private var interval = 0
     @State private var notificationTitle = ""
     @State private var notificationBody = ""
-    
     @State private var selectedTime = Date()
     @State private var repeatEveryday = true
     @State private var selectedWeekdays: Set<Int> = []
-    
     let weekdays = [
         (1, "Domingo"),
         (2, "Segunda"),
@@ -26,27 +24,22 @@ struct notificationTest: View {
         (6, "Sexta"),
         (7, "Sábado")
     ]
-    
     var body: some View {
         VStack{
             Text("Habit")
                 .font(.title)
-            
             TextField("Digite o tempo em segundos", text: $intervalText)
                 .keyboardType(.numberPad)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
-            
             TextField("Digite título da notificação", text: $notificationTitle)
                 .keyboardType(.default)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
-            
             TextField("Digite o corpo da notificação", text: $notificationBody)
                 .keyboardType(.default)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
-            
             Button {
                 if let time = Int(intervalText), time > 0 {
                     interval = time

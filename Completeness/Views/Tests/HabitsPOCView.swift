@@ -38,7 +38,9 @@ struct HabitsPOCView: View {
 
             Button {
                 viewModel.createNewHabit()
-                viewModel.habits.forEach({habit in print(habit.habitName)})
+                viewModel.habits.forEach({habit
+                    in print(habit.habitName)
+                })
             } label: {
                 Text("Save New Habit")
             }
@@ -46,7 +48,6 @@ struct HabitsPOCView: View {
             ForEach(viewModel.habits) { habit in
                 HStack {
                     Text(habit.habitName)
-                    
                     Spacer()
                     
                     if habit.habitCompleteness == .byToggle {
@@ -61,7 +62,7 @@ struct HabitsPOCView: View {
                             Button {
                                 viewModel.completeHabitByMultipleToggle(by: habit.id)
                             } label: {
-                                Text("\(habit.howManyTimesItWasDone) / \(habit.howManyTimesToToggle)")
+                                Text("\(habit.howManyTimesItWasDone) /\(habit.howManyTimesToToggle)")
                             }
                         } else {
                             Button {

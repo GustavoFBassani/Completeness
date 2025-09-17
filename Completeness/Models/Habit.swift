@@ -20,10 +20,8 @@ final class Habit: Identifiable {
     var habitSimbol = ""
     var timestampHabit = Date()
     var habitCompleteness: CompletionHabit?
-    
     var howManyTimesToToggle = 1
     var howManyTimesItWasDone = 0
-    
     init(id: UUID = UUID(),
          habitName: String = "",
          habitIsCompleted: Bool = false,

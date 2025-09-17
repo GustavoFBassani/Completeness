@@ -12,11 +12,9 @@ import Foundation
 
 class HabitCompletionRepository: HabitCompletionProtocol {
     let context: ModelContext
-    
     init(context: ModelContext) {
         self.context = context
     }
-    
     func getAllHabits() throws -> [Habit] {
         let descriptor = FetchDescriptor<Habit>()
         do {
@@ -27,11 +25,9 @@ class HabitCompletionRepository: HabitCompletionProtocol {
         }
         return []
     }
-    
     func getHabitById(id: UUID) -> Habit? {
         try? getAllHabits().first {$0.id == id }
     }
-    
     func completeByToggle(id: UUID) {
         let habitToChange = getHabitById(id: id)
         habitToChange?.habitIsCompleted.toggle()
