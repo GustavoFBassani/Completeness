@@ -11,7 +11,6 @@ import SwiftData
 
 @main
 struct CompletenessApp: App {
-    @AppStorage("selectedTheme") private var selectedTheme : String = "system"
     @Environment(\.modelContext) var context
 
     @State private var appViewModel = AppViewModel()
@@ -23,6 +22,28 @@ struct CompletenessApp: App {
         }
         .modelContainer(for: Habit.self)
     }
+
+}
+
+struct CompletenessAppContentView: View {
+    @Environment(AppViewModel.self) private var appViewModel
+    @AppStorage("selectedTheme") private var selectedTheme : String = "system"
+
+    var body: some View {
+        if appViewModel.isAuthenticated {
+            TabBar()
+                .preferredColorScheme(getColorScheme())
+        } else  {
+            VStack {
+                Text("FaceID")
+                ProgressView()
+            }
+            .task {
+                await appViewModel.autenticateIfNeeded()
+            }
+        }
+    }
+    
     private func getColorScheme() -> ColorScheme? {
         switch selectedTheme {
             case "light" :
@@ -33,23 +54,5 @@ struct CompletenessApp: App {
                 return nil
         }
         
-    }
-}
-
-struct CompletenessAppContentView: View {
-    @Environment(AppViewModel.self) private var appViewModel
-
-    var body: some View {
-        if appViewModel.isAuthenticated {
-            TabBar()
-        } else  {
-            VStack {
-                Text("FaceID")
-                ProgressView()
-            }
-            .task {
-                await appViewModel.autenticateIfNeeded()
-            }
-        }
     }
 }
