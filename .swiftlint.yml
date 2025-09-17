@@ -22,7 +22,6 @@ only_rules:
   - shorthand_operator
   - statement_position
   - syntactic_sugar
-  - trailing_closure
   - trailing_comma
   - trailing_newline
   - trailing_semicolon
@@ -47,8 +46,8 @@ only_rules:
 
 # ----------- Config extra -----------
 line_length:
-  warning: 120
-  error: 160
+  warning: 180
+  error: 200
 
 identifier_name:
   min_length:
