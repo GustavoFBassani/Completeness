@@ -48,6 +48,8 @@ struct notificationTest: View {
         }
     }
     
+    
+    //PARA QUEM FOR TIRAR DO TESTE, COLOCAR ESTA FUNÇÃO NA VIEWMODEL ESPECÍFICA
     private func actionButtonTapped() {
         if let time = Int(intervalText), time > 0 {
             interval = time

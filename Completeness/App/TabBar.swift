@@ -18,6 +18,17 @@ struct TabBar: View {
                     HabitView()
                 }
             }
+            Tab("Stats", systemImage: "circle.hexagongrid"){
+                NavigationStack{
+                    StatsView()
+                }
+            }
+            Tab("Settings", systemImage: "gear"){
+                NavigationStack{
+                    ConfigView()
+                }
+            }
+            // MARK:- Tabfake
             Tab("Notif Timer", systemImage: "circle.hexagongrid"){
                 NavigationStack{
                     notificationTest()

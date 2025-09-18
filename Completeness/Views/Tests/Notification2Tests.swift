@@ -42,11 +42,7 @@ struct Notification2Tests: View {
                 DatePicker("Horário", selection: $selectedTime, displayedComponents: .hourAndMinute)
                     .datePickerStyle(.wheel)
                     .labelsHidden()
-                
-                Toggle("Repetir todos os dias", isOn: $repeatEveryday)
-                    .padding(.horizontal)
-                
-                if !repeatEveryday {
+
                     List(weekdays, id: \.0) { day in
                         MultipleSelectionRow(
                             title: day.1,
@@ -60,9 +56,8 @@ struct Notification2Tests: View {
                         }
                     }
                     .frame(maxHeight: 250)
-                }
                 
-                Button(action: scheduleNotification) {
+                Button(action: buttonTapped) {
                     Text("Agendar Notificação")
                         .bold()
                         .frame(maxWidth: .infinity)
@@ -76,30 +71,26 @@ struct Notification2Tests: View {
                 Spacer()
             }
             .navigationTitle("Teste Notificação")
+            .onAppear {
+                NotificationHelper.requestNotificationPermissions()
+            }
         }
     }
     
-    private func scheduleNotification() {
+    private func buttonTapped() {
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: selectedTime)
         let minute = calendar.component(.minute, from: selectedTime)
         
-//        if repeatEveryday {
-//            NotificationHelper.scheduledDailyNotification(
-//                title: "Lembrete Diário",
-//                body: "Hora marcada chegou!",
-//                hour: hour,
-//                minute: minute
-//            )
-//        } else {
-//            NotificationHelper.scheduledDailyNotification(
-//                title: "Lembrete Semanal",
-//                body: "Dia específico!",
-//                hour: hour,
-//                minute: minute,
-//                weekdays: Array(selectedWeekdays)
-//            )
-//        }
+        
+        NotificationHelper.scheduledDailyNotification(
+            title: notificationTitle,
+            body: notificationBody,
+            hour: hour,
+            minute: minute,
+            weekdays: Array(selectedWeekdays)
+        )
+        
     }
 }
 
