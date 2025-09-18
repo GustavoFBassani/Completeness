@@ -29,16 +29,16 @@ struct TabBar: View {
                 }
             }
             // MARK:- Tabfake
-            Tab("Notif Timer", systemImage: "circle.hexagongrid"){
-                NavigationStack{
-                    notificationTest()
-                }
-            }
-            Tab("Notif Agendada", systemImage: "gear"){
-                NavigationStack{
-                    Notification2Tests()
-                }
-            }
+//            Tab("Notif Timer", systemImage: "circle"){
+//                NavigationStack{
+//                    notificationTest()
+//                }
+//            }
+//            Tab("Notif Agendada", systemImage: "circle"){
+//                NavigationStack{
+//                    Notification2Tests()
+//                }
+//            }
         }
     }
 }

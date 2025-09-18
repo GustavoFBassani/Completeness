@@ -14,8 +14,7 @@ struct Notification2Tests: View {
     @State private var selectedWeekdays: Set<Int> = []
     @State private var notificationTitle = ""
     @State private var notificationBody = ""
-    
-    
+
     let weekdays = [
         (1, "Domingo"),
         (2, "Segunda"),
@@ -67,33 +66,34 @@ struct Notification2Tests: View {
                         .cornerRadius(12)
                 }
                 .padding(.horizontal)
-                
                 Spacer()
             }
-            .navigationTitle("Teste Notificação")
+//            .navigationTitle("Teste Notificação")
             .onAppear {
                 NotificationHelper.requestNotificationPermissions()
             }
         }
     }
     
+    //PARA QUEM FOR TIRAR DO TESTE, COLOCAR ESTA FUNÇÃO NA VIEWMODEL ESPECÍFICA
     private func buttonTapped() {
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: selectedTime)
         let minute = calendar.component(.minute, from: selectedTime)
         
-        
-        NotificationHelper.scheduledDailyNotification(
-            title: notificationTitle,
-            body: notificationBody,
-            hour: hour,
-            minute: minute,
-            weekdays: Array(selectedWeekdays)
-        )
-        
+        if UserDefaults.standard.bool(forKey: "dailyEnabled") {
+            NotificationHelper.scheduledDailyNotification(
+                title: notificationTitle,
+                body: notificationBody,
+                hour: hour,
+                minute: minute,
+                weekdays: Array(selectedWeekdays)
+            )
+        }
     }
 }
 
+// MARK: - Desnecessário, por isto não está em um arquivo separado
 struct MultipleSelectionRow: View {
     var title: String
     var isSelected: Bool

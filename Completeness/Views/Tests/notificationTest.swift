@@ -47,20 +47,21 @@ struct notificationTest: View {
             NotificationHelper.requestNotificationPermissions()
         }
     }
-    
-    
+
     //PARA QUEM FOR TIRAR DO TESTE, COLOCAR ESTA FUNÇÃO NA VIEWMODEL ESPECÍFICA
     private func actionButtonTapped() {
-        if let time = Int(intervalText), time > 0 {
-            interval = time
-            NotificationHelper.regressiveNotification(
-                title: notificationTitle,
-                body: notificationBody,
-                timeInterval: TimeInterval(interval)
-            )
-            print("Notificação agendada em \(interval) segundos")
-        } else {
-            print("Digite um tempo válido")
+        if UserDefaults.standard.bool(forKey: "timmerEnabled"){
+            if let time = Int(intervalText), time > 0 {
+                interval = time
+                NotificationHelper.regressiveNotification(
+                    title: notificationTitle,
+                    body: notificationBody,
+                    timeInterval: TimeInterval(interval)
+                )
+                print("Notificação agendada em \(interval) segundos")
+            } else {
+                print("Digite um tempo válido")
+            }
         }
     }
 }
