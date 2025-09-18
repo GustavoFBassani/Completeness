@@ -27,7 +27,17 @@ struct TabBar: View {
                     ConfigView()
                 }
             }
-            
+            // MARK:- Tabfake
+//            Tab("Notif Timer", systemImage: "circle"){
+//                NavigationStack{
+//                    notificationTest()
+//                }
+//            }
+//            Tab("Notif Agendada", systemImage: "circle"){
+//                NavigationStack{
+//                    Notification2Tests()
+//                }
+//            }
             Tab("viewModelTests", systemImage: "circle.fill") {
                 NavigationStack {
                     HabitsPOCView(viewModel: .init(habitCompletionService: HabitCompletionRepository(context: context),
