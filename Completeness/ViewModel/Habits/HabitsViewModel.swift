@@ -27,7 +27,6 @@ final class HabitsViewModel: HabitsProtocol {
     var textField = ""
     var completenessType: CompletionHabit = .byToggle
     var howManyTimesToCompleteHabit = 1
-    
     var newHabitName = ""
     var newHabitDate = Date()
 
@@ -36,6 +35,7 @@ final class HabitsViewModel: HabitsProtocol {
                Calendar.current.isDate($0.timestampHabit, inSameDayAs: selectedDate)
            }
        }
+
     func selectDate(_ date: Date) {
           selectedDate = date
       }
@@ -100,3 +100,4 @@ final class HabitsViewModel: HabitsProtocol {
         }
     }
 }
+
