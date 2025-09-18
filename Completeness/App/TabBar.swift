@@ -14,7 +14,7 @@ struct TabBar: View {
         TabView{
             Tab("Habit", systemImage: "house"){
                 NavigationStack{
-                    HabitView()
+                    HabitView(context: context)
                 }
             }
             Tab("Stats", systemImage: "circle.hexagongrid"){
