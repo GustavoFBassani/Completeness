@@ -14,7 +14,7 @@ struct TabBar: View {
         TabView{
             Tab("Habit", systemImage: "house"){
                 NavigationStack{
-                    HabitView()
+                    HabitTest(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context), habitService: HabitRepository(context: context)))
                 }
             }
             Tab("Stats", systemImage: "circle.hexagongrid"){

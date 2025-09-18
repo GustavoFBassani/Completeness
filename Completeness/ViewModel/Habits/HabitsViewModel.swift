@@ -19,6 +19,7 @@ enum HabitsStates {
 @Observable
 final class HabitsViewModel: HabitsProtocol {
     var state: HabitsStates = .idle
+    var selectedDate: Date = .now
     var errorMessage: String?
     var habits: [Habit] = []
     var habitCompletionService: HabitCompletionProtocol
@@ -26,6 +27,19 @@ final class HabitsViewModel: HabitsProtocol {
     var textField = ""
     var completenessType: CompletionHabit = .byToggle
     var howManyTimesToCompleteHabit = 1
+    var newHabitName = ""
+    var newHabitDate = Date()
+
+    var filteredHabits: [Habit] {
+           habits.filter {
+               Calendar.current.isDate($0.timestampHabit, inSameDayAs: selectedDate)
+           }
+       }
+
+    func selectDate(_ date: Date) {
+          selectedDate = date
+      }
+
     var habitToEdit: Habit = .init(howManyTimesToToggle: 1)
     
     init(habitCompletionService: HabitCompletionProtocol, habitService: HabitRepositoryProtocol) {
@@ -86,3 +100,4 @@ final class HabitsViewModel: HabitsProtocol {
         }
     }
 }
+

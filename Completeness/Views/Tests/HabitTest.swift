@@ -1,17 +1,19 @@
 //
-//  HabitView.swift
+//  HabitTest.swift
 //  Completeness
 //
-//  Created by Gustavo Ferreira bassani on 15/09/25.
+//  Created by Gustavo Melleu on 18/09/25.
 //
 
 import SwiftUI
 import SwiftData
 
-struct HabitView: View {
+struct HabitTest: View {
+    @Bindable var viewModel: HabitsViewModel
     
-    @State private var viewModel: HabitsViewModel
+    // Controle do sheet/modal
     @State private var showingAddHabit = false
+    
 
     
     var body: some View {
@@ -23,6 +25,7 @@ struct HabitView: View {
                 Spacer()
                 
                 AddHabitButton {
+                    viewModel.newHabitDate = viewModel.selectedDate
                     showingAddHabit = true
                 }
             }
@@ -57,11 +60,11 @@ struct HabitView: View {
             AddHabitView(
                 isPresented: $showingAddHabit,
                 newHabitName: $viewModel.newHabitName,
-                newHabitDate: $viewModel.selectedDate
+                newHabitDate: $viewModel.newHabitDate
             ) {
                 let newHabit = Habit(
                     habitName: viewModel.newHabitName,
-                    timestampHabit: viewModel.selectedDate,
+                    timestampHabit: viewModel.newHabitDate,
                     howManyTimesToToggle: 1
                 )
                 viewModel.habitService.createHabit(habit: newHabit)
