@@ -15,6 +15,7 @@ class HabitRepository: HabitRepositoryProtocol {
     init(context: ModelContext) {
         self.context = context
     }
+    
     func getAllHabits() throws -> [Habit] {
         let descriptor = FetchDescriptor<Habit>()
         do {
@@ -49,10 +50,13 @@ class HabitRepository: HabitRepositoryProtocol {
             fatalError()
         }
     }
-    func editHabit() {
-        //edit habits
+    func saveChanges() {
+        try? context.save()
     }
-    func deleteHabit() {
-        //delete habits
+    func deleteHabit(id: UUID) {
+        if let habitToDelete = getHabitById(id: id) {
+            context.delete(habitToDelete)
+            try? context.save()
+        }
     }
 }
