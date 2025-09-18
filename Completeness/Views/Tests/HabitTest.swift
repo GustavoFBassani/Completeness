@@ -9,19 +9,12 @@ import SwiftUI
 import SwiftData
 
 struct HabitTest: View {
-    @State private var viewModel: HabitsViewModel
+    @Bindable var viewModel: HabitsViewModel
     
     // Controle do sheet/modal
     @State private var showingAddHabit = false
-    @State private var newHabitName = ""
-    @State private var newHabitDate = Date()
     
-    init(context: ModelContext) {
-        _viewModel = State(initialValue: HabitsViewModel(
-            habitCompletionService: HabitCompletionRepository(context: context),
-            habitService: HabitRepository(context: context)
-        ))
-    }
+
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -32,7 +25,7 @@ struct HabitTest: View {
                 Spacer()
                 
                 AddHabitButton {
-                    newHabitDate = viewModel.selectedDate
+                    viewModel.newHabitDate = viewModel.selectedDate
                     showingAddHabit = true
                 }
             }
@@ -66,17 +59,17 @@ struct HabitTest: View {
         .sheet(isPresented: $showingAddHabit) {
             AddHabitView(
                 isPresented: $showingAddHabit,
-                newHabitName: $newHabitName,
-                newHabitDate: $newHabitDate
+                newHabitName: $viewModel.newHabitName,
+                newHabitDate: $viewModel.newHabitDate
             ) {
                 let newHabit = Habit(
-                    habitName: newHabitName,
-                    timestampHabit: newHabitDate,
+                    habitName: viewModel.newHabitName,
+                    timestampHabit: viewModel.newHabitDate,
                     howManyTimesToToggle: 1
                 )
                 viewModel.habitService.createHabit(habit: newHabit)
                 Task { await viewModel.loadData() }
-                newHabitName = ""
+                viewModel.newHabitName = ""
                 showingAddHabit = false
             }
         }

@@ -27,10 +27,10 @@ final class HabitsViewModel: HabitsProtocol {
     var textField = ""
     var completenessType: CompletionHabit = .byToggle
     var howManyTimesToCompleteHabit = 1
-<<<<<<< HEAD
-=======
+    
+    var newHabitName = ""
+    var newHabitDate = Date()
 
->>>>>>> 356d32b2015bfd0f8da8b78d18f5df1bfe1cf17f
     var filteredHabits: [Habit] {
            habits.filter {
                Calendar.current.isDate($0.timestampHabit, inSameDayAs: selectedDate)
@@ -39,12 +39,8 @@ final class HabitsViewModel: HabitsProtocol {
     func selectDate(_ date: Date) {
           selectedDate = date
       }
-<<<<<<< HEAD
-=======
 
     var habitToEdit: Habit = .init(howManyTimesToToggle: 1)
-
->>>>>>> 356d32b2015bfd0f8da8b78d18f5df1bfe1cf17f
     
     init(habitCompletionService: HabitCompletionProtocol, habitService: HabitRepositoryProtocol) {
         self.habitCompletionService = habitCompletionService
