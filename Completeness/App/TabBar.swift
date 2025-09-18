@@ -10,7 +10,6 @@ import SwiftData
 
 struct TabBar: View {
     @Environment(\.modelContext) var context
-    
     var body: some View {
         TabView{
             Tab("Habit", systemImage: "house"){
@@ -39,6 +38,13 @@ struct TabBar: View {
 //                    Notification2Tests()
 //                }
 //            }
+            Tab("viewModelTests", systemImage: "circle.fill") {
+                NavigationStack {
+                    HabitsPOCView(viewModel: .init(habitCompletionService: HabitCompletionRepository(context: context),
+                                                             habitService: HabitRepository(context: context))
+                    )
+                }
+            }
         }
     }
 }

@@ -10,9 +10,8 @@
 import SwiftData
 import Foundation
 
-class HabitRepository {
+class HabitRepository: HabitRepositoryProtocol {
     let context: ModelContext
-    
     init(context: ModelContext) {
         self.context = context
     }
@@ -27,11 +26,9 @@ class HabitRepository {
         }
         return []
     }
-    
     func getHabitById(id: UUID) -> Habit? {
         try? getAllHabits().first {$0.id == id }
     }
-    
     func createHabit(habit: Habit) {
         let newHabit = Habit(id: habit.id,
                              habitName: habit.habitName,
@@ -45,16 +42,21 @@ class HabitRepository {
                              habitCompleteness: habit.habitCompleteness,
                              howManyTimesToToggle: habit.howManyTimesToToggle
         )
-        
         context.insert(newHabit)
+        do {
+            try context.save()
+        } catch {
+            debugPrint(error)
+            fatalError()
+        }
+    }
+    func saveChanges() {
         try? context.save()
     }
-    
-    func editHabit() {
-        //edit habits
-    }
-    
-    func deleteHabit() {
-        //delete habits
+    func deleteHabit(id: UUID) {
+        if let habitToDelete = getHabitById(id: id) {
+            context.delete(habitToDelete)
+            try? context.save()
+        }
     }
 }

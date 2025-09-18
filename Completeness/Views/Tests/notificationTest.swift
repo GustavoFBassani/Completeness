@@ -12,22 +12,19 @@ struct notificationTest: View {
     @State private var interval = 0
     @State private var notificationTitle = ""
     @State private var notificationBody = ""
-    
+  
     var body: some View {
         VStack{
             Text("Habit")
                 .font(.title)
-            
             TextField("Digite o tempo em segundos", text: $intervalText)
                 .keyboardType(.numberPad)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
-            
             TextField("Digite título da notificação", text: $notificationTitle)
                 .keyboardType(.default)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
-            
             TextField("Digite o corpo da notificação", text: $notificationBody)
                 .keyboardType(.default)
                 .textFieldStyle(RoundedBorderTextFieldStyle())

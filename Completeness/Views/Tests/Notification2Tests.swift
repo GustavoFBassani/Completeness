@@ -24,7 +24,6 @@ struct Notification2Tests: View {
         (6, "Sexta"),
         (7, "Sábado")
     ]
-    
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
@@ -41,6 +40,7 @@ struct Notification2Tests: View {
                 DatePicker("Horário", selection: $selectedTime, displayedComponents: .hourAndMinute)
                     .datePickerStyle(.wheel)
                     .labelsHidden()
+
 
                     List(weekdays, id: \.0) { day in
                         MultipleSelectionRow(
@@ -98,7 +98,6 @@ struct MultipleSelectionRow: View {
     var title: String
     var isSelected: Bool
     var action: () -> Void
-    
     var body: some View {
         Button(action: action) {
             HStack {
