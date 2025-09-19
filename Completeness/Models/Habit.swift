@@ -22,6 +22,12 @@ final class Habit: Identifiable {
     var habitCompleteness: CompletionHabit?
     var howManyTimesToToggle = 1
     var howManyTimesItWasDone = 0
+    
+    /// A one-to-many relationship to all historical completion records for this habit.
+       /// `deleteRule: .cascade` ensures that when a Habit is deleted, all its associated logs are also deleted,
+       /// maintaining data integrity.
+    @Relationship(deleteRule: .cascade) var habitLogs: [HabitLog]? = []
+    
     init(id: UUID = UUID(),
          habitName: String = "",
          habitIsCompleted: Bool = false,

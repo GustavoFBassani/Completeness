@@ -12,17 +12,17 @@ struct TabBar: View {
     @Environment(\.modelContext) var context
     var body: some View {
         TabView{
-            Tab("Habit", systemImage: "house"){
+            Tab("Habit", systemImage: "circle.hexagongrid"){
                 NavigationStack{
                     HabitTest(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context), habitService: HabitRepository(context: context)))
                 }
             }
-            Tab("Stats", systemImage: "circle.hexagongrid"){
+            Tab("Stats", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
                 NavigationStack{
                     StatsView()
                 }
             }
-            Tab("Settings", systemImage: "gear"){
+            Tab("Settings", systemImage: "gearshape"){
                 NavigationStack{
                     ConfigView()
                 }
@@ -46,6 +46,7 @@ struct TabBar: View {
                 }
             }
         }
+        .tint(.indigoCustom)
     }
 }
 

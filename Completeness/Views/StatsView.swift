@@ -1,11 +1,5 @@
-//
-//  StatsView.swift
-//  Completeness
-//
-//  Created by Gustavo Ferreira bassani on 15/09/25.
-//
-
 import SwiftUI
+import SwiftData
 
 struct StatsView: View {
     var body: some View {
