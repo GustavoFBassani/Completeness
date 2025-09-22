@@ -4,7 +4,7 @@
 //
 //  Created by Gustavo Melleu on 17/09/25.
 //
-
+//
 import SwiftUI
 
 struct AddHabitView: View {
@@ -12,6 +12,8 @@ struct AddHabitView: View {
     @Binding var newHabitName: String
     @Binding var newHabitDate: Date
     
+    @State private var selectedPredefinedHabit: PredefinedHabits? = nil
+        
     var onSave: () -> Void
     
     var body: some View {
