@@ -23,8 +23,8 @@ class ChartsService: ChartsServiceProtocol {
     /// Calculates and returns the most completed habits over a given period.
     /// - Parameter days: The number of days in the past to consider (e.g., 7 for the last week).
     /// - Returns: An array of `Habit` objects sorted from most to least completed.
-    func getMostCompletedHabits(inLastDays days: Int) -> [Habit] {
-        guard let habits = fetchAllHabbits() else { return [] }
+    func getMostCompletedHabits(inLastDays days: Int) async -> [Habit] {
+        guard let habits = await fetchAllHabbits() else { return [] }
         
         // Define the start date for our filter.
         let startDate = Calendar.current.date(byAdding: .day, value: -days, to: Date()) ?? Date()
@@ -49,8 +49,8 @@ class ChartsService: ChartsServiceProtocol {
     
     /// Calculates and returns the least completed habits over a given period.
     /// The logic is identical to 'getMostCompletedHabits', only changing the sort direction.
-    func getLeastCompletedHabit(inLastDays days: Int) -> [Habit] {
-        guard let habits = fetchAllHabbits() else { return [] }
+    func getLeastCompletedHabit(inLastDays days: Int) async -> [Habit] {
+        guard let habits = await fetchAllHabbits() else { return [] }
         
         let startDate = Calendar.current.date(byAdding: .day, value: -days, to: Date()) ?? Date()
         
@@ -72,8 +72,8 @@ class ChartsService: ChartsServiceProtocol {
     /// Calculates the percentage of "perfect days" ONLY among days with recorded activity.
     /// - Parameter days: The period to analyze.
     /// - Returns: A `Double` representing the percentage (e.g., 80.0 for 80%).
-    func getOverallCompletion(inLastDays days: Int) -> Double {
-        guard let allHabits = fetchAllHabbits(), !allHabits.isEmpty else { return 0.0 }
+    func getOverallCompletion(inLastDays days: Int) async -> Double {
+        guard let allHabits = await fetchAllHabbits(), !allHabits.isEmpty else { return 0.0 }
         let habitsCount = allHabits.count
         
         let today = Calendar.current.startOfDay(for: Date())
@@ -109,12 +109,12 @@ class ChartsService: ChartsServiceProtocol {
     }
     
     // The functions below are private helpers to avoid code repetition.
-    private func fetchAllHabbits() -> [Habit]? {
+    private func fetchAllHabbits() async -> [Habit]? {
         let descriptor = FetchDescriptor<Habit>()
         return try? modelContext.fetch(descriptor)
     }
     
-    private func fetchAllHabbitsLogs() -> [HabitLog]? {
+    private func fetchAllHabbitsLogs() async -> [HabitLog]? {
         let descriptor = FetchDescriptor<HabitLog>()
         return try? modelContext.fetch(descriptor)
     }
