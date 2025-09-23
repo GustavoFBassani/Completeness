@@ -1,9 +1,9 @@
-//
-//  HabitsViewModel.swift
-//  Completeness
-//
-//  Created by Gustavo Ferreira bassani on 16/09/25.
-//
+////
+////  HabitsViewModel.swift
+////  Completeness
+////
+////  Created by Gustavo Ferreira bassani on 16/09/25.
+////
 
 import SwiftUI
 import Observation
@@ -29,6 +29,7 @@ final class HabitsViewModel: HabitsProtocol {
     var howManyTimesToCompleteHabit = 1
     var newHabitName = ""
     var newHabitDate = Date()
+   
 
     var filteredHabits: [Habit] {
            habits.filter {
