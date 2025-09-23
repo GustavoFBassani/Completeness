@@ -1,10 +1,10 @@
+////
+////  HabitTrackerService.swift
+////  Completeness
+////
+////  Created by Gustavo Ferreira bassani on 15/09/25.
+////
 //
-//  HabitTrackerService.swift
-//  Completeness
-//
-//  Created by Gustavo Ferreira bassani on 15/09/25.
-//
-
 import SwiftData
 import Foundation
 
@@ -117,3 +117,4 @@ class HabitCompletionRepository: HabitCompletionProtocol {
 //        }
 //    }
 }
+

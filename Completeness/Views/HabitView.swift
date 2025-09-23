@@ -9,9 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct HabitView: View {
+
     @Bindable var viewModel: HabitsViewModel
     @State private var showingAddHabit = false
-
     
     var body: some View {
         VStack(alignment: .leading) {
