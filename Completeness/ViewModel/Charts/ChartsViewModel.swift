@@ -49,9 +49,9 @@ class ChartsViewModel {
         
         // Asynchronously call the service methods to get the calculated data.
         // For enhanced performance, these could be run concurrently using a TaskGroup or async let.
-        mostCompletedHabits = chartsService.getMostCompletedHabits(inLastDays: 7)
-        leastCompletedHabits = chartsService.getLeastCompletedHabit(inLastDays: 7)
-        overallCompletionRate = chartsService.getOverallCompletion(inLastDays: 7)
+        mostCompletedHabits = await chartsService.getMostCompletedHabits(inLastDays: 7)
+        leastCompletedHabits = await chartsService.getLeastCompletedHabit(inLastDays: 7)
+        overallCompletionRate = await chartsService.getOverallCompletion(inLastDays: 7)
         
         isLoading = false
     }

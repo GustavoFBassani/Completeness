@@ -9,7 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct HabitView: View {
-    @State private var viewModel: HabitsViewModel
+
+    @Bindable var viewModel: HabitsViewModel
     @State private var showingAddHabit = false
 
     
@@ -40,14 +41,10 @@ struct HabitView: View {
                     .foregroundColor(.gray)
                     .padding()
             } else {
-                List(viewModel.filteredHabits) { habit in
-                    HStack {
-                        Text(habit.habitName)
-                        Spacer()
-                    }
+                ForEach(viewModel.filteredHabits) { habit in
+                    HabitRowView(habit: habit, viewModel: viewModel)
                 }
-                .listStyle(.plain)
-                .background(Color.white)
+                .padding()
             }
         }
         .onAppear(perform: {
@@ -61,16 +58,10 @@ struct HabitView: View {
             AddHabitView(
                 isPresented: $showingAddHabit,
                 newHabitName: $viewModel.newHabitName,
-                newHabitDate: $viewModel.selectedDate
+                newHabitDate: $viewModel.selectedDate,
+                selectedDays: $viewModel.newHabitDays
             ) {
-                let newHabit = Habit(
-                    habitName: viewModel.newHabitName,
-                    timestampHabit: viewModel.selectedDate,
-                    howManyTimesToToggle: 1
-                )
-                viewModel.habitService.createHabit(habit: newHabit)
-                Task { await viewModel.loadData() }
-                viewModel.newHabitName = ""
+                viewModel.createNewHabit()
                 showingAddHabit = false
             }
         }

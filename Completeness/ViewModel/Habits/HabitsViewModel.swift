@@ -29,19 +29,19 @@ final class HabitsViewModel: HabitsProtocol {
     var howManyTimesToCompleteHabit = 1
     var newHabitName = ""
     var newHabitDate = Date()
-   
-
+    var newHabitDays: [Int] = []
+    
     var filteredHabits: [Habit] {
-           habits.filter {
-               Calendar.current.isDate($0.timestampHabit, inSameDayAs: selectedDate)
-           }
-       }
-
+        habits.filter {
+            $0.isScheduled(for: selectedDate)
+        }
+    }
+    
     func selectDate(_ date: Date) {
-          selectedDate = date
-      }
-
-    var habitToEdit: Habit = .init(howManyTimesToToggle: 1)
+        selectedDate = date
+    }
+    
+    //var habitToEdit: Habit = .init(howManyTimesToToggle: 1)
     
     init(habitCompletionService: HabitCompletionProtocol, habitService: HabitRepositoryProtocol) {
         self.habitCompletionService = habitCompletionService
@@ -49,41 +49,44 @@ final class HabitsViewModel: HabitsProtocol {
     }
     
     // MARK: - Functions
-    func getAllHabits() throws {
+    func getAllHabits() async throws {
         do {
-            habits = try habitService.getAllHabits()
+            habits = try await habitService.getAllHabits()
+            state = .loaded
         } catch {
             print("cannot get all Habits, ERROR: \(error.localizedDescription)")
+            state = .error
         }
     }
     
     func createNewHabit() {
+        guard !newHabitName.isEmpty else {return}
+        
         let newHabit = Habit(
-            habitName: textField,
+            habitName: newHabitName,
             habitCompleteness: completenessType,
-            howManyTimesToToggle: howManyTimesToCompleteHabit
+            howManyTimesToToggle: howManyTimesToCompleteHabit,
+            scheduleDays: newHabitDays
         )
         
+        habits.append(newHabit)
         habitService.createHabit(habit: newHabit)
         Task{
             await loadData()
         }
     }
     
-    func completeHabitByToggle(by id: UUID) {
-        habitCompletionService.completeByToggle(id: id)
-    }
-    
-    func completeHabitByMultipleToggle(by id: UUID) {
-        habitCompletionService.completeByMultipleToggle(id: id)
-    }
-    
-    func showAditionalConfigForHabit() -> Bool {
-        self.completenessType == .byMultipleToggle
-    }
-    
-    func deleteHabit(by id: UUID) {
-        habitService.deleteHabit(id: id)
+    func completeHabit(habit: Habit, on date: Date) async {
+        switch habit.habitCompleteness {
+        case .byMultipleToggle:
+            await habitCompletionService.completeByMultipleToggle(id: habit.id, on: date)
+        case .byToggle:
+            await habitCompletionService.completeByToggle(id: habit.id, on: date)
+        case .byTimer:
+            break //implement completness by timer
+        default:
+            break
+        }
     }
     
     func editHabit() {
@@ -93,7 +96,7 @@ final class HabitsViewModel: HabitsProtocol {
     @MainActor
     func loadData() async {
         do {
-            try getAllHabits()
+            try await getAllHabits()
             state = .loaded
         } catch {
             errorMessage = "Error fetching products: \(error.localizedDescription)"
