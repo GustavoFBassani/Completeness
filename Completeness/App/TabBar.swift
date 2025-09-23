@@ -19,7 +19,7 @@ struct TabBar: View {
             }
             Tab("Stats", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
                 NavigationStack{
-                    StatsView()
+                    DeleteAllData()
                 }
             }
             Tab("Settings", systemImage: "gearshape"){
@@ -27,24 +27,6 @@ struct TabBar: View {
                     ConfigView()
                 }
             }
-            // MARK:- Tabfake
-//            Tab("Notif Timer", systemImage: "circle"){
-//                NavigationStack{
-//                    notificationTest()
-//                }
-//            }
-//            Tab("Notif Agendada", systemImage: "circle"){
-//                NavigationStack{
-//                    Notification2Tests()
-//                }
-//            }
-//            Tab("viewModelTests", systemImage: "circle.fill") {
-//                NavigationStack {
-//                    HabitsPOCView(viewModel: .init(habitCompletionService: HabitCompletionRepository(context: context),
-//                                                             habitService: HabitRepository(context: context))
-//                    )
-//                }
-//            }
         }
         .tint(.indigoCustom)
     }
