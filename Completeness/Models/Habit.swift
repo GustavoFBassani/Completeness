@@ -79,5 +79,3 @@ final class Habit: Identifiable {
         }
     }
 }
-
-
