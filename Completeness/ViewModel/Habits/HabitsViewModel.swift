@@ -1,9 +1,9 @@
-//
-//  HabitsViewModel.swift
-//  Completeness
-//
-//  Created by Gustavo Ferreira bassani on 16/09/25.
-//
+////
+////  HabitsViewModel.swift
+////  Completeness
+////
+////  Created by Gustavo Ferreira bassani on 16/09/25.
+////
 
 import SwiftUI
 import Observation
@@ -25,9 +25,13 @@ final class HabitsViewModel: HabitsProtocol {
     var habitCompletionService: HabitCompletionProtocol
     var habitService: HabitRepositoryProtocol
     var textField = ""
-    var completenessType: CompletionHabit = .byToggle
+    var completenessType: CompletionHabit = .byTimer
     var howManyTimesToCompleteHabit = 1
+    var howManySecondsToCompleteHabit = 100
     var newHabitName = ""
+    var newValuePosition = 0
+    var newIndicePosition = 0
+    var newHabitDate = Date()
     var newHabitDays: [Int] = []
     
     var filteredHabits: [Habit] {
@@ -36,9 +40,9 @@ final class HabitsViewModel: HabitsProtocol {
         }
     }
     
-    func selectDate(_ date: Date) {
-        selectedDate = date
-    }
+//    func selectDate(_ date: Date) {
+//        selectedDate = date
+//    }
     
     //var habitToEdit: Habit = .init(howManyTimesToToggle: 1)
     
@@ -65,7 +69,10 @@ final class HabitsViewModel: HabitsProtocol {
             habitName: newHabitName,
             habitCompleteness: completenessType,
             howManyTimesToToggle: howManyTimesToCompleteHabit,
-            scheduleDays: newHabitDays
+            scheduleDays: newHabitDays,
+            valuePosition: newValuePosition,
+            indicePosition: newIndicePosition,
+            howManySecondsToComplete: howManySecondsToCompleteHabit
         )
         
         habits.append(newHabit)
@@ -82,7 +89,7 @@ final class HabitsViewModel: HabitsProtocol {
         case .byToggle:
             await habitCompletionService.completeByToggle(id: habit.id, on: date)
         case .byTimer:
-            break //implement completness by timer
+            await habitCompletionService.completeByTimer(id: habit.id, on: date)
         default:
             break
         }

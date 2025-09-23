@@ -12,5 +12,5 @@ protocol HabitCompletionProtocol {
     func getHabitById(id: UUID) async -> Habit?
     func completeByToggle(id: UUID, on date: Date) async
     func completeByMultipleToggle(id: UUID, on date: Date) async
-    //func completeWithTimer(id: UUID, after seconds: TimeInterval)
+    func completeByTimer(id: UUID, on date: Date) async
 }

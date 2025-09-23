@@ -4,7 +4,7 @@
 //
 //  Created by Gustavo Melleu on 17/09/25.
 //
-
+//
 import SwiftUI
 
 struct AddHabitView: View {
@@ -13,6 +13,8 @@ struct AddHabitView: View {
     @Binding var newHabitDate: Date
     @Binding var selectedDays: [Int]
     
+    @State private var selectedPredefinedHabit: PredefinedHabits? = nil
+        
     var onSave: () -> Void
     
     let weekDays = ["S", "M", "T", "W", "T", "F", "S"]
