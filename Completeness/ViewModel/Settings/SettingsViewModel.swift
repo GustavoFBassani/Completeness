@@ -1,28 +1,35 @@
-//
-//  SettingsViewModel.swift
-//  Completeness
-//
-//  Created by Vítor Bruno on 16/09/25.
-//
-
 import Foundation
 
 @Observable
-class SettingsViewModel: ObservableObject {
-    private let biometryKey = "isBiometryEnabled"
-
-    var biometricManager = BiometricManager.shared
+final class SettingsViewModel: SettingsViewModelProtocol, ObservableObject {
+    let biometryKey = "isBiometryEnabled"
+    var biometricManager: BiometricManagerProtocol
+    let userDefaults: UserDefaults
 
     var showPermissionAlert = false
     var alertMessage = ""
 
     var isBiometryEnabled: Bool {
         didSet {
-            UserDefaults.standard.set(isBiometryEnabled, forKey: biometryKey)
+            userDefaults.set(isBiometryEnabled, forKey: biometryKey)
         }
     }
 
-    init() {
-        self.isBiometryEnabled = UserDefaults.standard.bool(forKey: biometryKey)
+    init(biometricManager: BiometricManagerProtocol = BiometricManager.shared,
+         userDefaults: UserDefaults = .standard) {
+        self.biometricManager = biometricManager
+        self.userDefaults = userDefaults
+        self.isBiometryEnabled = userDefaults.bool(forKey: biometryKey)
+    }
+    
+    func enableBiometry() async {
+        do {
+            try await biometricManager.authenticate()
+            isBiometryEnabled = true
+        } catch {
+            alertMessage = error.localizedDescription
+            showPermissionAlert = true
+            isBiometryEnabled = false
+        }
     }
 }
