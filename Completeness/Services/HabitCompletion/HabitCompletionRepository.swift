@@ -47,7 +47,7 @@ class HabitCompletionRepository: HabitCompletionProtocol {
     /// Marks a habit as completed or not completed (toggle logic).
     /// This is the most common strategy: one tap checks it, another unchecks it.
     /// - Parameter id: The `UUID` of the habit to be modified.
-    func completeByToggle(id:UUID, on date:Date) async {
+    func completeByToggle(id: UUID, on date: Date) async {
            guard let habitToChange = await getHabitById(id: id) else { return }
            let targetDay = Calendar.current.startOfDay(for: date)
            

@@ -23,7 +23,8 @@ final class Habit: Identifiable {
     var howManyTimesToToggle = 1
     var scheduleDays: [Int] = []
     var howManyTimesItWasDone = 0
-    
+    var valuePosition = 0
+    var indicePosition = 0
     /// A one-to-many relationship to all historical completion records for this habit.
     /// `deleteRule: .cascade` ensures that when a Habit is deleted, all its associated logs are also deleted,
     /// maintaining data integrity.
@@ -41,7 +42,9 @@ final class Habit: Identifiable {
          habitCompleteness: CompletionHabit? = .byToggle,
          howManyTimesToToggle: Int,
          scheduleDays: [Int],
-         howManyTimesItWasDone: Int = 0) {
+         howManyTimesItWasDone: Int = 0,
+         valuePosition: Int = 0,
+         indicePosition: Int = 0) {
         self.id = id
         self.habitName = habitName
         self.habitIsCompleted = habitIsCompleted
@@ -55,6 +58,8 @@ final class Habit: Identifiable {
         self.howManyTimesToToggle = howManyTimesToToggle
         self.howManyTimesItWasDone = howManyTimesItWasDone
         self.scheduleDays = scheduleDays
+        self.valuePosition = valuePosition
+        self.indicePosition = indicePosition
     }
     
     func isScheduled(for date: Date) -> Bool {

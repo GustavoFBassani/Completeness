@@ -19,7 +19,7 @@ struct TabBar: View {
             }
             Tab("Stats", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
                 NavigationStack{
-                    StatsView()
+                    DeleteAllData()
                 }
             }
             Tab("Settings", systemImage: "gearshape"){

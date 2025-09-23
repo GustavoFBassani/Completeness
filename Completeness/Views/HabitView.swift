@@ -41,17 +41,39 @@ struct HabitView: View {
             case .loaded:
                 ScrollView([.horizontal, .vertical]) {
                     VStack(spacing: 20) {
-                        ForEach(1..<5, id: \.self) { indice in
+                        ForEach(1...4, id: \.self) { indice in
                             if indice.isMultiple(of: 2) {
                                 HStack(alignment: .center, spacing: 12) {
                                     ForEach(1...3, id: \.self) { value in
-                                        EmptyCircle()
+                                        if let habitWithPosition = viewModel.habits.first(where: {habit in
+                                            habit.valuePosition == value && habit.indicePosition == indice &&
+                                            viewModel.filteredHabits.contains(habit) }) {
+                                            EmptyCircle(habit: habitWithPosition)
+                                        } else {
+                                            EmptyCircle()
+                                                .onTapGesture {
+                                                    viewModel.newValuePosition = value
+                                                    viewModel.newIndicePosition = indice
+                                                    showingAddHabit = true
+                                                }
+                                        }
                                     }
                                 }
                             } else {
                                 HStack(alignment: .center, spacing: 12) {
                                     ForEach(1...4, id: \.self) { value in
-                                        EmptyCircle()
+                                        if let habitWithPosition = viewModel.habits.first(where: {habit in
+                                            habit.valuePosition == value && habit.indicePosition == indice &&
+                                            viewModel.filteredHabits.contains(habit) }) {
+                                            EmptyCircle(habit: habitWithPosition)
+                                        } else {
+                                            EmptyCircle()
+                                                .onTapGesture {
+                                                    viewModel.newValuePosition = value
+                                                    viewModel.newIndicePosition = indice
+                                                    showingAddHabit = true
+                                                }
+                                        }
                                     }
                                 }
                             }

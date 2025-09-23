@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct EmptyCircle: View {
+    var habit: Habit? = nil
+
     var body: some View {
         VStack(alignment: .center, spacing: 6) {
-            Image(systemName: "plus")
+            Image(systemName: habit?.habitSimbol ?? "plus")
                 .foregroundStyle(.labelTertiary)
                 .font(.system(size: 58))
                 .fontWeight(.semibold)
@@ -18,9 +20,9 @@ struct EmptyCircle: View {
                 .background(Circle().fill(.backgroundSecondary))
                 .shadow(color: .shadow, radius: 10, x: 4.52, y: 4.52)
             
-            Text("Adicionar")
+            Text(habit?.habitName ?? "Adicionar")
                 .font(.system(size: 13))
-                .foregroundStyle(.labelSecondary)
+                .foregroundStyle(habit?.habitName != nil ? .labelPrimary : .labelSecondary)
                 .fontWeight(.semibold)
         }
     }
