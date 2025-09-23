@@ -1,9 +1,9 @@
-////
-////  HabitView.swift
-////  Completeness
-////
-////  Created by Gustavo Ferreira bassani on 15/09/25.
-////
+//
+//  HabitView.swift
+//  Completeness
+//
+//  Created by Gustavo Ferreira bassani on 15/09/25.
+//
 
 import SwiftUI
 import SwiftData
@@ -12,7 +12,6 @@ struct HabitView: View {
 
     @Bindable var viewModel: HabitsViewModel
     @State private var showingAddHabit = false
-
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -47,11 +46,6 @@ struct HabitView: View {
                 .padding()
             }
         }
-        .onAppear(perform: {
-            viewModel.habits.forEach { habit in
-                print(habit.habitName )
-            }
-        })
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .task { await viewModel.loadData() }
         .sheet(isPresented: $showingAddHabit) {
