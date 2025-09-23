@@ -10,6 +10,7 @@ import SwiftData
 
 struct TabBar: View {
     @Environment(\.modelContext) var context
+    
     var body: some View {
         TabView{
             Tab("Habit", systemImage: "circle.hexagongrid"){
@@ -27,7 +28,7 @@ struct TabBar: View {
                     ConfigView()
                 }
             }
-            // MARK:- Tabfake
+            // MARK: - Tabfake
 //            Tab("Notif Timer", systemImage: "circle"){
 //                NavigationStack{
 //                    notificationTest()
