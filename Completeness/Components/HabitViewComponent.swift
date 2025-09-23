@@ -7,9 +7,11 @@
 
 import SwiftUI
 
-struct MultipleToggleHabitViewComponent: View {
+struct HabitViewComponent: View {
     @State private var progress = 0
-    let maxProgress = 5
+    @State private var completionType: CompletionHabit = .byMultipleToggle
+    
+    private var maxProgress: Int { completionType == .byToggle ? 1 : 3 }
     
     var body: some View {
         VStack {
@@ -18,24 +20,22 @@ struct MultipleToggleHabitViewComponent: View {
                     if progress < maxProgress {
                         progress += 1
                     } else {
-                        progress = 0 // reinicia ou pode deixar fixo em 5
+                        progress = 0
                     }
                 }
             }) {
                 ZStack {
-                    // Círculo de fundo
                     Circle()
                         .fill(progress == maxProgress ? Color.indigoCustom : Color.white)
                         .frame(width: 130, height: 130)
                         .shadow(color: .black.opacity(0.25), radius: 12, x: 0, y: 4)
                     
-                    // Círculo de progresso
                     Circle()
                         .trim(from: 0, to: CGFloat(progress) / CGFloat(maxProgress))
-                        .stroke(progress == maxProgress ? Color.indigoCustom : Color.white,
+                        .stroke(Color.indigoCustom,
                                 style: StrokeStyle(lineWidth: 6, lineCap: .round))
                         .frame(width: 124, height: 124)
-                        .rotationEffect(.degrees(90)) // começa no topo
+                        .rotationEffect(.degrees(90))
                         .animation(.easeInOut, value: progress)
                     
                     VStack {
@@ -45,10 +45,16 @@ struct MultipleToggleHabitViewComponent: View {
                             .foregroundColor(progress == maxProgress ? .white : .indigoCustom)
                             .frame(width: 58, height: 58)
                         
-                        if progress < maxProgress {
+                        if progress < maxProgress && completionType != .byToggle {
                             Text("\(progress)/\(maxProgress)")
                                 .font(.system(size: 12.8, weight: .semibold))
-                                .foregroundColor(.backgroundSecondary)
+                                .foregroundColor(.labelSecondary)
+                        }
+                        
+                        if progress == maxProgress {
+                            Text("Feito!")
+                                .font(.system(size: 12.8, weight: .semibold))
+                                .foregroundColor(.white)
                         }
                     }
                 }
@@ -64,5 +70,5 @@ struct MultipleToggleHabitViewComponent: View {
 }
 
 #Preview {
-    MultipleToggleHabitViewComponent()
+    HabitViewComponent()
 }
