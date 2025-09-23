@@ -9,13 +9,13 @@ import SwiftUI
 
 struct HabitViewComponent: View {
     @State private var progress = 0
-    @State private var completionType: CompletionHabit = .byMultipleToggle
+    @Bindable var habit: Habit
     
-    private var maxProgress: Int { completionType == .byToggle ? 1 : 3 }
+    private var maxProgress: Int { habit.habitCompleteness == .byToggle ? 1 : habit.howManyTimesToToggle }
     
     var body: some View {
         VStack {
-            Button(action: {
+            Button {
                 withAnimation(.bouncy(duration: 0.6)) {
                     if progress < maxProgress {
                         progress += 1
@@ -23,7 +23,7 @@ struct HabitViewComponent: View {
                         progress = 0
                     }
                 }
-            }) {
+            } label: {
                 ZStack {
                     Circle()
                         .fill(progress == maxProgress ? Color.indigoCustom : Color.white)
@@ -39,13 +39,13 @@ struct HabitViewComponent: View {
                         .animation(.easeInOut, value: progress)
                     
                     VStack {
-                        Image(systemName: "book.fill")
+                        Image(systemName: habit.habitSimbol)
                             .resizable()
                             .scaledToFit()
                             .foregroundColor(progress == maxProgress ? .white : .indigoCustom)
                             .frame(width: 58, height: 58)
                         
-                        if progress < maxProgress && completionType != .byToggle {
+                        if progress < maxProgress && habit.habitCompleteness == .byMultipleToggle {
                             Text("\(progress)/\(maxProgress)")
                                 .font(.system(size: 12.8, weight: .semibold))
                                 .foregroundColor(.labelSecondary)
@@ -61,7 +61,7 @@ struct HabitViewComponent: View {
             }
             .buttonStyle(.plain)
             
-            Text("Estudar")
+            Text(habit.habitName)
                 .padding(.top, 6)
                 .font(.system(size: 12.8, weight: .semibold))
                 .foregroundColor(.labelPrimary)
@@ -70,5 +70,5 @@ struct HabitViewComponent: View {
 }
 
 #Preview {
-    HabitViewComponent()
+//    HabitViewComponent()
 }
