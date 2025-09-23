@@ -12,7 +12,6 @@ struct HabitView: View {
     @Bindable var viewModel: HabitsViewModel
     @State private var showingAddHabit = false
     
-    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -49,6 +48,9 @@ struct HabitView: View {
                                             habit.valuePosition == value && habit.indicePosition == indice &&
                                             viewModel.filteredHabits.contains(habit) }) {
                                             EmptyCircle(habit: habitWithPosition)
+                                                .onTapGesture {
+                                                    Task { await viewModel.completeHabit(habit: habitWithPosition, on: viewModel.selectedDate) }
+                                                }
                                         } else {
                                             EmptyCircle()
                                                 .onTapGesture {
@@ -66,6 +68,11 @@ struct HabitView: View {
                                             habit.valuePosition == value && habit.indicePosition == indice &&
                                             viewModel.filteredHabits.contains(habit) }) {
                                             EmptyCircle(habit: habitWithPosition)
+                                                .onTapGesture {
+                                                    Task {
+                                                        await viewModel.completeHabit(habit: habitWithPosition, on: viewModel.selectedDate)
+                                                    }
+                                                }
                                         } else {
                                             EmptyCircle()
                                                 .onTapGesture {

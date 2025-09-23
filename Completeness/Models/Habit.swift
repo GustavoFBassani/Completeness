@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class Habit: Identifiable {
+final class Habit: Identifiable, Sendable {
     var id = UUID()
     var habitName = ""
     var habitIsCompleted = false
@@ -18,13 +18,20 @@ final class Habit: Identifiable {
     var habitColor = ""
     var habitRecurrence = ""
     var habitSimbol = ""
-    var timestampHabit = Date()
     var habitCompleteness: CompletionHabit?
-    var howManyTimesToToggle = 1
+//    var timestampHabit = Date()
     var scheduleDays: [Int] = []
-    var howManyTimesItWasDone = 0
+    
+    //position of the habit at screen
     var valuePosition = 0
     var indicePosition = 0
+    
+    //what is needed to complete the habit
+    var howManyTimesItWasDone = 0
+    var howManyTimesToToggle = 1
+    var howManySecondsToComplete = 1
+    var howManySecondsAreGone = 0
+    
     /// A one-to-many relationship to all historical completion records for this habit.
     /// `deleteRule: .cascade` ensures that when a Habit is deleted, all its associated logs are also deleted,
     /// maintaining data integrity.
@@ -38,13 +45,15 @@ final class Habit: Identifiable {
          habitColor: String = "",
          habitRecurrence: String = "",
          habitSimbol: String = "",
-         timestampHabit: Date = .now,
+//         timestampHabit: Date = .now,
          habitCompleteness: CompletionHabit? = .byToggle,
          howManyTimesToToggle: Int,
          scheduleDays: [Int],
          howManyTimesItWasDone: Int = 0,
          valuePosition: Int = 0,
-         indicePosition: Int = 0) {
+         indicePosition: Int = 0,
+         howManySecondsToComplete: Int = 0,
+         howManySecondsAreGone: Int = 0) {
         self.id = id
         self.habitName = habitName
         self.habitIsCompleted = habitIsCompleted
@@ -53,13 +62,15 @@ final class Habit: Identifiable {
         self.habitColor = habitColor
         self.habitRecurrence = habitRecurrence
         self.habitSimbol = habitSimbol
-        self.timestampHabit = timestampHabit
+//        self.timestampHabit = timestampHabit
         self.habitCompleteness = habitCompleteness ?? .byToggle
         self.howManyTimesToToggle = howManyTimesToToggle
         self.howManyTimesItWasDone = howManyTimesItWasDone
         self.scheduleDays = scheduleDays
         self.valuePosition = valuePosition
         self.indicePosition = indicePosition
+        self.howManySecondsToComplete = howManySecondsToComplete
+        self.howManySecondsAreGone = howManySecondsAreGone
     }
     
     func isScheduled(for date: Date) -> Bool {
