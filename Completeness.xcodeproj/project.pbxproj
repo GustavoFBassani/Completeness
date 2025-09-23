@@ -568,7 +568,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.academy.Completeness.CompletenessWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = CompletenessiOSPProfile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = CompletenesWidgetsPP;
 				REGISTER_APP_GROUPS = YES;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -605,7 +605,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.academy.Completeness.CompletenessWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = CompletenessiOSPProfile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = CompletenesWidgetsPP;
 				REGISTER_APP_GROUPS = YES;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
