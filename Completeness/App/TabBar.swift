@@ -14,7 +14,7 @@ struct TabBar: View {
         TabView{
             Tab("Habit", systemImage: "circle.hexagongrid"){
                 NavigationStack{
-                    HabitTest(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context), habitService: HabitRepository(context: context)))
+                    HabitView(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context), habitService: HabitRepository(context: context)))
                 }
             }
             Tab("Stats", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
@@ -38,13 +38,13 @@ struct TabBar: View {
 //                    Notification2Tests()
 //                }
 //            }
-            Tab("viewModelTests", systemImage: "circle.fill") {
-                NavigationStack {
-                    HabitsPOCView(viewModel: .init(habitCompletionService: HabitCompletionRepository(context: context),
-                                                             habitService: HabitRepository(context: context))
-                    )
-                }
-            }
+//            Tab("viewModelTests", systemImage: "circle.fill") {
+//                NavigationStack {
+//                    HabitsPOCView(viewModel: .init(habitCompletionService: HabitCompletionRepository(context: context),
+//                                                             habitService: HabitRepository(context: context))
+//                    )
+//                }
+//            }
         }
         .tint(.indigoCustom)
     }

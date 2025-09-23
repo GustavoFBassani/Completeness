@@ -16,7 +16,7 @@ class HabitRepository: HabitRepositoryProtocol {
         self.context = context
     }
     
-    func getAllHabits() throws -> [Habit] {
+    func getAllHabits() async throws -> [Habit] {
         let descriptor = FetchDescriptor<Habit>()
         do {
             let allHabits: [Habit] = try context.fetch(descriptor)
@@ -26,23 +26,11 @@ class HabitRepository: HabitRepositoryProtocol {
         }
         return []
     }
-    func getHabitById(id: UUID) -> Habit? {
-        try? getAllHabits().first {$0.id == id }
+    func getHabitById(id: UUID) async -> Habit? {
+        try? await getAllHabits().first {$0.id == id }
     }
     func createHabit(habit: Habit) {
-        let newHabit = Habit(id: habit.id,
-                             habitName: habit.habitName,
-                             habitIsCompleted: habit.habitIsCompleted,
-                             habitCategory: habit.habitCategory,
-                             habitDescription: habit.habitDescription,
-                             habitColor: habit.habitColor,
-                             habitRecurrence: habit.habitRecurrence,
-                             habitSimbol: habit.habitSimbol,
-                             timestampHabit: habit.timestampHabit,
-                             habitCompleteness: habit.habitCompleteness,
-                             howManyTimesToToggle: habit.howManyTimesToToggle
-        )
-        context.insert(newHabit)
+        context.insert(habit)
         do {
             try context.save()
         } catch {
@@ -53,8 +41,8 @@ class HabitRepository: HabitRepositoryProtocol {
     func saveChanges() {
         try? context.save()
     }
-    func deleteHabit(id: UUID) {
-        if let habitToDelete = getHabitById(id: id) {
+    func deleteHabit(id: UUID) async {
+        if let habitToDelete = await getHabitById(id: id) {
             context.delete(habitToDelete)
             try? context.save()
         }
