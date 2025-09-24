@@ -19,7 +19,6 @@ final class Habit: Identifiable, Sendable {
     var habitRecurrence = ""
     var habitSimbol = ""
     var habitCompleteness: CompletionHabit?
-//    var timestampHabit = Date()
     var scheduleDays: [Int] = []
     
     //position of the habit at screen
@@ -45,7 +44,6 @@ final class Habit: Identifiable, Sendable {
          habitColor: String = "",
          habitRecurrence: String = "",
          habitSimbol: String = "",
-//         timestampHabit: Date = .now,
          habitCompleteness: CompletionHabit? = .byToggle,
          howManyTimesToToggle: Int,
          scheduleDays: [Int],
@@ -62,7 +60,6 @@ final class Habit: Identifiable, Sendable {
         self.habitColor = habitColor
         self.habitRecurrence = habitRecurrence
         self.habitSimbol = habitSimbol
-//        self.timestampHabit = timestampHabit
         self.habitCompleteness = habitCompleteness ?? .byToggle
         self.howManyTimesToToggle = howManyTimesToToggle
         self.howManyTimesItWasDone = howManyTimesItWasDone

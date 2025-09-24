@@ -25,12 +25,14 @@ final class HabitsViewModel: HabitsProtocol {
     var habitCompletionService: HabitCompletionProtocol
     var habitService: HabitRepositoryProtocol
     var textField = ""
-    var completenessType: CompletionHabit = .byTimer
+    var completenessType: CompletionHabit = .byToggle
     var howManyTimesToCompleteHabit = 1
     var howManySecondsToCompleteHabit = 100
     var newHabitName = ""
+    var newHabitDescription = ""
     var newValuePosition = 0
     var newIndicePosition = 0
+    var newHabitTimeGoalInSeconds: TimeInterval = 900
     var newHabitDate = Date()
     var newHabitDays: [Int] = []
     
@@ -72,7 +74,8 @@ final class HabitsViewModel: HabitsProtocol {
             scheduleDays: newHabitDays,
             valuePosition: newValuePosition,
             indicePosition: newIndicePosition,
-            howManySecondsToComplete: howManySecondsToCompleteHabit
+            howManySecondsToComplete: howManySecondsToCompleteHabit,
+            habitTimeGoalInSeconds: newHabitTimeGoalInSeconds
         )
         
         habits.append(newHabit)

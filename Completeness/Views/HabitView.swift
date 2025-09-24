@@ -18,7 +18,6 @@ struct HabitView: View {
                 Text("Hábitos")
                     .font(.largeTitle).bold()
                 
-                
                 Spacer()
                 
                 AddHabitButton {
@@ -99,20 +98,12 @@ struct HabitView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .task { await viewModel.loadData() }
         .sheet(isPresented: $showingAddHabit) {
-            AddHabitView(
-                isPresented: $showingAddHabit,
-                newHabitName: $viewModel.newHabitName,
-                newHabitDate: $viewModel.selectedDate,
-                selectedDays: $viewModel.newHabitDays
-            ) {
-                viewModel.createNewHabit()
-                showingAddHabit = false
-            }
+            AddCustomHabit(viewModel: viewModel)
         }
     }
 }
 
 #Preview {
-    @Previewable @Environment(\.modelContext) var context
-    HabitView(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context), habitService: HabitRepository(context: context)))
+//    @Previewable @Environment(\.modelContext) var context
+//    HabitView(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context), habitService: HabitRepository(context: context)))
 }
