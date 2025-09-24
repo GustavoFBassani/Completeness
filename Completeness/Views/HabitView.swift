@@ -11,7 +11,7 @@ import SwiftData
 struct HabitView: View {
     @Bindable var viewModel: HabitsViewModel
     @State private var showingAddHabit = false
-    
+	
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -97,8 +97,19 @@ struct HabitView: View {
         .background(.backgroundSecondary)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .task { await viewModel.loadData() }
+//        .sheet(isPresented: $showingAddHabit) {
+//            AddHabitView(
+//                isPresented: $showingAddHabit,
+//                newHabitName: $viewModel.newHabitName,
+//                newHabitDate: $viewModel.selectedDate,
+//                selectedDays: $viewModel.newHabitDays
+//            ) {
+//                viewModel.createNewHabit()
+//                showingAddHabit = false
+//            }
+//        }
         .sheet(isPresented: $showingAddHabit) {
-            AddCustomHabit(viewModel: viewModel)
+            AddNewHabit()
         }
     }
 }

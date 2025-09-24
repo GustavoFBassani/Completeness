@@ -15,7 +15,7 @@ struct notificationTest: View {
   
     var body: some View {
         VStack{
-            Text("Habit")
+            Text("Hábitos")
                 .font(.title)
             TextField("Digite o tempo em segundos", text: $intervalText)
                 .keyboardType(.numberPad)

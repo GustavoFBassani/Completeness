@@ -14,20 +14,20 @@ struct SheetToEditHabitsTest: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text("editar nome do hábito")
+            Text("Editar nome do hábito")
             TextField("so de teste", text: $habit.habitName)
             
-            Picker("Completion Type", selection: $habit.habitCompleteness) {
-                Text("Toggle simples").tag(CompletionHabit.byToggle)
-                Text("Toggle multiplo").tag(CompletionHabit.byMultipleToggle)
-                Text("By Timer").tag(CompletionHabit.byTimer)
+            Picker("Tipo de Completude", selection: $habit.habitCompleteness) {
+                Text("Troca simples").tag(CompletionHabit.byToggle)
+                Text("Troca multipla").tag(CompletionHabit.byMultipleToggle)
+                Text("Por tempo").tag(CompletionHabit.byTimer)
             }
             
             if habit.habitCompleteness == .byMultipleToggle {
                 HStack {
-                    Text("choose how many times you want to do it for a day")
+                    Text("Escolha quantas vezes você quer fazer isso no dia")
                     
-                    Picker("How many times", selection: $habit.howManyTimesToToggle) {
+                    Picker("Quantas vezes", selection: $habit.howManyTimesToToggle) {
                         ForEach(1..<10, id: \.self) { count in
                             Text("\(count)").tag(count)
                         }
@@ -39,7 +39,7 @@ struct SheetToEditHabitsTest: View {
                 editHabit()
                 dismiss()
             } label: {
-                Text("Save Changes")
+                Text("Salvar alterações")
             }
         }
         .padding()
