@@ -47,7 +47,7 @@ struct HabitView: View {
                                         if let habitWithPosition = viewModel.habits.first(where: {habit in
                                             habit.valuePosition == value && habit.indicePosition == indice &&
                                             viewModel.filteredHabits.contains(habit) }) {
-                                            EmptyCircle(habit: habitWithPosition)
+                                            HabitViewComponent(habit: habitWithPosition, day: viewModel.selectedDate)
                                                 .onTapGesture {
                                                     Task { await viewModel.completeHabit(habit: habitWithPosition, on: viewModel.selectedDate) }
                                                 }
@@ -67,7 +67,7 @@ struct HabitView: View {
                                         if let habitWithPosition = viewModel.habits.first(where: {habit in
                                             habit.valuePosition == value && habit.indicePosition == indice &&
                                             viewModel.filteredHabits.contains(habit) }) {
-                                            EmptyCircle(habit: habitWithPosition)
+                                            HabitViewComponent(habit: habitWithPosition, day: viewModel.selectedDate)
                                                 .onTapGesture {
                                                     Task {
                                                         await viewModel.completeHabit(habit: habitWithPosition, on: viewModel.selectedDate)

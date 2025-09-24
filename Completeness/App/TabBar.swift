@@ -12,17 +12,17 @@ struct TabBar: View {
     @Environment(\.modelContext) var context
     var body: some View {
         TabView{
-            Tab("Habit", systemImage: "circle.hexagongrid"){
+            Tab("Hábitos", systemImage: "circle.hexagongrid"){
                 NavigationStack{
                     HabitView(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context), habitService: HabitRepository(context: context)))
                 }
             }
-            Tab("Stats", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
+            Tab("Relatórios", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
                 NavigationStack{
                     DeleteAllData()
                 }
             }
-            Tab("Settings", systemImage: "gearshape"){
+            Tab("Configurações", systemImage: "gearshape"){
                 NavigationStack{
                     ConfigView()
                 }

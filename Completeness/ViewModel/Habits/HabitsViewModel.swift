@@ -25,8 +25,8 @@ final class HabitsViewModel: HabitsProtocol {
     var habitCompletionService: HabitCompletionProtocol
     var habitService: HabitRepositoryProtocol
     var textField = ""
-    var completenessType: CompletionHabit = .byTimer
-    var howManyTimesToCompleteHabit = 1
+    var completenessType: CompletionHabit = .byMultipleToggle
+    var howManyTimesToCompleteHabit = 3
     var howManySecondsToCompleteHabit = 100
     var newHabitName = ""
     var newValuePosition = 0

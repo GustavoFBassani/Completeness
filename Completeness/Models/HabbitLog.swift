@@ -27,6 +27,10 @@ final class HabitLog: Identifiable {
     /// This is the inverse of the `habitLogs` relationship in the `Habit` model.
     var habit: Habit?
     
+    var howManyTimesItWasDone = 0
+    var secondsElapsed = 0
+
+    
     init(completionDate: Date, isCompleted: Bool = true, habit: Habit? = nil) {
         // By normalizing the date to the start of the day, we ensure that all logs
         // for a given calendar day are treated equally, regardless of the time they were created.
