@@ -10,7 +10,7 @@ import SwiftUI
 struct HabitViewComponent: View {
     @Bindable var habit: Habit
     let day: Date
-    
+        
     private var maxProgress: Int {
         switch habit.habitCompleteness {
         case .byToggle, .byMultipleToggle:
@@ -22,40 +22,67 @@ struct HabitViewComponent: View {
         }
     }
     
+    private var progressDone: Int {
+        switch habit.habitCompleteness {
+        case .byToggle, .byMultipleToggle:
+            let habitLog = habit.habitLogs?.first(where: {log in
+                log.completionDate == day })
+            return habitLog?.howManyTimesItWasDone ?? 0
+            
+        case .byTimer:
+            let habitLog = habit.habitLogs?.first(where: {log in
+                log.completionDate == day })
+            return habitLog?.secondsElapsed ?? 0
+        case .none:
+            return 0
+        }
+    }
+    
     private var isCompleted: Bool {
         habit.isCompleted(on: day)
+    }
+    
+    private var circleColor: Color {
+        switch isCompleted {
+        case true:
+            return Color.indigoCustom
+        case false:
+            return Color.white
+        }
     }
     
     var body: some View {
         VStack {
             ZStack {
                 Circle()
-                    .fill(isCompleted ? Color.indigoCustom : Color.white)
+                    .fill(circleColor)
                     .frame(width: 130, height: 130)
                     .shadow(color: .black.opacity(0.25), radius: 12, x: 0, y: 4)
+                    .animation(.easeInOut(duration: 0.4).delay(0.3), value: isCompleted)
                 
                 Circle()
-                    .trim(from: 0, to: CGFloat(habit.howManyTimesItWasDone) / CGFloat(maxProgress))
+                    .trim(from: 0, to: maxProgress > 0 ? min(1, CGFloat(progressDone) / CGFloat(maxProgress)) : 0)
                     .stroke(Color.indigoCustom,
                             style: StrokeStyle(lineWidth: 6, lineCap: .round))
                     .frame(width: 124, height: 124)
                     .rotationEffect(.degrees(90))
-                    .animation(.easeInOut, value: habit.howManyTimesItWasDone)
+                    .animation(.easeInOut(duration: 0.4), value: progressDone)
                 
                 VStack {
                     Image(systemName: habit.habitSimbol)
                         .resizable()
                         .scaledToFit()
-                        .foregroundColor(habit.howManyTimesItWasDone == maxProgress ? .white : .indigoCustom)
+                        .foregroundColor(isCompleted ? .white : .indigoCustom)
+                        .animation(.easeInOut(duration: 0.4).delay(0.3), value: isCompleted)
                         .frame(width: 58, height: 58)
                     
-                    if habit.howManyTimesItWasDone < maxProgress && habit.habitCompleteness == .byMultipleToggle {
-                        Text("\(habit.howManyTimesItWasDone)/\(maxProgress)")
+                    if progressDone < maxProgress {
+                        Text("\(progressDone)/\(maxProgress)")
                             .font(.system(size: 12.8, weight: .semibold))
                             .foregroundColor(.labelSecondary)
                     }
                     
-                    if habit.howManyTimesItWasDone == maxProgress {
+                    if progressDone == maxProgress {
                         Text("Feito!")
                             .font(.system(size: 12.8, weight: .semibold))
                             .foregroundColor(.white)
@@ -74,4 +101,3 @@ struct HabitViewComponent: View {
 //#Preview {
 //    HabitViewComponent(habit: ...)
 //}
-

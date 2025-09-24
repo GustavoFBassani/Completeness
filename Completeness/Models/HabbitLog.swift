@@ -21,7 +21,7 @@ final class HabitLog: Identifiable {
     var completionDate = Date()
     
     /// A boolean indicating the status of the completion (typically always true).
-    var isCompleted = true
+    var isCompleted = false
     
     /// A many-to-one relationship back to the parent `Habit` this log belongs to.
     /// This is the inverse of the `habitLogs` relationship in the `Habit` model.
@@ -30,8 +30,7 @@ final class HabitLog: Identifiable {
     var howManyTimesItWasDone = 0
     var secondsElapsed = 0
 
-    
-    init(completionDate: Date, isCompleted: Bool = true, habit: Habit? = nil) {
+    init(completionDate: Date, isCompleted: Bool = false, habit: Habit? = nil) {
         // By normalizing the date to the start of the day, we ensure that all logs
         // for a given calendar day are treated equally, regardless of the time they were created.
         // This is crucial for accurate daily statistics.

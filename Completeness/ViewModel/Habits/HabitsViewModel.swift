@@ -25,8 +25,10 @@ final class HabitsViewModel: HabitsProtocol {
     var habitCompletionService: HabitCompletionProtocol
     var habitService: HabitRepositoryProtocol
     var textField = ""
+    
+    //MARK: - NEW HABIT
     var completenessType: CompletionHabit = .byMultipleToggle
-    var howManyTimesToCompleteHabit = 3
+    var howManyTimesToCompleteHabit = 9
     var howManySecondsToCompleteHabit = 100
     var newHabitName = ""
     var newValuePosition = 0
@@ -34,17 +36,12 @@ final class HabitsViewModel: HabitsProtocol {
     var newHabitDate = Date()
     var newHabitDays: [Int] = []
     
+    
     var filteredHabits: [Habit] {
         habits.filter {
             $0.isScheduled(for: selectedDate)
         }
     }
-    
-//    func selectDate(_ date: Date) {
-//        selectedDate = date
-//    }
-    
-    //var habitToEdit: Habit = .init(howManyTimesToToggle: 1)
     
     init(habitCompletionService: HabitCompletionProtocol, habitService: HabitRepositoryProtocol) {
         self.habitCompletionService = habitCompletionService
@@ -88,8 +85,10 @@ final class HabitsViewModel: HabitsProtocol {
             await habitCompletionService.completeByMultipleToggle(id: habit.id, on: date)
         case .byToggle:
             await habitCompletionService.completeByToggle(id: habit.id, on: date)
+
         case .byTimer:
             await habitCompletionService.completeByTimer(id: habit.id, on: date)
+
         default:
             break
         }
