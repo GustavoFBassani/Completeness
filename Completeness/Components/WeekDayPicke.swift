@@ -32,7 +32,7 @@ struct WeekDayPicker: View {
                         .foregroundColor(isSelected ? .indigo : .gray)
                 }
                 .frame(width: 43, height: 62)
-                .background(isSelected ? Color.clear : Color.white.opacity(0.8))
+                .background(isSelected ? Color.clear : .backgroundPrimary/*.opacity(0.8)*/)
                 .cornerRadius(12)
                 .overlay(
                     Group {
