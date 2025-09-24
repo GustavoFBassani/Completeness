@@ -20,8 +20,7 @@ struct CompletenessApp: App {
         WindowGroup {
             CompletenessAppContentView().environment(appViewModel)
         }
-        .modelContainer(for: Habit.self)
-        .modelContainer(for: HabitLog.self)
+        .modelContainer(for: [Habit.self, HabitLog.self])
     }
 }
 

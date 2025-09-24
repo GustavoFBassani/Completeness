@@ -9,7 +9,7 @@ import Foundation
 import LocalAuthentication
 
 @Observable
-class BiometricManager {
+class BiometricManager: BiometricManagerProtocol {
     static let shared = BiometricManager()
 
     enum BiometricError: LocalizedError {

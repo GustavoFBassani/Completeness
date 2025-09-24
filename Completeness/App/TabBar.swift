@@ -10,6 +10,7 @@ import SwiftData
 
 struct TabBar: View {
     @Environment(\.modelContext) var context
+    
     var body: some View {
         TabView{
             Tab("Hábitos", systemImage: "circle.hexagongrid"){
@@ -19,7 +20,7 @@ struct TabBar: View {
             }
             Tab("Resumo", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
                 NavigationStack{
-                    StatsView()
+                    DeleteAllData()
                 }
             }
             Tab("Configurações", systemImage: "gearshape"){

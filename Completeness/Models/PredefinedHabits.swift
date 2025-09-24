@@ -178,15 +178,15 @@ enum PredefinedHabits: String, CaseIterable, Identifiable {
             case .learnNew: return .byToggle
             case .draw: return .byToggle
             case .steps: return .byToggle
-            case .study: return .byToggle
-            case .reading: return .byToggle
-            case .walking: return .byToggle
-            case .running: return .byToggle
-            case .meditation: return .byToggle
-            case .yoga: return .byToggle
-            case .cook: return .byToggle
-            case .rest: return .byToggle
-            case .noScreensAlt: return .byToggle
+            case .study: return .byTimer
+            case .reading: return .byTimer
+            case .walking: return .byTimer
+            case .running: return .byTimer
+            case .meditation: return .byTimer
+            case .yoga: return .byTimer
+            case .cook: return .byTimer
+            case .rest: return .byTimer
+            case .noScreensAlt: return .byTimer
             case .pomodoro: return .byToggle
             case .sleep: return .byToggle
             case .outdoors: return .byToggle
