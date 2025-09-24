@@ -98,16 +98,19 @@ struct HabitView: View {
         .background(.backgroundSecondary)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .task { await viewModel.loadData() }
+//        .sheet(isPresented: $showingAddHabit) {
+//            AddHabitView(
+//                isPresented: $showingAddHabit,
+//                newHabitName: $viewModel.newHabitName,
+//                newHabitDate: $viewModel.selectedDate,
+//                selectedDays: $viewModel.newHabitDays
+//            ) {
+//                viewModel.createNewHabit()
+//                showingAddHabit = false
+//            }
+//        }
         .sheet(isPresented: $showingAddHabit) {
-            AddHabitView(
-                isPresented: $showingAddHabit,
-                newHabitName: $viewModel.newHabitName,
-                newHabitDate: $viewModel.selectedDate,
-                selectedDays: $viewModel.newHabitDays
-            ) {
-                viewModel.createNewHabit()
-                showingAddHabit = false
-            }
+            AddNewHabit()
         }
     }
 }
