@@ -27,12 +27,11 @@ final class HabitsViewModel: HabitsProtocol {
     var textField = ""
     var completenessType: CompletionHabit = .byToggle
     var howManyTimesToCompleteHabit = 1
-    var howManySecondsToCompleteHabit = 100
+    var howManySecondsToCompleteHabit = 900
     var newHabitName = ""
     var newHabitDescription = ""
     var newValuePosition = 0
     var newIndicePosition = 0
-    var newHabitTimeGoalInSeconds: TimeInterval = 900
     var newHabitDate = Date()
     var newHabitDays: [Int] = []
     
