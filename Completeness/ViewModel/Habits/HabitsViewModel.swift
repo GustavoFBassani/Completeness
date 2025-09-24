@@ -74,8 +74,7 @@ final class HabitsViewModel: HabitsProtocol {
             scheduleDays: newHabitDays,
             valuePosition: newValuePosition,
             indicePosition: newIndicePosition,
-            howManySecondsToComplete: howManySecondsToCompleteHabit,
-            habitTimeGoalInSeconds: newHabitTimeGoalInSeconds
+            howManySecondsToComplete: howManySecondsToCompleteHabit
         )
         
         habits.append(newHabit)
