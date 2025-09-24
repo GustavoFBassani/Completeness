@@ -8,9 +8,9 @@
 import Foundation
 
 protocol HabitCompletionProtocol {
-    func getAllHabits() throws -> [Habit]
-    func getHabitById(id: UUID) -> Habit?
-    func completeByToggle(id: UUID)
-    func completeByMultipleToggle(id: UUID)
-    func completeWithTimer(id: UUID, after seconds: TimeInterval)
+    func getAllHabits() async throws -> [Habit]
+    func getHabitById(id: UUID) async -> Habit?
+    func completeByToggle(id: UUID, on date: Date) async
+    func completeByMultipleToggle(id: UUID, on date: Date) async
+    func completeByTimer(id: UUID, on date: Date) async
 }

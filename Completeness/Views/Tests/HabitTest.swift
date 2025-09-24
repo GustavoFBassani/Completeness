@@ -1,10 +1,9 @@
-//
-//  HabitTest.swift
-//  Completeness
-//
-//  Created by Gustavo Melleu on 18/09/25.
-//
-
+////
+////  HabitTest.swift
+////  Completeness
+////
+////  Created by Gustavo Melleu on 18/09/25.
+///
 import SwiftUI
 import SwiftData
 
@@ -54,24 +53,6 @@ struct HabitTest: View {
                 .background(Color.white)
             }
         }
-//        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-//        .task { await viewModel.loadData() }
-//        .sheet(isPresented: $showingAddHabit) {
-//            AddHabitView(
-//                isPresented: $showingAddHabit,
-//                newHabitName: $viewModel.newHabitName,
-//                newHabitDate: $viewModel.newHabitDate
-//            ) {
-//                let newHabit = Habit(
-//                    habitName: viewModel.newHabitName,
-//                    timestampHabit: viewModel.newHabitDate,
-//                    howManyTimesToToggle: 1
-//                )
-//                viewModel.habitService.createHabit(habit: newHabit)
-//                Task { await viewModel.loadData() }
-//                viewModel.newHabitName = ""
-//                showingAddHabit = false
-//            }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .task { await viewModel.loadData() }
         .sheet(isPresented: $showingAddHabit) {
@@ -79,3 +60,4 @@ struct HabitTest: View {
         }
         }
     }
+

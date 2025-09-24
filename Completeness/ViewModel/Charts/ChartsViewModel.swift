@@ -14,14 +14,14 @@ import SwiftData
 /// required by the charts screen. The `@Observable` macro automatically notifies any
 /// listening SwiftUI view when its properties change, triggering a UI update.
 @Observable
-class ChartsViewModel {
+class ChartsViewModel: ChartsViewModelProtocol {
     /// A flag to indicate when a data fetch operation is in progress.
     /// The UI can use this to show a loading indicator (e.g., ProgressView).
     var isLoading = false
     
     /// A reference to the service layer that contains the business logic for chart calculations.
     /// This dependency is injected to promote loose coupling and testability.
-    var chartsService: ChartsService
+    var chartsService: ChartsServiceProtocol
     
     // MARK: - Published State Properties
     // These properties hold the state of the view. When they are updated, the UI automatically reflects the new values.
@@ -34,8 +34,8 @@ class ChartsViewModel {
     
     /// A list of the least frequently completed habits.
     var leastCompletedHabits: [Habit] = []
-    
-    init(chartsService: ChartsService) {
+
+    init(chartsService: ChartsServiceProtocol) {
         self.chartsService = chartsService
     }
     
@@ -49,9 +49,9 @@ class ChartsViewModel {
         
         // Asynchronously call the service methods to get the calculated data.
         // For enhanced performance, these could be run concurrently using a TaskGroup or async let.
-        mostCompletedHabits = chartsService.getMostCompletedHabits(inLastDays: 7)
-        leastCompletedHabits = chartsService.getLeastCompletedHabit(inLastDays: 7)
-        overallCompletionRate = chartsService.getOverallCompletion(inLastDays: 7)
+        mostCompletedHabits = await chartsService.getMostCompletedHabits(inLastDays: 7)
+        leastCompletedHabits = await chartsService.getLeastCompletedHabit(inLastDays: 7)
+        overallCompletionRate = await chartsService.getOverallCompletion(inLastDays: 7)
         
         isLoading = false
     }

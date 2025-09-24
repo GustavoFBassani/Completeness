@@ -9,15 +9,15 @@ import SwiftUI
 import SwiftData
 
 struct HabitView: View {
-    @State private var viewModel: HabitsViewModel
+    @Bindable var viewModel: HabitsViewModel
     @State private var showingAddHabit = false
-    
-    
+	
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 Text("Hábitos")
                     .font(.largeTitle).bold()
+                
                 
                 Spacer()
                 
@@ -28,51 +28,91 @@ struct HabitView: View {
             .padding(.horizontal)
             
             WeekDayPicker(selectedDate: $viewModel.selectedDate)
+                .padding(.vertical, 16)
             
             Divider()
             
-            if viewModel.state == .error {
+            switch viewModel.state {
+            case .error:
                 Text(viewModel.errorMessage ?? "Erro desconhecido")
                     .foregroundColor(.red)
                     .padding()
-            } else if viewModel.filteredHabits.isEmpty {
-                Text("Nenhum hábito para este dia")
-                    .foregroundColor(.gray)
-                    .padding()
-            } else {
-                List(viewModel.filteredHabits) { habit in
-                    HStack {
-                        Text(habit.habitName)
-                        Spacer()
+            case .loaded:
+                ScrollView([.horizontal, .vertical]) {
+                    VStack(spacing: 20) {
+                        ForEach(1...4, id: \.self) { indice in
+                            if indice.isMultiple(of: 2) {
+                                HStack(alignment: .center, spacing: 12) {
+                                    ForEach(1...3, id: \.self) { value in
+                                        if let habitWithPosition = viewModel.habits.first(where: {habit in
+                                            habit.valuePosition == value && habit.indicePosition == indice &&
+                                            viewModel.filteredHabits.contains(habit) }) {
+                                            EmptyCircle(habit: habitWithPosition)
+                                                .onTapGesture {
+                                                    Task { await viewModel.completeHabit(habit: habitWithPosition, on: viewModel.selectedDate) }
+                                                }
+                                        } else {
+                                            EmptyCircle()
+                                                .onTapGesture {
+                                                    viewModel.newValuePosition = value
+                                                    viewModel.newIndicePosition = indice
+                                                    showingAddHabit = true
+                                                }
+                                        }
+                                    }
+                                }
+                            } else {
+                                HStack(alignment: .center, spacing: 12) {
+                                    ForEach(1...4, id: \.self) { value in
+                                        if let habitWithPosition = viewModel.habits.first(where: {habit in
+                                            habit.valuePosition == value && habit.indicePosition == indice &&
+                                            viewModel.filteredHabits.contains(habit) }) {
+                                            EmptyCircle(habit: habitWithPosition)
+                                                .onTapGesture {
+                                                    Task {
+                                                        await viewModel.completeHabit(habit: habitWithPosition, on: viewModel.selectedDate)
+                                                    }
+                                                }
+                                        } else {
+                                            EmptyCircle()
+                                                .onTapGesture {
+                                                    viewModel.newValuePosition = value
+                                                    viewModel.newIndicePosition = indice
+                                                    showingAddHabit = true
+                                                }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
+                    .padding(.vertical, 16)
                 }
-                .listStyle(.plain)
-                .background(Color.white)
+                .defaultScrollAnchor(.top)
+                
+                
+            default:
+                EmptyView()
             }
         }
-        .onAppear(perform: {
-            viewModel.habits.forEach { habit in
-                print(habit.habitName )
-            }
-        })
+        .background(.backgroundSecondary)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .task { await viewModel.loadData() }
         .sheet(isPresented: $showingAddHabit) {
             AddHabitView(
                 isPresented: $showingAddHabit,
                 newHabitName: $viewModel.newHabitName,
-                newHabitDate: $viewModel.selectedDate
+                newHabitDate: $viewModel.selectedDate,
+                selectedDays: $viewModel.newHabitDays
             ) {
-                let newHabit = Habit(
-                    habitName: viewModel.newHabitName,
-                    timestampHabit: viewModel.selectedDate,
-                    howManyTimesToToggle: 1
-                )
-                viewModel.habitService.createHabit(habit: newHabit)
-                Task { await viewModel.loadData() }
-                viewModel.newHabitName = ""
+                viewModel.createNewHabit()
                 showingAddHabit = false
             }
         }
     }
+}
+
+#Preview {
+    @Previewable @Environment(\.modelContext) var context
+    HabitView(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context), habitService: HabitRepository(context: context)))
 }
