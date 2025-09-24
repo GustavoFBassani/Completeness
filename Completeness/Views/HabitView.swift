@@ -1,9 +1,9 @@
-////
-////  HabitView.swift
-////  Completeness
-////
-////  Created by Gustavo Ferreira bassani on 15/09/25.
-////
+//
+//  HabitView.swift
+//  Completeness
+//
+//  Created by Gustavo Ferreira bassani on 15/09/25.
+//
 
 import SwiftUI
 import SwiftData
@@ -11,7 +11,7 @@ import SwiftData
 struct HabitView: View {
     @State private var viewModel: HabitsViewModel
     @State private var showingAddHabit = false
-
+    
     
     var body: some View {
         VStack(alignment: .leading) {

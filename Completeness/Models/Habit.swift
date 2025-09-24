@@ -54,5 +54,3 @@ final class Habit: Identifiable {
         self.howManyTimesItWasDone = howManyTimesItWasDone
     }
 }
-
-
