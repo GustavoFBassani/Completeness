@@ -15,7 +15,7 @@ struct notificationTest: View {
   
     var body: some View {
         VStack{
-            Text("Habit")
+            Text("Hábitos")
                 .font(.title)
             TextField("Digite o tempo em segundos", text: $intervalText)
                 .keyboardType(.numberPad)
@@ -47,7 +47,7 @@ struct notificationTest: View {
 
     //PARA QUEM FOR TIRAR DO TESTE, COLOCAR ESTA FUNÇÃO NA VIEWMODEL ESPECÍFICA
     private func actionButtonTapped() {
-        if UserDefaults.standard.bool(forKey: "timmerEnabled"){
+        if UserDefaults.standard.bool(forKey: "notificationEnabled"){
             if let time = Int(intervalText), time > 0 {
                 interval = time
                 NotificationHelper.regressiveNotification(

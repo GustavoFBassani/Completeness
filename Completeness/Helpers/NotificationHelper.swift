@@ -14,12 +14,24 @@ import UserNotifications
 struct NotificationHelper {
     static func requestNotificationPermissions() {
         UNUserNotificationCenter.current().requestAuthorization(
-            options: [.alert, .badge, .sound]
+            options: [.alert, .sound]
         ) { granted, error in
             if granted {
-                print(">>> Notification permission granted.")
+                print("Notification permission granted.")
             } else {
-                print(">>> Notification permission denied.")
+                print("Notification permission denied.")
+            }
+        }
+    }
+
+    static func requestNotificationPermissionsBadge() {
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: [.badge]
+        ) { granted, error in
+            if granted {
+                print("Badge permission granted.")
+            } else {
+                print("Badge permission denied.")
             }
         }
     }

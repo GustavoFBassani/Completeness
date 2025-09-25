@@ -8,10 +8,11 @@ import SwiftUI
 import SwiftData
 
 struct ConfigView: View {
-    @AppStorage("dailyEnabled") private var dailyEnabled = true
-    @AppStorage("timmerEnabled") private var timmerEnabled = true
+    @AppStorage("notificationEnabled") private var notificationEnabled = true
+    @AppStorage("badgeEnabled") private var badgeEnabled = true
     @AppStorage("selectedTheme") private var selectedTheme = "system"
     @AppStorage("faceIDEnabled") private var faceIDEnabled = false
+    @AppStorage("selectedLanguage") private var selectedLanguage = "pt"
     
     @State private var showError = false
     @State private var errorMessage = ""
@@ -23,9 +24,19 @@ struct ConfigView: View {
                 HStack {
                     Image(systemName: "flag.fill")
                         .foregroundStyle(.indigoCustom)
-                    Text("idioma")
+                    Text("Idioma")
+
+                    Spacer()
+
+                    Picker("", selection: $selectedLanguage) {
+                        Text("Português").tag("pt")
+                        Text("Inglês").tag("en")
+                    }
+                    .foregroundStyle(.labelSecondary)
+                    .pickerStyle(.menu)
+                    .labelsHidden()
+                    .tint(.labelSecondary)
                 }
-                
                 HStack {
                     Image(systemName: "faceid")
                         .foregroundStyle(.indigoCustom)
@@ -64,6 +75,7 @@ struct ConfigView: View {
                     }
                     .pickerStyle(.menu)
                     .labelsHidden()
+                    .tint(.labelSecondary)
                 }
             }
             
@@ -71,12 +83,12 @@ struct ConfigView: View {
                 HStack {
                     Image(systemName: "app.badge")
                         .foregroundStyle(.indigoCustom)
-                    Toggle("Avisos", isOn: $timmerEnabled)
+                    Toggle("Avisos", isOn: $badgeEnabled)
                 }
                 HStack {
                     Image(systemName: "bell.badge")
                         .foregroundStyle(.indigoCustom)
-                    Toggle("Permitir notificações", isOn: $dailyEnabled)
+                    Toggle("Permitir notificações", isOn: $notificationEnabled)
                 }
             }
         
