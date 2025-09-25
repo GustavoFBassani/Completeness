@@ -21,8 +21,6 @@ struct CompletenessApp: App {
             CompletenessAppContentView().environment(appViewModel)
         }
         .modelContainer(for: [Habit.self, HabitLog.self])
-//        .modelContainer(for: Habit.self)
-//        .modelContainer(for: HabitLog.self)
     }
 }
 

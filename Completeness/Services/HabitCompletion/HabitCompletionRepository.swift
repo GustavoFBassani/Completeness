@@ -139,7 +139,6 @@ class HabitCompletionRepository: HabitCompletionProtocol {
                     habitLog.isCompleted = true
                     try? context.save()
                 }
-                
             }
         } else {
             //se não existir, cria um novo e começa

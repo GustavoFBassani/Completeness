@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
  
 @Model
-final class Habit: Identifiable, Sendable {
+final class Habit: Identifiable/*, Sendable*/ {
     var id = UUID()
     var habitName = ""
     var habitIsCompleted = false
@@ -19,7 +19,7 @@ final class Habit: Identifiable, Sendable {
     var habitRecurrence = ""
     var habitSimbol = ""
     var habitCompleteness: CompletionHabit?
-    //    var timestampHabit = Date()
+
     var scheduleDays: [Int] = []
     
     //position of the habit at screen
@@ -82,7 +82,7 @@ final class Habit: Identifiable, Sendable {
     func isCompleted(on date: Date) -> Bool {
         let targetDay = Calendar.current.startOfDay(for: date)
         //if there is a log in the same date as in the parameter, then its completed
-        if let log = self.habitLogs?.firstIndex(where: {log in
+        if let log = self.habitLogs?.firstIndex(where: { log in
             log.completionDate == targetDay && log.isCompleted}) {
             return true
         } else {

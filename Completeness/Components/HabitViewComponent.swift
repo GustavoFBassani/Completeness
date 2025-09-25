@@ -112,7 +112,6 @@ struct HabitViewComponent: View {
                 .padding(.top, 6)
                 .font(.system(size: 12.8, weight: .semibold))
                 .foregroundColor(.labelPrimary)
-            
         }
     }
 }

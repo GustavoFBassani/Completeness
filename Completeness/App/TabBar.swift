@@ -11,6 +11,7 @@ import SwiftData
 struct TabBar: View {
     @Environment(\.modelContext) var context
     @State private var refreshView = false
+
     var body: some View {
         TabView{
             Tab("Hábitos", systemImage: "circle.hexagongrid"){
@@ -19,7 +20,8 @@ struct TabBar: View {
                                                          habitService: HabitRepository(context: context)), refreshView: $refreshView)
                 }
             }
-            Tab("Relatórios", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
+
+            Tab("Resumo", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
                 NavigationStack{
                     DeleteAllData()
                 }

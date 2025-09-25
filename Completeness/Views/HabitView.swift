@@ -13,12 +13,12 @@ struct HabitView: View {
     @State private var showingAddHabit = false
     @Binding var refreshView: Bool
     
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 Text("Hábitos")
                     .font(.largeTitle).bold()
-                
                 
                 Spacer()
                 
@@ -110,21 +110,19 @@ struct HabitView: View {
         .background(.backgroundSecondary)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .task { await viewModel.loadData() }
+//        .sheet(isPresented: $showingAddHabit) {
+//            AddHabitView(
+//                isPresented: $showingAddHabit,
+//                newHabitName: $viewModel.newHabitName,
+//                newHabitDate: $viewModel.selectedDate,
+//                selectedDays: $viewModel.newHabitDays
+//            ) {
+//                viewModel.createNewHabit()
+//                showingAddHabit = false
+//            }
+//        }
         .sheet(isPresented: $showingAddHabit) {
-            AddHabitView(
-                isPresented: $showingAddHabit,
-                newHabitName: $viewModel.newHabitName,
-                newHabitDate: $viewModel.selectedDate,
-                selectedDays: $viewModel.newHabitDays
-            ) {
-                viewModel.createNewHabit()
-                showingAddHabit = false
-            }
+            AddNewHabit()
         }
     }
 }
-
-//#Preview {
-//    @Previewable @Environment(\.modelContext) var context
-//    HabitView(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context), habitService: HabitRepository(context: context)))
-//}

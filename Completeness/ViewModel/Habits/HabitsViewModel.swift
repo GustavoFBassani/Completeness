@@ -34,10 +34,11 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
     var textField = ""
     
     // MARK: - NEW HABIT
-    var completenessType: CompletionHabit = .byTimer
-    var howManyTimesToCompleteHabit = 5
-    var howManySecondsToCompleteHabit = 300
+    var completenessType: CompletionHabit = .byToggle
+    var howManyTimesToCompleteHabit = 1
+    var howManySecondsToCompleteHabit = 900
     var newHabitName = ""
+    var newHabitDescription = ""
     var newValuePosition = 0
     var newIndicePosition = 0
     var newHabitDate = Date()

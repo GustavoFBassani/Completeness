@@ -1,0 +1,633 @@
+{
+  "sourceLanguage" : "pt-BR",
+  "strings" : {
+    "" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
+    },
+    "%lld / %lld" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld / %2$lld"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld"
+          }
+        }
+      }
+    },
+    "%lld/%lld" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld/%2$lld"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld"
+          }
+        }
+      }
+    },
+    "🏆 Hábitos Mais Concluídos" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🏆 Most common habits"
+          }
+        }
+      }
+    },
+    "📉 Hábitos Menos Concluídos" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "📉 Less common habits"
+          }
+        }
+      }
+    },
+    "1 hora" : {
+
+    },
+    "1 min" : {
+
+    },
+    "3 min" : {
+
+    },
+    "5 min" : {
+
+    },
+    "10 min" : {
+
+    },
+    "15 min" : {
+
+    },
+    "20 min" : {
+
+    },
+    "30 min" : {
+
+    },
+    "45 min" : {
+
+    },
+    "Abrir Ajustes do Sistema" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open System Settings"
+          }
+        }
+      }
+    },
+    "Agendar Notificação" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schedule Notification"
+          }
+        }
+      }
+    },
+    "Apagar dados" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erase data"
+          }
+        }
+      }
+    },
+    "Aparência" : {
+
+    },
+    "Automático" : {
+
+    },
+    "Avalie" : {
+
+    },
+    "Avisos" : {
+
+    },
+    "Buscando dados..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Searching for data..."
+          }
+        }
+      }
+    },
+    "Cancelar" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "Claro" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light"
+          }
+        }
+      }
+    },
+    "Começa em" : {
+
+    },
+    "Configurações" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
+    "Data" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date"
+          }
+        }
+      }
+    },
+    "Descrição" : {
+
+    },
+    "Detalhes" : {
+
+    },
+    "Digite o corpo da notificação" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter the body of the notification"
+          }
+        }
+      }
+    },
+    "Digite o tempo em segundos" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter the time in seconds"
+          }
+        }
+      }
+    },
+    "Digite título da notificação" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter notification title"
+          }
+        }
+      }
+    },
+    "Editar nome do hábito" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit habit name"
+          }
+        }
+      }
+    },
+    "Escolha quantas vezes você quer fazer isso no dia" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose how many times you want to do this per day."
+          }
+        }
+      }
+    },
+    "Escolha um tema" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose a theme"
+          }
+        }
+      }
+    },
+    "Escuro" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dark"
+          }
+        }
+      }
+    },
+    "Etapas" : {
+
+    },
+    "Ex: Tomar água" : {
+
+    },
+    "Ex: Você consegue" : {
+
+    },
+    "Exemplo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exemple"
+          }
+        }
+      }
+    },
+    "Face ID" : {
+
+    },
+    "FaceID" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FaceID"
+          }
+        }
+      }
+    },
+    "Fale conosco" : {
+
+    },
+    "Feito!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done!"
+          }
+        }
+      }
+    },
+    "Geral" : {
+
+    },
+    "Hábito personalizado" : {
+
+    },
+    "Hábitos" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Habits"
+          }
+        }
+      }
+    },
+    "Hello, World!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hello, World!"
+          }
+        }
+      }
+    },
+    "Horário" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time"
+          }
+        }
+      }
+    },
+    "idioma" : {
+
+    },
+    "Meta" : {
+
+    },
+    "Modo claro" : {
+
+    },
+    "Modo escuro" : {
+
+    },
+    "Nenhum hábito para este dia" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No habits for this day"
+          }
+        }
+      }
+    },
+    "Nenhum hábito para exibir." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No habits to show off."
+          }
+        }
+      }
+    },
+    "Nome" : {
+
+    },
+    "Nome do hábito" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Habit name"
+          }
+        }
+      }
+    },
+    "Notificação Hábito diário" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily Habit Notification"
+          }
+        }
+      }
+    },
+    "Notificação Hábito timmer" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Habit Timmer Notification"
+          }
+        }
+      }
+    },
+    "Notificações" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications"
+          }
+        }
+      }
+    },
+    "Novo Hábito" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Habit"
+          }
+        }
+      }
+    },
+    "Painel de Teste" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test Panel"
+          }
+        }
+      }
+    },
+    "Permitir notificações" : {
+
+    },
+    "Personalizado" : {
+
+    },
+    "Por tempo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "By time"
+          }
+        }
+      }
+    },
+    "Quantas vezes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How many times"
+          }
+        }
+      }
+    },
+    "Repete" : {
+
+    },
+    "Resumo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summary"
+          }
+        }
+      }
+    },
+    "Salvar" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        }
+      }
+    },
+    "Salvar alterações" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save changes"
+          }
+        }
+      }
+    },
+    "Selecione um hábito" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select a habit"
+          }
+        }
+      }
+    },
+    "Semanalmente" : {
+
+    },
+    "Settings" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
+    "Simples" : {
+
+    },
+    "so de teste" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "just for testing"
+          }
+        }
+      }
+    },
+    "Sobre nós" : {
+
+    },
+    "Taxa de conclusão" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taxa de conclusão"
+          }
+        }
+      }
+    },
+    "Tema" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "theme"
+          }
+        }
+      }
+    },
+    "Tempo" : {
+
+    },
+    "Termos de privacidade" : {
+
+    },
+    "Tipo de Completude" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completeness Type"
+          }
+        }
+      }
+    },
+    "Tipo de hábito" : {
+
+    },
+    "Todos os dias" : {
+
+    },
+    "Troca multipla" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toggle Multiple"
+          }
+        }
+      }
+    },
+    "Troca simples" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Simple Toggle"
+          }
+        }
+      }
+    },
+    "Ver mais" : {
+
+    },
+    "Ver menos" : {
+
+    },
+    "Visão Geral (Últimos 7 dias)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Overview (Last 7 days)"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
