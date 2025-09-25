@@ -18,7 +18,7 @@ struct EmptyCircle: View {
                 .fontWeight(.semibold)
                 .padding(33)
                 .background(Circle().fill(.backgroundSecondary))
-                .shadow(color: .shadow, radius: 10, x: 4.52, y: 4.52)
+                .shadow(color: .shadow, radius: 20, x: 4.52, y: 4.52)
             
             Text(habit?.habitName ?? "Adicionar")
                 .font(.system(size: 13))

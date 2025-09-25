@@ -9,6 +9,9 @@ import Foundation
 @testable import Completeness
 
 class MockHabitCompletionRepository: HabitCompletionProtocol {
+    func completeByTimer(id: UUID, on date: Date) async {
+    }
+    
     var sampleHabits: [Habit]
 
     init(sampleHabits: [Habit] = []) {
@@ -42,17 +45,23 @@ class MockHabitCompletionRepository: HabitCompletionProtocol {
     }
     
     func completeByMultipleToggle(id: UUID, on date: Date) async {
-        guard let habitToChange = await getHabitById(id: id) else { return }
-        
-        if habitToChange.isCompleted(on: date) { return }
-        
-        habitToChange.howManyTimesItWasDone += 1
-        print("Mock: Contador do hábito '\(habitToChange.habitName)' incrementado para \(habitToChange.howManyTimesItWasDone)")
-
-        if habitToChange.howManyTimesItWasDone >= habitToChange.howManyTimesToToggle {
-            let newLog = HabitLog(completionDate: date, habit: habitToChange)
-            habitToChange.habitLogs?.append(newLog)
-            print("Mock: Hábito '\(habitToChange.habitName)' totalmente concluído.")
-        }
+//        guard let habitToChange = await getHabitById(id: id) else { return }
+//        
+//        if habitToChange.isCompleted(on: date) { return }
+//        
+//        //se tiver um log com a mesma data
+//        if let log = habitToChange.habitLogs?.first(where: { habit in
+//            habit.completionDate == date }) {
+//            print("Mock: Contador do hábito '\(habitToChange.habitName)' incrementado para \(log.howManyTimesItWasDone)")
+//            // se o log com a mesma data ainda nao esta completo
+//            if log.howManyTimesItWasDone < habitToChange.howManyTimesToToggle - 1  {
+//                log.howManyTimesItWasDone += 1
+//            } else {
+//                //completa o hábito
+//                log.isCompleted = true
+//                print("Mock: Hábito '\(habitToChange.habitName)' totalmente concluído.")
+//
+//            }
+//        }
     }
 }

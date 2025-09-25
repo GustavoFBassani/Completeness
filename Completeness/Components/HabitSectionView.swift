@@ -20,7 +20,7 @@ struct HabitSectionView: View {
             .padding(.leading, 16)
             .frame(maxWidth: .infinity, alignment: .leading)
         //padding negativo eu sei :(
-            .padding(.bottom , -10)
+            .padding(.bottom, -10)
         VStack(alignment: .leading, spacing: 0) {
             // lista de hábitos
             ForEach(showMore ? habits : Array(habits.prefix(3))) { habit in
@@ -38,7 +38,7 @@ struct HabitSectionView: View {
                 .padding(.horizontal)
                 .padding(.vertical, 12)
                  Divider()
-                    .padding(.horizontal,16)
+                    .padding(.horizontal, 16)
             }
             // botão ver mais
             if habits.count > 3 {

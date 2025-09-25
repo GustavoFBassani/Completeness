@@ -11,13 +11,14 @@ import SwiftData
 struct HabitView: View {
     @Bindable var viewModel: HabitsViewModel
     @State private var showingAddHabit = false
-	
+    @Binding var refreshView: Bool
+    
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 Text("Hábitos")
                     .font(.largeTitle).bold()
-                
                 
                 Spacer()
                 
@@ -47,9 +48,13 @@ struct HabitView: View {
                                         if let habitWithPosition = viewModel.habits.first(where: {habit in
                                             habit.valuePosition == value && habit.indicePosition == indice &&
                                             viewModel.filteredHabits.contains(habit) }) {
-                                            EmptyCircle(habit: habitWithPosition)
+                                            HabitViewComponent(habit: habitWithPosition, refreshView: refreshView, day: viewModel.selectedDate)
                                                 .onTapGesture {
-                                                    Task { await viewModel.completeHabit(habit: habitWithPosition, on: viewModel.selectedDate) }
+                                                    //print(#file, #line, ObjectIdentifier(habitWithPosition))
+                                                    Task {
+                                                        await viewModel.completeHabit(habit: habitWithPosition, on: viewModel.selectedDate)
+                                                        refreshView.toggle()
+                                                    }
                                                 }
                                         } else {
                                             EmptyCircle()
@@ -67,10 +72,12 @@ struct HabitView: View {
                                         if let habitWithPosition = viewModel.habits.first(where: {habit in
                                             habit.valuePosition == value && habit.indicePosition == indice &&
                                             viewModel.filteredHabits.contains(habit) }) {
-                                            EmptyCircle(habit: habitWithPosition)
+                                            HabitViewComponent(habit: habitWithPosition, refreshView: refreshView, day: viewModel.selectedDate)
                                                 .onTapGesture {
                                                     Task {
                                                         await viewModel.completeHabit(habit: habitWithPosition, on: viewModel.selectedDate)
+                                                        
+                                                        refreshView.toggle()
                                                     }
                                                 }
                                         } else {
@@ -95,6 +102,11 @@ struct HabitView: View {
                 EmptyView()
             }
         }
+        //gpt
+        .onAppear {
+            viewModel.selectedDate = Calendar.current.startOfDay(for: Date())
+        }
+
         .background(.backgroundSecondary)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .task { await viewModel.loadData() }
@@ -113,9 +125,4 @@ struct HabitView: View {
             AddNewHabit()
         }
     }
-}
-
-#Preview {
-    @Previewable @Environment(\.modelContext) var context
-    HabitView(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context), habitService: HabitRepository(context: context)))
 }
