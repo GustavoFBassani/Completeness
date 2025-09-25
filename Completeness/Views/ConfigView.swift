@@ -77,7 +77,7 @@ Form {
             Toggle("Avisos", isOn: $timmerEnabled)
         }
         HStack{
-            Image(systemName : "bell.badge")
+            Image(systemName: "bell.badge")
                 .foregroundStyle(.indigoCustom)
             Toggle("Permitir notificações", isOn: $dailyEnabled)
         }

@@ -32,7 +32,6 @@ struct HabitRepositoryTests {
 
     @Test("deleteHabit should remove the habit from the database")
     func testDeleteHabit() async throws {
-        
         let habitToDelete = Habit(habitName: "habit ot delete", howManyTimesToToggle: 1, scheduleDays: [])
         repository.createHabit(habit: habitToDelete)
         #expect((try await repository.getAllHabits()).count == 1)

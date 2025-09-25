@@ -22,6 +22,7 @@
       }
     },
     "%lld / %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -38,6 +39,7 @@
       }
     },
     "%lld/%lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -73,7 +75,35 @@
         }
       }
     },
+    "1 hora" : {
+
+    },
+    "1 min" : {
+
+    },
+    "3 min" : {
+
+    },
+    "5 min" : {
+
+    },
+    "10 min" : {
+
+    },
+    "15 min" : {
+
+    },
+    "20 min" : {
+
+    },
+    "30 min" : {
+
+    },
+    "45 min" : {
+
+    },
     "Abrir Ajustes do Sistema" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -102,6 +132,18 @@
           }
         }
       }
+    },
+    "Aparência" : {
+
+    },
+    "Automático" : {
+
+    },
+    "Avalie" : {
+
+    },
+    "Avisos" : {
+
     },
     "Buscando dados..." : {
       "localizations" : {
@@ -133,6 +175,9 @@
         }
       }
     },
+    "Começa em" : {
+
+    },
     "Configurações" : {
       "localizations" : {
         "en" : {
@@ -152,6 +197,12 @@
           }
         }
       }
+    },
+    "Descrição" : {
+
+    },
+    "Detalhes" : {
+
     },
     "Digite o corpo da notificação" : {
       "localizations" : {
@@ -223,6 +274,15 @@
         }
       }
     },
+    "Etapas" : {
+
+    },
+    "Ex: Tomar água" : {
+
+    },
+    "Ex: Você consegue" : {
+
+    },
     "Exemplo" : {
       "localizations" : {
         "en" : {
@@ -232,6 +292,9 @@
           }
         }
       }
+    },
+    "Face ID" : {
+
     },
     "FaceID" : {
       "localizations" : {
@@ -243,6 +306,9 @@
         }
       }
     },
+    "Fale conosco" : {
+
+    },
     "Feito!" : {
       "localizations" : {
         "en" : {
@@ -252,6 +318,12 @@
           }
         }
       }
+    },
+    "Geral" : {
+
+    },
+    "Hábito personalizado" : {
+
     },
     "Hábitos" : {
       "localizations" : {
@@ -283,6 +355,18 @@
         }
       }
     },
+    "idioma" : {
+
+    },
+    "Meta" : {
+
+    },
+    "Modo claro" : {
+
+    },
+    "Modo escuro" : {
+
+    },
     "Nenhum hábito para este dia" : {
       "localizations" : {
         "en" : {
@@ -303,6 +387,9 @@
         }
       }
     },
+    "Nome" : {
+
+    },
     "Nome do hábito" : {
       "localizations" : {
         "en" : {
@@ -314,6 +401,7 @@
       }
     },
     "Notificação Hábito diário" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -324,6 +412,7 @@
       }
     },
     "Notificação Hábito timmer" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -363,6 +452,12 @@
         }
       }
     },
+    "Permitir notificações" : {
+
+    },
+    "Personalizado" : {
+
+    },
     "Por tempo" : {
       "localizations" : {
         "en" : {
@@ -382,6 +477,9 @@
           }
         }
       }
+    },
+    "Repete" : {
+
     },
     "Resumo" : {
       "localizations" : {
@@ -423,6 +521,9 @@
         }
       }
     },
+    "Semanalmente" : {
+
+    },
     "Settings" : {
       "localizations" : {
         "en" : {
@@ -433,6 +534,9 @@
         }
       }
     },
+    "Simples" : {
+
+    },
     "so de teste" : {
       "localizations" : {
         "en" : {
@@ -442,6 +546,9 @@
           }
         }
       }
+    },
+    "Sobre nós" : {
+
     },
     "Taxa de conclusão" : {
       "localizations" : {
@@ -463,6 +570,12 @@
         }
       }
     },
+    "Tempo" : {
+
+    },
+    "Termos de privacidade" : {
+
+    },
     "Tipo de Completude" : {
       "localizations" : {
         "en" : {
@@ -472,6 +585,12 @@
           }
         }
       }
+    },
+    "Tipo de hábito" : {
+
+    },
+    "Todos os dias" : {
+
     },
     "Troca multipla" : {
       "localizations" : {
@@ -492,6 +611,12 @@
           }
         }
       }
+    },
+    "Ver mais" : {
+
+    },
+    "Ver menos" : {
+
     },
     "Visão Geral (Últimos 7 dias)" : {
       "localizations" : {

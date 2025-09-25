@@ -10,14 +10,17 @@ import SwiftData
 
 struct TabBar: View {
     @Environment(\.modelContext) var context
-    
+    @State private var refreshView = false
+
     var body: some View {
         TabView{
             Tab("Hábitos", systemImage: "circle.hexagongrid"){
                 NavigationStack{
-                    HabitView(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context), habitService: HabitRepository(context: context)))
+                    HabitView(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context),
+                                                         habitService: HabitRepository(context: context)), refreshView: $refreshView)
                 }
             }
+
             Tab("Resumo", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
                 NavigationStack{
                     DeleteAllData()
@@ -29,6 +32,9 @@ struct TabBar: View {
                 }
             }
         }
+        .onAppear(perform: {
+            refreshView.toggle()
+        })
         .tint(.indigoCustom)
     }
 }
