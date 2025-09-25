@@ -198,9 +198,7 @@
         }
       }
     },
-    "Descrição" : {
 
-    },
     "Detalhes" : {
 
     },
@@ -243,6 +241,9 @@
           }
         }
       }
+    },
+    "Erro" : {
+
     },
     "Escolha quantas vezes você quer fazer isso no dia" : {
       "localizations" : {
@@ -355,10 +356,11 @@
         }
       }
     },
-    "idioma" : {
+
+    "Idioma" : {
 
     },
-    "Meta" : {
+    "Inglês" : {
 
     },
     "Modo claro" : {
@@ -399,6 +401,9 @@
           }
         }
       }
+    },
+    "Notif" : {
+
     },
     "Notificação Hábito diário" : {
       "extractionState" : "stale",
@@ -442,6 +447,9 @@
         }
       }
     },
+    "OK" : {
+
+    },
     "Painel de Teste" : {
       "localizations" : {
         "en" : {
@@ -455,7 +463,11 @@
     "Permitir notificações" : {
 
     },
+    
+    "Política de Privacidade – Completeness" : {
+
     "Personalizado" : {
+
 
     },
     "Por tempo" : {
@@ -467,6 +479,9 @@
           }
         }
       }
+    },
+    "Português" : {
+
     },
     "Quantas vezes" : {
       "localizations" : {
@@ -550,6 +565,11 @@
     "Sobre nós" : {
 
     },
+
+    "Sua privacidade é importante para nós. Esta Política de Privacidade descreve como coletamos, usamos e protegemos suas informações ao utilizar o Completeness.\n\n1. Coleta de Informações\n\nO Completeness foi projetado para ajudá-lo a acompanhar seus hábitos de forma simples.\nInformações pessoais: não coletamos informações pessoais como nome, e-mail ou telefone, a menos que você as forneça voluntariamente\n(por exemplo, ao criar uma conta).\nDados de uso: podemos coletar informações anônimas, como tempo de uso do aplicativo, frequência de abertura e estatísticas gerais,\napenas para melhorar a experiência do usuário.\nDados armazenados localmente: seus hábitos e registros ficam salvos localmente no dispositivo. Caso haja integração com iCloud,\nesses dados poderão ser sincronizados entre seus aparelhos Apple.\n\n2. Uso das Informações\n\nAs informações coletadas são utilizadas para:\nFornecer as funcionalidades principais do aplicativo;\nMelhorar a experiência do usuário;\nCorrigir falhas e manter a estabilidade do serviço.\n\n3. Compartilhamento de Informações\n\nNão compartilhamos, vendemos ou alugamos seus dados pessoais a terceiros.\nEm caso de sincronização via iCloud ou outros serviços Apple, a gestão e proteção seguem as políticas da Apple.\n\n4. Armazenamento e Segurança\nSeus dados ficam protegidos nos servidores da Apple (quando armazenados via iCloud) ou localmente no dispositivo.\nAdotamos medidas técnicas adequadas para proteger suas informações, mas não podemos garantir segurança absoluta contra todas as ameaças digitais.\n\n5. Direitos do Usuário\n\nVocê pode, a qualquer momento:\nExcluir seus dados diretamente no aplicativo;\nSolicitar informações sobre os dados coletados;\nRevogar permissões concedidas.\n\n6. Alterações nesta Política\n\nPodemos atualizar esta Política de Privacidade periodicamente. Recomendamos que você revise este documento regularmente para estar ciente de como protegemos suas informações.\n\n7. Contato\n\nSe tiver dúvidas ou solicitações relacionadas à privacidade, entre em contato pelo e-mail: [suportecompleteness@gmail.com]." : {
+
+    },
+
     "Taxa de conclusão" : {
       "localizations" : {
         "en" : {
@@ -570,9 +590,11 @@
         }
       }
     },
+    
     "Tempo" : {
 
     },
+
     "Termos de privacidade" : {
 
     },

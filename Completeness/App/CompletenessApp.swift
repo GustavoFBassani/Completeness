@@ -11,6 +11,7 @@ import SwiftData
 @main
 struct CompletenessApp: App {
     @AppStorage("selectedTheme") private var selectedTheme = "system"
+    @AppStorage("selectedLanguage") private var selectedLanguage = "pt"
     @Environment(\.modelContext) var context
 
     @State private var appViewModel = AppViewModel()
@@ -18,7 +19,9 @@ struct CompletenessApp: App {
 
     var body: some Scene {
         WindowGroup {
-            CompletenessAppContentView().environment(appViewModel)
+            CompletenessAppContentView()
+                .environment(appViewModel)
+                .environment(\.locale, Locale(identifier: selectedLanguage))
         }
         .modelContainer(for: [Habit.self, HabitLog.self])
     }
