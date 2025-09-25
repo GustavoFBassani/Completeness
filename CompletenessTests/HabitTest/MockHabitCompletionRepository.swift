@@ -9,6 +9,11 @@ import Foundation
 @testable import Completeness
 
 class MockHabitCompletionRepository: HabitCompletionProtocol {
+    
+    func completeByTimer(id: UUID, on date: Date) async {
+        
+    }
+    
     var sampleHabits: [Habit]
 
     init(sampleHabits: [Habit] = []) {

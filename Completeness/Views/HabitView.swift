@@ -18,7 +18,6 @@ struct HabitView: View {
                 Text("Hábitos")
                     .font(.largeTitle).bold()
                 
-                
                 Spacer()
                 
                 AddHabitButton {
@@ -116,6 +115,6 @@ struct HabitView: View {
 }
 
 #Preview {
-    @Previewable @Environment(\.modelContext) var context
-    HabitView(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context), habitService: HabitRepository(context: context)))
+//    @Previewable @Environment(\.modelContext) var context
+//    HabitView(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context), habitService: HabitRepository(context: context)))
 }
