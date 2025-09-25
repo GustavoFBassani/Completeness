@@ -35,7 +35,8 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
     
     // MARK: - NEW HABIT
     var completenessType: CompletionHabit = .byTimer
-    var howManyTimesToCompleteHabit = 1
+    var howManyTimesToCompleteHabit = 5
+    var howManySecondsToCompleteHabit = 300
     var newHabitName = ""
     var newValuePosition = 0
     var newIndicePosition = 0
@@ -69,6 +70,7 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
             scheduleDays: newHabitDays,
             valuePosition: newValuePosition,
             indicePosition: newIndicePosition,
+            howManySecondsToComplete: howManySecondsToCompleteHabit
         )
         
         habits.append(newHabit)
@@ -86,7 +88,6 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
             return await habitCompletionService.completeByToggle(id: habit.id, on: date)
         case .byTimer:
             return await habitCompletionService.completeByTimer(id: habit.id, on: date)
-
         default:
             break
         }
@@ -100,6 +101,13 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
     func loadData() async {
         do {
             try await getAllHabits()
+
+            filteredHabits = habits.filter {
+                $0.isScheduled(for: selectedDate)
+            }
+            
+            print(filteredHabits)
+
             state = .loaded
         } catch {
             errorMessage = "Error fetching products: \(error.localizedDescription)"

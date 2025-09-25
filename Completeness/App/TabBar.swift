@@ -30,6 +30,9 @@ struct TabBar: View {
                 }
             }
         }
+        .onAppear(perform: {
+            refreshView.toggle()
+        })
         .tint(.indigoCustom)
     }
 }

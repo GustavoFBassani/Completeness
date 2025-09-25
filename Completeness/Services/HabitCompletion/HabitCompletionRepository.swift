@@ -119,27 +119,46 @@ class HabitCompletionRepository: HabitCompletionProtocol {
         guard let habitToChange = await getHabitById(id: id) else { return }
         let targetDay = Calendar.current.startOfDay(for: date)
         
-        if (habitToChange.habitLogs ?? []).contains(where: { Calendar.current.isDate($0.completionDate, inSameDayAs: targetDay) &&
-            $0.isCompleted == true}) {
-            return
-        }
-        var logs = habitToChange.habitLogs ?? []
-        let newLog = HabitLog(completionDate: targetDay)
-        logs.append(newLog)
-        habitToChange.habitLogs = logs
-        
-        Task { @MainActor in
-            while newLog.secondsElapsed < habitToChange.howManySecondsToComplete {
-                try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 segundo
-                newLog.secondsElapsed += 1
-                try? context.save()
-                print(newLog.secondsElapsed)
+        // se existir habitLog no dia
+        if let habitLog = habitToChange.habitLogs?.first(where: { Calendar.current.isDate($0.completionDate, inSameDayAs: targetDay) }) {
+            print("entrou no habitLog")
+            //se o habitLog está completo
+            if habitLog.isCompleted == true {
+                habitLog.isCompleted = false
+                habitLog.secondsElapsed = 0
+                return
+            } else {
+                // se não está completo
+                Task { @MainActor in
+                    while habitLog.secondsElapsed < habitToChange.howManySecondsToComplete {
+                        try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 segundo
+                        habitLog.secondsElapsed += 1
+                        try? context.save()
+                    }
+                    
+                    habitLog.isCompleted = true
+                    try? context.save()
+                }
+                
             }
+        } else {
+            //se não existir, cria um novo e começa
+            var logs = habitToChange.habitLogs ?? []
+            let newLog = HabitLog(completionDate: targetDay)
+            logs.append(newLog)
+            habitToChange.habitLogs = logs
             
-            // Completar o hábito
-            habitToChange.habitIsCompleted = true
-            try? context.save()
-            print("Hábito completado!")
+            Task { @MainActor in
+                while newLog.secondsElapsed < habitToChange.howManySecondsToComplete {
+                    try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 segundo
+                    newLog.secondsElapsed += 1
+                    try? context.save()
+                }
+                
+                // Completar o hábito
+                newLog.isCompleted = true
+                try? context.save()
+            }
         }
     }
     

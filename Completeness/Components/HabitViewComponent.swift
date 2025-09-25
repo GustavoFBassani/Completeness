@@ -12,30 +12,17 @@ struct HabitViewComponent: View {
     var refreshView = false
     let day: Date
     
-        private var maxProgress: Int {
-            switch habit.habitCompleteness {
-            case .byToggle, .byMultipleToggle, .byTimer:
-                return habit.howManyTimesToToggle
-            case .none:
-                return habit.howManyTimesToToggle
-            }
-        }
-    
-    private var progressDone: Int {
+    private var maxProgress: Int {
         switch habit.habitCompleteness {
         case .byToggle, .byMultipleToggle:
-            let habitLog = habit.habitLogs?.first(where: {log in
-                log.completionDate == day })
-            return habitLog?.howManyTimesItWasDone ?? 0
-            
+            return habit.howManyTimesToToggle
         case .byTimer:
-            let habitLog = habit.habitLogs?.first(where: {log in
-                log.completionDate == day })
-            return habitLog?.secondsElapsed ?? 0
+            return habit.howManySecondsToComplete
         case .none:
-            return 0
+            return habit.howManyTimesToToggle
         }
     }
+    
     
     private var isCompleted: Bool {
         habit.isCompleted(on: day)
@@ -49,6 +36,38 @@ struct HabitViewComponent: View {
             return Color.white
         }
     }
+    
+    private var habbitIsByTimer: Bool { habit.habitCompleteness == .byTimer }
+    
+
+    private var progressTimer: String {
+        if let habitLog = habit.habitLogs?.first(where: {
+            Calendar.current.isDate($0.completionDate, inSameDayAs: day)
+        }) {
+            return habitLog.formattedTime
+        }
+        return ""
+    }
+
+    private var progressDone: Int {
+        let habitLog = habit.habitLogs?.first(where: {
+            Calendar.current.isDate($0.completionDate, inSameDayAs: day)
+        })
+        switch habit.habitCompleteness {
+        case .byToggle, .byMultipleToggle:
+            return habitLog?.howManyTimesItWasDone ?? 0
+        case .byTimer:
+            return habitLog?.secondsElapsed ?? 0
+        case .none:
+            return 0
+        }
+    }
+    
+    private func showProgressDone() -> String {
+        return progressTimer
+    }
+    
+    
     
     var body: some View {
         VStack {
@@ -76,7 +95,7 @@ struct HabitViewComponent: View {
                         .frame(width: 58, height: 58)
                     
                     if progressDone < maxProgress {
-                        Text("\(progressDone)/\(maxProgress)")
+                        Text( habbitIsByTimer ? progressTimer : "\(progressDone)/\(maxProgress)")
                             .font(.system(size: 12.8, weight: .semibold))
                             .foregroundColor(.labelSecondary)
                     }
@@ -93,6 +112,7 @@ struct HabitViewComponent: View {
                 .padding(.top, 6)
                 .font(.system(size: 12.8, weight: .semibold))
                 .foregroundColor(.labelPrimary)
+            
         }
     }
 }

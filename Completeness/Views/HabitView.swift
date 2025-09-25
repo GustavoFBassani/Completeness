@@ -102,9 +102,11 @@ struct HabitView: View {
                 EmptyView()
             }
         }
-        .onAppear(perform: {
-            refreshView.toggle()
-        })
+        //gpt
+        .onAppear {
+            viewModel.selectedDate = Calendar.current.startOfDay(for: Date())
+        }
+
         .background(.backgroundSecondary)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .task { await viewModel.loadData() }
