@@ -9,18 +9,17 @@ import SwiftUI
 
 struct HabitViewComponent: View {
     @Bindable var habit: Habit
+    var refreshView = false
     let day: Date
-        
-    private var maxProgress: Int {
-        switch habit.habitCompleteness {
-        case .byToggle, .byMultipleToggle:
-            return habit.howManyTimesToToggle
-        case .byTimer:
-            return habit.howManySecondsToComplete
-        case .none:
-            return habit.howManyTimesToToggle
+    
+        private var maxProgress: Int {
+            switch habit.habitCompleteness {
+            case .byToggle, .byMultipleToggle, .byTimer:
+                return habit.howManyTimesToToggle
+            case .none:
+                return habit.howManyTimesToToggle
+            }
         }
-    }
     
     private var progressDone: Int {
         switch habit.habitCompleteness {

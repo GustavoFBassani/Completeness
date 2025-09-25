@@ -9,7 +9,7 @@ import SwiftData
 import Foundation
 
 /// Manages all habit completion logic operations.
-class HabitCompletionRepository: HabitCompletionProtocol, Sendable {
+class HabitCompletionRepository: HabitCompletionProtocol {
     // The ModelContext is our "bridge" to the database.
     let context: ModelContext
     
@@ -54,7 +54,6 @@ class HabitCompletionRepository: HabitCompletionProtocol, Sendable {
         
         var logs = habitToChange.habitLogs ?? []
         
-        
         // IF THE LOG WITH SAME DAY EXIST
         if let habitLog = habitToChange.habitLogs?.first(where: { Calendar.current.isDate($0.completionDate, inSameDayAs: targetDay)}) {
             // IF IS COMPLETED, CHANGE TO FALSE
@@ -92,18 +91,17 @@ class HabitCompletionRepository: HabitCompletionProtocol, Sendable {
             if habitLog.isCompleted {
                 habitLog.isCompleted = false
                 habitLog.howManyTimesItWasDone = 0
+                return
             }
             
             // if the habit isnt completed already, add one more
             if habitLog.howManyTimesItWasDone < habitToChange.howManyTimesToToggle - 1 {
                 habitLog.howManyTimesItWasDone += 1
                 try? context.save()
-                print(habitLog.howManyTimesItWasDone)
             } else {
                 habitLog.isCompleted = true
                 habitLog.howManyTimesItWasDone += 1
                 try? context.save()
-                print(habitLog.howManyTimesItWasDone)
             }
         } else {
             // IF the log doenst not exist, create one.
@@ -112,7 +110,6 @@ class HabitCompletionRepository: HabitCompletionProtocol, Sendable {
             logs.append(newHabitLog)
             habitToChange.habitLogs = logs
             try? context.save()
-            print(newHabitLog.howManyTimesItWasDone)
         }
     }
     

@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftData
-
+ 
 @Model
 final class Habit: Identifiable, Sendable {
     var id = UUID()
@@ -48,7 +48,8 @@ final class Habit: Identifiable, Sendable {
          scheduleDays: [Int],
          valuePosition: Int = 0,
          indicePosition: Int = 0,
-         howManySecondsToComplete: Int = 0) {
+         howManySecondsToComplete: Int = 0,
+        ) {
         self.id = id
         self.habitName = habitName
         self.habitIsCompleted = habitIsCompleted

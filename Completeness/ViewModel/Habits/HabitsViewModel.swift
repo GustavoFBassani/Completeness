@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Observation
+import Combine
 
 // MARK: - State
 enum HabitsStates {
@@ -17,32 +18,31 @@ enum HabitsStates {
 
 // MARK: - ViewModel
 @Observable
-final class HabitsViewModel: HabitsProtocol {
+final class HabitsViewModel: HabitsProtocol, Sendable {
     var state: HabitsStates = .idle
-    var selectedDate: Date = .now
+    var selectedDate: Date = .now {
+        didSet {
+           filteredHabits = habits.filter {
+               $0.isScheduled(for: selectedDate)
+           }
+        }
+    }
     var errorMessage: String?
     var habits: [Habit] = []
     var habitCompletionService: HabitCompletionProtocol
     var habitService: HabitRepositoryProtocol
     var textField = ""
     
-    //MARK: - NEW HABIT
-    var completenessType: CompletionHabit = .byMultipleToggle
-    var howManyTimesToCompleteHabit = 9
-    var howManySecondsToCompleteHabit = 100
+    // MARK: - NEW HABIT
+    var completenessType: CompletionHabit = .byTimer
+    var howManyTimesToCompleteHabit = 1
     var newHabitName = ""
     var newValuePosition = 0
     var newIndicePosition = 0
     var newHabitDate = Date()
     var newHabitDays: [Int] = []
-    
-    
-    var filteredHabits: [Habit] {
-        habits.filter {
-            $0.isScheduled(for: selectedDate)
-        }
-    }
-    
+    var filteredHabits: [Habit] = []
+         
     init(habitCompletionService: HabitCompletionProtocol, habitService: HabitRepositoryProtocol) {
         self.habitCompletionService = habitCompletionService
         self.habitService = habitService
@@ -60,7 +60,7 @@ final class HabitsViewModel: HabitsProtocol {
     }
     
     func createNewHabit() {
-        guard !newHabitName.isEmpty else {return}
+        guard !newHabitName.isEmpty else {return }
         
         let newHabit = Habit(
             habitName: newHabitName,
@@ -69,7 +69,6 @@ final class HabitsViewModel: HabitsProtocol {
             scheduleDays: newHabitDays,
             valuePosition: newValuePosition,
             indicePosition: newIndicePosition,
-            howManySecondsToComplete: howManySecondsToCompleteHabit
         )
         
         habits.append(newHabit)
@@ -82,12 +81,11 @@ final class HabitsViewModel: HabitsProtocol {
     func completeHabit(habit: Habit, on date: Date) async {
         switch habit.habitCompleteness {
         case .byMultipleToggle:
-            await habitCompletionService.completeByMultipleToggle(id: habit.id, on: date)
+            return await habitCompletionService.completeByMultipleToggle(id: habit.id, on: date)
         case .byToggle:
-            await habitCompletionService.completeByToggle(id: habit.id, on: date)
-
+            return await habitCompletionService.completeByToggle(id: habit.id, on: date)
         case .byTimer:
-            await habitCompletionService.completeByTimer(id: habit.id, on: date)
+            return await habitCompletionService.completeByTimer(id: habit.id, on: date)
 
         default:
             break
