@@ -21,6 +21,9 @@
         }
       }
     },
+    "%lld habitos feitos" : {
+
+    },
     "🏆 Hábitos Mais Concluídos" : {
       "localizations" : {
         "en" : {
@@ -131,6 +134,9 @@
         }
       }
     },
+    "Acompanhe seu progresso semanal" : {
+
+    },
     "Agendar Notificação" : {
       "localizations" : {
         "en" : {
@@ -211,6 +217,9 @@
         }
       }
     },
+    "Carregando estatísticas..." : {
+
+    },
     "Claro" : {
       "localizations" : {
         "en" : {
@@ -230,6 +239,9 @@
           }
         }
       }
+    },
+    "Conclua sua primeira semana de hábitos e você verá o resumo sobre sua evolução aqui." : {
+
     },
     "Configurações" : {
       "localizations" : {
@@ -351,6 +363,18 @@
         }
       }
     },
+    "Essa semana você concluiu %.0f%% dos seus hábitos" : {
+
+    },
+    "Essa semana você concluiu %.0f%% dos seus hábitos, você foi muito bem!" : {
+
+    },
+    "Esse hábito apareceu pouco essa semana, podemos juntos melhorar!" : {
+
+    },
+    "Esse hábito já está se tornando parte da sua rotina, continue assim!" : {
+
+    },
     "Etapas" : {
       "localizations" : {
         "en" : {
@@ -441,6 +465,15 @@
         }
       }
     },
+    "Hábito feito %lld vezes" : {
+
+    },
+    "Hábito mais feito" : {
+
+    },
+    "Hábito menos feito" : {
+
+    },
     "Hábito personalizado" : {
       "localizations" : {
         "en" : {
@@ -461,7 +494,11 @@
         }
       }
     },
+    "Hábitos semanais" : {
+
+    },
     "Hello, World!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -572,6 +609,7 @@
       }
     },
     "Notif" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
