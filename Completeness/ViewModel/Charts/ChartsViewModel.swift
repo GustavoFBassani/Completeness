@@ -54,7 +54,7 @@ class ChartsViewModel: ChartsViewModelProtocol {
         mostCompletedHabits = await chartsService.getMostCompletedHabits(inLastDays: 7)
         leastCompletedHabits = await chartsService.getLeastCompletedHabit(inLastDays: 7)
         overallCompletionRate = await chartsService.getOverallCompletion(inLastDays: 7)
-        totalHabitsCompleted = await chartsService.
+        totalHabitsCompleted = await chartsService.getNumberOfHabbitsCompleted(inLastDays: 7)
         
         isLoading = false
     }

@@ -11,7 +11,7 @@
         }
       }
     },
-    "%lf" : {
+    "%lf%%" : {
 
     },
     "%lld" : {
@@ -23,6 +23,9 @@
           }
         }
       }
+    },
+    "%lld habitos feitos" : {
+
     },
     "🏆 Hábitos Mais Concluídos" : {
       "localizations" : {
@@ -125,11 +128,6 @@
       }
     },
     "45 min" : {
-
-    },
-    "100 habitos feitos" : {
-
-    },
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -368,10 +366,10 @@
         }
       }
     },
-    "Essa semana você concluiu %lf dos seus hábitos" : {
+    "Essa semana você concluiu %lf%% dos seus hábitos" : {
 
     },
-    "Essa semana você concluiu %lf dos seus hábitos, você foi muito bem!" : {
+    "Essa semana você concluiu %lf%% dos seus hábitos, você foi muito bem!" : {
 
     },
     "Essa semana você concluiu 70% dos seus hábitos, você foi muito bem!" : {

@@ -7,10 +7,10 @@ struct StatsView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                if viewModel.mostCompletedHabits.isEmpty {
-                    StatsEmptyView()
-                        .containerRelativeFrame(.vertical)
-                } else {
+//                if viewModel.mostCompletedHabits.isEmpty {
+//                    StatsEmptyView()
+//                        .containerRelativeFrame(.vertical)
+//                } else {
                     
                     OverallChart(viewModel: $viewModel)
                     
@@ -23,7 +23,7 @@ struct StatsView: View {
                         viewModel: $viewModel,
                         habitCartType: .leastDone
                     )
-                }
+                //}
             }
         }
         .padding()
