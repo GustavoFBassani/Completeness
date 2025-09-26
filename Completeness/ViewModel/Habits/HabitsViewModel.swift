@@ -96,8 +96,15 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
                 habits.append(newHabit)
                 await habitService.createHabit(habit: newHabit)
                 await loadData()
-            
         }
+    }
+    
+    func deleteHabitById() async {
+        if let id {
+            await habitService.deleteHabit(id: id)
+            habitService.saveChanges()
+        }
+        await loadData()
     }
     
     func completeHabit(habit: Habit, on date: Date) async {

@@ -112,7 +112,6 @@ struct HabitView: View {
                                                                   howManyTimesToComplete: habit.howManyTimesToToggle,
                                                                   completenessType: habit.habitCompleteness ?? CompletionHabit.byToggle,
                                                                   habitsSymbol: habit.habitSimbol)
-
                                                 }
                                         } else {
                                             EmptyCircle()
