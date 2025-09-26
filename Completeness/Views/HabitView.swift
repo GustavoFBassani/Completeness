@@ -11,8 +11,10 @@ import SwiftData
 struct HabitView: View {
     @Bindable var viewModel: HabitsViewModel
     @State private var showingAddHabit = false
+    @State private var showEditHabbit = false
+    @State private var habbitToEdit: Habit?
     @Binding var refreshView: Bool
-    
+
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -56,6 +58,21 @@ struct HabitView: View {
                                                         refreshView.toggle()
                                                     }
                                                 }
+                                                .onLongPressGesture {
+                                                    habbitToEdit = habitWithPosition
+                                                    print(habitWithPosition.howManyTimesToToggle)
+                                                }
+                                                .sheet(item: $habbitToEdit) { habit in
+                                                    HabitsConfig(id: habit.id,
+                                                        viewModel: viewModel,
+                                                                  title: "Edit \(habit.habitName)",
+                                                                  habitName: habit.habitName,
+                                                                  timesChoice: TimeOption(rawValue: habit.howManySecondsToComplete) ?? TimeOption.oneMinute,
+                                                                 selectedDays: habit.scheduleDays,
+                                                                  howManyTimesToComplete: habit.howManyTimesToToggle,
+                                                                  completenessType: habit.habitCompleteness ?? CompletionHabit.byToggle,
+                                                                  habitsSymbol: habit.habitSimbol)
+                                                }
                                         } else {
                                             EmptyCircle()
                                                 .onTapGesture {
@@ -79,6 +96,23 @@ struct HabitView: View {
                                                         
                                                         refreshView.toggle()
                                                     }
+                                                }
+                                                .onLongPressGesture {
+                                                    habbitToEdit = habitWithPosition
+                                                    print(#file, #line, habitWithPosition.id)
+                                                    print(habitWithPosition.howManyTimesToToggle)
+                                                }
+                                                .sheet(item: $habbitToEdit) { habit in
+                                                    HabitsConfig( id: habit.id,
+                                                        viewModel: viewModel,
+                                                                  title: "Edit \(habit.habitName)",
+                                                                  habitName: habit.habitName,
+                                                                  timesChoice: TimeOption(rawValue: habit.howManySecondsToComplete) ?? TimeOption.oneMinute,
+                                                                  selectedDays: habit.scheduleDays,
+                                                                  howManyTimesToComplete: habit.howManyTimesToToggle,
+                                                                  completenessType: habit.habitCompleteness ?? CompletionHabit.byToggle,
+                                                                  habitsSymbol: habit.habitSimbol)
+
                                                 }
                                         } else {
                                             EmptyCircle()
@@ -126,3 +160,4 @@ struct HabitView: View {
         }
     }
 }
+

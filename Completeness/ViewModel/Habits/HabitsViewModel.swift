@@ -45,7 +45,8 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
     var newHabitDays: [Int] = []
     var filteredHabits: [Habit] = []
     var habitSymbol = ""
-         
+    var id: UUID?
+    
     init(habitCompletionService: HabitCompletionProtocol, habitService: HabitRepositoryProtocol) {
         self.habitCompletionService = habitCompletionService
         self.habitService = habitService
@@ -62,31 +63,40 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
         }
     }
     
-    func createNewHabit() {
+    func createNewHabit() async {
         guard !newHabitName.isEmpty else { return }
         
-        print("[DEBUG] createNewHabit",
-              "type:", completenessType,
-              "times:", howManyTimesToCompleteHabit,
-              "seconds:", howManySecondsToCompleteHabit,
-              "valuePos:", newValuePosition,
-              "indicePos:", newIndicePosition)
-        
-        let newHabit = Habit(
-            habitName: newHabitName,
-            habitSimbol: habitSymbol,
-            habitCompleteness: completenessType,
-            howManyTimesToToggle: howManyTimesToCompleteHabit,
-            scheduleDays: newHabitDays,
-            valuePosition: newValuePosition,
-            indicePosition: newIndicePosition,
-            howManySecondsToComplete: howManySecondsToCompleteHabit
-        )
-        
-        habits.append(newHabit)
-        habitService.createHabit(habit: newHabit)
-        Task{
-            await loadData()
+        if let id {
+            print(" entrou aqui? ")
+            print(#file, #line, id)
+
+            if let habitWithID = await habitService.getHabitById(id: id) {
+                habitWithID.habitName = newHabitName
+                habitWithID.habitSimbol = habitSymbol
+                habitWithID.habitCompleteness = completenessType
+                habitWithID.howManyTimesToToggle = howManyTimesToCompleteHabit
+                habitWithID.scheduleDays = newHabitDays
+                habitWithID.howManySecondsToComplete = howManySecondsToCompleteHabit
+                
+                habitService.saveChanges()
+                    await loadData()
+            }
+        } else {
+            let newHabit = Habit(
+                habitName: newHabitName,
+                habitSimbol: habitSymbol,
+                habitCompleteness: completenessType,
+                howManyTimesToToggle: howManyTimesToCompleteHabit,
+                scheduleDays: newHabitDays,
+                valuePosition: newValuePosition,
+                indicePosition: newIndicePosition,
+                howManySecondsToComplete: howManySecondsToCompleteHabit
+            )
+            
+                habits.append(newHabit)
+                await habitService.createHabit(habit: newHabit)
+                await loadData()
+            
         }
     }
     

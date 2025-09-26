@@ -10,7 +10,7 @@
 import SwiftData
 import Foundation
 
-class HabitRepository: HabitRepositoryProtocol {
+class HabitRepository: HabitRepositoryProtocol {    
     let context: ModelContext
     init(context: ModelContext) {
         self.context = context
@@ -26,10 +26,14 @@ class HabitRepository: HabitRepositoryProtocol {
         }
         return []
     }
+    
     func getHabitById(id: UUID) async -> Habit? {
-        try? await getAllHabits().first {$0.id == id }
+        let predicate = #Predicate<Habit> { $0.id == id }
+        let descriptor = FetchDescriptor(predicate: predicate)
+        return (try? context.fetch(descriptor))?.first
     }
-    func createHabit(habit: Habit) {
+    
+    func createHabit(habit: Habit) async {
         context.insert(habit)
         do {
             try context.save()
@@ -38,6 +42,7 @@ class HabitRepository: HabitRepositoryProtocol {
             fatalError()
         }
     }
+    
     func saveChanges() {
         try? context.save()
     }

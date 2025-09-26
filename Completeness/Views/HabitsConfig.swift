@@ -25,6 +25,7 @@ enum DaysRepeation: String {
 import SwiftUI
 
 struct HabitsConfig: View {
+    var id: UUID?
     @Bindable var viewModel: HabitsViewModel
     var title = "Hábito Personalizado"
     let weekDays = ["S", "M", "T", "W", "T", "F", "S"]
@@ -228,7 +229,7 @@ struct HabitsConfig: View {
                 
                 ToolbarItem(placement: .confirmationAction) {
                     Button(action: {
-                        viewModel.newHabitName = viewModel.newHabitName
+                        viewModel.newHabitName = habitName
                         viewModel.completenessType = completenessType
                         viewModel.howManyTimesToCompleteHabit = howManyTimesToComplete
                         if typeOfRepetition == .allDays {
@@ -238,7 +239,11 @@ struct HabitsConfig: View {
                         }
                         viewModel.habitSymbol = habitsSymbol
                         viewModel.howManySecondsToCompleteHabit = timesChoice.rawValue
-                        viewModel.createNewHabit()
+                        if let id {
+                            print(#file, #line, id)
+                            viewModel.id = id
+                        }
+                        Task { await viewModel.createNewHabit() }
                         dismiss()
                         dismiss()
                     }, label: {
