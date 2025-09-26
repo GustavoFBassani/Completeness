@@ -59,7 +59,9 @@ struct ConfigView: View {
                         }
                     }
                     ))
+                    .tint(.green)
                 }
+                
                 
                 HStack {
                     Image(systemName: "paintpalette.fill")
@@ -85,11 +87,13 @@ struct ConfigView: View {
                         .foregroundStyle(.indigoCustom)
                     Toggle("Avisos", isOn: $badgeEnabled)
                 }
+                .tint(.green)
                 HStack {
                     Image(systemName: "bell.badge")
                         .foregroundStyle(.indigoCustom)
                     Toggle("Permitir notificações", isOn: $notificationEnabled)
                 }
+                .tint(.green)
             }
         
             Section(header: Text("Sobre nós")) {

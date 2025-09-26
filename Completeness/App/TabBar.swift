@@ -20,7 +20,7 @@ struct TabBar: View {
                                                          habitService: HabitRepository(context: context)), refreshView: $refreshView)
                 }
             }
-
+            
             Tab("Resumo", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
                 NavigationStack{
                     DeleteAllData()
@@ -31,7 +31,13 @@ struct TabBar: View {
                     ConfigView()
                 }
             }
+            Tab("teste" , systemImage: "bol"){
+                NavigationStack{
+                    HabitSheetTimerView()
+                }
+            }
         }
+        
         .onAppear(perform: {
             refreshView.toggle()
         })
