@@ -368,6 +368,7 @@
 
     },
     "Nenhum hábito para este dia" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -520,9 +521,6 @@
           }
         }
       }
-    },
-    "Semanalmente" : {
-
     },
     "Settings" : {
       "localizations" : {

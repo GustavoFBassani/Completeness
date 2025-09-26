@@ -39,7 +39,6 @@ struct HabitViewComponent: View {
     
     private var habbitIsByTimer: Bool { habit.habitCompleteness == .byTimer }
     
-
     private var progressTimer: String {
         if let habitLog = habit.habitLogs?.first(where: {
             Calendar.current.isDate($0.completionDate, inSameDayAs: day)
@@ -66,7 +65,6 @@ struct HabitViewComponent: View {
     private func showProgressDone() -> String {
         return progressTimer
     }
-    
     
     
     var body: some View {

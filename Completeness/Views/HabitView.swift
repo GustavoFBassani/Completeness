@@ -122,7 +122,7 @@ struct HabitView: View {
 //            }
 //        }
         .sheet(isPresented: $showingAddHabit) {
-            AddNewHabit()
+                AddHabitsView(viewModel: viewModel)
         }
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct HabitSectionView: View {
     let title: String
     let habits: [PredefinedHabits]
+    @Bindable var viewModel: HabitsViewModel
     
     @State private var showMore = false
     
@@ -24,17 +25,27 @@ struct HabitSectionView: View {
         VStack(alignment: .leading, spacing: 0) {
             // lista de hábitos
             ForEach(showMore ? habits : Array(habits.prefix(3))) { habit in
-                HStack {
-                    Image(systemName: habit.habitSimbol)
-                        .foregroundColor(.indigoCustom)
-                    Text(habit.habitName)
-                        .foregroundColor(.primary)
-                    Spacer()
-                    Text("Detalhes")
-                        .foregroundColor(.gray)
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.gray)
+                NavigationLink {
+                    HabitsConfig( viewModel: viewModel,
+                                  title: title,
+                                  habitName: habit.habitName,
+                                  timesChoice: TimeOption.oneMinute,
+                                  completenessType: habit.completionType,
+                                  habitsSymbol: habit.habitSimbol)
+                } label: {
+                    HStack {
+                        Image(systemName: habit.habitSimbol)
+                            .foregroundColor(.indigoCustom)
+                        Text(habit.habitName)
+                            .foregroundColor(.primary)
+                        Spacer()
+                        Text("Detalhes")
+                            .foregroundColor(.gray)
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.gray)
+                    }
                 }
+
                 .padding(.horizontal)
                 .padding(.vertical, 12)
                  Divider()

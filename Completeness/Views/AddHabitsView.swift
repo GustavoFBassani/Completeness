@@ -7,14 +7,17 @@
 //
 import SwiftUI
 
-struct AddNewHabit: View {
+struct AddHabitsView: View {
     @Environment(\.dismiss) var dismiss
+    
+    @Bindable var viewModel: HabitsViewModel
+    @State private var showPersonalizedHabits = false
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                Button {
-                    //
+                NavigationLink {
+                    HabitsConfig(viewModel: viewModel)
                 } label: {
                     Text("Hábito personalizado")
                         .foregroundColor(.white)
@@ -24,19 +27,20 @@ struct AddNewHabit: View {
                         .font(.system(size: 17, weight: .semibold))
                 }
                 .padding(.vertical)
+                
                 VStack(spacing: 20) {
                     // Seções dinâmicas
                     HabitSectionView(
                         title: "Hábitos simples",
-                        habits: PredefinedHabits.allCases.filter { $0.completionType == .byToggle }
+                        habits: PredefinedHabits.allCases.filter { $0.completionType == .byToggle }, viewModel: viewModel
                     )
                     HabitSectionView(
                         title: "Hábitos múltiplos",
-                        habits: PredefinedHabits.allCases.filter { $0.completionType == .byMultipleToggle }
+                        habits: PredefinedHabits.allCases.filter { $0.completionType == .byMultipleToggle }, viewModel: viewModel
                     )
                     HabitSectionView(
                         title: "Hábitos por tempo",
-                        habits: PredefinedHabits.allCases.filter { $0.completionType == .byTimer }
+                        habits: PredefinedHabits.allCases.filter { $0.completionType == .byTimer }, viewModel: viewModel
                     )
                     Spacer()
                 }

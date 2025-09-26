@@ -30,7 +30,6 @@ only_rules:
   - vertical_whitespace_opening_braces
 
   # ----------- SwiftUI específico -----------
-  - private_swiftui_state
   - private_unit_test
   - redundant_discardable_let
   - redundant_nil_coalescing
@@ -38,7 +37,6 @@ only_rules:
 
   # ----------- Custom rules -----------
   - custom_rules
-  - swiftui_state_private
   - swiftui_environment_private
   - swiftui_environmentobject_private
   - swiftui_scaledtofit
@@ -63,11 +61,6 @@ redundant_type_annotation:
 
 # ----------- Regras customizadas úteis em SwiftUI -----------
 custom_rules:
-  swiftui_state_private:
-    regex: '@State(?! private)'
-    message: '@State properties devem ser private'
-    severity: error
-
   swiftui_environment_private:
     regex: '@Environment\\(.*\\) var'
     message: '@Environment properties devem ser private'

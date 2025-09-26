@@ -37,13 +37,14 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
     var completenessType: CompletionHabit = .byToggle
     var howManyTimesToCompleteHabit = 1
     var howManySecondsToCompleteHabit = 900
-    var newHabitName = ""
+    var newHabitName = " "
     var newHabitDescription = ""
     var newValuePosition = 0
     var newIndicePosition = 0
     var newHabitDate = Date()
     var newHabitDays: [Int] = []
     var filteredHabits: [Habit] = []
+    var habitSymbol = ""
          
     init(habitCompletionService: HabitCompletionProtocol, habitService: HabitRepositoryProtocol) {
         self.habitCompletionService = habitCompletionService
@@ -62,10 +63,18 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
     }
     
     func createNewHabit() {
-        guard !newHabitName.isEmpty else {return }
+        guard !newHabitName.isEmpty else { return }
+        
+        print("[DEBUG] createNewHabit",
+              "type:", completenessType,
+              "times:", howManyTimesToCompleteHabit,
+              "seconds:", howManySecondsToCompleteHabit,
+              "valuePos:", newValuePosition,
+              "indicePos:", newIndicePosition)
         
         let newHabit = Habit(
             habitName: newHabitName,
+            habitSimbol: habitSymbol,
             habitCompleteness: completenessType,
             howManyTimesToToggle: howManyTimesToCompleteHabit,
             scheduleDays: newHabitDays,
