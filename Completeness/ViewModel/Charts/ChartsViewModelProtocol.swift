@@ -12,5 +12,6 @@ protocol ChartsViewModelProtocol: Observable {
     var overallCompletionRate: Double { get }
     var mostCompletedHabits: [Habit] { get }
     var leastCompletedHabits: [Habit] { get }
+    var totalHabitsCompleted: Int { get }
     func fetchChartBy7Days() async
 }

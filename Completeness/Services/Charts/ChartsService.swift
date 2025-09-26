@@ -105,7 +105,28 @@ class ChartsService: ChartsServiceProtocol {
         let totalPossibleCompletion = habitsCount * totalDaysActive
         
         
-        return (Double(totalCompletions) / Double(totalPossibleCompletion))
+        return (Double(totalCompletions) / Double(totalPossibleCompletion)) * 100
+    }
+    
+    ///get the count of the logs that are among in the parameters
+    /// - Parameter days: The period to analyze.
+    /// - Returns: A `Int` representing the total of habits marked as done.
+    func getNumberOfHabbitsCompleted(inLastDays days: Int)  async -> Int{
+        
+        guard let allHabits = await fetchAllHabbits(), !allHabits.isEmpty else { return 0}
+        
+        let today = Calendar.current.startOfDay(for: Date())
+        let startDate = Calendar.current.date(byAdding: .day, value: -days, to: today)!
+        
+        let predicate = #Predicate<HabitLog> { log in
+            log.completionDate >= startDate
+        }
+        let descriptor = FetchDescriptor<HabitLog>(predicate: predicate)
+        let periodLogs = (try? modelContext.fetch(descriptor)) ?? []
+        
+        let totalCompletions = periodLogs.count
+        
+        return totalCompletions
     }
     
     // The functions below are private helpers to avoid code repetition.

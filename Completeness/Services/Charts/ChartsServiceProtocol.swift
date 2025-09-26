@@ -18,4 +18,7 @@ protocol ChartsServiceProtocol {
         
         /// Calculates the percentage of "perfect days".
         func getOverallCompletion(inLastDays days: Int) async -> Double
+    
+        ///calculates the total of tasks marked as done
+        func getNumberOfHabbitsCompleted(inLastDays days: Int)  async -> Int
 }

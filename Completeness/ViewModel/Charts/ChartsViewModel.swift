@@ -34,6 +34,8 @@ class ChartsViewModel: ChartsViewModelProtocol {
     
     /// A list of the least frequently completed habits.
     var leastCompletedHabits: [Habit] = []
+    
+    var totalHabitsCompleted: Int = 0
 
     init(chartsService: ChartsServiceProtocol) {
         self.chartsService = chartsService
@@ -52,6 +54,7 @@ class ChartsViewModel: ChartsViewModelProtocol {
         mostCompletedHabits = await chartsService.getMostCompletedHabits(inLastDays: 7)
         leastCompletedHabits = await chartsService.getLeastCompletedHabit(inLastDays: 7)
         overallCompletionRate = await chartsService.getOverallCompletion(inLastDays: 7)
+        totalHabitsCompleted = await chartsService.
         
         isLoading = false
     }

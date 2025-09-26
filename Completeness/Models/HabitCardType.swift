@@ -7,5 +7,5 @@
 
 enum HabitCardType {
     case mostDone
-    case leatDone
+    case leastDone
 }

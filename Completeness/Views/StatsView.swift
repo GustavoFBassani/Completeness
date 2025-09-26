@@ -11,12 +11,17 @@ struct StatsView: View {
                     StatsEmptyView()
                         .containerRelativeFrame(.vertical)
                 } else {
-                    HabitStatCard(
-                        viewModel: $viewModel, habitCartType: .mostDone
-                    )
+                    
+                    OverallChart(viewModel: $viewModel)
+                    
                     HabitStatCard(
                         viewModel: $viewModel,
-                        habitCartType: .leatDone
+                        habitCartType: .mostDone
+                    )
+                    
+                    HabitStatCard(
+                        viewModel: $viewModel,
+                        habitCartType: .leastDone
                     )
                 }
             }
@@ -26,6 +31,7 @@ struct StatsView: View {
         .background(Color.backgroundPrimary)
         .task {
             await viewModel.fetchChartBy7Days()
+            print(viewModel.overallCompletionRate)
         }
         .navigationTitle("Resumo")
     }

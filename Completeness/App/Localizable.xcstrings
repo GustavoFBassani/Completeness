@@ -105,6 +105,9 @@
     "45 min" : {
 
     },
+    "100 habitos feitos" : {
+
+    },
     "Abrir Ajustes do Sistema" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -290,6 +293,9 @@
 
     },
     "Essa semana você concluiu %lf dos seus hábitos, você foi muito bem!" : {
+
+    },
+    "Essa semana você concluiu 70% dos seus hábitos, você foi muito bem!" : {
 
     },
     "Esse hábito apareceu pouco essa semana, podemos juntos melhorar!" : {
@@ -585,9 +591,6 @@
       }
     },
     "Sobre nós" : {
-
-    },
-    "tantos habitos feitos" : {
 
     },
     "Taxa de conclusão" : {
