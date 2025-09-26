@@ -406,9 +406,6 @@
         }
       }
     },
-    "Notif" : {
-
-    },
     "Notificação Hábito diário" : {
       "extractionState" : "stale",
       "localizations" : {
