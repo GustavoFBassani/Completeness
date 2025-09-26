@@ -114,6 +114,9 @@
         }
       }
     },
+    "20:00" : {
+
+    },
     "30 min" : {
       "localizations" : {
         "en" : {
@@ -166,6 +169,9 @@
           }
         }
       }
+    },
+    "Aprender algo novo" : {
+
     },
     "Automático" : {
       "localizations" : {
@@ -243,6 +249,9 @@
     "Conclua sua primeira semana de hábitos e você verá o resumo sobre sua evolução aqui." : {
 
     },
+    "Completar" : {
+
+    },
     "Configurações" : {
       "localizations" : {
         "en" : {
@@ -312,6 +321,9 @@
           }
         }
       }
+    },
+    "Editar" : {
+
     },
     "Editar nome do hábito" : {
       "localizations" : {
@@ -868,6 +880,9 @@
           }
         }
       }
+    },
+    "teste" : {
+
     },
     "Tipo de Completude" : {
       "localizations" : {
