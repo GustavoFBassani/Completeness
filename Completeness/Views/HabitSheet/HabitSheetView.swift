@@ -70,7 +70,7 @@ let maxValue = 5
                     }
             }
             Button {
-                
+                //
             }label: {
                 Text("Completar")
                     .foregroundColor(.white)
@@ -90,7 +90,6 @@ let maxValue = 5
             .underline()
                       
             Spacer()
-            
         }
         .padding()
         .presentationDragIndicator(.visible)
