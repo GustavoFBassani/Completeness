@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ChartsViewModelProtocol {
+protocol ChartsViewModelProtocol: Observable {
     var isLoading: Bool { get }
     var overallCompletionRate: Double { get }
     var mostCompletedHabits: [Habit] { get }
