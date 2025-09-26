@@ -31,6 +31,11 @@ struct TabBar: View {
                     ConfigView()
                 }
             }
+            Tab("Notif", systemImage: "circle"){
+                NavigationStack{
+                    Notification2Tests()
+                }
+            }
         }
         .onAppear(perform: {
             refreshView.toggle()
