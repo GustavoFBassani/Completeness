@@ -16,6 +16,7 @@ struct AddCustomHabit: View {
             Form {
                 Section {
                     TextField("Ex: Tomar água", text: $viewModel.newHabitName)
+                        .background(Color.textFieldBackground)
                 }   header: {
                     Text("Nome")
                         .font(.system(size: 22).bold())
@@ -24,6 +25,7 @@ struct AddCustomHabit: View {
                 
                 Section {
                     TextField("Ex: Você consegue", text: $viewModel.newHabitDescription)
+                        .background(Color.textFieldBackground)
                 } header: {
                     Text("Descrição")
                         .font(.system(size: 22).bold())

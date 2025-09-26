@@ -107,7 +107,7 @@ struct HabitView: View {
             viewModel.selectedDate = Calendar.current.startOfDay(for: Date())
         }
 
-        .background(.backgroundSecondary)
+        .background(.backgroundPrimary)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .task { await viewModel.loadData() }
 //        .sheet(isPresented: $showingAddHabit) {

@@ -23,17 +23,12 @@ struct TabBar: View {
             
             Tab("Resumo", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
                 NavigationStack{
-                    DeleteAllData()
+                    StatsView(viewModel: ChartsViewModel(chartsService: ChartsService(modelContext: context)))
                 }
             }
             Tab("Configurações", systemImage: "gearshape"){
                 NavigationStack{
                     ConfigView()
-                }
-            }
-            Tab("teste" , systemImage: "bol"){
-                NavigationStack{
-                    HabitSheetTimerView()
                 }
             }
         }
