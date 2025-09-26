@@ -11,9 +11,6 @@
         }
       }
     },
-    "%lf%%" : {
-
-    },
     "%lld" : {
       "localizations" : {
         "en" : {
@@ -366,13 +363,10 @@
         }
       }
     },
-    "Essa semana você concluiu %lf%% dos seus hábitos" : {
+    "Essa semana você concluiu %.0f%% dos seus hábitos" : {
 
     },
-    "Essa semana você concluiu %lf%% dos seus hábitos, você foi muito bem!" : {
-
-    },
-    "Essa semana você concluiu 70% dos seus hábitos, você foi muito bem!" : {
+    "Essa semana você concluiu %.0f%% dos seus hábitos, você foi muito bem!" : {
 
     },
     "Esse hábito apareceu pouco essa semana, podemos juntos melhorar!" : {
@@ -615,6 +609,7 @@
       }
     },
     "Notif" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

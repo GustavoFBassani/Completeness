@@ -35,8 +35,8 @@ class ChartsViewModel: ChartsViewModelProtocol {
     /// A list of the least frequently completed habits.
     var leastCompletedHabits: [Habit] = []
     
-    var totalHabitsCompleted: Int = 0
-
+    var totalHabitsCompleted = 0
+    
     init(chartsService: ChartsServiceProtocol) {
         self.chartsService = chartsService
     }

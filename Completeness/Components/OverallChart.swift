@@ -11,12 +11,12 @@ struct OverallChart: View {
     @Binding var viewModel: ChartsViewModelProtocol
     
     var body: some View {
-        HStack(spacing: 16){
+        HStack(spacing: 32){
             ZStack {
                 Circle()
                     .stroke(
                         Color.indigoCustomTertiary,
-                        lineWidth: 32)
+                        lineWidth: 24)
                 
                 Circle()
                     .trim(from: 0.0, to: viewModel.overallCompletionRate)
@@ -28,11 +28,11 @@ struct OverallChart: View {
                     .animation(.easeInOut, value: viewModel.overallCompletionRate) //animation absed on the overallCompletionRate
                 
                 
-                Text("\(viewModel.overallCompletionRate)%")
+                Text(viewModel.overallCompletionRate, format: .percent.precision(.fractionLength(0)))
                     .font(.title.bold())
                     .foregroundStyle(Color.labelPrimary)
             }
-            .frame(width: 130.41, height: 130.41)
+            .frame(width: 120, height: 120)
             
             VStack(alignment: .leading, spacing: 16) {
                 Text("Hábitos semanais")
@@ -40,12 +40,11 @@ struct OverallChart: View {
                     .foregroundStyle(Color.labelPrimary)
                 
                 if viewModel.overallCompletionRate >= 60 {
-                    Text("Essa semana você concluiu \(viewModel.overallCompletionRate)% dos seus hábitos, você foi muito bem!")
-                    Text("Essa semana você concluiu 70% dos seus hábitos, você foi muito bem!")
+                    Text("Essa semana você concluiu \(viewModel.overallCompletionRate, specifier: "%.0f")% dos seus hábitos, você foi muito bem!")
                         .padding(.trailing, 30)
                         .font(.subheadline)
                 } else {
-                    Text("Essa semana você concluiu \(viewModel.overallCompletionRate)% dos seus hábitos")
+                    Text("Essa semana você concluiu \(viewModel.overallCompletionRate, specifier: "%.0f")% dos seus hábitos")
                 }
                 
                 ZStack {
@@ -60,8 +59,6 @@ struct OverallChart: View {
                         .foregroundStyle(.indigoCustom)
                 )
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 22.01)
         }
         .background(
             RoundedRectangle(cornerRadius: 26)

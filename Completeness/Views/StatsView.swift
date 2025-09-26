@@ -3,7 +3,7 @@ import SwiftData
 
 struct StatsView: View {
     @State var viewModel: ChartsViewModelProtocol
-    
+
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
@@ -25,10 +25,11 @@ struct StatsView: View {
                     )
                 //}
             }
+            .padding()
         }
         .padding()
         .frame(maxWidth: .infinity)
-        .background(Color.backgroundPrimary)
+        .background(Color.backgroundSecondary)
         .task {
             await viewModel.fetchChartBy7Days()
             print(viewModel.overallCompletionRate)
