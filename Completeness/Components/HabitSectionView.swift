@@ -56,7 +56,7 @@ struct HabitSectionView: View {
             }
             Spacer()
         }
-        .background(.backgroundPrimary)
+        .background(.textFieldBackground)
         .cornerRadius(12)
         .padding(.horizontal)
     }

@@ -43,7 +43,7 @@ struct AddNewHabit: View {
             }
             .navigationTitle("Novo Hábito")
             .navigationBarTitleDisplayMode(.inline)
-            .background(Color(.systemGray6))
+            .background(.backgroundPrimary)
             .toolbar{
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {

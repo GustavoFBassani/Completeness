@@ -23,7 +23,7 @@ struct StatsView: View {
         }
         .padding()
         .frame(maxWidth: .infinity)
-        .background(Color.backgroundSecondary)
+        .background(Color.backgroundPrimary)
         .task {
             await viewModel.fetchChartBy7Days()
         }
@@ -32,5 +32,4 @@ struct StatsView: View {
 }
 
 #Preview {
-    //StatsView()
 }

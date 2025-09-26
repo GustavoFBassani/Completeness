@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WeeklyOverallChart: View {
+struct OverallChart: View {
     
     @Binding var viewModel: ChartsViewModelProtocol
     
@@ -15,6 +15,31 @@ struct WeeklyOverallChart: View {
         HStack{
             
             //gráfico geral
+            ZStack {
+                
+                Circle()
+                    .stroke(
+                        Color.indigoCustomTertiary,
+                        lineWidth: 24)
+                
+                Circle()
+                    .trim(from: 0.0, to: viewModel.overallCompletionRate)
+                    .stroke(
+                        Color.indigoCustom,
+                        style: StrokeStyle(lineWidth: 24, lineCap: .round)
+                    )
+                    .frame(width: 130.41, height: 130.41)
+                    .rotationEffect(.degrees(-90))
+                    .animation(.easeInOut, value: viewModel.overallCompletionRate) //animation absed on the overallCompletionRate
+                
+                Circle()
+                    .fill(.backgroundPrimary)
+                    
+                
+                Text("\(viewModel.overallCompletionRate)")
+                    .font(.title)
+                    .foregroundStyle(Color.labelPrimary)
+            }
             
             VStack(spacing: 16) {
                 Text("Hábitos semanais")
@@ -41,5 +66,4 @@ struct WeeklyOverallChart: View {
 }
 
 #Preview {
-    //WeeklyChallengeChart()
 }

@@ -11,6 +11,9 @@
         }
       }
     },
+    "%lf" : {
+
+    },
     "%lld" : {
       "localizations" : {
         "en" : {
