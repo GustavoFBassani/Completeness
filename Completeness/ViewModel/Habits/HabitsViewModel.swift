@@ -81,6 +81,7 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
                 habitService.saveChanges()
                     await loadData()
             }
+            
         } else {
             let newHabit = Habit(
                 habitName: newHabitName,
@@ -103,6 +104,7 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
         if let id {
             await habitService.deleteHabit(id: id)
             habitService.saveChanges()
+            self.id = nil
         }
         await loadData()
     }

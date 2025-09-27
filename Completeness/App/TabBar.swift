@@ -20,18 +20,20 @@ struct TabBar: View {
                                                          habitService: HabitRepository(context: context)), refreshView: $refreshView)
                 }
             }
-
+            
             Tab("Resumo", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
                 NavigationStack{
-                    DeleteAllData()
+                    StatsView(viewModel: ChartsViewModel(chartsService: ChartsService(modelContext: context)))
                 }
             }
+            
             Tab("Configurações", systemImage: "gearshape"){
                 NavigationStack{
                     ConfigView()
                 }
             }
         }
+        
         .onAppear(perform: {
             refreshView.toggle()
         })

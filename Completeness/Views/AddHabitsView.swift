@@ -20,7 +20,7 @@ struct AddHabitsView: View {
                     HabitsConfig(viewModel: viewModel)
                 } label: {
                     Text("Hábito personalizado")
-                        .foregroundColor(.white)
+                        .foregroundColor(.labelPrimary)
                         .frame(width: 362, height: 52)
                         .background(.indigoCustom)
                         .cornerRadius(26)
@@ -45,9 +45,8 @@ struct AddHabitsView: View {
                     Spacer()
                 }
             }
-            .navigationTitle("Novo Hábito")
             .navigationBarTitleDisplayMode(.inline)
-            .background(Color(.systemGray6))
+            .background(.backgroundSecondary)
             .toolbar{
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
@@ -56,6 +55,10 @@ struct AddHabitsView: View {
                         Image(systemName: "xmark")
                             .font(.body.weight(.semibold))
                     }
+                }
+                ToolbarItem(placement: .principal) {
+                    Text("Novo Hábito")
+                        .foregroundStyle(.labelPrimary)
                 }
             }
         }

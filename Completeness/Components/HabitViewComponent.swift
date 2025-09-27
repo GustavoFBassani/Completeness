@@ -33,7 +33,7 @@ struct HabitViewComponent: View {
         case true:
             return Color.indigoCustom
         case false:
-            return Color.white
+            return Color.textFieldBackground
         }
     }
     

@@ -71,6 +71,7 @@ struct Notification2Tests: View {
 //            .navigationTitle("Teste Notificação")
             .onAppear {
                 NotificationHelper.requestNotificationPermissions()
+                NotificationHelper.requestNotificationPermissionsBadge()
             }
         }
     }
@@ -81,7 +82,7 @@ struct Notification2Tests: View {
         let hour = calendar.component(.hour, from: selectedTime)
         let minute = calendar.component(.minute, from: selectedTime)
         
-        if UserDefaults.standard.bool(forKey: "dailyEnabled") {
+        if UserDefaults.standard.bool(forKey: "notificationEnabled") {
             NotificationHelper.scheduledDailyNotification(
                 title: notificationTitle,
                 body: notificationBody,

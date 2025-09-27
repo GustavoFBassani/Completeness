@@ -24,9 +24,9 @@ struct HabitView: View {
                 
                 Spacer()
                 
-                AddHabitButton {
-                    showingAddHabit = true
-                }
+//                AddHabitButton {
+//                    showingAddHabit = true
+//                }
             }
             .padding(.horizontal)
             
