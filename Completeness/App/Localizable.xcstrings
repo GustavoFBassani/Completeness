@@ -113,6 +113,9 @@
         }
       }
     },
+    "Acompanhe\nseu progresso" : {
+
+    },
     "Agendar Notificação" : {
       "localizations" : {
         "en" : {
@@ -122,6 +125,9 @@
           }
         }
       }
+    },
+    "Agora é \n com você!" : {
+
     },
     "Apagar dados" : {
       "localizations" : {
@@ -136,6 +142,9 @@
     "Aparência" : {
 
     },
+    "Aqui, cada pequeno hábito conta \n para grandes transformações." : {
+
+    },
     "Automático" : {
 
     },
@@ -143,6 +152,9 @@
 
     },
     "Avisos" : {
+
+    },
+    "Bem-vindo a \n sua nova rotina" : {
 
     },
     "Buscando dados..." : {
@@ -178,6 +190,9 @@
     "Começa em" : {
 
     },
+    "Começar" : {
+
+    },
     "Configurações" : {
       "localizations" : {
         "en" : {
@@ -187,6 +202,15 @@
           }
         }
       }
+    },
+    "Continuar" : {
+
+    },
+    "Criar meu primeiro hábito" : {
+
+    },
+    "Crie seu primeiro hábito e dê o \n primeiro passo para sua nova rotina." : {
+
     },
     "Data" : {
       "localizations" : {
@@ -406,9 +430,6 @@
         }
       }
     },
-    "Notif" : {
-
-    },
     "Notificação Hábito diário" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -484,6 +505,9 @@
       }
     },
     "Português" : {
+
+    },
+    "Pular" : {
 
     },
     "Quantas vezes" : {
@@ -632,6 +656,9 @@
           }
         }
       }
+    },
+    "Veja resumos semanais e gerais que mostram sua evolução" : {
+
     },
     "Ver mais" : {
 

@@ -28,7 +28,7 @@ struct TabBar: View {
             }
             Tab("Configurações", systemImage: "gearshape"){
                 NavigationStack{
-                    ConfigView()
+                    Onboarding1()
                 }
             }
         }
