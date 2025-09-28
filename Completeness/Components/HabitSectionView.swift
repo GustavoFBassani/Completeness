@@ -9,10 +9,12 @@ import SwiftUI
 
 struct HabitSectionView: View {
     let title: String
+    let rowPosition: Int
+    let colunmPosition: Int
     let habits: [PredefinedHabits]
-    @Bindable var viewModel: HabitsViewModel
     
     @State private var showMore = false
+    @Environment(\.modelContext) var context
     
     var body: some View {
         Text(title)
@@ -26,12 +28,13 @@ struct HabitSectionView: View {
             // lista de hábitos
             ForEach(showMore ? habits : Array(habits.prefix(3))) { habit in
                 NavigationLink {
-                    HabitsConfig( viewModel: viewModel,
-                                  title: title,
-                                  habitName: habit.habitName,
-                                  timesChoice: TimeOption.oneMinute,
-                                  completenessType: habit.completionType,
-                                  habitsSymbol: habit.habitSimbol)
+                    HabitsConfigView(viewModel: HabitConfigViewModel(habitName: habit.habitName,
+                                                                 habitsSymbol: habit.habitSimbol,
+                                                                 completenessType: habit.completionType,
+                                                                 habitRowPosition: rowPosition,
+                                                                 habitColunmPosition: colunmPosition,
+                                                                 habitService: HabitRepository(context: context),
+                                                                 newHabitDescription: ""))
                 } label: {
                     HStack {
                         Image(systemName: habit.habitSimbol)

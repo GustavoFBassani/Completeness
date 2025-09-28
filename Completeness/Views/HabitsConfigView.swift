@@ -24,35 +24,22 @@ enum DaysRepeation: String {
 
 import SwiftUI
 
-struct HabitsConfig: View {
+struct HabitsConfigView: View {
     var id: UUID?
-    @Bindable var viewModel: HabitsViewModel
+    @State var viewModel: HabitConfigViewModel
+    
+    //view variables
     var title = "Hábito Personalizado"
     let weekDays = ["S", "M", "T", "W", "T", "F", "S"]
-    @State var habitName = ""
     @State var timesChoice: TimeOption = .oneMinute
     @State var typeOfRepetition: DaysRepeation = .allDays
-    @State var selectedDays: [Int] = []
-    @State var howManyTimesToComplete = 1
-    @State var completenessType = CompletionHabit.byToggle
-    @State var habitsSymbol = "checkmark.circle"
-    
-    private func toggleSelection(for day: Int) {
-        if let index = selectedDays.firstIndex(of: day) {
-            selectedDays.remove(at: index)
-        } else {
-            selectedDays.append(day)
-            selectedDays.sort()
-        }
-    }
-    
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         NavigationStack {
                 Form {
                     Section {
-                        TextField("Ex: Tomar água", text: $habitName)
+                        TextField("Ex: Tomar água", text: $viewModel.habitName)
                     }   header: {
                         Text("Nome")
                             .font(.system(size: 22).bold())
@@ -68,7 +55,7 @@ struct HabitsConfig: View {
                     }
                     
                     Section {
-                        Picker(selection: $completenessType) {
+                        Picker(selection: $viewModel.completenessType) {
                             Text("Simples").tag(CompletionHabit.byToggle)
                             Text("Etapas").tag(CompletionHabit.byMultipleToggle)
                             Text("Tempo").tag(CompletionHabit.byTimer)
@@ -118,11 +105,11 @@ struct HabitsConfig: View {
                                         .frame(width: 40, height: 40)
                                         .background(
                                             Circle()
-                                                .fill(selectedDays.contains(day) ? Color.accentColor : Color.gray.opacity(0.2))
+                                                .fill(viewModel.selectedDays.contains(day) ? Color.accentColor : Color.gray.opacity(0.2))
                                         )
-                                        .foregroundColor(selectedDays.contains(day) ? .white : .primary)
+                                        .foregroundColor(viewModel.selectedDays.contains(day) ? .white : .primary)
                                         .onTapGesture {
-                                            toggleSelection(for: day)
+                                            viewModel.toggleSelection(for: day)
                                         }
                                 }
                             }
@@ -134,7 +121,7 @@ struct HabitsConfig: View {
                         }
                     }
                     
-                    if completenessType == .byMultipleToggle {
+                    if viewModel.completenessType == .byMultipleToggle {
                         Section {
                             HStack {
                                 Image(systemName: "numbers.rectangle")
@@ -150,7 +137,7 @@ struct HabitsConfig: View {
                                     return formatter
                                 }()
                                 
-                                TextField("", value: $howManyTimesToComplete, formatter: numberFormatter)
+                                TextField("", value: $viewModel.howManyTimesToComplete, formatter: numberFormatter)
                                     .keyboardType(.numberPad)
                                     .textFieldStyle(.roundedBorder)
                                     .frame(width: 60)
@@ -163,7 +150,7 @@ struct HabitsConfig: View {
                         }
                     }
                     
-                    if completenessType == .byTimer {
+                    if viewModel.completenessType == .byTimer {
                         Section {
                             Picker(selection: $timesChoice) {
                                 Text("1 min").tag(TimeOption.oneMinute)
@@ -196,10 +183,10 @@ struct HabitsConfig: View {
                         Section {
                             Button {
                                 viewModel.id = id
-                                Task { await viewModel.deleteHabitById() }
-                                dismiss()
-                                dismiss()
-                                
+                                Task { await viewModel.deleteHabitById()
+                                    dismiss()
+                                    dismiss()
+                                }
                             } label: {
                                 Text("Excluir hábito")
                                     .frame(maxWidth: .infinity)
@@ -251,28 +238,23 @@ struct HabitsConfig: View {
                 
                 ToolbarItem(placement: .confirmationAction) {
                     Button(action: {
-                        viewModel.newHabitName = habitName
-                        viewModel.completenessType = completenessType
-                        viewModel.howManyTimesToCompleteHabit = howManyTimesToComplete
                         if typeOfRepetition == .allDays {
-                            viewModel.newHabitDays = [1,2,3,4,5,6,7]
-                        } else {
-                            viewModel.newHabitDays = selectedDays
+                            viewModel.selectedDays = [1, 2, 3, 4, 5, 6, 7]
                         }
-                        viewModel.habitSymbol = habitsSymbol
-                        viewModel.howManySecondsToCompleteHabit = timesChoice.rawValue
+                        
+                        viewModel.timesChoice = timesChoice.rawValue
                         if let id {
-                            print(#file, #line, id)
                             viewModel.id = id
                         }
-                        Task { await viewModel.createNewHabit() }
-                        viewModel.newHabitDescription = ""
-                        dismiss()
-                        dismiss()
+                        Task { await viewModel.createNewHabit()
+                            viewModel.newHabitDescription = ""
+                            dismiss()
+                            dismiss()
+                        }
                     }, label: {
                         Image(systemName: "checkmark")
                     })
-                    .disabled(habitName.trimmingCharacters(in: .whitespaces) == "")
+                    .disabled(viewModel.habitName.trimmingCharacters(in: .whitespaces) == "")
                 }
             }
             .navigationBarBackButtonHidden()

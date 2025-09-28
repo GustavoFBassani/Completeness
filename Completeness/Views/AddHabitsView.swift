@@ -9,15 +9,15 @@ import SwiftUI
 
 struct AddHabitsView: View {
     @Environment(\.dismiss) var dismiss
-    
-    @Bindable var viewModel: HabitsViewModel
-    @State private var showPersonalizedHabits = false
+    let repositoryFactory: HabitRepositoryFactory
+    let rowPosition: Int
+    let colunmPosition: Int
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 NavigationLink {
-                    HabitsConfig(viewModel: viewModel)
+                    HabitsConfigView(viewModel: HabitConfigViewModel(habitService: repositoryFactory.makeHabitRepository()))
                 } label: {
                     Text("Hábito personalizado")
                         .foregroundColor(.labelPrimary)
@@ -30,18 +30,22 @@ struct AddHabitsView: View {
                 
                 VStack(spacing: 20) {
                     // Seções dinâmicas
-                    HabitSectionView(
-                        title: "Hábitos simples",
-                        habits: PredefinedHabits.allCases.filter { $0.completionType == .byToggle }, viewModel: viewModel
-                    )
+
+                    HabitSectionView(title: "Hábitos simples",
+                                     rowPosition: rowPosition,
+                                     colunmPosition: colunmPosition,
+                                     habits: PredefinedHabits.allCases.filter {
+                        $0.completionType == .byToggle })
                     HabitSectionView(
                         title: "Hábitos múltiplos",
-                        habits: PredefinedHabits.allCases.filter { $0.completionType == .byMultipleToggle }, viewModel: viewModel
-                    )
+                        rowPosition: rowPosition ,
+                        colunmPosition: colunmPosition,
+                        habits: PredefinedHabits.allCases.filter { $0.completionType == .byMultipleToggle })
                     HabitSectionView(
                         title: "Hábitos por tempo",
-                        habits: PredefinedHabits.allCases.filter { $0.completionType == .byTimer }, viewModel: viewModel
-                    )
+                        rowPosition: rowPosition,
+                        colunmPosition: colunmPosition,
+                        habits: PredefinedHabits.allCases.filter { $0.completionType == .byTimer })
                     Spacer()
                 }
             }

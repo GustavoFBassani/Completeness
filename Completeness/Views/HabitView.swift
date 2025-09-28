@@ -10,22 +10,25 @@ import SwiftData
 
 struct HabitView: View {
     @Bindable var viewModel: HabitsViewModel
-    @State private var showingAddHabit = false
-    @State private var showEditHabbit = false
     @State private var habbitToEdit: Habit?
+    struct Position: Identifiable {
+        init(row: Int, column: Int) {
+        self.row = row
+        self.column = column
+    }
+        let id = UUID()
+        let row: Int
+        let column: Int
+    }
+    @State private var createHabbitWithPosition: Position?
     @Binding var refreshView: Bool
     
+    let repositoryFactory: HabitRepositoryFactory
     
     func showHabitsRow(witch row: Int) -> some View {
-        var numberOfColunms: Int
+        let numberOfColunms = row.isMultiple(of: 2) ? 3 : 4
         
-        if row.isMultiple(of: 2) {
-            numberOfColunms = 3
-        } else {
-            numberOfColunms = 4
-        }
-        
-        return HStack(alignment: .center, spacing: 12) {
+          return HStack(alignment: .center, spacing: 12) {
             ForEach(1...numberOfColunms, id: \.self) { colunm in
                 if let habitWithPosition = viewModel.habits.first(where: {habit in
                     habit.valuePosition == row && habit.indicePosition == colunm &&
@@ -41,23 +44,36 @@ struct HabitView: View {
                             habbitToEdit = habitWithPosition
                             print(habitWithPosition.howManyTimesToToggle)
                         }
-                        .sheet(item: $habbitToEdit) { habit in
-                            HabitsConfig(id: habit.id,
-                                         viewModel: viewModel,
-                                         title: "Edit \(habit.habitName)",
-                                         habitName: habit.habitName,
-                                         timesChoice: TimeOption(rawValue: habit.howManySecondsToComplete) ?? TimeOption.oneMinute,
-                                         selectedDays: habit.scheduleDays,
-                                         howManyTimesToComplete: habit.howManyTimesToToggle,
-                                         completenessType: habit.habitCompleteness ?? CompletionHabit.byToggle,
-                                         habitsSymbol: habit.habitSimbol)
+                        .sheet(item: $habbitToEdit, onDismiss: {
+                            Task {
+                                await viewModel.loadData()
+                                refreshView.toggle()
+                            }
+                        }) { habit in
+                            HabitsConfigView(id: habit.id,
+                                         viewModel: HabitConfigViewModel(habitName: habit.habitName,
+                                                                         selectedDays: habit.scheduleDays,
+                                                                         habitsSymbol: habit.habitSimbol,
+                                                                         completenessType: habit.habitCompleteness ?? .byToggle,
+                                                                         timesChoice: habit.howManySecondsToComplete,
+                                                                         howManyTimesToComplete: habit.howManyTimesToToggle,
+                                                                         habitService: repositoryFactory.makeHabitRepository(),
+                                                                         newHabitDescription: habit.habitDescription)
+                            )
                         }
                 } else {
                     EmptyCircle()
                         .onTapGesture {
-                            viewModel.newValuePosition = row
-                            viewModel.newIndicePosition = colunm
-                            showingAddHabit = true
+                            createHabbitWithPosition = Position(row: row, column: colunm)
+                        }
+                        .sheet(item: $createHabbitWithPosition, onDismiss: {
+                            Task {
+                                await viewModel.loadData()
+                                refreshView.toggle()
+                            }
+                        }) { rowAndColunm in
+                            AddHabitsView(repositoryFactory: repositoryFactory, rowPosition: rowAndColunm.row,
+                                          colunmPosition: rowAndColunm.column)
                         }
                 }
             }
@@ -112,8 +128,5 @@ struct HabitView: View {
         .background(.backgroundSecondary)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .task { await viewModel.loadData() }
-        .sheet(isPresented: $showingAddHabit) {
-            AddHabitsView(viewModel: viewModel)
-        }
     }
 }

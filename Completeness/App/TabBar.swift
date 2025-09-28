@@ -17,7 +17,7 @@ struct TabBar: View {
             Tab("Hábitos", systemImage: "circle.hexagongrid"){
                 NavigationStack{
                     HabitView(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context),
-                                                         habitService: HabitRepository(context: context)), refreshView: $refreshView)
+                                                         habitService: HabitRepository(context: context)), refreshView: $refreshView, repositoryFactory: HabitRepositoryFactory(context: context))
                 }
             }
             
