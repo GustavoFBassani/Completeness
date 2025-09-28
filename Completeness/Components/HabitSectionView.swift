@@ -14,7 +14,9 @@ struct HabitSectionView: View {
     let habits: [PredefinedHabits]
     
     @State private var showMore = false
-    @Environment(\.modelContext) var context
+    
+//    let repositoryFactory: HabitRepositoryFactory
+    let configsVMFactory: HabitsConfigVMFactory
     
     var body: some View {
         Text(title)
@@ -28,13 +30,11 @@ struct HabitSectionView: View {
             // lista de hábitos
             ForEach(showMore ? habits : Array(habits.prefix(3))) { habit in
                 NavigationLink {
-                    HabitsConfigView(viewModel: HabitConfigViewModel(habitName: habit.habitName,
-                                                                 habitsSymbol: habit.habitSimbol,
-                                                                 completenessType: habit.completionType,
-                                                                 habitRowPosition: rowPosition,
-                                                                 habitColunmPosition: colunmPosition,
-                                                                 habitService: HabitRepository(context: context),
-                                                                 newHabitDescription: ""))
+                    HabitsConfigView(viewModel: configsVMFactory.createPredefinedHabits(habitName: habit.habitName,
+                                                                                        habitsSymbol: habit.habitSimbol,
+                                                                                        completenessType: habit.completionType,
+                                                                                        habitRowPosition: rowPosition,
+                                                                                        habitColunmPosition: colunmPosition))
                 } label: {
                     HStack {
                         Image(systemName: habit.habitSimbol)

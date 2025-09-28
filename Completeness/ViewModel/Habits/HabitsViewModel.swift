@@ -34,16 +34,7 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
     var textField = ""
     var filteredHabits: [Habit] = []
     
-    // MARK: - NEW HABIT
-    var completenessType: CompletionHabit = .byToggle
-    var howManyTimesToCompleteHabit = 1
-    var howManySecondsToCompleteHabit = 900
-    var newHabitName = " "
-    var newHabitDescription = ""
-    var newHabitDate = Date()
-    var newHabitDays: [Int] = []
-    var habitSymbol = ""
-    var id: UUID?
+    var createHabbitWithPosition: Position?
     
     init(habitCompletionService: HabitCompletionProtocol, habitService: HabitRepositoryProtocol) {
         self.habitCompletionService = habitCompletionService
@@ -60,7 +51,6 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
             state = .error
         }
     }
-        
     
     func completeHabit(habit: Habit, on date: Date) async {
         switch habit.habitCompleteness {
@@ -77,6 +67,12 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
     
     func editHabit() {
         habitService.saveChanges()
+    }
+    
+    @MainActor
+    func didTapHabit(_ habit: Habit) async {
+        await completeHabit(habit: habit, on: selectedDate)
+        await loadData()
     }
     
     @MainActor

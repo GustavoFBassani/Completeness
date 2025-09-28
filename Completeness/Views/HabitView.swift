@@ -11,24 +11,14 @@ import SwiftData
 struct HabitView: View {
     @Bindable var viewModel: HabitsViewModel
     @State private var habbitToEdit: Habit?
-    struct Position: Identifiable {
-        init(row: Int, column: Int) {
-        self.row = row
-        self.column = column
-    }
-        let id = UUID()
-        let row: Int
-        let column: Int
-    }
-    @State private var createHabbitWithPosition: Position?
     @Binding var refreshView: Bool
     
-    let repositoryFactory: HabitRepositoryFactory
+    let configsVMFactory: HabitsConfigVMFactory
     
     func showHabitsRow(witch row: Int) -> some View {
         let numberOfColunms = row.isMultiple(of: 2) ? 3 : 4
         
-          return HStack(alignment: .center, spacing: 12) {
+        return HStack(alignment: .center, spacing: 12) {
             ForEach(1...numberOfColunms, id: \.self) { colunm in
                 if let habitWithPosition = viewModel.habits.first(where: {habit in
                     habit.valuePosition == row && habit.indicePosition == colunm &&
@@ -36,7 +26,7 @@ struct HabitView: View {
                     HabitViewComponent(habit: habitWithPosition, refreshView: refreshView, day: viewModel.selectedDate)
                         .onTapGesture {
                             Task {
-                                await viewModel.completeHabit(habit: habitWithPosition, on: viewModel.selectedDate)
+                                await viewModel.didTapHabit(habitWithPosition)
                                 refreshView.toggle()
                             }
                         }
@@ -51,28 +41,28 @@ struct HabitView: View {
                             }
                         }) { habit in
                             HabitsConfigView(id: habit.id,
-                                         viewModel: HabitConfigViewModel(habitName: habit.habitName,
-                                                                         selectedDays: habit.scheduleDays,
-                                                                         habitsSymbol: habit.habitSimbol,
-                                                                         completenessType: habit.habitCompleteness ?? .byToggle,
-                                                                         timesChoice: habit.howManySecondsToComplete,
-                                                                         howManyTimesToComplete: habit.howManyTimesToToggle,
-                                                                         habitService: repositoryFactory.makeHabitRepository(),
-                                                                         newHabitDescription: habit.habitDescription)
-                            )
+                                             viewModel: configsVMFactory.editHabits(
+                                                habitName: habit.habitName,
+                                                scheduleDays: habit.scheduleDays,
+                                                habitSimbol: habit.habitSimbol,
+                                                habitCompleteness: habit.habitCompleteness,
+                                                howManySecondsToComplete: habit.howManySecondsToComplete,
+                                                howManyTimesToToggle: habit.howManyTimesToToggle,
+                                                habitDescription: habit.habitDescription))
                         }
                 } else {
                     EmptyCircle()
                         .onTapGesture {
-                            createHabbitWithPosition = Position(row: row, column: colunm)
+                            viewModel.createHabbitWithPosition = Position(row: row, column: colunm)
                         }
-                        .sheet(item: $createHabbitWithPosition, onDismiss: {
+                        .sheet(item: $viewModel.createHabbitWithPosition, onDismiss: {
                             Task {
                                 await viewModel.loadData()
                                 refreshView.toggle()
                             }
                         }) { rowAndColunm in
-                            AddHabitsView(repositoryFactory: repositoryFactory, rowPosition: rowAndColunm.row,
+                            AddHabitsView(configsVMFactory: configsVMFactory,
+                                          rowPosition: rowAndColunm.row,
                                           colunmPosition: rowAndColunm.column)
                         }
                 }

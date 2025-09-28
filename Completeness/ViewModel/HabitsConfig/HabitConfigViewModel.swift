@@ -35,15 +35,13 @@ class HabitConfigViewModel {
          completenessType: CompletionHabit,
          habitRowPosition: Int,
          habitColunmPosition: Int,
-         habitService: HabitRepository,
-         newHabitDescription: String) {
+         habitService: HabitRepository) {
         self.habitName = habitName
         self.habitsSymbol = habitsSymbol
         self.completenessType = completenessType
         self.habitRowPosition = habitRowPosition
         self.habitColunmPosition = habitColunmPosition
         self.habitService = habitService
-        self.newHabitDescription = newHabitDescription
     }
     
     //create personalized habits
@@ -56,8 +54,8 @@ class HabitConfigViewModel {
          completenessType: CompletionHabit = .byToggle,
          timesChoice: Int = 0,
          howManyTimesToComplete: Int = 1,
-         habitRowPosition: Int = 0,
-         habitColunmPosition: Int = 0,
+         habitRowPosition: Int ,
+         habitColunmPosition: Int ,
          newHabitDate: Date = Date(),
          habitService: HabitRepositoryProtocol) {
 //        self.habits = habits

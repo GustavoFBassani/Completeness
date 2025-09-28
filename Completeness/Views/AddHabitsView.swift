@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddHabitsView: View {
     @Environment(\.dismiss) var dismiss
-    let repositoryFactory: HabitRepositoryFactory
+    let configsVMFactory: HabitsConfigVMFactory
     let rowPosition: Int
     let colunmPosition: Int
     
@@ -17,7 +17,7 @@ struct AddHabitsView: View {
         NavigationStack {
             ScrollView {
                 NavigationLink {
-                    HabitsConfigView(viewModel: HabitConfigViewModel(habitService: repositoryFactory.makeHabitRepository()))
+                    HabitsConfigView(viewModel: configsVMFactory.createPersonalizedHabits(rowPosition: rowPosition, colunmPosition: colunmPosition))
                 } label: {
                     Text("Hábito personalizado")
                         .foregroundColor(.labelPrimary)
@@ -30,22 +30,24 @@ struct AddHabitsView: View {
                 
                 VStack(spacing: 20) {
                     // Seções dinâmicas
-
+                    
                     HabitSectionView(title: "Hábitos simples",
                                      rowPosition: rowPosition,
                                      colunmPosition: colunmPosition,
-                                     habits: PredefinedHabits.allCases.filter {
-                        $0.completionType == .byToggle })
+                                     habits: PredefinedHabits.allCases.filter { $0.completionType == .byToggle },
+                                     configsVMFactory: configsVMFactory)
                     HabitSectionView(
                         title: "Hábitos múltiplos",
-                        rowPosition: rowPosition ,
+                        rowPosition: rowPosition,
                         colunmPosition: colunmPosition,
-                        habits: PredefinedHabits.allCases.filter { $0.completionType == .byMultipleToggle })
+                        habits: PredefinedHabits.allCases.filter { $0.completionType == .byMultipleToggle },
+                        configsVMFactory: configsVMFactory)
                     HabitSectionView(
                         title: "Hábitos por tempo",
                         rowPosition: rowPosition,
                         colunmPosition: colunmPosition,
-                        habits: PredefinedHabits.allCases.filter { $0.completionType == .byTimer })
+                        habits: PredefinedHabits.allCases.filter { $0.completionType == .byTimer },
+                        configsVMFactory: configsVMFactory)
                     Spacer()
                 }
             }
