@@ -14,8 +14,57 @@ struct HabitView: View {
     @State private var showEditHabbit = false
     @State private var habbitToEdit: Habit?
     @Binding var refreshView: Bool
-
-
+    
+    
+    func showHabitsRow(witch row: Int) -> some View {
+        var numberOfColunms: Int
+        
+        if row.isMultiple(of: 2) {
+            numberOfColunms = 3
+        } else {
+            numberOfColunms = 4
+        }
+        
+        return HStack(alignment: .center, spacing: 12) {
+            ForEach(1...numberOfColunms, id: \.self) { colunm in
+                if let habitWithPosition = viewModel.habits.first(where: {habit in
+                    habit.valuePosition == row && habit.indicePosition == colunm &&
+                    viewModel.filteredHabits.contains(habit) }) {
+                    HabitViewComponent(habit: habitWithPosition, refreshView: refreshView, day: viewModel.selectedDate)
+                        .onTapGesture {
+                            Task {
+                                await viewModel.completeHabit(habit: habitWithPosition, on: viewModel.selectedDate)
+                                refreshView.toggle()
+                            }
+                        }
+                        .onLongPressGesture {
+                            habbitToEdit = habitWithPosition
+                            print(habitWithPosition.howManyTimesToToggle)
+                        }
+                        .sheet(item: $habbitToEdit) { habit in
+                            HabitsConfig(id: habit.id,
+                                         viewModel: viewModel,
+                                         title: "Edit \(habit.habitName)",
+                                         habitName: habit.habitName,
+                                         timesChoice: TimeOption(rawValue: habit.howManySecondsToComplete) ?? TimeOption.oneMinute,
+                                         selectedDays: habit.scheduleDays,
+                                         howManyTimesToComplete: habit.howManyTimesToToggle,
+                                         completenessType: habit.habitCompleteness ?? CompletionHabit.byToggle,
+                                         habitsSymbol: habit.habitSimbol)
+                        }
+                } else {
+                    EmptyCircle()
+                        .onTapGesture {
+                            viewModel.newValuePosition = row
+                            viewModel.newIndicePosition = colunm
+                            showingAddHabit = true
+                        }
+                }
+            }
+        }
+    }
+    
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -24,9 +73,9 @@ struct HabitView: View {
                 
                 Spacer()
                 
-//                AddHabitButton {
-//                    showingAddHabit = true
-//                }
+                //                AddHabitButton {
+                //                    showingAddHabit = true
+                //                }
             }
             .padding(.horizontal)
             
@@ -43,87 +92,8 @@ struct HabitView: View {
             case .loaded:
                 ScrollView([.horizontal, .vertical]) {
                     VStack(spacing: 20) {
-                        ForEach(1...4, id: \.self) { indice in
-                            if indice.isMultiple(of: 2) {
-                                HStack(alignment: .center, spacing: 12) {
-                                    ForEach(1...3, id: \.self) { value in
-                                        if let habitWithPosition = viewModel.habits.first(where: {habit in
-                                            habit.valuePosition == value && habit.indicePosition == indice &&
-                                            viewModel.filteredHabits.contains(habit) }) {
-                                            HabitViewComponent(habit: habitWithPosition, refreshView: refreshView, day: viewModel.selectedDate)
-                                                .onTapGesture {
-                                                    //print(#file, #line, ObjectIdentifier(habitWithPosition))
-                                                    Task {
-                                                        await viewModel.completeHabit(habit: habitWithPosition, on: viewModel.selectedDate)
-                                                        refreshView.toggle()
-                                                    }
-                                                }
-                                                .onLongPressGesture {
-                                                    habbitToEdit = habitWithPosition
-                                                    print(habitWithPosition.howManyTimesToToggle)
-                                                }
-                                                .sheet(item: $habbitToEdit) { habit in
-                                                    HabitsConfig(id: habit.id,
-                                                        viewModel: viewModel,
-                                                                  title: "Edit \(habit.habitName)",
-                                                                  habitName: habit.habitName,
-                                                                  timesChoice: TimeOption(rawValue: habit.howManySecondsToComplete) ?? TimeOption.oneMinute,
-                                                                 selectedDays: habit.scheduleDays,
-                                                                  howManyTimesToComplete: habit.howManyTimesToToggle,
-                                                                  completenessType: habit.habitCompleteness ?? CompletionHabit.byToggle,
-                                                                  habitsSymbol: habit.habitSimbol)
-                                                }
-                                        } else {
-                                            EmptyCircle()
-                                                .onTapGesture {
-                                                    viewModel.newValuePosition = value
-                                                    viewModel.newIndicePosition = indice
-                                                    showingAddHabit = true
-                                                }
-                                        }
-                                    }
-                                }
-                            } else {
-                                HStack(alignment: .center, spacing: 12) {
-                                    ForEach(1...4, id: \.self) { value in
-                                        if let habitWithPosition = viewModel.habits.first(where: {habit in
-                                            habit.valuePosition == value && habit.indicePosition == indice &&
-                                            viewModel.filteredHabits.contains(habit) }) {
-                                            HabitViewComponent(habit: habitWithPosition, refreshView: refreshView, day: viewModel.selectedDate)
-                                                .onTapGesture {
-                                                    Task {
-                                                        await viewModel.completeHabit(habit: habitWithPosition, on: viewModel.selectedDate)
-                                                        
-                                                        refreshView.toggle()
-                                                    }
-                                                }
-                                                .onLongPressGesture {
-                                                    habbitToEdit = habitWithPosition
-                                                    print(#file, #line, habitWithPosition.id)
-                                                    print(habitWithPosition.howManyTimesToToggle)
-                                                }
-                                                .sheet(item: $habbitToEdit) { habit in
-                                                    HabitsConfig( id: habit.id,
-                                                        viewModel: viewModel,
-                                                                  title: "Edit \(habit.habitName)",
-                                                                  habitName: habit.habitName,
-                                                                  timesChoice: TimeOption(rawValue: habit.howManySecondsToComplete) ?? TimeOption.oneMinute,
-                                                                  selectedDays: habit.scheduleDays,
-                                                                  howManyTimesToComplete: habit.howManyTimesToToggle,
-                                                                  completenessType: habit.habitCompleteness ?? CompletionHabit.byToggle,
-                                                                  habitsSymbol: habit.habitSimbol)
-                                                }
-                                        } else {
-                                            EmptyCircle()
-                                                .onTapGesture {
-                                                    viewModel.newValuePosition = value
-                                                    viewModel.newIndicePosition = indice
-                                                    showingAddHabit = true
-                                                }
-                                        }
-                                    }
-                                }
-                            }
+                        ForEach(1...4, id: \.self) { row in
+                            showHabitsRow(witch: row)
                         }
                     }
                     .padding(.vertical, 16)
@@ -135,28 +105,15 @@ struct HabitView: View {
                 EmptyView()
             }
         }
-        //gpt
         .onAppear {
             viewModel.selectedDate = Calendar.current.startOfDay(for: Date())
         }
-
+        
         .background(.backgroundSecondary)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .task { await viewModel.loadData() }
-//        .sheet(isPresented: $showingAddHabit) {
-//            AddHabitView(
-//                isPresented: $showingAddHabit,
-//                newHabitName: $viewModel.newHabitName,
-//                newHabitDate: $viewModel.selectedDate,
-//                selectedDays: $viewModel.newHabitDays
-//            ) {
-//                viewModel.createNewHabit()
-//                showingAddHabit = false
-//            }
-//        }
         .sheet(isPresented: $showingAddHabit) {
-                AddHabitsView(viewModel: viewModel)
+            AddHabitsView(viewModel: viewModel)
         }
     }
 }
-

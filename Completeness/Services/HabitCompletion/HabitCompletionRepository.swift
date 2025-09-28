@@ -113,12 +113,20 @@ class HabitCompletionRepository: HabitCompletionProtocol {
         }
     }
     
+    private var isRunning: [UUID: Bool] = [:]
     
     @MainActor
     func completeByTimer(id: UUID, on date: Date) async {
         guard let habitToChange = await getHabitById(id: id) else { return }
         let targetDay = Calendar.current.startOfDay(for: date)
         
+        if isRunning[id] == true {
+            isRunning[id] = false
+            return
+        }
+        
+        isRunning[id] = true
+
         // se existir habitLog no dia
         if let habitLog = habitToChange.habitLogs?.first(where: { Calendar.current.isDate($0.completionDate, inSameDayAs: targetDay) }) {
             print("entrou no habitLog")
@@ -130,14 +138,17 @@ class HabitCompletionRepository: HabitCompletionProtocol {
             } else {
                 // se não está completo
                 Task { @MainActor in
-                    while habitLog.secondsElapsed < habitToChange.howManySecondsToComplete {
+                    while habitLog.secondsElapsed < habitToChange.howManySecondsToComplete && isRunning[id] == true {
                         try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 segundo
                         habitLog.secondsElapsed += 1
                         try? context.save()
                     }
                     
-                    habitLog.isCompleted = true
-                    try? context.save()
+                    if habitLog.secondsElapsed == habitToChange.howManySecondsToComplete  {
+                        habitLog.isCompleted = true
+                        try? context.save()
+                    }
+                    isRunning[id] = false
                 }
             }
         } else {
@@ -148,15 +159,18 @@ class HabitCompletionRepository: HabitCompletionProtocol {
             habitToChange.habitLogs = logs
             
             Task { @MainActor in
-                while newLog.secondsElapsed < habitToChange.howManySecondsToComplete {
+                while newLog.secondsElapsed < habitToChange.howManySecondsToComplete && isRunning[id] == true {
                     try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 segundo
                     newLog.secondsElapsed += 1
                     try? context.save()
                 }
                 
                 // Completar o hábito
-                newLog.isCompleted = true
-                try? context.save()
+                if newLog.secondsElapsed == habitToChange.howManySecondsToComplete {
+                    newLog.isCompleted = true
+                    try? context.save()
+                }
+                isRunning[id] = false
             }
         }
     }

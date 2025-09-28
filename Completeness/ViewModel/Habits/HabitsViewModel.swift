@@ -63,6 +63,7 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
         }
     }
     
+    // isso aqui nao era pra ta aqui
     func createNewHabit() async {
         guard !newHabitName.isEmpty else { return }
         
