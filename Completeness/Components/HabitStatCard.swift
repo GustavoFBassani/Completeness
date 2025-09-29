@@ -54,10 +54,10 @@ struct HabitStatCard: View {
                     let count = habitCartType == .mostDone ? (mostCompletedHabit.habitLogs?.count ?? 0) : (leastCompletedHabit.habitLogs?.count ?? 0)
                     
                     ZStack {
-                        Text("\(viewModel.totalHabitsCompleted) habitos feitos")
+                        Text("Hábito feito \(count) vezes")
                             .font(.subheadline.bold())
                             .foregroundStyle(.whiteCustom)
-                            .padding(.horizontal, 35.5)
+                            .padding(.horizontal, 25)
                             .padding(.vertical, 7.49)
                     }
                     .background(
