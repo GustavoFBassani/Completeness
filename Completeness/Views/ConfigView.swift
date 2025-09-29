@@ -4,6 +4,7 @@
 //
 //  Created by Gustavo Ferreira bassani on 15/09/25.
 //
+
 import SwiftUI
 import SwiftData
 
@@ -59,7 +60,9 @@ struct ConfigView: View {
                         }
                     }
                     ))
+                    .tint(.green)
                 }
+                
                 
                 HStack {
                     Image(systemName: "paintpalette.fill")
@@ -85,11 +88,37 @@ struct ConfigView: View {
                         .foregroundStyle(.indigoCustom)
                     Toggle("Avisos", isOn: $badgeEnabled)
                 }
+                .tint(.green)
+                
                 HStack {
                     Image(systemName: "bell.badge")
                         .foregroundStyle(.indigoCustom)
-                    Toggle("Permitir notificações", isOn: $notificationEnabled)
+                    Toggle("Permitir notificações", isOn: Binding(
+                        get: { notificationEnabled },
+                        set: { newValue in
+                            Task {
+                                if newValue {
+                                    let granted = await NotificationHelper.shared.requestNotificationPermissions()
+                                    if !granted {
+                                        // Reverte a chave se o usuário negar
+                                        notificationEnabled = false
+                                        errorMessage = "Permissão de notificação negada nas Configurações do sistema."
+                                        showError = true
+                                    } else {
+                                        notificationEnabled = true
+                                        // Garante que sejamos delegate para controlar apresentação em primeiro plano
+                                        NotificationHelper.shared.setDelegate()
+                                    }
+                                } else {
+                                    notificationEnabled = false
+                                    NotificationHelper.shared.stopAllNotifications()
+                                    try? await UNUserNotificationCenter.current().setBadgeCount(0)
+                                }
+                            }
+                        }
+                    ))
                 }
+                .tint(.green)
             }
         
             Section(header: Text("Sobre nós")) {
@@ -136,6 +165,7 @@ struct ConfigView: View {
             }
         }
         .navigationTitle("Configurações")
+        .onAppear { NotificationHelper.shared.setDelegate() }
         .alert("Erro", isPresented: $showError) {
             Button("OK", role: .cancel) {}
         } message: {
@@ -146,8 +176,6 @@ struct ConfigView: View {
         }
     }
 }
-
-
 
 struct PrivacyPolicyView: View {
     @Environment(\.dismiss) var dismiss

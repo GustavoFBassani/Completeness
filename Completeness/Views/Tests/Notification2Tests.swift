@@ -68,10 +68,11 @@ struct Notification2Tests: View {
                 .padding(.horizontal)
                 Spacer()
             }
-//            .navigationTitle("Teste Notificação")
-            .onAppear {
-                NotificationHelper.requestNotificationPermissions()
-                NotificationHelper.requestNotificationPermissionsBadge()
+            .task {
+                let granted = await NotificationHelper.shared.requestNotificationPermissions()
+                if granted {
+                    NotificationHelper.shared.setDelegate()
+                }
             }
         }
     }
@@ -82,15 +83,13 @@ struct Notification2Tests: View {
         let hour = calendar.component(.hour, from: selectedTime)
         let minute = calendar.component(.minute, from: selectedTime)
         
-        if UserDefaults.standard.bool(forKey: "notificationEnabled") {
-            NotificationHelper.scheduledDailyNotification(
+        NotificationHelper.shared.scheduledDailyNotification(
                 title: notificationTitle,
                 body: notificationBody,
                 hour: hour,
                 minute: minute,
                 weekdays: Array(selectedWeekdays)
             )
-        }
     }
 }
 
@@ -117,3 +116,4 @@ struct MultipleSelectionRow: View {
 #Preview {
     Notification2Tests()
 }
+

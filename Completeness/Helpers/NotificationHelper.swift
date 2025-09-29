@@ -7,129 +7,156 @@
 
 import Foundation
 import UserNotifications
+import UIKit
 
-/// Function to request notification permission.
-/// This should be called inside `.onAppear` of the screen
-/// where the notification will be scheduled to fire.
-struct NotificationHelper {
-    static func requestNotificationPermissions() {
-        UNUserNotificationCenter.current().requestAuthorization(
-            options: [.alert, .sound]
-        ) { granted, error in
-            if granted {
-                print("Notification permission granted.")
-            } else {
-                print("Notification permission denied.")
-            }
+final class NotificationHelper: NSObject, UNUserNotificationCenterDelegate {
+    static let shared = NotificationHelper()
+    
+    private let center = UNUserNotificationCenter.current()
+    private let enabledKey = "notificationEnabled"
+    private let badgeKey = "badgeEnabled"
+    private let permissionKey = "notificationPermissionGranted"
+
+    override private init() {
+        super.init()
+        center.delegate = self
+    }
+
+    // MARK: - UserDefaults Helpers
+    var isEnabled: Bool {
+        UserDefaults.standard.bool(forKey: enabledKey)
+    }
+    
+    var isPermissionGranted: Bool {
+        UserDefaults.standard.bool(forKey: permissionKey)
+    }
+
+    var isBadgeEnabled: Bool {
+        UserDefaults.standard.bool(forKey: badgeKey)
+    }
+
+    // MARK: - Permissions
+    @discardableResult
+    func requestNotificationPermissions() async -> Bool {
+        do {
+            let granted = try await center.requestAuthorization(options: [.alert, .sound, .badge])
+            UserDefaults.standard.set(granted, forKey: permissionKey)
+            print("Notificações permitidas")
+            return granted
+        } catch {
+            UserDefaults.standard.set(false, forKey: permissionKey)
+            print("Notificações desabilitadas")
+            return false
         }
     }
 
-    static func requestNotificationPermissionsBadge() {
-        UNUserNotificationCenter.current().requestAuthorization(
-            options: [.badge]
-        ) { granted, error in
-            if granted {
-                print("Badge permission granted.")
-            } else {
-                print("Badge permission denied.")
-            }
-        }
+    func setDelegate() {
+        center.delegate = self
     }
+
+    // MARK: - Scheduling
+
     /// Function that schedules a notification based on a countdown.
-    static func regressiveNotification(
+    func regressiveNotification(
         title: String,
         body: String,
         timeInterval: TimeInterval
     ) {
-        let content = UNMutableNotificationContent()
-        content.title = title
-        content.body = body
-        content.sound = UNNotificationSound.default
-        content.launchImageName = "LaunchImage"
-        content.badge = 1 as NSNumber
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
-        let request = UNNotificationRequest(
-            identifier: UUID().uuidString,
-            content: content,
-            trigger: trigger
-        )
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                print("Error scheduling notification: \(error)")
-            } else {
-                print(">>> Notification scheduled.")
-            }
-        }
+        guard isEnabled else { return }
+
+        let content = makeContent(title: title, body: body)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: max(1, timeInterval), repeats: false)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        print("Notificação de contagem regressiva agendada")
+        center.add(request, withCompletionHandler: nil)
     }
+
     /// Function that schedules a daily notification.
     /// If no weekdays are provided, it schedules daily without restrictions.
-    static func scheduledDailyNotification(
+    func scheduledDailyNotification(
         title: String,
         body: String,
         hour: Int,
         minute: Int,
         weekdays: [Int] = []
     ) {
-        let content = UNMutableNotificationContent()
-        content.title = title
-        content.body = body
-        content.sound = UNNotificationSound.default
-        content.badge = 1
+        guard isEnabled else { return }
 
-        // If no weekdays are provided, schedule daily without weekday restriction
+        let content = makeContent(title: title, body: body)
+
         if weekdays.isEmpty {
-            var dateComponents = DateComponents()
-            dateComponents.hour = hour
-            dateComponents.minute = minute
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-            let request = UNNotificationRequest(
-                identifier: UUID().uuidString,
-                content: content,
-                trigger: trigger
-            )
-            UNUserNotificationCenter.current().add(request) { error in
-                if let error = error {
-                    print("Error scheduling notification: \(error)")
-                } else {
-                    print(">>> Daily notification scheduled.")
-                }
-            }
+            var comps = DateComponents()
+            comps.hour = hour
+            comps.minute = minute
+            let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: true)
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            print("Notificação diária agendada")
+            center.add(request, withCompletionHandler: nil)
         } else {
-            // For each weekday, create a schedule
             weekdays.forEach { wk in
-                var dateComponents = DateComponents()
-                dateComponents.hour = hour
-                dateComponents.minute = minute
-                dateComponents.weekday = wk // 1 = Sunday, 2 = Monday, ... 7 = Saturday
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-                let request = UNNotificationRequest(
-                    identifier: UUID().uuidString,
-                    content: content,
-                    trigger: trigger
-                )
-                UNUserNotificationCenter.current().add(request) { error in
-                    if let error = error {
-                        print("Error scheduling notification for weekday \(wk): \(error)")
-                    } else {
-                        print(">>> Notification scheduled for weekday \(wk).")
-                    }
-                }
+                var comps = DateComponents()
+                comps.hour = hour
+                comps.minute = minute
+                comps.weekday = wk
+                let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: true)
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                print("Notificação agendada para o dia \(wk)")
+                center.add(request, withCompletionHandler: nil)
             }
         }
     }
-    
-    static func scheduledOneTimeNotification(
+
+    /// Function that schedules a one-time notification at specific time (today).
+    func scheduledOneTimeNotification(
         title: String,
         body: String,
         hour: Int,
         minute: Int
     ) {
-        var dateComponents = DateComponents()
-        dateComponents.hour = hour
-        dateComponents.minute = minute
+        guard isEnabled else { return }
+
+        var comps = DateComponents()
+        comps.hour = hour
+        comps.minute = minute
+
+        let content = makeContent(title: title, body: body)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        print("Notificação única agendada")
+        center.add(request, withCompletionHandler: nil)
     }
-    
-    static func stopAllNotifications() {
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+
+    /// Remove all pending and delivered notifications.
+    func stopAllNotifications() {
+        center.removeAllPendingNotificationRequests()
+        center.removeAllDeliveredNotifications()
+    }
+
+    // MARK: - Helpers
+    private func makeContent(title: String, body: String) -> UNMutableNotificationContent {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        if isBadgeEnabled {
+            let current = UIApplication.shared.applicationIconBadgeNumber
+            content.badge = NSNumber(value: max(0, current) + 1)
+        }
+        content.sound = .default
+        return content
+    }
+
+    // MARK: - UNUserNotificationCenterDelegate
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        guard isEnabled && isPermissionGranted else {
+            completionHandler([])
+            return
+        }
+        var options: UNNotificationPresentationOptions = [.sound, .banner, .list]
+        if isBadgeEnabled {
+            options.insert(.badge)
+        }
+        completionHandler(options)
     }
 }

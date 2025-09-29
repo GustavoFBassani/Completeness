@@ -40,8 +40,11 @@ struct notificationTest: View {
                     .padding(.horizontal)
             }
         }
-        .onAppear {
-            NotificationHelper.requestNotificationPermissions()
+        .task {
+            let granted = await NotificationHelper.shared.requestNotificationPermissions()
+            if granted {
+                NotificationHelper.shared.setDelegate()
+            }
         }
     }
 
@@ -50,7 +53,7 @@ struct notificationTest: View {
         if UserDefaults.standard.bool(forKey: "notificationEnabled"){
             if let time = Int(intervalText), time > 0 {
                 interval = time
-                NotificationHelper.regressiveNotification(
+                NotificationHelper.shared.regressiveNotification(
                     title: notificationTitle,
                     body: notificationBody,
                     timeInterval: TimeInterval(interval)
@@ -66,3 +69,4 @@ struct notificationTest: View {
 #Preview() {
     notificationTest()
 }
+
