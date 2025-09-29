@@ -7,6 +7,16 @@
 
 import Foundation
 import SwiftData
+
+struct Position: Identifiable {
+    init(row: Int, column: Int) {
+    self.row = row
+    self.column = column
+}
+    let id = UUID()
+    let row: Int
+    let column: Int
+}
  
 @Model
 final class Habit: Identifiable/*, Sendable*/ {

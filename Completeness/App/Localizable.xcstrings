@@ -24,6 +24,16 @@
     "%lld habitos feitos" : {
 
     },
+    "%lld/%lld" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld"
+          }
+        }
+      }
+    },
     "🏆 Hábitos Mais Concluídos" : {
       "localizations" : {
         "en" : {
@@ -194,6 +204,7 @@
       }
     },
     "Avisos" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -246,10 +257,10 @@
         }
       }
     },
-    "Conclua sua primeira semana de hábitos e você verá o resumo sobre sua evolução aqui." : {
+    "Completar" : {
 
     },
-    "Completar" : {
+    "Conclua sua primeira semana de hábitos e você verá o resumo sobre sua evolução aqui." : {
 
     },
     "Configurações" : {
@@ -335,6 +346,9 @@
         }
       }
     },
+    "Em breve" : {
+
+    },
     "Erro" : {
       "localizations" : {
         "en" : {
@@ -416,6 +430,9 @@
           }
         }
       }
+    },
+    "Excluir hábito" : {
+
     },
     "Exemplo" : {
       "localizations" : {
@@ -531,6 +548,7 @@
       }
     },
     "Idioma" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -541,6 +559,7 @@
       }
     },
     "Inglês" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -549,6 +568,9 @@
           }
         }
       }
+    },
+    "Iniciar tempo" : {
+
     },
     "Meta" : {
       "localizations" : {
@@ -581,6 +603,7 @@
       }
     },
     "Nenhum hábito para este dia" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -632,6 +655,7 @@
       }
     },
     "Notificações" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -672,6 +696,7 @@
       }
     },
     "Permitir notificações" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -712,6 +737,7 @@
       }
     },
     "Português" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -782,6 +808,7 @@
       }
     },
     "Semanalmente" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -880,9 +907,6 @@
           }
         }
       }
-    },
-    "teste" : {
-
     },
     "Tipo de Completude" : {
       "localizations" : {
