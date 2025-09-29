@@ -30,7 +30,7 @@ struct HabitsConfigView: View {
     
     //view variables
     var title = "Hábito Personalizado"
-    let weekDays = ["S", "M", "T", "W", "T", "F", "S"]
+    let weekDays = ["D", "S", "T", "Q", "Q", "S", "S"]
     @State var timesChoice: TimeOption = .oneMinute
     @State var typeOfRepetition: DaysRepeation = .allDays
     @Environment(\.dismiss) private var dismiss
