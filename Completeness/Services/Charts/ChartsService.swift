@@ -112,7 +112,6 @@ class ChartsService: ChartsServiceProtocol {
     /// - Parameter days: The period to analyze.
     /// - Returns: A `Int` representing the total of habits marked as done.
     func getNumberOfHabbitsCompleted(inLastDays days: Int)  async -> Int{
-        
         guard let allHabits = await fetchAllHabbits(), !allHabits.isEmpty else { return 0}
         
         let today = Calendar.current.startOfDay(for: Date())

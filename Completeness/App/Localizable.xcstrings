@@ -11,6 +11,9 @@
         }
       }
     },
+    "%.0f%%" : {
+
+    },
     "%lld" : {
       "localizations" : {
         "en" : {
@@ -150,6 +153,9 @@
     "Acompanhe\nseu progresso" : {
 
     },
+    "Acompanhe seu progresso semanal" : {
+
+    },
     "Agendar Notificação" : {
       "localizations" : {
         "en" : {
@@ -244,9 +250,6 @@
         }
       }
     },
-    "Carregando estatísticas..." : {
-
-    },
     "Claro" : {
       "localizations" : {
         "en" : {
@@ -267,13 +270,13 @@
         }
       }
     },
+    "Começar" : {
+
+    },
     "Completar" : {
 
     },
     "Conclua sua primeira semana de hábitos e você verá o resumo sobre sua evolução aqui." : {
-
-    },
-    "Começar" : {
 
     },
     "Configurações" : {
@@ -367,9 +370,6 @@
           }
         }
       }
-    },
-    "Em breve" : {
-
     },
     "Erro" : {
       "localizations" : {
@@ -515,9 +515,6 @@
           }
         }
       }
-    },
-    "Hábito feito %lld vezes" : {
-
     },
     "Hábito mais feito" : {
 
@@ -796,7 +793,6 @@
       }
     },
     "Resumo" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

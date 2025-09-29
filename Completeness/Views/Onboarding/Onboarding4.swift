@@ -57,7 +57,7 @@ struct Onboarding4: View {
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 40)
                         
-                        NavigationLink(destination: AddNewHabit()) {
+                        NavigationLink(destination: TabBar()) {
                             Text("Criar meu primeiro hábito")
                                 .font(.headline)
                                 .foregroundColor(.white)
