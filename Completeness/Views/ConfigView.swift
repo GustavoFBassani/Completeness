@@ -21,22 +21,23 @@ struct ConfigView: View {
     var body: some View {
         Form {
             Section(header: Text("Geral")) {
-                HStack {
-                    Image(systemName: "flag.fill")
-                        .foregroundStyle(.indigoCustom)
-                    Text("Idioma")
-
-                    Spacer()
-
-                    Picker("", selection: $selectedLanguage) {
-                        Text("Português").tag("pt")
-                        Text("Inglês").tag("en")
-                    }
-                    .foregroundStyle(.labelSecondary)
-                    .pickerStyle(.menu)
-                    .labelsHidden()
-                    .tint(.labelSecondary)
-                }
+//                HStack {
+//                    Image(systemName: "flag.fill")
+//                        .foregroundStyle(.indigoCustom)
+//                    Text("Idioma")
+//
+//                    Spacer()
+//
+//                    Picker("", selection: $selectedLanguage) {
+//                        Text("Português").tag("pt")
+//                        Text("Inglês").tag("en")
+//                    }
+//                    .foregroundStyle(.labelSecondary)
+//                    .pickerStyle(.menu)
+//                    .labelsHidden()
+//                    .tint(.labelSecondary)
+//                }
+                
                 HStack {
                     Image(systemName: "faceid")
                         .foregroundStyle(.indigoCustom)
@@ -59,6 +60,7 @@ struct ConfigView: View {
                         }
                     }
                     ))
+                    .tint(.green)
                 }
                 
                 HStack {
@@ -79,31 +81,33 @@ struct ConfigView: View {
                 }
             }
             
-            Section(header: Text("Notificações")) {
-                HStack {
-                    Image(systemName: "app.badge")
-                        .foregroundStyle(.indigoCustom)
-                    Toggle("Avisos", isOn: $badgeEnabled)
-                }
-                HStack {
-                    Image(systemName: "bell.badge")
-                        .foregroundStyle(.indigoCustom)
-                    Toggle("Permitir notificações", isOn: $notificationEnabled)
-                }
-            }
+//            Section(header: Text("Notificações")) {
+//                HStack {
+//                    Image(systemName: "app.badge")
+//                        .foregroundStyle(.indigoCustom)
+//                    Toggle("Avisos", isOn: $badgeEnabled)
+//                }
+//                .tint(.green)
+//                HStack {
+//                    Image(systemName: "bell.badge")
+//                        .foregroundStyle(.indigoCustom)
+//                    Toggle("Permitir notificações", isOn: $notificationEnabled)
+//                }
+//                .tint(.green)
+//            }
         
             Section(header: Text("Sobre nós")) {
-                Link(destination: URL(string: "https://apps.apple.com")!) {
-                    HStack {
-                        Image(systemName: "star.fill")
-                            .foregroundStyle(.indigoCustom)
-                        Text("Avalie")
-                            .foregroundColor(.primary)
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.gray)
-                    }
-                }
+//                Link(destination: URL(string: "https://apps.apple.com")!) {
+//                    HStack {
+//                        Image(systemName: "star.fill")
+//                            .foregroundStyle(.indigoCustom)
+//                        Text("Avalie")
+//                            .foregroundColor(.primary)
+//                        Spacer()
+//                        Image(systemName: "chevron.right")
+//                            .foregroundColor(.gray)
+//                    }
+//                }
                 Button {
                     if let url = URL(string: "https://wa.me/5551983385200") {
                         UIApplication.shared.open(url)

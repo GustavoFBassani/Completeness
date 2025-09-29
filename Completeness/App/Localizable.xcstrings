@@ -21,32 +21,11 @@
         }
       }
     },
-    "%lld / %lld" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld / %2$lld"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld / %2$lld"
-          }
-        }
-      }
+    "%lld habitos feitos" : {
+
     },
     "%lld/%lld" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld/%2$lld"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "new",
@@ -76,39 +55,94 @@
       }
     },
     "1 hora" : {
-
-    },
-    "1 min" : {
-
-    },
-    "3 min" : {
-
-    },
-    "5 min" : {
-
-    },
-    "10 min" : {
-
-    },
-    "15 min" : {
-
-    },
-    "20 min" : {
-
-    },
-    "30 min" : {
-
-    },
-    "45 min" : {
-
-    },
-    "Abrir Ajustes do Sistema" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open System Settings"
+            "value" : "1 hour"
+          }
+        }
+      }
+    },
+    "1 min" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 min"
+          }
+        }
+      }
+    },
+    "3 min" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 min"
+          }
+        }
+      }
+    },
+    "5 min" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5 min"
+          }
+        }
+      }
+    },
+    "10 min" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "10 min"
+          }
+        }
+      }
+    },
+    "15 min" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15 min"
+          }
+        }
+      }
+    },
+    "20 min" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "20 min"
+          }
+        }
+      }
+    },
+    "20:00" : {
+
+    },
+    "30 min" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30 min"
+          }
+        }
+      }
+    },
+    "45 min" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "45 min"
           }
         }
       }
@@ -140,19 +174,52 @@
       }
     },
     "Aparência" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appearance"
+          }
+        }
+      }
+    },
+    "Aprender algo novo" : {
 
     },
     "Aqui, cada pequeno hábito conta \n para grandes transformações." : {
 
     },
     "Automático" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatic"
+          }
+        }
+      }
     },
     "Avalie" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Evaluate"
+          }
+        }
+      }
     },
     "Avisos" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notices"
+          }
+        }
+      }
     },
     "Bem-vindo a \n sua nova rotina" : {
 
@@ -177,6 +244,9 @@
         }
       }
     },
+    "Carregando estatísticas..." : {
+
+    },
     "Claro" : {
       "localizations" : {
         "en" : {
@@ -188,6 +258,19 @@
       }
     },
     "Começa em" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Starts in"
+          }
+        }
+      }
+    },
+    "Completar" : {
+
+    },
+    "Conclua sua primeira semana de hábitos e você verá o resumo sobre sua evolução aqui." : {
 
     },
     "Começar" : {
@@ -223,10 +306,24 @@
       }
     },
     "Descrição" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
+          }
+        }
+      }
     },
     "Detalhes" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Details"
+          }
+        }
+      }
     },
     "Digite o corpo da notificação" : {
       "localizations" : {
@@ -258,6 +355,9 @@
         }
       }
     },
+    "Editar" : {
+
+    },
     "Editar nome do hábito" : {
       "localizations" : {
         "en" : {
@@ -268,8 +368,18 @@
         }
       }
     },
-    "Erro" : {
+    "Em breve" : {
 
+    },
+    "Erro" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        }
+      }
     },
     "Escolha quantas vezes você quer fazer isso no dia" : {
       "localizations" : {
@@ -301,13 +411,49 @@
         }
       }
     },
-    "Etapas" : {
+    "Essa semana você concluiu %.0f%% dos seus hábitos" : {
 
+    },
+    "Essa semana você concluiu %.0f%% dos seus hábitos, você foi muito bem!" : {
+
+    },
+    "Esse hábito apareceu pouco essa semana, podemos juntos melhorar!" : {
+
+    },
+    "Esse hábito já está se tornando parte da sua rotina, continue assim!" : {
+
+    },
+    "Etapas" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steps"
+          }
+        }
+      }
     },
     "Ex: Tomar água" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ex: Drink water"
+          }
+        }
+      }
     },
     "Ex: Você consegue" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ex: You can"
+          }
+        }
+      }
+    },
+    "Excluir hábito" : {
 
     },
     "Exemplo" : {
@@ -321,7 +467,14 @@
       }
     },
     "Face ID" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Face ID"
+          }
+        }
+      }
     },
     "FaceID" : {
       "localizations" : {
@@ -334,7 +487,14 @@
       }
     },
     "Fale conosco" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contact us"
+          }
+        }
+      }
     },
     "Feito!" : {
       "localizations" : {
@@ -347,10 +507,33 @@
       }
     },
     "Geral" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General"
+          }
+        }
+      }
+    },
+    "Hábito feito %lld vezes" : {
+
+    },
+    "Hábito mais feito" : {
+
+    },
+    "Hábito menos feito" : {
 
     },
     "Hábito personalizado" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personalized habit"
+          }
+        }
+      }
     },
     "Hábitos" : {
       "localizations" : {
@@ -362,7 +545,11 @@
         }
       }
     },
+    "Hábitos semanais" : {
+
+    },
     "Hello, World!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -383,21 +570,62 @@
       }
     },
     "Idioma" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
+          }
+        }
+      }
     },
     "Inglês" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "English"
+          }
+        }
+      }
+    },
+    "Iniciar tempo" : {
 
     },
     "Meta" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Goal"
+          }
+        }
+      }
     },
     "Modo claro" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light mode"
+          }
+        }
+      }
     },
     "Modo escuro" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dark mode"
+          }
+        }
+      }
     },
     "Nenhum hábito para este dia" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -418,7 +646,14 @@
       }
     },
     "Nome" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        }
+      }
     },
     "Nome do hábito" : {
       "localizations" : {
@@ -430,29 +665,19 @@
         }
       }
     },
-    "Notificação Hábito diário" : {
+    "Notif" : {
       "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Daily Habit Notification"
-          }
-        }
-      }
-    },
-    "Notificação Hábito timmer" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Habit Timmer Notification"
+            "value" : "Notification"
           }
         }
       }
     },
     "Notificações" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -473,7 +698,14 @@
       }
     },
     "OK" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
     },
     "Organize sua rotina de \n forma simples e intuitiva" : {
 
@@ -489,13 +721,35 @@
       }
     },
     "Permitir notificações" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow notifications"
+          }
+        }
+      }
     },
     "Personalizado" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Customized"
+          }
+        }
+      }
     },
     "Política de Privacidade – Completeness" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy Policy – ​​Completeness"
+          }
+        }
+      }
     },
     "Por tempo" : {
       "localizations" : {
@@ -508,7 +762,15 @@
       }
     },
     "Português" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Portuguese"
+          }
+        }
+      }
     },
     "Pular" : {
 
@@ -524,9 +786,17 @@
       }
     },
     "Repete" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repeat"
+          }
+        }
+      }
     },
     "Resumo" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -567,7 +837,15 @@
       }
     },
     "Semanalmente" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weekly"
+          }
+        }
+      }
     },
     "Settings" : {
       "localizations" : {
@@ -583,7 +861,14 @@
 
     },
     "Simples" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Simple"
+          }
+        }
+      }
     },
     "so de teste" : {
       "localizations" : {
@@ -596,10 +881,24 @@
       }
     },
     "Sobre nós" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About us"
+          }
+        }
+      }
     },
     "Sua privacidade é importante para nós. Esta Política de Privacidade descreve como coletamos, usamos e protegemos suas informações ao utilizar o Completeness.\n\n1. Coleta de Informações\n\nO Completeness foi projetado para ajudá-lo a acompanhar seus hábitos de forma simples.\nInformações pessoais: não coletamos informações pessoais como nome, e-mail ou telefone, a menos que você as forneça voluntariamente\n(por exemplo, ao criar uma conta).\nDados de uso: podemos coletar informações anônimas, como tempo de uso do aplicativo, frequência de abertura e estatísticas gerais,\napenas para melhorar a experiência do usuário.\nDados armazenados localmente: seus hábitos e registros ficam salvos localmente no dispositivo. Caso haja integração com iCloud,\nesses dados poderão ser sincronizados entre seus aparelhos Apple.\n\n2. Uso das Informações\n\nAs informações coletadas são utilizadas para:\nFornecer as funcionalidades principais do aplicativo;\nMelhorar a experiência do usuário;\nCorrigir falhas e manter a estabilidade do serviço.\n\n3. Compartilhamento de Informações\n\nNão compartilhamos, vendemos ou alugamos seus dados pessoais a terceiros.\nEm caso de sincronização via iCloud ou outros serviços Apple, a gestão e proteção seguem as políticas da Apple.\n\n4. Armazenamento e Segurança\nSeus dados ficam protegidos nos servidores da Apple (quando armazenados via iCloud) ou localmente no dispositivo.\nAdotamos medidas técnicas adequadas para proteger suas informações, mas não podemos garantir segurança absoluta contra todas as ameaças digitais.\n\n5. Direitos do Usuário\n\nVocê pode, a qualquer momento:\nExcluir seus dados diretamente no aplicativo;\nSolicitar informações sobre os dados coletados;\nRevogar permissões concedidas.\n\n6. Alterações nesta Política\n\nPodemos atualizar esta Política de Privacidade periodicamente. Recomendamos que você revise este documento regularmente para estar ciente de como protegemos suas informações.\n\n7. Contato\n\nSe tiver dúvidas ou solicitações relacionadas à privacidade, entre em contato pelo e-mail: [suportecompleteness@gmail.com]." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your privacy is important to us. This Privacy Policy describes how we collect, use, and protect your information when using Completeness.\n\n1. Information We Collect\n\nPersonal Information: We do not collect personally identifiable information (such as your name, email address, or phone number) unless you provide it voluntarily, for example, when creating an account.\nUsage Data: We may collect non-identifiable information, such as frequency of use, session duration, and general usage statistics, solely for the purpose of improving the App’s performance and user experience.\nLocal Data Storage: Your habits and records are stored locally on your device. If you enable iCloud synchronization, your data may also be stored on Apple’s servers and synchronized across your Apple devices in accordance with Apple’s policies.\n\n2. Use of Information\n\nWe may use the collected information to:\nProvide the core features and functionality of the App;\nImprove, optimize, and personalize the user experience;\nMonitor performance, identify, and fix bugs;\nMaintain the overall security and stability of the App.\n\n3. Disclosure of Information\n\nWe do not sell, rent, or share your personal information with third parties.\nIf you choose to enable iCloud or other Apple services, data storage, management, and security are governed by Apple’s privacy policies.\n\n4. Data Storage and Security\n\nData stored locally remains on your device unless you choose to back it up or synchronize with iCloud.\nWhen stored on iCloud, your information is protected by Apple’s infrastructure and policies.\nWhile we implement reasonable technical and organizational safeguards to protect your data, no method of storage or transmission over the internet can be guaranteed 100% secure.\n\n5. Your Rights\n\nDepending on your jurisdiction, you may have the following rights:\nAccess and Information: Request details about the data we collect.\nDeletion: Delete your data directly within the App.\nRevocation: Revoke permissions or disable synchronization at any time.\n\n6. Changes to This Policy\n\nWe may update this Privacy Policy from time to time. Any changes will be effective upon posting the revised version within the App. We encourage you to review this Policy periodically to stay informed about how we protect your information.\n\n7. Contact Us\n\nIf you have any questions or concerns regarding this Privacy Policy, please contact us at:\nEmail: suportecompleteness@gmail.com"
+          }
+        }
+      }
     },
     "Taxa de conclusão" : {
       "localizations" : {
@@ -622,10 +921,24 @@
       }
     },
     "Tempo" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time"
+          }
+        }
+      }
     },
     "Termos de privacidade" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy terms"
+          }
+        }
+      }
     },
     "Tipo de Completude" : {
       "localizations" : {
@@ -638,10 +951,24 @@
       }
     },
     "Tipo de hábito" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type of habit"
+          }
+        }
+      }
     },
     "Todos os dias" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every day"
+          }
+        }
+      }
     },
     "Troca multipla" : {
       "localizations" : {
@@ -667,10 +994,24 @@
 
     },
     "Ver mais" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See more"
+          }
+        }
+      }
     },
     "Ver menos" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See less"
+          }
+        }
+      }
     },
     "Visão Geral (Últimos 7 dias)" : {
       "localizations" : {

@@ -21,9 +21,9 @@ struct HabitRepositoryTests {
     }
 
     @Test("createHabit should save a habit to the database")
-    func testCreateHabit() throws {
+    func testCreateHabit() async throws {
         let newHabit = Habit(habitName: "Habit", howManyTimesToToggle: 1, scheduleDays: [])
-        repository.createHabit(habit: newHabit)
+        await repository.createHabit(habit: newHabit)
         let fetchedHabits = try modelContext.fetch(FetchDescriptor<Habit>())
         
         #expect(fetchedHabits.count == 1)
@@ -33,7 +33,7 @@ struct HabitRepositoryTests {
     @Test("deleteHabit should remove the habit from the database")
     func testDeleteHabit() async throws {
         let habitToDelete = Habit(habitName: "habit ot delete", howManyTimesToToggle: 1, scheduleDays: [])
-        repository.createHabit(habit: habitToDelete)
+        await repository.createHabit(habit: habitToDelete)
         #expect((try await repository.getAllHabits()).count == 1)
         
         await repository.deleteHabit(id: habitToDelete.id)
