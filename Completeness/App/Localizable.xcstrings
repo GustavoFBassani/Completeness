@@ -194,6 +194,7 @@
       }
     },
     "Avalie" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -768,6 +769,7 @@
       }
     },
     "Resumo" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
