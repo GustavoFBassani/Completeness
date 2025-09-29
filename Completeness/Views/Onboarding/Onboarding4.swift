@@ -57,15 +57,15 @@ struct Onboarding4: View {
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 40)
                         
-//                        NavigationLink(destination: AddNewHabit()) {
-//                            Text("Criar meu primeiro hábito")
-//                                .font(.headline)
-//                                .foregroundColor(.white)
-//                                .frame(maxWidth: .infinity)
-//                                .padding()
-//                                .background(Color.indigo)
-//                                .cornerRadius(26)
-//                        }
+                        NavigationLink(destination: TabBar()) {
+                            Text("Criar meu primeiro hábito")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.indigo)
+                                .cornerRadius(26)
+                        }
                         .padding(.horizontal, 32)
                         .padding(.bottom, 40)
                     }

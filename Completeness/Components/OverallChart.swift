@@ -9,42 +9,49 @@ import SwiftUI
 
 struct OverallChart: View {
     @Binding var viewModel: ChartsViewModelProtocol
+    @State private var animatedProgress: CGFloat = 0
     
     var body: some View {
         HStack(spacing: 32){
-            ZStack {
-                Circle()
-                    .stroke(
-                        Color.indigoCustomTertiary,
-                        lineWidth: 24)
-                
-                Circle()
-                    .trim(from: 0.0, to: viewModel.overallCompletionRate)
-                    .stroke(
-                        Color.indigoCustom,
-                        style: StrokeStyle(lineWidth: 32, lineCap: .round)
-                    )
-                    .rotationEffect(.degrees(-90))
-                    .animation(.easeInOut, value: viewModel.overallCompletionRate) //animation absed on the overallCompletionRate
-                
-                
-                Text(viewModel.overallCompletionRate, format: .percent.precision(.fractionLength(0)))
-                    .font(.title.bold())
-                    .foregroundStyle(Color.labelPrimary)
+            VStack {
+                ZStack {
+                    Circle()
+                        .stroke(
+                            Color.indigoCustomTertiary,
+                            lineWidth: 24)
+                    
+                    Circle()
+                        .trim(from: 0.0, to: animatedProgress)
+                        .stroke(
+                            Color.indigoCustom,
+                            style: StrokeStyle(lineWidth: 24, lineCap: .round)
+                        )
+                        .rotationEffect(.degrees(-90))
+                        .animation(.easeInOut(duration: 0.7), value: animatedProgress) //animation absed on the overallCompletionRate
+                    
+                    
+                    Text("\(viewModel.overallCompletionRate, specifier: "%.0f")%")
+                        .font(.title.bold())
+                        .foregroundStyle(Color.labelPrimary)
+                        .padding(4)
+                }
+                .frame(width: 100, height: 100)
             }
-            .frame(width: 120, height: 120)
+            .padding(.leading)
             
             VStack(alignment: .leading, spacing: 16) {
                 Text("Hábitos semanais")
-                    .font(.title2.bold())
+                    .font(.title3.bold())
                     .foregroundStyle(Color.labelPrimary)
                 
                 if viewModel.overallCompletionRate >= 60 {
                     Text("Essa semana você concluiu \(viewModel.overallCompletionRate, specifier: "%.0f")% dos seus hábitos, você foi muito bem!")
-                        .padding(.trailing, 30)
+                        .padding(.trailing, 32)
                         .font(.subheadline)
                 } else {
                     Text("Essa semana você concluiu \(viewModel.overallCompletionRate, specifier: "%.0f")% dos seus hábitos")
+                        .padding(.trailing, 32)
+                        .font(.subheadline)
                 }
                 
                 ZStack {
@@ -60,9 +67,15 @@ struct OverallChart: View {
                 )
             }
         }
+        .padding()
         .background(
             RoundedRectangle(cornerRadius: 26)
                 .foregroundStyle(.backgroundPrimary)
         )
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                animatedProgress = viewModel.overallCompletionRate / 100
+            }
+        }
     }
 }

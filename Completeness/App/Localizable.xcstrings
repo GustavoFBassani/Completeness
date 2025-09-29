@@ -11,6 +11,9 @@
         }
       }
     },
+    "%.0f%%" : {
+
+    },
     "%lld" : {
       "localizations" : {
         "en" : {
@@ -247,9 +250,6 @@
         }
       }
     },
-    "Carregando estatísticas..." : {
-
-    },
     "Claro" : {
       "localizations" : {
         "en" : {
@@ -367,9 +367,6 @@
           }
         }
       }
-    },
-    "Em breve" : {
-
     },
     "Erro" : {
       "localizations" : {
@@ -796,7 +793,6 @@
       }
     },
     "Resumo" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
