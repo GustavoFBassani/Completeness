@@ -31,7 +31,7 @@ struct TabBar: View {
             
             Tab("Configurações", systemImage: "gearshape"){
                 NavigationStack{
-                    ConfigView()
+                    ConfigView(settingsViewModel: SettingsViewModel())
                 }
             }
         }
