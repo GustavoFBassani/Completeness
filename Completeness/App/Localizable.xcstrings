@@ -147,7 +147,7 @@
         }
       }
     },
-    "Acompanhe seu progresso semanal" : {
+    "Acompanhe\nseu progresso" : {
 
     },
     "Agendar Notificação" : {
@@ -159,6 +159,9 @@
           }
         }
       }
+    },
+    "Agora é \n com você!" : {
+
     },
     "Apagar dados" : {
       "localizations" : {
@@ -181,6 +184,9 @@
       }
     },
     "Aprender algo novo" : {
+
+    },
+    "Aqui, cada pequeno hábito conta \n para grandes transformações." : {
 
     },
     "Automático" : {
@@ -214,6 +220,9 @@
           }
         }
       }
+    },
+    "Bem-vindo a \n sua nova rotina" : {
+
     },
     "Buscando dados..." : {
       "localizations" : {
@@ -264,6 +273,9 @@
     "Conclua sua primeira semana de hábitos e você verá o resumo sobre sua evolução aqui." : {
 
     },
+    "Começar" : {
+
+    },
     "Configurações" : {
       "localizations" : {
         "en" : {
@@ -273,6 +285,15 @@
           }
         }
       }
+    },
+    "Continuar" : {
+
+    },
+    "Criar meu primeiro hábito" : {
+
+    },
+    "Crie seu primeiro hábito e dê o \n primeiro passo para sua nova rotina." : {
+
     },
     "Data" : {
       "localizations" : {
@@ -686,6 +707,9 @@
         }
       }
     },
+    "Organize sua rotina de \n forma simples e intuitiva" : {
+
+    },
     "Painel de Teste" : {
       "localizations" : {
         "en" : {
@@ -747,6 +771,9 @@
           }
         }
       }
+    },
+    "Pular" : {
+
     },
     "Quantas vezes" : {
       "localizations" : {
@@ -829,6 +856,9 @@
           }
         }
       }
+    },
+    "Seus hábitos\nem um só lugar" : {
+
     },
     "Simples" : {
       "localizations" : {
@@ -959,6 +989,9 @@
           }
         }
       }
+    },
+    "Veja resumos semanais e gerais que mostram sua evolução" : {
+
     },
     "Ver mais" : {
       "localizations" : {
