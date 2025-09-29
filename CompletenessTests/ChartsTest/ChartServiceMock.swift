@@ -10,6 +10,10 @@ import Foundation
 import SwiftData
 
 class MockChartsService: ChartsServiceProtocol {
+    func getNumberOfHabbitsCompleted(inLastDays days: Int) async -> Int {
+        return 1
+    }
+    
     private var sampleHabits: [Habit] = []
     
     init() {

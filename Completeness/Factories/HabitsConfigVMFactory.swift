@@ -36,7 +36,6 @@ struct HabitsConfigVMFactory {
                     howManySecondsToComplete: Int,
                     howManyTimesToToggle: Int,
                     habitDescription: String) -> HabitConfigViewModel {
-        
                       return HabitConfigViewModel(habitName: habitName,
                                                      selectedDays: scheduleDays,
                                                      habitsSymbol: habitSimbol,
