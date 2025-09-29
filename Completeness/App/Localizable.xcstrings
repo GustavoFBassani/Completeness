@@ -150,6 +150,9 @@
     "Acompanhe\nseu progresso" : {
 
     },
+    "Acompanhe seu progresso semanal" : {
+
+    },
     "Agendar Notificação" : {
       "localizations" : {
         "en" : {
@@ -267,13 +270,13 @@
         }
       }
     },
+    "Começar" : {
+
+    },
     "Completar" : {
 
     },
     "Conclua sua primeira semana de hábitos e você verá o resumo sobre sua evolução aqui." : {
-
-    },
-    "Começar" : {
 
     },
     "Configurações" : {
@@ -287,9 +290,6 @@
       }
     },
     "Continuar" : {
-
-    },
-    "Criar meu primeiro hábito" : {
 
     },
     "Crie seu primeiro hábito e dê o \n primeiro passo para sua nova rotina." : {
