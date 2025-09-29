@@ -54,8 +54,8 @@ class HabitConfigViewModel {
          completenessType: CompletionHabit = .byToggle,
          timesChoice: Int = 0,
          howManyTimesToComplete: Int = 1,
-         habitRowPosition: Int ,
-         habitColunmPosition: Int ,
+         habitRowPosition: Int,
+         habitColunmPosition: Int,
          newHabitDate: Date = Date(),
          habitService: HabitRepositoryProtocol) {
 //        self.habits = habits
