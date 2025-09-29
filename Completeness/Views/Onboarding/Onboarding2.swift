@@ -10,30 +10,30 @@ import SwiftUI
 import SwiftUI
 
 struct Onboarding2: View {
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     var body: some View {
         ZStack {
             Image("Frame 1")
                 .scaledToFill()
                 .ignoresSafeArea()
                 .padding(.bottom ,90)
+                .opacity(0.3)
             Image("Group 1")
                 .scaledToFill()
                 .ignoresSafeArea()
-            
             VStack {
                 HStack {
                     Spacer()
                     Button {
-                        //
+                        hasSeenOnboarding = true
                     }label: {
                         Text("Pular")
                             .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.primary)
+                            .foregroundColor(.indigoCustomSecondary)
                     }
                     .padding(.trailing, 24)
                     .padding(.top, 16)
                 }
-                
                 Spacer()
                 
                 ZStack(alignment: .bottom) {
@@ -47,11 +47,11 @@ struct Onboarding2: View {
                         Text("Seus hábitos\nem um só lugar")
                             .font(.system(size: 28, weight: .bold))
                             .multilineTextAlignment(.center)
-                            .foregroundColor(.primary)
+                            .foregroundColor(.black)
                         
                         Text("Organize sua rotina de \n forma simples e intuitiva")
                             .font(.system(size: 16))
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.gray)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 40)
                         
@@ -70,6 +70,9 @@ struct Onboarding2: View {
                 }
             }
         }
+        .background(.white)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
     }
 }
 

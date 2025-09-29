@@ -11,25 +11,26 @@ import SwiftUI
 import SwiftUI
 
 struct Onboarding4: View {
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     var body: some View {
         ZStack {
             Image("Frame 1")
                 .scaledToFill()
                 .ignoresSafeArea()
                 .padding(.bottom ,90)
+                .opacity(0.3)
             Image("Group 3")
                 .scaledToFill()
                 .ignoresSafeArea()
-            
             VStack {
                 HStack {
                     Spacer()
                     Button {
-                        //
+                        hasSeenOnboarding = true
                     }label: {
                         Text("Pular")
                             .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.primary)
+                            .foregroundColor(.indigoCustomSecondary)
                     }
                     .padding(.trailing, 24)
                     .padding(.top, 16)
@@ -48,17 +49,15 @@ struct Onboarding4: View {
                         Text("Agora é \n com você!")
                             .font(.system(size: 28, weight: .bold))
                             .multilineTextAlignment(.center)
-                            .foregroundColor(.primary)
+                            .foregroundColor(.black)
                         
                         Text("Crie seu primeiro hábito e dê o \n primeiro passo para sua nova rotina.")
                             .font(.system(size: 16))
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.gray)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 40)
                         
-                        Button{
-                           //
-                        }label: {
+                        NavigationLink(destination: AddNewHabit()) {
                             Text("Criar meu primeiro hábito")
                                 .font(.headline)
                                 .foregroundColor(.white)
@@ -73,6 +72,9 @@ struct Onboarding4: View {
                 }
             }
         }
+        .background(.white)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
     }
 }
 

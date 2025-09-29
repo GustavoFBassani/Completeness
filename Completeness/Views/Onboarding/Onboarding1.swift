@@ -10,6 +10,7 @@ import SwiftUI
 import SwiftUI
 
 struct Onboarding1: View {
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     var body: some View {
         ZStack {
             Image("Frame 1")
@@ -20,16 +21,15 @@ struct Onboarding1: View {
                 HStack {
                     Spacer()
                     Button {
-                        //
+                        hasSeenOnboarding = true
                     }label: {
                         Text("Pular")
                             .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.primary)
+                            .foregroundColor(.indigoCustomSecondary)
                     }
                     .padding(.trailing, 24)
                     .padding(.top, 16)
                 }
-                
                 Spacer()
                 
                 ZStack(alignment: .bottom) {
@@ -43,11 +43,11 @@ struct Onboarding1: View {
                         Text("Bem-vindo a \n sua nova rotina")
                             .font(.system(size: 28, weight: .bold))
                             .multilineTextAlignment(.center)
-                            .foregroundColor(.primary)
+                            .foregroundColor(.black)
                         
                         Text("Aqui, cada pequeno hábito conta \n para grandes transformações.")
                             .font(.system(size: 16))
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.gray)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 40)
 
@@ -66,9 +66,9 @@ struct Onboarding1: View {
                 }
             }
         }
+        .background(.white)
     }
 }
-
 #Preview {
     Onboarding1()
 }
