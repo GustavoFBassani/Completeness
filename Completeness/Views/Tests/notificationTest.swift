@@ -69,4 +69,3 @@ struct notificationTest: View {
 #Preview() {
     notificationTest()
 }
-
