@@ -9,9 +9,14 @@ import SwiftUI
 
 struct HabitSectionView: View {
     let title: String
+    let rowPosition: Int
+    let colunmPosition: Int
     let habits: [PredefinedHabits]
     
     @State private var showMore = false
+    
+//    let repositoryFactory: HabitRepositoryFactory
+    let configsVMFactory: HabitsConfigVMFactory
     
     var body: some View {
         Text(title)
@@ -24,17 +29,26 @@ struct HabitSectionView: View {
         VStack(alignment: .leading, spacing: 0) {
             // lista de hábitos
             ForEach(showMore ? habits : Array(habits.prefix(3))) { habit in
-                HStack {
-                    Image(systemName: habit.habitSimbol)
-                        .foregroundColor(.indigoCustom)
-                    Text(habit.habitName)
-                        .foregroundColor(.primary)
-                    Spacer()
-                    Text("Detalhes")
-                        .foregroundColor(.gray)
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.gray)
+                NavigationLink {
+                    HabitsConfigView(viewModel: configsVMFactory.createPredefinedHabits(habitName: habit.habitName,
+                                                                                        habitsSymbol: habit.habitSimbol,
+                                                                                        completenessType: habit.completionType,
+                                                                                        habitRowPosition: rowPosition,
+                                                                                        habitColunmPosition: colunmPosition))
+                } label: {
+                    HStack {
+                        Image(systemName: habit.habitSimbol)
+                            .foregroundColor(.indigoCustom)
+                        Text(habit.habitName)
+                            .foregroundColor(.primary)
+                        Spacer()
+                        Text("Detalhes")
+                            .foregroundColor(.gray)
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.gray)
+                    }
                 }
+
                 .padding(.horizontal)
                 .padding(.vertical, 12)
                  Divider()
@@ -56,7 +70,7 @@ struct HabitSectionView: View {
             }
             Spacer()
         }
-        .background(.backgroundPrimary)
+        .background(.textFieldBackground)
         .cornerRadius(12)
         .padding(.horizontal)
     }

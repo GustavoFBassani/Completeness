@@ -33,13 +33,12 @@ struct HabitViewComponent: View {
         case true:
             return Color.indigoCustom
         case false:
-            return Color.white
+            return Color.textFieldBackground
         }
     }
     
     private var habbitIsByTimer: Bool { habit.habitCompleteness == .byTimer }
     
-
     private var progressTimer: String {
         if let habitLog = habit.habitLogs?.first(where: {
             Calendar.current.isDate($0.completionDate, inSameDayAs: day)
@@ -66,7 +65,6 @@ struct HabitViewComponent: View {
     private func showProgressDone() -> String {
         return progressTimer
     }
-    
     
     
     var body: some View {

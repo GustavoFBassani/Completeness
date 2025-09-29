@@ -32,19 +32,10 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
     var habitCompletionService: HabitCompletionProtocol
     var habitService: HabitRepositoryProtocol
     var textField = ""
-    
-    // MARK: - NEW HABIT
-    var completenessType: CompletionHabit = .byToggle
-    var howManyTimesToCompleteHabit = 1
-    var howManySecondsToCompleteHabit = 900
-    var newHabitName = ""
-    var newHabitDescription = ""
-    var newValuePosition = 0
-    var newIndicePosition = 0
-    var newHabitDate = Date()
-    var newHabitDays: [Int] = []
     var filteredHabits: [Habit] = []
-         
+    
+    var createHabbitWithPosition: Position?
+    
     init(habitCompletionService: HabitCompletionProtocol, habitService: HabitRepositoryProtocol) {
         self.habitCompletionService = habitCompletionService
         self.habitService = habitService
@@ -58,26 +49,6 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
         } catch {
             print("cannot get all Habits, ERROR: \(error.localizedDescription)")
             state = .error
-        }
-    }
-    
-    func createNewHabit() {
-        guard !newHabitName.isEmpty else {return }
-        
-        let newHabit = Habit(
-            habitName: newHabitName,
-            habitCompleteness: completenessType,
-            howManyTimesToToggle: howManyTimesToCompleteHabit,
-            scheduleDays: newHabitDays,
-            valuePosition: newValuePosition,
-            indicePosition: newIndicePosition,
-            howManySecondsToComplete: howManySecondsToCompleteHabit
-        )
-        
-        habits.append(newHabit)
-        habitService.createHabit(habit: newHabit)
-        Task{
-            await loadData()
         }
     }
     
@@ -96,6 +67,12 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
     
     func editHabit() {
         habitService.saveChanges()
+    }
+    
+    @MainActor
+    func didTapHabit(_ habit: Habit) async {
+        await completeHabit(habit: habit, on: selectedDate)
+        await loadData()
     }
     
     @MainActor

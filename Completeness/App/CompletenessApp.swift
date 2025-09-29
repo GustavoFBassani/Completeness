@@ -13,9 +13,9 @@ struct CompletenessApp: App {
     @AppStorage("selectedTheme") private var selectedTheme = "system"
     @AppStorage("selectedLanguage") private var selectedLanguage = "pt"
     @Environment(\.modelContext) var context
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
 
     @State private var appViewModel = AppViewModel()
-
 
     var body: some Scene {
         WindowGroup {
@@ -30,12 +30,17 @@ struct CompletenessApp: App {
 struct CompletenessAppContentView: View {
     @Environment(AppViewModel.self) private var appViewModel
     @AppStorage("selectedTheme") private var selectedTheme = "system"
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
 
     var body: some View {
-        if appViewModel.isAuthenticated {
+        if !hasSeenOnboarding {
+            NavigationStack {
+                Onboarding1()
+            }
+        } else if appViewModel.isAuthenticated {
             TabBar()
                 .preferredColorScheme(getColorScheme())
-        } else  {
+        } else {
             VStack {
                 Text("FaceID")
                 ProgressView()

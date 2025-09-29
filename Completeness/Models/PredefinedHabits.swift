@@ -138,93 +138,70 @@ enum PredefinedHabits: String, CaseIterable, Identifiable {
         }
     }
     var completionType: CompletionHabit {
-            switch self {
-            case .drinkWater: return .byMultipleToggle
-            case .meditate: return .byToggle
-            case .vitamins: return .byToggle
-            case .stretch: return .byToggle
-            case .skincare: return .byToggle
-            case .gratitude: return .byToggle
-            case .makeBed: return .byToggle
-            case .walk: return .byToggle
-            case .noSocialMedia: return .byToggle
-            case .callFriends: return .byToggle
-            case .journal: return .byToggle
-            case .eatHealthy: return .byToggle
-            case .tea: return .byToggle
-            case .brushTeeth: return .byToggle
-            case .hug: return .byToggle
-            case .noScreens: return .byToggle
-            case .coldShower: return .byToggle
-            case .smile: return .byToggle
-            case .noSmoking: return .byToggle
-            case .checkAgenda: return .byToggle
-            case .checkEmails: return .byMultipleToggle
-            case .takeStairs: return .byMultipleToggle
-            case .beGrateful: return .byMultipleToggle
-            case .readPages: return .byMultipleToggle
-            case .ideas: return .byMultipleToggle
-            case .trackExpenses: return .byMultipleToggle
-            case .breathing: return .byMultipleToggle
-            case .sendAudio: return .byMultipleToggle
-            case .drinkCoffee: return .byToggle
-            case .mobility: return .byToggle
-            case .takePhotos: return .byToggle
-            case .washHands: return .byToggle
-            case .refillBottle: return .byToggle
-            case .fixPosture: return .byToggle
-            case .familyTime: return .byToggle
-            case .write: return .byToggle
-            case .learnNew: return .byToggle
-            case .draw: return .byToggle
-            case .steps: return .byToggle
-            case .study: return .byTimer
-            case .reading: return .byTimer
-            case .walking: return .byTimer
-            case .running: return .byTimer
-            case .meditation: return .byTimer
-            case .yoga: return .byTimer
-            case .cook: return .byTimer
-            case .rest: return .byTimer
-            case .noScreensAlt: return .byTimer
-            case .pomodoro: return .byToggle
-            case .sleep: return .byToggle
-            case .outdoors: return .byToggle
-            case .listenMusic: return .byToggle
-            case .petCare: return .byToggle
-            case .learnLanguages: return .byToggle
-            case .creativity: return .byToggle
-            case .cleaning: return .byToggle
-            case .organize: return .byToggle
-            case .podcast: return .byToggle
-            }
-        }
+        switch self {
+        // MARK: - byToggle (Habitos done/undone)
+        case .meditate, .vitamins, .stretch, .skincare,
+             .gratitude, .makeBed, .walk, .noSocialMedia,
+             .callFriends, .journal, .eatHealthy, .tea,
+             .brushTeeth, .hug, .noScreens, .coldShower,
+             .smile, .noSmoking, .checkAgenda:
+            return .byToggle
 
+        // MARK: - byMultipleToggle (Habitos Steps)
+        case .drinkWater, .checkEmails, .takeStairs,
+             .beGrateful, .readPages, .ideas,
+             .trackExpenses, .breathing, .sendAudio,
+             .drinkCoffee, .mobility, .takePhotos,
+             .washHands, .refillBottle, .fixPosture,
+             .familyTime, .write, .learnNew,
+             .draw, .steps:
+            return .byMultipleToggle
+
+        // MARK: - byTimer (Habitos Timer)
+        case .study, .reading, .walking, .running,
+             .meditation, .yoga, .cook, .rest,
+             .noScreensAlt, .pomodoro,
+             .sleep, .outdoors, .listenMusic,
+             .petCare, .learnLanguages, .creativity,
+             .cleaning, .organize, .podcast:
+            return .byTimer
+        }
+    }
+    
     var habitSimbol: String {
         switch self {
-        case .drinkWater, .refillBottle: return "drop.fill"
-        case .meditate, .meditation: return "brain.head.profile"
+        case .drinkWater: return "drop.fill"
+        case .refillBottle: return "waterbottle.fill"
+        case .meditate: return "brain.head.profile"
+        case .meditation: return "brain.fill"
         case .vitamins: return "pills.fill"
-        case .stretch, .mobility: return "figure.cooldown"
+        case .stretch: return "figure.cooldown"
+        case .mobility: return "figure.flexibility"
         case .skincare: return "hands.and.sparkles"
-        case .gratitude, .beGrateful: return "heart.text.square.fill"
+        case .gratitude: return "heart.text.square.fill"
+        case .beGrateful: return "hands.clap.fill"
         case .makeBed: return "bed.double.fill"
-        case .walk, .walking, .steps: return "figure.walk"
+        case .walk: return "figure.walk"
+        case .walking: return "figure.walk.treadmill"
+        case .steps: return "shoeprints.fill"
         case .noSocialMedia: return "antenna.radiowaves.left.and.right.slash"
         case .callFriends: return "phone.arrow.up.right.fill"
-        case .journal, .write: return "book.closed.fill"
+        case .journal: return "book.closed.fill"
+        case .write: return "pencil.and.scribble"
         case .eatHealthy: return "carrot"
         case .tea: return "cup.and.saucer.fill"
         case .brushTeeth: return "mouth.fill"
         case .hug: return "person.2.fill"
-        case .noScreens, .noScreensAlt: return "tv.slash.fill"
+        case .noScreens: return "tv.slash.fill"
+        case .noScreensAlt: return "iphone.slash"
         case .coldShower: return "snowflake"
         case .smile: return "face.smiling.inverse"
         case .noSmoking: return "nosign.app.fill"
         case .checkAgenda: return "calendar"
         case .checkEmails: return "envelope.fill"
         case .takeStairs: return "figure.stairs"
-        case .readPages, .reading: return "book.pages.fill"
+        case .readPages: return "book.pages.fill"
+        case .reading: return "text.book.closed.fill"
         case .ideas: return "lightbulb.fill"
         case .trackExpenses: return "dollarsign.circle.fill"
         case .breathing: return "lungs.fill"
@@ -236,7 +213,8 @@ enum PredefinedHabits: String, CaseIterable, Identifiable {
         case .familyTime: return "person.3.fill"
         case .learnNew: return "graduationcap.fill"
         case .draw: return "pencil.and.ruler.fill"
-        case .study, .learnLanguages: return "book.fill"
+        case .study:  return "book.fill"
+        case .learnLanguages: return "character.book.closed.fill"
         case .running: return "figure.run.treadmill"
         case .yoga: return "figure.mind.and.body"
         case .cook: return "fork.knife"

@@ -10,7 +10,7 @@ import Foundation
 protocol HabitRepositoryProtocol {
     func getAllHabits() async throws -> [Habit]
     func getHabitById(id: UUID) async -> Habit?
-    func createHabit(habit: Habit)
+    func createHabit(habit: Habit) async
     func saveChanges()
     func deleteHabit(id: UUID) async
 }

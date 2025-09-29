@@ -17,21 +17,25 @@ struct TabBar: View {
             Tab("Hábitos", systemImage: "circle.hexagongrid"){
                 NavigationStack{
                     HabitView(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context),
-                                                         habitService: HabitRepository(context: context)), refreshView: $refreshView)
+                                                         habitService: HabitRepository(context: context)),
+                              refreshView: $refreshView,
+                              configsVMFactory: HabitsConfigVMFactory(repositoryFactory: HabitRepositoryFactory(context: context)))
                 }
             }
-
-            Tab("Resumo", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
-                NavigationStack{
-                    DeleteAllData()
-                }
-            }
+            
+//            Tab("Resumo", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
+//                NavigationStack{
+//                    StatsView(viewModel: ChartsViewModel(chartsService: ChartsService(modelContext: context)))
+//                }
+//            }
+            
             Tab("Configurações", systemImage: "gearshape"){
                 NavigationStack{
                     ConfigView()
                 }
             }
         }
+        
         .onAppear(perform: {
             refreshView.toggle()
         })
