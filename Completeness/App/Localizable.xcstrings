@@ -169,6 +169,9 @@
     "Agora é \n com você!" : {
 
     },
+    "Ao excluir, você perderá todos os seus resumos e dados do seu hábito" : {
+
+    },
     "Apagar dados" : {
       "localizations" : {
         "en" : {
@@ -1021,6 +1024,12 @@
           }
         }
       }
+    },
+    "Voçê tem certeza que deseja excluir esse hábito?" : {
+
+    },
+    "Voltar a editar" : {
+
     }
   },
   "version" : "1.0"
