@@ -14,7 +14,7 @@ class HabitConfigViewModel {
     var id: UUID?
     var habitName = ""
     var selectedDays: [Int] = []
-    var habitsSymbol = "checkmark.circle"
+    var habitsSymbol = "checkmark.circle.fill"
     var newHabitDescription = ""
     //how to complete the habit
     var completenessType = CompletionHabit.byToggle
@@ -54,8 +54,8 @@ class HabitConfigViewModel {
          completenessType: CompletionHabit = .byToggle,
          timesChoice: Int = 0,
          howManyTimesToComplete: Int = 1,
-         habitRowPosition: Int ,
-         habitColunmPosition: Int ,
+         habitRowPosition: Int,
+         habitColunmPosition: Int,
          newHabitDate: Date = Date(),
          habitService: HabitRepositoryProtocol) {
 //        self.habits = habits

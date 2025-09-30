@@ -240,6 +240,9 @@
         }
       }
     },
+    "Buscar" : {
+
+    },
     "Cancelar" : {
       "localizations" : {
         "en" : {
@@ -568,6 +571,12 @@
           }
         }
       }
+    },
+    "Icone" : {
+
+    },
+    "Ícone" : {
+
     },
     "Idioma" : {
       "extractionState" : "stale",

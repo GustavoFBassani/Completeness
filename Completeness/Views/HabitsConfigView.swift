@@ -69,6 +69,20 @@ struct HabitsConfigView: View {
                         }
                         .tint(.secondary)
                         
+                        
+                        NavigationLink {
+                            IconPickerView(selectedIcon: $viewModel.habitsSymbol)
+                        } label: {
+                            HStack {
+                                Image(systemName: viewModel.habitsSymbol)
+                                    .foregroundStyle(Color.indigoCustom)
+                                    .font(.system(size: 16))
+                                Text("Icone")
+                                
+                                Spacer()
+                            }
+                        }
+                        
                         DatePicker(selection: $viewModel.newHabitDate, displayedComponents: .date) {
                             HStack {
                                 Image(systemName: "calendar")

@@ -16,7 +16,7 @@ struct Onboarding1: View {
             Image("Frame 1")
                 .scaledToFill()
                 .ignoresSafeArea()
-                .padding(.bottom ,90)
+                .padding(.bottom, 90)
             VStack {
                 HStack {
                     Spacer()
