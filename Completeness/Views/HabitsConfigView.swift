@@ -33,6 +33,7 @@ struct HabitsConfigView: View {
     let weekDays = ["D", "S", "T", "Q", "Q", "S", "S"]
     @State var timesChoice: TimeOption = .oneMinute
     @State var typeOfRepetition: DaysRepeation = .allDays
+    @State var showDeleteAlert = false
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -182,6 +183,7 @@ struct HabitsConfigView: View {
                     if let id {
                         Section {
                             Button {
+                                showDeleteAlert = true
                                 viewModel.id = id
                                 Task { await viewModel.deleteHabitById()
                                     dismiss()
@@ -194,6 +196,22 @@ struct HabitsConfigView: View {
                                     .foregroundStyle(Color.indigoCustom)
                                     .fontWeight(.semibold)
                                     .font(.system(size: 17))
+                            }
+                            .alert("Voçê tem certeza que deseja excluir esse hábito?", isPresented: $showDeleteAlert) {
+                                Button(role: .cancel) {}
+                                label: {
+                                    Text("Voltar a editar")
+                                        .foregroundStyle(.white)
+                                }
+                                .background(.indigoCustom)
+                                Button("Excluir hábito", role: .destructive) {
+                                    Task { await viewModel.deleteHabitById()
+                                        dismiss()
+                                        dismiss()
+                                    }
+                                }
+                            } message: { //alert's description
+                                Text("Ao excluir, você perderá todos os seus resumos e dados do seu hábito")
                             }
                             .listRowInsets(EdgeInsets())
                             .listRowBackground(Color.clear)

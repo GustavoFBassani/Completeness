@@ -23,15 +23,15 @@ struct TabBar: View {
                 }
             }
             
-//            Tab("Resumo", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
-//                NavigationStack{
-//                    StatsView(viewModel: ChartsViewModel(chartsService: ChartsService(modelContext: context)))
-//                }
-//            }
+            Tab("Resumo", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
+                NavigationStack{
+                    StatsView(viewModel: ChartsViewModel(chartsService: ChartsService(modelContext: context)))
+                }
+            }
             
             Tab("Configurações", systemImage: "gearshape"){
                 NavigationStack{
-                    ConfigView()
+                    ConfigView(settingsViewModel: SettingsViewModel())
                 }
             }
         }
