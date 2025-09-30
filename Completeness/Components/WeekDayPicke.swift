@@ -43,7 +43,6 @@ struct WeekDayPicker: View {
                     }
                 )
                 .onTapGesture {
-                    //refresh na view aqui
                     selectedDate = date
                 }
             }
