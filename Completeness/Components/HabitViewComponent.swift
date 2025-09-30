@@ -22,12 +22,9 @@ struct HabitViewComponent: View {
             return habit.howManyTimesToToggle
         }
     }
-    
-    
     private var isCompleted: Bool {
         habit.isCompleted(on: day)
     }
-    
     private var circleColor: Color {
         switch isCompleted {
         case true:
@@ -36,9 +33,7 @@ struct HabitViewComponent: View {
             return Color.textFieldBackground
         }
     }
-    
     private var habbitIsByTimer: Bool { habit.habitCompleteness == .byTimer }
-    
     private var progressTimer: String {
         if let habitLog = habit.habitLogs?.first(where: {
             Calendar.current.isDate($0.completionDate, inSameDayAs: day)
@@ -47,7 +42,6 @@ struct HabitViewComponent: View {
         }
         return ""
     }
-
     private var progressDone: Int {
         let habitLog = habit.habitLogs?.first(where: {
             Calendar.current.isDate($0.completionDate, inSameDayAs: day)
@@ -61,7 +55,6 @@ struct HabitViewComponent: View {
             return 0
         }
     }
-    
     private func showProgressDone() -> String {
         return progressTimer
     }

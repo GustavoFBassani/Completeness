@@ -10,7 +10,6 @@ import SwiftData
 
 struct HabitView: View {
     @Bindable var viewModel: HabitsViewModel
-    @State private var habbitToEdit: Habit?
     @Binding var refreshView: Bool
     
     let configsVMFactory: HabitsConfigVMFactory
@@ -28,27 +27,28 @@ struct HabitView: View {
                             Task {
                                 await viewModel.didTapHabit(habitWithPosition)
                                 refreshView.toggle()
+                                if habitWithPosition.habitCompleteness == .byTimer {
+                                    viewModel.isTimeStoped.toggle()
+                                }
                             }
                         }
                         .onLongPressGesture {
-                            habbitToEdit = habitWithPosition
-                            print(habitWithPosition.howManyTimesToToggle)
+                            viewModel.selectedHabit = habitWithPosition
                         }
-                        .sheet(item: $habbitToEdit, onDismiss: {
+                        .sheet(item: $viewModel.selectedHabit, onDismiss: {
                             Task {
                                 await viewModel.loadData()
                                 refreshView.toggle()
                             }
-                        }) { habit in
-                            HabitsConfigView(id: habit.id,
-                                             viewModel: configsVMFactory.editHabits(
-                                                habitName: habit.habitName,
-                                                scheduleDays: habit.scheduleDays,
-                                                habitSimbol: habit.habitSimbol,
-                                                habitCompleteness: habit.habitCompleteness,
-                                                howManySecondsToComplete: habit.howManySecondsToComplete,
-                                                howManyTimesToToggle: habit.howManyTimesToToggle,
-                                                habitDescription: habit.habitDescription))
+                        }) {  habit in
+                            HabitSheetView(isTimeStoped: $viewModel.isTimeStoped,
+                                           resetHabitTimer: {Task{ await viewModel.resetHabitTimer(habit: habit) }; refreshView.toggle()},
+                                           completeTheHabitAutomatically: { Task {await viewModel.completeHabitAutomatically(habit: habit);  refreshView.toggle()}},
+                                           subtractOneStep: { Task { await viewModel.decreaseHabitSteps(habit: habit);  refreshView.toggle() }},
+                                           increaseOneStepOrStopAndPauseTimer: { Task { await viewModel.didTapHabit(habit); refreshView.toggle()}},
+                                           habit: habit,
+                                           configsVMFactory: configsVMFactory)
+                                .presentationDetents([.medium])
                         }
                 } else {
                     EmptyCircle()
@@ -102,11 +102,9 @@ struct HabitView: View {
                             showHabitsRow(witch: row)
                         }
                     }
-                    .padding(.vertical, 16)
+                    .padding()
                 }
                 .defaultScrollAnchor(.top)
-                
-                
             default:
                 EmptyView()
             }

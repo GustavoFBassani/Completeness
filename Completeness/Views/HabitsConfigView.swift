@@ -185,7 +185,6 @@ struct HabitsConfigView: View {
                                 viewModel.id = id
                                 Task { await viewModel.deleteHabitById()
                                     dismiss()
-                                    dismiss()
                                 }
                             } label: {
                                 Text("Excluir hábito")
