@@ -11,6 +11,9 @@
         }
       }
     },
+    "%.0f%%" : {
+
+    },
     "%lld" : {
       "localizations" : {
         "en" : {
@@ -23,16 +26,6 @@
     },
     "%lld habitos feitos" : {
 
-    },
-    "%lld/%lld" : {
-      "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld/%2$lld"
-          }
-        }
-      }
     },
     "🏆 Hábitos Mais Concluídos" : {
       "localizations" : {
@@ -166,6 +159,9 @@
     "Agora é \n com você!" : {
 
     },
+    "Ao excluir, você perderá todos os seus resumos e dados do seu hábito" : {
+
+    },
     "Apagar dados" : {
       "localizations" : {
         "en" : {
@@ -246,9 +242,6 @@
           }
         }
       }
-    },
-    "Carregando estatísticas..." : {
-
     },
     "Claro" : {
       "localizations" : {
@@ -367,9 +360,6 @@
           }
         }
       }
-    },
-    "Em breve" : {
-
     },
     "Erro" : {
       "localizations" : {
@@ -594,6 +584,9 @@
     "Iniciar tempo" : {
 
     },
+    "Iniciar Tempo" : {
+
+    },
     "Meta" : {
       "localizations" : {
         "en" : {
@@ -720,6 +713,9 @@
         }
       }
     },
+    "Pausar" : {
+
+    },
     "Permitir notificações" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -796,7 +792,6 @@
       }
     },
     "Resumo" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1022,6 +1017,12 @@
           }
         }
       }
+    },
+
+    "Voçê tem certeza que deseja excluir esse hábito?" : {
+
+    },
+    "Voltar a editar" : {
     }
   },
   "version" : "1.0"

@@ -13,4 +13,7 @@ protocol HabitCompletionProtocol {
     func completeByToggle(id: UUID, on date: Date) async
     func completeByMultipleToggle(id: UUID, on date: Date) async
     func completeByTimer(id: UUID, on date: Date) async
+    func completeToggleAndMultipleToggleAutomatic(id: UUID, on date: Date)  async
+    func decreaseHabitStep(id: UUID, on date: Date) async
+    func restartHabitTimer(id: UUID, on date: Date) async
 }

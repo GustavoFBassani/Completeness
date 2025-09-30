@@ -74,9 +74,9 @@ let maxValue = 5
     }
 }
 
-#Preview {
-    HabitSheetView()
-}
+//#Preview {
+//    HabitSheetView()
+//}
 //import SwiftUI
 //
 //struct HabitSheetTimerView: View {

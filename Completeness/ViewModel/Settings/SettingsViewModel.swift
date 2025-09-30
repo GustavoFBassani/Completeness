@@ -5,7 +5,6 @@ final class SettingsViewModel: SettingsViewModelProtocol, ObservableObject {
     let biometryKey = "isBiometryEnabled"
     var biometricManager: BiometricManagerProtocol
     let userDefaults: UserDefaults
-
     var showPermissionAlert = false
     var alertMessage = ""
 

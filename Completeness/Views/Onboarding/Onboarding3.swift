@@ -16,7 +16,7 @@ struct Onboarding3: View {
             Image("Frame 1")
                 .scaledToFill()
                 .ignoresSafeArea()
-                .padding(.bottom ,90)
+                .padding(.bottom, 90)
                 .opacity(0.3)
             Image("Group 2")
                 .scaledToFill()
