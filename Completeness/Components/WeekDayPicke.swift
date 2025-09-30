@@ -18,7 +18,7 @@ struct WeekDayPicker: View {
     private let horizontalPadding: CGFloat = 16
     private let itemSpacing: CGFloat = 8
     private let itemHeight: CGFloat = 62
-    private let itemCornerRadius: CGFloat = 12
+    private let itemCornerRadius: CGFloat = 16
     private let topPadding: CGFloat = 6
     private let bottomPadding: CGFloat = -18
     
