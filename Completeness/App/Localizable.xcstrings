@@ -27,16 +27,6 @@
     "%lld habitos feitos" : {
 
     },
-    "%lld/%lld" : {
-      "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld/%2$lld"
-          }
-        }
-      }
-    },
     "🏆 Hábitos Mais Concluídos" : {
       "localizations" : {
         "en" : {
@@ -597,6 +587,9 @@
     "Iniciar tempo" : {
 
     },
+    "Iniciar Tempo" : {
+
+    },
     "Meta" : {
       "localizations" : {
         "en" : {
@@ -722,6 +715,9 @@
           }
         }
       }
+    },
+    "Pausar" : {
+
     },
     "Permitir notificações" : {
       "extractionState" : "stale",
@@ -1025,11 +1021,11 @@
         }
       }
     },
+
     "Voçê tem certeza que deseja excluir esse hábito?" : {
 
     },
     "Voltar a editar" : {
-
     }
   },
   "version" : "1.0"

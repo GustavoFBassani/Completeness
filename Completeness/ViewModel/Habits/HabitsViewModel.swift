@@ -22,9 +22,9 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
     var state: HabitsStates = .idle
     var selectedDate: Date = .now {
         didSet {
-           filteredHabits = habits.filter {
-               $0.isScheduled(for: selectedDate)
-           }
+            filteredHabits = habits.filter {
+                $0.isScheduled(for: selectedDate)
+            }
         }
     }
     var errorMessage: String?
@@ -33,8 +33,8 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
     var habitService: HabitRepositoryProtocol
     var textField = ""
     var filteredHabits: [Habit] = []
-    
     var createHabbitWithPosition: Position?
+    var selectedHabit: Habit?
     
     init(habitCompletionService: HabitCompletionProtocol, habitService: HabitRepositoryProtocol) {
         self.habitCompletionService = habitCompletionService
@@ -74,22 +74,48 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
         await completeHabit(habit: habit, on: selectedDate)
         await loadData()
     }
-    
-    @MainActor
-    func loadData() async {
-        do {
-            try await getAllHabits()
-
-            filteredHabits = habits.filter {
-                $0.isScheduled(for: selectedDate)
-            }
-            
-            print(filteredHabits)
-
-            state = .loaded
-        } catch {
-            errorMessage = "Error fetching products: \(error.localizedDescription)"
-            state = .error
-        }
+    //used at sheet --------
+    var isTimeStoped = true
+    func didTapSelectedHabit(_ habit: Habit) async {
+        await completeHabit(habit: habit, on: selectedDate)
+        await loadData()
     }
+    
+    func completeHabitAutomatically(habit: Habit) async {
+        await habitCompletionService.completeToggleAndMultipleToggleAutomatic(id: habit.id, on: selectedDate)
+    }
+    
+    func decreaseHabitSteps(habit: Habit) async {
+        await habitCompletionService.decreaseHabitStep(id: habit.id, on: selectedDate)
+    }
+    
+    func resetHabitTimer(habit: Habit) async {
+        await habitCompletionService.restartHabitTimer(id: habit.id, on: selectedDate)
+    }
+    // --------------------
+    func getHabitLog(habit: Habit) -> HabitLog? {
+        if let habitLog = habit.habitLogs?.first(where: {log in
+            log.completionDate == selectedDate }) {
+            return habitLog
+        }
+        return nil
+    }
+
+@MainActor
+func loadData() async {
+    do {
+        try await getAllHabits()
+        
+        filteredHabits = habits.filter {
+            $0.isScheduled(for: selectedDate)
+        }
+        
+        print(filteredHabits)
+        
+        state = .loaded
+    } catch {
+        errorMessage = "Error fetching products: \(error.localizedDescription)"
+        state = .error
+    }
+}
 }
