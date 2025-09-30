@@ -1021,11 +1021,14 @@
         }
       }
     },
-
     "Voçê tem certeza que deseja excluir esse hábito?" : {
 
     },
     "Voltar a editar" : {
+
+    },
+    "Zerar Tempo" : {
+
     }
   },
   "version" : "1.0"
