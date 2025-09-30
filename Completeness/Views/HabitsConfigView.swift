@@ -185,9 +185,6 @@ struct HabitsConfigView: View {
                             Button {
                                 showDeleteAlert = true
                                 viewModel.id = id
-                                Task { await viewModel.deleteHabitById()
-                                    dismiss()
-                                }
                             } label: {
                                 Text("Excluir hábito")
                                     .frame(maxWidth: .infinity)
