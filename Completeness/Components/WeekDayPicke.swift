@@ -12,7 +12,6 @@ struct WeekDayPicker: View {
     // Alcance de semanas que podem ser navegadas (ex.: -52..+52 = ~2 anos)
     private let weeksRange: ClosedRange<Int> = -52...52
     @State private var currentWeekOffset: Int = 0
-    
     private var calendar: Calendar { Calendar.current }
     
     // Layout constants para estabilidade visual
@@ -21,64 +20,65 @@ struct WeekDayPicker: View {
     private let itemHeight: CGFloat = 62
     private let itemCornerRadius: CGFloat = 12
     private let topPadding: CGFloat = 6
-    private let bottomPadding: CGFloat = 6
+    private let bottomPadding: CGFloat = -18
     
     var body: some View {
-        TabView(selection: $currentWeekOffset) {
-            ForEach(weeksRange, id: \.self) { offset in
-                GeometryReader { proxy in
-                    // Calcula a largura exata para 7 itens + 6 espaçamentos
-                    let availableWidth = max(0, proxy.size.width - (horizontalPadding * 2))
-                    let totalSpacing = itemSpacing * 6
-                    let rawItemWidth = (availableWidth - totalSpacing) / 7
-                    let itemWidth = max(40, floor(rawItemWidth)) // largura mínima defensiva
-                    
-                    HStack(spacing: itemSpacing) {
-                        ForEach(weekDays(for: offset), id: \.self) { date in
-                            let isSelected = calendar.isDate(date, inSameDayAs: selectedDate)
-                            
-                            VStack(spacing: 4) {
-                                Text("\(calendar.component(.day, from: date))")
-                                    .font(.headline)
-                                    .foregroundColor(isSelected ? .indigo : .primary)
+            TabView(selection: $currentWeekOffset) {
+                ForEach(weeksRange, id: \.self) { offset in
+                    GeometryReader { proxy in
+                        // Calcula a largura exata para 7 itens + 6 espaçamentos
+                        let availableWidth = max(0, proxy.size.width - (horizontalPadding * 2))
+                        let totalSpacing = itemSpacing * 6
+                        let rawItemWidth = (availableWidth - totalSpacing) / 7
+                        let itemWidth = max(40, floor(rawItemWidth)) // largura mínima defensiva
+                        
+                        HStack(spacing: itemSpacing) {
+                            ForEach(weekDays(for: offset), id: \.self) { date in
+                                let isSelected = calendar.isDate(date, inSameDayAs: selectedDate)
                                 
-                                Text(shortWeekdayFormatter.string(from: date).withoutDot.capitalized)
-                                    .font(.caption)
-                                    .foregroundColor(isSelected ? .indigo : .gray)
-                            }
-                            .frame(width: itemWidth, height: itemHeight)
-                            .background(
-                                RoundedRectangle(cornerRadius: itemCornerRadius)
-                                    .fill(Color.backgroundPrimary)
-                            )
-                            .overlay(
-                                RoundedRectangle(cornerRadius: itemCornerRadius)
-                                    .stroke(isSelected ? Color.indigo : .clear, lineWidth: 2)
-                            )
-                            .contentShape(RoundedRectangle(cornerRadius: itemCornerRadius))
-                            .onTapGesture {
-                                selectedDate = date
+                                VStack(spacing: 4) {
+                                    Text("\(calendar.component(.day, from: date))")
+                                        .font(.headline)
+                                        .foregroundColor(isSelected ? .indigo : .primary)
+                                    
+                                    Text(shortWeekdayFormatter.string(from: date).withoutDot.capitalized)
+                                        .font(.caption)
+                                        .foregroundColor(isSelected ? .indigo : .gray)
+                                }
+                                .frame(width: itemWidth, height: itemHeight)
+                                .background(
+                                    RoundedRectangle(cornerRadius: itemCornerRadius)
+                                        .fill(Color.backgroundPrimary)
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: itemCornerRadius)
+                                        .stroke(isSelected ? Color.indigo : .clear, lineWidth: 2)
+                                )
+                                .contentShape(RoundedRectangle(cornerRadius: itemCornerRadius))
+                                .onTapGesture {
+                                    selectedDate = date
+                                }
                             }
                         }
+                        .padding(.horizontal, horizontalPadding)
+                        .padding(.top, topPadding)       // espaço com o título
+                        .padding(.bottom, bottomPadding) // evita corte na base
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                     }
-                    .padding(.horizontal, horizontalPadding)
-                    .padding(.top, topPadding)       // espaço com o título
-                    .padding(.bottom, bottomPadding) // evita corte na base
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                    .tag(offset)
                 }
-                .tag(offset)
+            }
+            .padding(.top, -20)
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .frame(height: itemHeight + topPadding + bottomPadding)
+            .onAppear {
+                currentWeekOffset = clampedOffset(for: selectedDate)
+            }
+            .onChange(of: selectedDate) { newValue in
+                currentWeekOffset = clampedOffset(for: newValue)
             }
         }
-        .tabViewStyle(.page(indexDisplayMode: .never))
-        // Altura estável incluindo os paddings verticais
-        .frame(height: itemHeight + topPadding + bottomPadding)
-        .onAppear {
-            currentWeekOffset = clampedOffset(for: selectedDate)
-        }
-        .onChange(of: selectedDate) { newValue in
-            currentWeekOffset = clampedOffset(for: newValue)
-        }
-    }
+    
     
     // MARK: - Helpers
     
@@ -120,7 +120,6 @@ private let shortWeekdayFormatter: DateFormatter = {
     return df
 }()
 
-// para remover o ponto
 extension String {
     var withoutDot: String {
         self.replacingOccurrences(of: ".", with: "")
