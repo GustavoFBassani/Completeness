@@ -86,7 +86,7 @@ struct HabitView: View {
             .padding(.horizontal)
             
             WeekDayPicker(selectedDate: $viewModel.selectedDate)
-                .padding(.vertical, 16)
+//                .padding(.vertical, 16)
             
             Divider()
             
@@ -116,5 +116,6 @@ struct HabitView: View {
         .background(.backgroundSecondary)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .task { await viewModel.loadData() }
+//        .navigationTitle("Hábitos")
     }
 }
