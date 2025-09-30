@@ -135,6 +135,8 @@ class HabitConfigViewModel {
         }
     }
     
+    //func triggerNotifications() { //chamar função do servico }
+    
     func toggleSelection(for day: Int) {
         if let index = selectedDays.firstIndex(of: day) {
             selectedDays.remove(at: index)

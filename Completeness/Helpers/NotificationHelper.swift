@@ -9,15 +9,15 @@ import Foundation
 import UserNotifications
 import UIKit
 
-final class NotificationHelper: NSObject, UNUserNotificationCenterDelegate {
+ class NotificationHelper: NSObject, UNUserNotificationCenterDelegate {
     static let shared = NotificationHelper()
     
     private let center = UNUserNotificationCenter.current()
     private let enabledKey = "notificationEnabled"
     private let badgeKey = "badgeEnabled"
     private let permissionKey = "notificationPermissionGranted"
-
-    override private init() {
+     
+    override init() {
         super.init()
         center.delegate = self
     }
@@ -62,8 +62,6 @@ final class NotificationHelper: NSObject, UNUserNotificationCenterDelegate {
         body: String,
         timeInterval: TimeInterval
     ) {
-        guard isEnabled else { return }
-
         let content = makeContent(title: title, body: body)
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: max(1, timeInterval), repeats: false)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
@@ -80,8 +78,6 @@ final class NotificationHelper: NSObject, UNUserNotificationCenterDelegate {
         minute: Int,
         weekdays: [Int] = []
     ) {
-        guard isEnabled else { return }
-
         let content = makeContent(title: title, body: body)
 
         if weekdays.isEmpty {
@@ -105,6 +101,60 @@ final class NotificationHelper: NSObject, UNUserNotificationCenterDelegate {
             }
         }
     }
+     
+     func weeklyNotification(
+         title: String,
+         body: String
+     ) {
+         let content = makeContent(title: title, body: body)
+
+         var comps = DateComponents()
+         comps.hour = 12
+         comps.minute = 12
+         comps.weekday = 2
+
+         let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: true)
+         let request = UNNotificationRequest(
+             identifier: UUID().uuidString,
+             content: content,
+             trigger: trigger
+         )
+         center.add(request, withCompletionHandler: nil)
+     }
+
+     func nightlyNotification(
+        title: String,
+        body: String
+     ) {
+        stopAllNotifications()
+        weeklyNotification(title: "Resumo da sua semana", body: "Veja como você se saiu nos seus hábitos nesta semana!")
+
+        let content = makeContent(title: title, body: body)
+
+        var comps = DateComponents()
+         comps.hour = 21
+         comps.minute = 21
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: true)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        center.add(request, withCompletionHandler: nil)
+    }
+
+     func dailyNotification(
+        title: String,
+        body: String
+    ) {
+        let content = makeContent(title: title, body: body)
+
+        var comps = DateComponents()
+        comps.hour = 12
+        comps.minute = 12
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: true)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        center.add(request, withCompletionHandler: nil)
+    }
+
 
     /// Function that schedules a one-time notification at specific time (today).
     func scheduledOneTimeNotification(
@@ -113,8 +163,6 @@ final class NotificationHelper: NSObject, UNUserNotificationCenterDelegate {
         hour: Int,
         minute: Int
     ) {
-        guard isEnabled else { return }
-
         var comps = DateComponents()
         comps.hour = hour
         comps.minute = minute
@@ -128,6 +176,7 @@ final class NotificationHelper: NSObject, UNUserNotificationCenterDelegate {
 
     /// Remove all pending and delivered notifications.
     func stopAllNotifications() {
+        print("Notificações apagadas")
         center.removeAllPendingNotificationRequests()
         center.removeAllDeliveredNotifications()
     }
@@ -137,10 +186,10 @@ final class NotificationHelper: NSObject, UNUserNotificationCenterDelegate {
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body
-        if isBadgeEnabled {
-            let current = UIApplication.shared.applicationIconBadgeNumber
-            content.badge = NSNumber(value: max(0, current) + 1)
-        }
+
+        let current = UIApplication.shared.applicationIconBadgeNumber
+        content.badge = NSNumber(value: max(0, current) + 1)
+
         content.sound = .default
         return content
     }
@@ -160,3 +209,4 @@ final class NotificationHelper: NSObject, UNUserNotificationCenterDelegate {
         completionHandler(options)
     }
 }
+

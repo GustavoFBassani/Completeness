@@ -10,7 +10,7 @@ import SwiftData
 
 struct ConfigView: View {
     @AppStorage("notificationEnabled") private var notificationEnabled = true
-    @AppStorage("badgeEnabled") private var badgeEnabled = true
+    @AppStorage("dailyNotification") private var dailyNotification = true
     @AppStorage("selectedTheme") private var selectedTheme = "system"
     @AppStorage("faceIDEnabled") private var faceIDEnabled = false
     @AppStorage("selectedLanguage") private var selectedLanguage = "pt"
@@ -83,13 +83,7 @@ struct ConfigView: View {
                 }
             }
             
-            Section(header: Text("Notificações")) {
-                HStack {
-                    Image(systemName: "app.badge")
-                        .foregroundStyle(.indigoCustom)
-                    Toggle("Avisos", isOn: $badgeEnabled)
-                }
-                .tint(.green)
+            Section(header: Text("Notificações no App")) {
                 
                 HStack {
                     Image(systemName: "bell.badge")
@@ -119,6 +113,43 @@ struct ConfigView: View {
                         }
                     ))
                 }
+                
+                HStack {
+                    Image(systemName: "app.badge")
+                        .foregroundStyle(.indigoCustom)
+                    Toggle("Lembrete diário", isOn: Binding(
+                        get: { dailyNotification },
+                        set: { newValue in
+                            Task {
+                                if newValue {
+                                    dailyNotification = true
+                                    print("toggle trocado - on")
+                                } else {
+                                    dailyNotification = false
+                                    print("toggle trocado - off")
+                                }
+                            }
+                        }
+                    ))
+                }
+                .tint(.green)
+
+//                HStack {
+//                    Image(systemName: "app.badge")
+//                        .foregroundStyle(.indigoCustom)
+//                    Toggle("Resumo diário", isOn: $dailyNotification)
+//                }
+//                .tint(.green)
+//
+//                HStack {
+//                    Image(systemName: "app.badge")
+//                        .foregroundStyle(.indigoCustom)
+//                    Toggle("Resumo semanal", isOn: $dailyNotification)
+//                }
+//                .tint(.green)
+                
+                
+                
                 .tint(.green)
             }
         

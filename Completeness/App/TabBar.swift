@@ -17,7 +17,10 @@ struct TabBar: View {
             Tab("Hábitos", systemImage: "circle.hexagongrid"){
                 NavigationStack{
                     HabitView(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context),
-                                                         habitService: HabitRepository(context: context)),
+                                                         habitService: HabitRepository(context: context),
+                                                         notificationService: NotificationHelper(),
+                                                         chartsService: ChartsService(modelContext: context),
+                                                        ),
                               refreshView: $refreshView,
                               configsVMFactory: HabitsConfigVMFactory(repositoryFactory: HabitRepositoryFactory(context: context)))
                 }
@@ -32,6 +35,11 @@ struct TabBar: View {
             Tab("Configurações", systemImage: "gearshape"){
                 NavigationStack{
                     ConfigView()
+                }
+            }
+            Tab("Notifications", systemImage: "bell.badge"){
+                NavigationStack{
+                    Notification2Tests()
                 }
             }
         }

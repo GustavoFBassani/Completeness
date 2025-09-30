@@ -33,12 +33,19 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
     var habitService: HabitRepositoryProtocol
     var textField = ""
     var filteredHabits: [Habit] = []
+    var notificationService: NotificationHelper
+    var chartsService: ChartsService
     
     var createHabbitWithPosition: Position?
     
-    init(habitCompletionService: HabitCompletionProtocol, habitService: HabitRepositoryProtocol) {
+    init(habitCompletionService: HabitCompletionProtocol,
+         habitService: HabitRepositoryProtocol,
+         notificationService: NotificationHelper,
+         chartsService: ChartsService) {
         self.habitCompletionService = habitCompletionService
         self.habitService = habitService
+        self.notificationService = notificationService
+        self.chartsService = chartsService
     }
     
     // MARK: - Functions
@@ -51,6 +58,8 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
             state = .error
         }
     }
+    
+    //func triggerNotification() { notificationService.algo}
     
     func completeHabit(habit: Habit, on date: Date) async {
         switch habit.habitCompleteness {
@@ -71,6 +80,11 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
     
     @MainActor
     func didTapHabit(_ habit: Habit) async {
+        let allHabits = await chartsService.getNumberOfHabbits(inLastDays: 1)
+        let countDoneHabitsPerDay = await chartsService.getNumberOfHabbitsCompleted(inLastDays: 1)
+        
+        notificationService.nightlyNotification(title: "Resumo do seu dia", body: "Você completou \(countDoneHabitsPerDay) de \(allHabits) hábitos hoje, muito bom!")
+        notificationService.dailyNotification(title: "Continue assim!", body: "Faltam \(allHabits - countDoneHabitsPerDay) hábitos para você concluir seu dia!")
         await completeHabit(habit: habit, on: selectedDate)
         await loadData()
     }
@@ -93,3 +107,4 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
         }
     }
 }
+
