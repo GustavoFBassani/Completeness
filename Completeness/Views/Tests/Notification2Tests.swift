@@ -69,27 +69,24 @@ struct Notification2Tests: View {
                 Spacer()
             }
             .task {
-                let granted = await NotificationHelper.shared.requestNotificationPermissions()
-                if granted {
-                    NotificationHelper.shared.setDelegate()
-                }
+                _ = await NotificationHelper().requestNotificationPermissions()
             }
         }
     }
     
     //PARA QUEM FOR TIRAR DO TESTE, COLOCAR ESTA FUNÇÃO NA VIEWMODEL ESPECÍFICA
     private func buttonTapped() {
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: selectedTime)
-        let minute = calendar.component(.minute, from: selectedTime)
-        
-        NotificationHelper.shared.scheduledDailyNotification(
-                title: notificationTitle,
-                body: notificationBody,
-                hour: hour,
-                minute: minute,
-                weekdays: Array(selectedWeekdays)
-            )
+//        let calendar = Calendar.current
+//        let hour = calendar.component(.hour, from: selectedTime)
+//        let minute = calendar.component(.minute, from: selectedTime)
+//        
+//        NotificationHelper.scheduledDailyNotification(
+//                title: notificationTitle,
+//                body: notificationBody,
+//                hour: hour,
+//                minute: minute,
+//                weekdays: Array(selectedWeekdays)
+//            )
     }
 }
 

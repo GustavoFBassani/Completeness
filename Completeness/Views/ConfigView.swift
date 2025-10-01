@@ -9,8 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct ConfigView: View {
-    @AppStorage("notificationEnabled") private var notificationEnabled = true
     @AppStorage("dailyNotification") private var dailyNotification = true
+    @AppStorage("nightlyNotification") private var nightlyNotification = true
+    @AppStorage("weeklyNotification") private var weeklyNotification = true
     @AppStorage("selectedTheme") private var selectedTheme = "system"
     @AppStorage("faceIDEnabled") private var faceIDEnabled = false
     @AppStorage("selectedLanguage") private var selectedLanguage = "pt"
@@ -84,38 +85,8 @@ struct ConfigView: View {
             }
             
             Section(header: Text("Notificações no App")) {
-                
                 HStack {
                     Image(systemName: "bell.badge")
-                        .foregroundStyle(.indigoCustom)
-                    Toggle("Permitir notificações", isOn: Binding(
-                        get: { notificationEnabled },
-                        set: { newValue in
-                            Task {
-                                if newValue {
-                                    let granted = await NotificationHelper.shared.requestNotificationPermissions()
-                                    if !granted {
-                                        // Reverte a chave se o usuário negar
-                                        notificationEnabled = false
-                                        errorMessage = "Permissão de notificação negada nas Configurações do sistema."
-                                        showError = true
-                                    } else {
-                                        notificationEnabled = true
-                                        // Garante que sejamos delegate para controlar apresentação em primeiro plano
-                                        NotificationHelper.shared.setDelegate()
-                                    }
-                                } else {
-                                    notificationEnabled = false
-                                    NotificationHelper.shared.stopAllNotifications()
-                                    try? await UNUserNotificationCenter.current().setBadgeCount(0)
-                                }
-                            }
-                        }
-                    ))
-                }
-                
-                HStack {
-                    Image(systemName: "app.badge")
                         .foregroundStyle(.indigoCustom)
                     Toggle("Lembrete diário", isOn: Binding(
                         get: { dailyNotification },
@@ -123,33 +94,55 @@ struct ConfigView: View {
                             Task {
                                 if newValue {
                                     dailyNotification = true
-                                    print("toggle trocado - on")
+                                    print("notificação de incentivo - on")
                                 } else {
                                     dailyNotification = false
-                                    print("toggle trocado - off")
+                                    print("notificação incentivo - off")
                                 }
                             }
                         }
                     ))
                 }
                 .tint(.green)
-
-//                HStack {
-//                    Image(systemName: "app.badge")
-//                        .foregroundStyle(.indigoCustom)
-//                    Toggle("Resumo diário", isOn: $dailyNotification)
-//                }
-//                .tint(.green)
-//
-//                HStack {
-//                    Image(systemName: "app.badge")
-//                        .foregroundStyle(.indigoCustom)
-//                    Toggle("Resumo semanal", isOn: $dailyNotification)
-//                }
-//                .tint(.green)
                 
+                HStack {
+                    Image(systemName: "clock.badge")
+                        .foregroundStyle(.indigoCustom)
+                    Toggle("Resumo diário", isOn: Binding(
+                        get: { nightlyNotification },
+                        set: { newValue in
+                            Task {
+                                if newValue {
+                                    nightlyNotification = true
+                                    print("notificação noturna - on")
+                                } else {
+                                    nightlyNotification = false
+                                    print("notificação noturna - off")
+                                }
+                            }
+                        }
+                    ))
+                }
+                .tint(.green)
                 
-                
+                HStack {
+                    Image(systemName: "calendar.badge")
+                        .foregroundStyle(.indigoCustom)
+                    Toggle("Resumo semanal", isOn: Binding(
+                        get: { weeklyNotification },
+                        set: { newValue in
+                            Task {
+                                if newValue {
+                                    weeklyNotification = true
+                                    print("notificação semanal - on")
+                                } else {
+                                    weeklyNotification = false
+                                    print("notificação semanal - off")
+                                }
+                            }
+                        }
+                    ))
+                }
                 .tint(.green)
             }
         
@@ -197,7 +190,6 @@ struct ConfigView: View {
             }
         }
         .navigationTitle("Configurações")
-        .onAppear { NotificationHelper.shared.setDelegate() }
         .alert("Erro", isPresented: $showError) {
             Button("OK", role: .cancel) {}
         } message: {

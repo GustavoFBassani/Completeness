@@ -41,28 +41,25 @@ struct notificationTest: View {
             }
         }
         .task {
-            let granted = await NotificationHelper.shared.requestNotificationPermissions()
-            if granted {
-                NotificationHelper.shared.setDelegate()
-            }
+//            let granted = await NotificationHelper.requestNotificationPermissions()
         }
     }
 
     //PARA QUEM FOR TIRAR DO TESTE, COLOCAR ESTA FUNÇÃO NA VIEWMODEL ESPECÍFICA
     private func actionButtonTapped() {
-        if UserDefaults.standard.bool(forKey: "notificationEnabled"){
-            if let time = Int(intervalText), time > 0 {
-                interval = time
-                NotificationHelper.shared.regressiveNotification(
-                    title: notificationTitle,
-                    body: notificationBody,
-                    timeInterval: TimeInterval(interval)
-                )
-                print("Notificação agendada em \(interval) segundos")
-            } else {
-                print("Digite um tempo válido")
-            }
-        }
+//        if UserDefaults.standard.bool(forKey: "notificationEnabled"){
+//            if let time = Int(intervalText), time > 0 {
+//                interval = time
+//                NotificationHelper.regressiveNotification(
+//                    title: notificationTitle,
+//                    body: notificationBody,
+//                    timeInterval: TimeInterval(interval)
+//                )
+//                print("Notificação agendada em \(interval) segundos")
+//            } else {
+//                print("Digite um tempo válido")
+//            }
+//        }
     }
 }
 

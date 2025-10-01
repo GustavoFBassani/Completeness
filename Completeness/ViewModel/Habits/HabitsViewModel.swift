@@ -59,8 +59,6 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
         }
     }
     
-    //func triggerNotification() { notificationService.algo}
-    
     func completeHabit(habit: Habit, on date: Date) async {
         switch habit.habitCompleteness {
         case .byMultipleToggle:
@@ -78,13 +76,59 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
         habitService.saveChanges()
     }
     
-    @MainActor
-    func didTapHabit(_ habit: Habit) async {
+//    func triggerNotifications() async {
+//        let allHabits = await chartsService.getNumberOfHabbits(inLastDays: 1)
+//        let countDoneHabitsPerDay = await chartsService.getNumberOfHabbitsCompleted(inLastDays: 1)
+//        
+//        notificationService.stopAllNotifications()
+//        notificationService.weeklyNotification(title: "Resumo da sua semana", body: "Veja como você se saiu nos seus hábitos nesta semana!")
+//        notificationService.nightlyNotification(title: "Resumo do seu dia", body: "Você completou \(countDoneHabitsPerDay) de \(allHabits) hábitos hoje, muito bom!")
+//        notificationService.dailyNotification(title: "Continue assim!", body: "Faltam \(allHabits - countDoneHabitsPerDay) hábitos para você concluir seu dia!")
+//    }
+    
+    func triggerNotifications() async {
         let allHabits = await chartsService.getNumberOfHabbits(inLastDays: 1)
         let countDoneHabitsPerDay = await chartsService.getNumberOfHabbitsCompleted(inLastDays: 1)
         
-        notificationService.nightlyNotification(title: "Resumo do seu dia", body: "Você completou \(countDoneHabitsPerDay) de \(allHabits) hábitos hoje, muito bom!")
-        notificationService.dailyNotification(title: "Continue assim!", body: "Faltam \(allHabits - countDoneHabitsPerDay) hábitos para você concluir seu dia!")
+        notificationService.stopAllNotifications()
+        
+        // Notificação semanal
+        if UserDefaults.standard.bool(forKey: "weeklyNotification") {
+            notificationService.weeklyNotification(
+                title: "Resumo da sua semana",
+                body: "Veja como você se saiu nos seus hábitos nesta semana!"
+            )
+        } else {
+            notificationService.removeWeeklyNotification()
+        }
+        
+        // Notificação noturna
+        if UserDefaults.standard.bool(forKey: "nightlyNotification") {
+            notificationService.nightlyNotification(
+                title: "Resumo do seu dia",
+                body: "Você completou \(countDoneHabitsPerDay) de \(allHabits) hábitos hoje, muito bom!"
+            )
+        } else {
+            notificationService.removeNightlyNotification()
+        }
+        
+        // Notificação diária
+        if UserDefaults.standard.bool(forKey: "dailyNotification") {
+            notificationService.dailyNotification(
+                title: "Continue assim!",
+                body: "Faltam \(allHabits - countDoneHabitsPerDay) hábitos para você concluir seu dia!"
+            )
+        } else {
+            notificationService.removeDailyNotification()
+        }
+    }
+
+    
+    
+    
+    @MainActor
+    func didTapHabit(_ habit: Habit) async {
+        await triggerNotifications()
         await completeHabit(habit: habit, on: selectedDate)
         await loadData()
     }
@@ -107,4 +151,3 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
         }
     }
 }
-

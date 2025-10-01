@@ -37,11 +37,6 @@ struct TabBar: View {
                     ConfigView()
                 }
             }
-            Tab("Notifications", systemImage: "bell.badge"){
-                NavigationStack{
-                    Notification2Tests()
-                }
-            }
         }
         
         .onAppear(perform: {
