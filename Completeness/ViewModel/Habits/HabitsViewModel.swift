@@ -18,7 +18,7 @@ enum HabitsStates {
 
 // MARK: - ViewModel
 @Observable
-final class HabitsViewModel: HabitsProtocol, Sendable {
+final class HabitsViewModel: HabitsViewModelProtocol, Sendable {
     var state: HabitsStates = .idle
     var selectedDate: Date = .now {
         didSet {
@@ -92,7 +92,7 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
     func resetHabitTimer(habit: Habit) async {
         await habitCompletionService.restartHabitTimer(id: habit.id, on: selectedDate)
     }
-    // --------------------
+    
     func getHabitLog(habit: Habit) -> HabitLog? {
         if let habitLog = habit.habitLogs?.first(where: {log in
             log.completionDate == selectedDate }) {
