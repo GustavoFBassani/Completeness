@@ -18,7 +18,6 @@ let maxValue = 5
             ZStack {
                 Text("Aprender algo novo")
                     .font(.system(size: 17, weight: .semibold))
-
                 HStack {
                     Button {
                         dismiss()
