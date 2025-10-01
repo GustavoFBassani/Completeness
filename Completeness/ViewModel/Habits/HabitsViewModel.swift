@@ -35,7 +35,7 @@ final class HabitsViewModel: HabitsViewModelProtocol, Sendable {
     var filteredHabits: [Habit] = []
     var createHabbitWithPosition: Position?
     var selectedHabit: Habit?
-    var isHabbitWithIdRunning: [UUID : Bool] = [UUID() : false]
+    var isHabbitWithIdRunning: [UUID : Bool] = [:]
     var habitToVerifyIfIsRunning: Habit?
     
     init(habitCompletionService: HabitCompletionProtocol, habitService: HabitRepositoryProtocol) {
@@ -74,7 +74,8 @@ final class HabitsViewModel: HabitsViewModelProtocol, Sendable {
     func isHabitRunning() {
         if let habitToVerifyIfIsRunning {
             let isRunning = habitCompletionService.isHabbitRunning(with: habitToVerifyIfIsRunning.id)
-            isHabbitWithIdRunning = [habitToVerifyIfIsRunning.id : isRunning]
+            // Preserve existing running states for other habits and update only this habit's entry
+            isHabbitWithIdRunning[habitToVerifyIfIsRunning.id] = isRunning
         }
     }
     
