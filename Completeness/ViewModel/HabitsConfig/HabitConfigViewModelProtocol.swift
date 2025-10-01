@@ -16,7 +16,7 @@ protocol HabitConfigViewModelProtocol {
         var howManyTimesToComplete: Int { get set }
         var timesChoice: Int { get set } 
         
-        func createNewHabit() async
+        func createNewHabit() async -> Bool
         func deleteHabitById() async
         func toggleSelection(for day: Int)
 }

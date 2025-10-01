@@ -46,10 +46,43 @@ class HabitRepository: HabitRepositoryProtocol {
     func saveChanges() {
         try? context.save()
     }
-//    func deleteHabit(id: UUID) async {
-//        if let habitToDelete = await getHabitById(id: id) {
-//            context.delete(habitToDelete)
-//            try? context.save()
-//        }
-//    }
+    
+    // MARK: - Slot Conflict Validation
+    func hasSlotConflict(valuePosition: Int,
+                         indicePosition: Int,
+                         scheduleDays: [Int],
+                         excludingHabitID: UUID?) async -> Bool {
+        // Busca todos os hábitos no mesmo slot (linha/coluna)
+        let predicate = #Predicate<Habit> {
+            $0.valuePosition == valuePosition && $0.indicePosition == indicePosition
+        }
+        let descriptor = FetchDescriptor<Habit>(predicate: predicate)
+        let habitsAtSlot = (try? context.fetch(descriptor)) ?? []
+        
+        // Considera "todos os dias" se o array estiver vazio ou se contiver todos os 7 dias
+        let newDaysSet = Set(scheduleDays)
+        let isNewEveryday = scheduleDays.isEmpty || newDaysSet == Set(1...7)
+        
+        for existing in habitsAtSlot {
+            if let excludingHabitID, existing.id == excludingHabitID {
+                continue
+            }
+            
+            let existingSet = Set(existing.scheduleDays)
+            let isExistingEveryday = existing.scheduleDays.isEmpty || existingSet == Set(1...7)
+            
+            // Se qualquer um for "todos os dias", há conflito
+            if isNewEveryday || isExistingEveryday {
+                return true
+            }
+            
+            // Se houver interseção de dias, há conflito
+            if !existingSet.isDisjoint(with: newDaysSet) {
+                return true
+            }
+        }
+        
+        return false
+    }
 }
+

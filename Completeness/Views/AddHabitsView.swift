@@ -30,7 +30,6 @@ struct AddHabitsView: View {
                 
                 VStack(spacing: 20) {
                     // Seções dinâmicas
-                    
                     HabitSectionView(title: "Hábitos simples",
                                      rowPosition: rowPosition,
                                      colunmPosition: colunmPosition,
