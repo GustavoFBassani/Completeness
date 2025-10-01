@@ -25,6 +25,10 @@ class HabitConfigViewModel {
     var habitColunmPosition = 0
     var newHabitDate = Date()
     
+    // UI feedback
+    var showSlotConflictAlert = false
+    var conflictMessage = ""
+    
     // services
     var habitService: HabitRepositoryProtocol
 
@@ -97,32 +101,70 @@ class HabitConfigViewModel {
         self.newHabitDescription = newHabitDescription
     }
     
-    // MARK: - FUNCTIONS
-//    func getAllHabits() async throws {
-//        do {
-//            habits = try await habitService.getAllHabits()
-//        } catch {
-//            print("cannot get all Habits, ERROR: \(error.localizedDescription)")
-//        }
-//    }
-
+    // MARK: - Helper
+    private func isEveryday(_ days: [Int]) -> Bool {
+        let set = Set(days)
+        return days.isEmpty || set == Set(1...7)
+    }
     
-    func createNewHabit() async {
+    // MARK: - FUNCTIONS
+    @discardableResult
+    func createNewHabit() async -> Bool {
+        // Validação de conflito antes de salvar/editar
         if let id {
-            if let habitWithID = await habitService.getHabitById(id: id) {
-                habitWithID.habitName = habitName
-                habitWithID.habitDescription = newHabitDescription
-                habitWithID.habitSimbol = habitsSymbol
-                habitWithID.habitCompleteness = completenessType
-                habitWithID.howManyTimesToToggle = howManyTimesToComplete
-                habitWithID.scheduleDays = selectedDays
-                habitWithID.howManySecondsToComplete = timesChoice
-                habitService.saveChanges()
+            // Edição: buscar o hábito para obter o slot atual e validar ignorando o próprio id
+            guard let habitWithID = await habitService.getHabitById(id: id) else {
+                return false
             }
+            
+            let conflict = await habitService.hasSlotConflict(
+                valuePosition: habitWithID.valuePosition,
+                indicePosition: habitWithID.indicePosition,
+                scheduleDays: selectedDays,
+                excludingHabitID: id
+            )
+            
+            if conflict {
+                showSlotConflictAlert = true
+                conflictMessage = isEveryday(selectedDays)
+                ? "Já existe um hábito nesse círculo que conflita com 'Todos os dias'."
+                : "Já existe um hábito nesse círculo para um ou mais dos dias selecionados."
+                return false
+            }
+            
+            // Sem conflito: aplicar alterações e salvar
+            habitWithID.habitName = habitName
+            habitWithID.habitDescription = newHabitDescription
+            habitWithID.habitSimbol = habitsSymbol
+            habitWithID.habitCompleteness = completenessType
+            habitWithID.howManyTimesToToggle = howManyTimesToComplete
+            habitWithID.scheduleDays = selectedDays
+            habitWithID.howManySecondsToComplete = timesChoice
+            habitService.saveChanges()
+            return true
         } else {
+            // Criação: validar no slot informado no VM
+            let conflict = await habitService.hasSlotConflict(
+                valuePosition: habitRowPosition,
+                indicePosition: habitColunmPosition,
+                scheduleDays: selectedDays,
+                excludingHabitID: nil
+            )
+            
+            if conflict {
+                showSlotConflictAlert = true
+                conflictMessage = isEveryday(selectedDays)
+                ? "Já existe um hábito nesse círculo que conflita com 'Todos os dias'."
+                : "Já existe um hábito nesse círculo para um ou mais dos dias selecionados."
+                return false
+            }
+            
+            // Sem conflito: criar e salvar
             let newHabit = Habit(
                 habitName: habitName,
                 habitDescription: newHabitDescription,
+                habitColor: "",
+                habitRecurrence: "",
                 habitSimbol: habitsSymbol,
                 habitCompleteness: completenessType,
                 howManyTimesToToggle: howManyTimesToComplete,
@@ -131,7 +173,8 @@ class HabitConfigViewModel {
                 indicePosition: habitColunmPosition,
                 howManySecondsToComplete: timesChoice
             )
-                await habitService.createHabit(habit: newHabit)
+            await habitService.createHabit(habit: newHabit)
+            return true
         }
     }
     
@@ -152,3 +195,4 @@ class HabitConfigViewModel {
         }
     }
 }
+

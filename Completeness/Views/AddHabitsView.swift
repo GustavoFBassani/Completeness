@@ -20,7 +20,7 @@ struct AddHabitsView: View {
                     HabitsConfigView(viewModel: configsVMFactory.createPersonalizedHabits(rowPosition: rowPosition, colunmPosition: colunmPosition))
                 } label: {
                     Text("Hábito personalizado")
-                        .foregroundColor(.labelPrimary)
+                        .foregroundColor(.white)
                         .frame(width: 362, height: 52)
                         .background(.indigoCustom)
                         .cornerRadius(26)
@@ -30,7 +30,6 @@ struct AddHabitsView: View {
                 
                 VStack(spacing: 20) {
                     // Seções dinâmicas
-                    
                     HabitSectionView(title: "Hábitos simples",
                                      rowPosition: rowPosition,
                                      colunmPosition: colunmPosition,
