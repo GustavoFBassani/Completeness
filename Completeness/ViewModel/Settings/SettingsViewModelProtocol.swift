@@ -16,4 +16,6 @@ protocol SettingsViewModelProtocol {
     
     /// A mensagem a ser exibida no alerta.
     var alertMessage: String { get set }
+    
+    func enableBiometry() async
 }

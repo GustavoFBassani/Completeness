@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-class HabitConfigViewModel {
+class HabitConfigViewModel: HabitConfigViewModelProtocol {
     // MARK: HABIT - INFO
 //    var habits: [Habit] = []
     var id: UUID?
