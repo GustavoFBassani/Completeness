@@ -47,13 +47,6 @@ class HabitRepository: HabitRepositoryProtocol {
         try? context.save()
     }
     
-    func deleteHabit(id: UUID) async {
-        if let habitToDelete = await getHabitById(id: id) {
-            context.delete(habitToDelete)
-            try? context.save()
-        }
-    }
-    
     // MARK: - Slot Conflict Validation
     func hasSlotConflict(valuePosition: Int,
                          indicePosition: Int,

@@ -9,9 +9,10 @@ import SwiftUI
 
 struct HabitSheetView: View {
     //view wrappers
+    var id = UUID()
     @Environment(\.dismiss) var dismiss
-    @State var showEditView = false
-    @Binding var isTimeStoped: Bool
+    @State var showEditView: Bool
+    @Binding var isHabbitRunning: [UUID:Bool]
     
     var selectedDate: Date
     // coming from viewModel
@@ -23,50 +24,94 @@ struct HabitSheetView: View {
     // coming from viewModel
     var increaseOneStepOrStopAndPauseTimer: () -> Void
     // coming from viewModel
-    @State var habit: Habit
+    var habit: Habit
     //coming from view (ok)
-    let configsVMFactory: HabitsConfigVMFactory
+    var configsVMFactory: HabitsConfigVMFactory
     //should come from viewModel...
-    private var habitProgress: Int {
-        if let habitLog = habit.habitLogs?.first(where: { log in
-            log.completionDate == Calendar.current.startOfDay(for: selectedDate) }) {
+    @State var detailsView: HabitsConfigView
+    // swiftlint:disable:next line_length
+    init(showEditView: Bool = false,
+         isHabbitRunning: Binding<[UUID:Bool]>,
+         selectedDate: Date,
+         resetHabitTimer: @escaping () -> Void,
+         completeTheHabitAutomatically: @escaping () -> Void,
+         subtractOneStep: @escaping () -> Void,
+         increaseOneStepOrStopAndPauseTimer: @escaping () -> Void,
+         habit: Habit,
+         configsVMFactory: HabitsConfigVMFactory) {
+        self._showEditView = State(initialValue: showEditView)
+        self._isHabbitRunning = isHabbitRunning
+        self.selectedDate = selectedDate
+        self.resetHabitTimer = resetHabitTimer
+        self.completeTheHabitAutomatically = completeTheHabitAutomatically
+        self.subtractOneStep = subtractOneStep
+        self.increaseOneStepOrStopAndPauseTimer = increaseOneStepOrStopAndPauseTimer
+        self.habit = habit
+        self.configsVMFactory = configsVMFactory
+
+        self.habitProgress = {
+            if let habitLog = habit.habitLogs?.first(where: { log in
+                log.completionDate == Calendar.current.startOfDay(for: selectedDate)
+            }) {
+                switch habit.habitCompleteness {
+                case .byToggle, .byMultipleToggle:
+                    return habitLog.howManyTimesItWasDone
+                case .byTimer:
+                    return habitLog.secondsElapsed
+                case .none:
+                    return 0
+                }
+            }
+            return 0
+        }()
+
+        self.habitMaxProgress = {
             switch habit.habitCompleteness {
             case .byToggle, .byMultipleToggle:
-                return habitLog.howManyTimesItWasDone
+                return habit.howManyTimesToToggle
             case .byTimer:
-                return habitLog.secondsElapsed
+                return habit.howManySecondsToComplete
             case .none:
                 return 0
             }
-        }
-        return 0
-    }
-    private var habitMaxProgress: Int {
-        switch habit.habitCompleteness {
-        case .byToggle, .byMultipleToggle:
-            return habit.howManyTimesToToggle
-        case .byTimer:
-            return habit.howManySecondsToComplete
-        case .none:
-            return 0
-        }
-    }
-    private var isHabbitIsByTimer: Bool {
-        return habit.habitCompleteness == .byTimer
-    }
-    private var habitProgressTimer: String {
-        if let habitLog = habit.habitLogs?.first(where: { log in
-            log.completionDate == Calendar.current.startOfDay(for: selectedDate) })
-         {
-            return habitLog.formattedTime
-        }
-        return ""
+        }()
+
+        self.isHabbitIsByTimer = {
+            habit.habitCompleteness == .byTimer
+        }()
+
+        self.habitProgressTimer = {
+            if let habitLog = habit.habitLogs?.first(where: { log in
+                log.completionDate == Calendar.current.startOfDay(for: Date())
+            }) {
+                return habitLog.formattedTime
+            }
+            return ""
+        }()
+
+        self._detailsView = State(initialValue: HabitsConfigView(
+            id: habit.id,
+            viewModel: configsVMFactory.editHabits(
+                habitName: habit.habitName,
+                scheduleDays: habit.scheduleDays,
+                habitSimbol: habit.habitSimbol,
+                habitCompleteness: habit.habitCompleteness,
+                howManySecondsToComplete: habit.howManySecondsToComplete,
+                howManyTimesToToggle: habit.howManyTimesToToggle,
+                habitDescription: habit.habitDescription
+            )
+        ))
     }
     
+    private var habitProgress: Int
+    private var habitMaxProgress: Int
+    private var isHabbitIsByTimer: Bool
+    private var habitProgressTimer: String
+
     var body: some View {
         VStack(spacing: 24){
             ZStack {
-                Text("Aprender algo novo")
+                Text(habit.habitName)
                     .font(.system(size: 17, weight: .semibold))
                 
                 HStack {
@@ -101,7 +146,7 @@ struct HabitSheetView: View {
                         .stroke(Color.indigoCustomSecondary.opacity(0.3), lineWidth: 14)
                         .frame(width: 170, height: 170)
                     Circle()
-                        .trim(from: 0, to: CGFloat(habitProgress) / CGFloat(habitMaxProgress))
+                        .trim(from: 0, to: habitMaxProgress > 0 ? CGFloat(habitProgress) / CGFloat(habitMaxProgress) : 0)
                         .stroke(Color.indigoCustom, style: StrokeStyle(lineWidth: 14, lineCap: .round))
                         .rotationEffect(.degrees(90))
                         .frame(width: 170, height: 170)
@@ -120,11 +165,31 @@ struct HabitSheetView: View {
                     }
                 }
             }
-            if isTimeStoped {
+            if isHabbitRunning[habit.id] ?? false {
+                HStack(spacing: 4) {
+                    Button {
+                        resetHabitTimer()
+                    } label: {
+                        Text("Zerar Tempo")
+                            .frame(width: 157, height: 52)
+                            .background(RoundedRectangle(cornerRadius: 26).fill(.backgroundPrimary))
+                            .foregroundStyle(.indigoCustom)
+                            .fontWeight(.semibold)
+                    }
+                    Button {
+                        increaseOneStepOrStopAndPauseTimer()
+                    } label: {
+                        Text("Pausar")
+                            .frame(width: 157, height: 52)
+                            .background(RoundedRectangle(cornerRadius: 26).fill(.indigoCustom))
+                            .foregroundStyle(.backgroundPrimary)
+                            .fontWeight(.semibold)
+                    }
+                }
+            } else {
                 Button {
                     if isHabbitIsByTimer {
                         increaseOneStepOrStopAndPauseTimer()
-                        isTimeStoped.toggle()
                     } else {
                         completeTheHabitAutomatically()
                     }
@@ -135,29 +200,6 @@ struct HabitSheetView: View {
                         .background(Color.indigoCustom)
                         .cornerRadius(26)
                         .font(.system(size: 17, weight: .semibold))
-                }
-            } else {
-                HStack(spacing: 4) {
-                    Button {
-                        resetHabitTimer()
-                        isTimeStoped.toggle()
-                    } label: {
-                        Text("Zerar Tempo")
-                            .frame(width: 157, height: 52)
-                            .background(RoundedRectangle(cornerRadius: 26).fill(.backgroundPrimary))
-                            .foregroundStyle(.indigoCustom)
-                            .fontWeight(.semibold)
-                    }
-                    Button {
-                        increaseOneStepOrStopAndPauseTimer()
-                        isTimeStoped.toggle()
-                    } label: {
-                        Text("Pausar")
-                            .frame(width: 157, height: 52)
-                            .background(RoundedRectangle(cornerRadius: 26).fill(.indigoCustom))
-                            .foregroundStyle(.backgroundPrimary)
-                            .fontWeight(.semibold)
-                    }
                 }
             }
 
@@ -173,16 +215,12 @@ struct HabitSheetView: View {
             Spacer()
         }
         .sheet(isPresented: $showEditView, content: {
-            HabitsConfigView(id: habit.id,
-                             viewModel: configsVMFactory.editHabits(
-                                habitName: habit.habitName,
-                                scheduleDays: habit.scheduleDays,
-                                habitSimbol: habit.habitSimbol,
-                                habitCompleteness: habit.habitCompleteness,
-                                howManySecondsToComplete: habit.howManySecondsToComplete,
-                                howManyTimesToToggle: habit.howManyTimesToToggle,
-                                habitDescription: habit.habitDescription))
-        })
+                detailsView
+                .onAppear{
+                    detailsView.dismissSheet = dismiss
+                }
+            }
+        )
         .padding()
         .presentationDragIndicator(.visible)
     }

@@ -35,6 +35,8 @@ final class HabitsViewModel: HabitsViewModelProtocol, Sendable {
     var filteredHabits: [Habit] = []
     var createHabbitWithPosition: Position?
     var selectedHabit: Habit?
+    var isHabbitWithIdRunning: [UUID : Bool] = [:]
+    var habitToVerifyIfIsRunning: Habit?
     
     init(habitCompletionService: HabitCompletionProtocol, habitService: HabitRepositoryProtocol) {
         self.habitCompletionService = habitCompletionService
@@ -69,13 +71,21 @@ final class HabitsViewModel: HabitsViewModelProtocol, Sendable {
         habitService.saveChanges()
     }
     
+    func isHabitRunning() {
+        if let habitToVerifyIfIsRunning {
+            let isRunning = habitCompletionService.isHabbitRunning(with: habitToVerifyIfIsRunning.id)
+            // Preserve existing running states for other habits and update only this habit's entry
+            isHabbitWithIdRunning[habitToVerifyIfIsRunning.id] = isRunning
+        }
+    }
+    
     @MainActor
     func didTapHabit(_ habit: Habit) async {
         await completeHabit(habit: habit, on: selectedDate)
         await loadData()
+        isHabitRunning()
     }
     //used at sheet --------
-    var isTimeStoped = true
     func didTapSelectedHabit(_ habit: Habit) async {
         await completeHabit(habit: habit, on: selectedDate)
         await loadData()
@@ -91,6 +101,8 @@ final class HabitsViewModel: HabitsViewModelProtocol, Sendable {
     
     func resetHabitTimer(habit: Habit) async {
         await habitCompletionService.restartHabitTimer(id: habit.id, on: selectedDate)
+        isHabitRunning()
+        
     }
     
     func getHabitLog(habit: Habit) -> HabitLog? {

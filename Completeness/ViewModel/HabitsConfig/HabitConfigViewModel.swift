@@ -31,6 +31,7 @@ class HabitConfigViewModel: HabitConfigViewModelProtocol {
     
     // services
     var habitService: HabitRepositoryProtocol
+    var habitCompletition: HabitCompletionProtocol
 
     // MARK: - INITS
     //create new Habit Predefined
@@ -39,13 +40,15 @@ class HabitConfigViewModel: HabitConfigViewModelProtocol {
          completenessType: CompletionHabit,
          habitRowPosition: Int,
          habitColunmPosition: Int,
-         habitService: HabitRepository) {
+         habitService: HabitRepository,
+         habitCompletition: HabitCompletionProtocol) {
         self.habitName = habitName
         self.habitsSymbol = habitsSymbol
         self.completenessType = completenessType
         self.habitRowPosition = habitRowPosition
         self.habitColunmPosition = habitColunmPosition
         self.habitService = habitService
+        self.habitCompletition = habitCompletition
     }
     
     //create personalized habits
@@ -61,7 +64,8 @@ class HabitConfigViewModel: HabitConfigViewModelProtocol {
          habitRowPosition: Int,
          habitColunmPosition: Int,
          newHabitDate: Date = Date(),
-         habitService: HabitRepositoryProtocol) {
+         habitService: HabitRepositoryProtocol,
+         habitCompletition: HabitCompletionProtocol) {
 //        self.habits = habits
         self.id = id
         self.habitName = habitName
@@ -75,6 +79,8 @@ class HabitConfigViewModel: HabitConfigViewModelProtocol {
         self.habitColunmPosition = habitColunmPosition
         self.newHabitDate = newHabitDate
         self.habitService = habitService
+        self.habitCompletition = habitCompletition
+
     }
 
     
@@ -88,7 +94,8 @@ class HabitConfigViewModel: HabitConfigViewModelProtocol {
          habitRow: Int = 0,
          habitColunm: Int = 0,
          habitService: HabitRepository,
-         newHabitDescription: String) {
+         newHabitDescription: String,
+         habitCompletition: HabitCompletionProtocol) {
         self.habitName = habitName
         self.selectedDays = selectedDays
         self.habitsSymbol = habitsSymbol
@@ -99,6 +106,8 @@ class HabitConfigViewModel: HabitConfigViewModelProtocol {
         self.habitColunmPosition = habitColunm
         self.habitService = habitService
         self.newHabitDescription = newHabitDescription
+        self.habitCompletition = habitCompletition
+
     }
     
     // MARK: - Helper
@@ -189,7 +198,7 @@ class HabitConfigViewModel: HabitConfigViewModelProtocol {
     
     func deleteHabitById() async {
         if let id {
-            await habitService.deleteHabit(id: id)
+            await habitCompletition.deleteHabit(id: id)
             habitService.saveChanges()
             self.id = nil
         }

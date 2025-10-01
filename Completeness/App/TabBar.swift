@@ -19,7 +19,8 @@ struct TabBar: View {
                     HabitView(viewModel: HabitsViewModel(habitCompletionService: HabitCompletionRepository(context: context),
                                                          habitService: HabitRepository(context: context)),
                               refreshView: $refreshView,
-                              configsVMFactory: HabitsConfigVMFactory(repositoryFactory: HabitRepositoryFactory(context: context)))
+                              configsVMFactory: HabitsConfigVMFactory(repositoryFactory: HabitRepositoryFactory(context: context),
+                                                                      completitionFactory: HabitCompletitionFactory(context: context)))
                 }
             }
             

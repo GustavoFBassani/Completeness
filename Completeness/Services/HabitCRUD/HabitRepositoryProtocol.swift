@@ -12,8 +12,7 @@ protocol HabitRepositoryProtocol {
     func getHabitById(id: UUID) async -> Habit?
     func createHabit(habit: Habit) async
     func saveChanges()
-    func deleteHabit(id: UUID) async
-    
+
     /// Verifica se existe conflito de slot (posição) e dias com hábitos já existentes.
     /// - Parameters:
     ///   - valuePosition: Linha (row) do slot.

@@ -98,6 +98,9 @@ class HabitCompletionRepository: HabitCompletionProtocol {
             // IF the log doenst not exist, create one.
             let newHabitLog = HabitLog(completionDate: targetDay)
             newHabitLog.howManyTimesItWasDone += 1
+            if habitToChange.howManyTimesToToggle == 1 {
+                newHabitLog.isCompleted = true
+            }
             logs.append(newHabitLog)
             habitToChange.habitLogs = logs
             try? context.save()
@@ -153,7 +156,11 @@ class HabitCompletionRepository: HabitCompletionProtocol {
         }
     }
     
-    private var isRunning: [UUID: Bool] = [:]
+    var isRunning: [UUID: Bool] = [:]
+    
+    func isHabbitRunning(with id: UUID) -> Bool {
+        return isRunning[id] ?? false
+    }
     
     @MainActor
     func completeByTimer(id: UUID, on date: Date) async {
@@ -221,9 +228,23 @@ class HabitCompletionRepository: HabitCompletionProtocol {
             if isRunning[id] == true {
                 isRunning[id] = false
             }
+            
             try? await Task.sleep(nanoseconds: 1_000_000_000)
             habitLog.secondsElapsed = 0
             habitLog.isCompleted = false
+        }
+    }
+    
+    func deleteHabit(id: UUID) async {
+        
+        if isRunning[id] == true {
+            isRunning[id] = false
+        }
+        try? await Task.sleep(nanoseconds: 1_000_000_000)
+        
+        if let habitToDelete = await getHabitById(id: id) {
+            context.delete(habitToDelete)
+            try? context.save()
         }
     }
     
