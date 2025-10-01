@@ -117,9 +117,6 @@
         }
       }
     },
-    "20:00" : {
-
-    },
     "30 min" : {
       "localizations" : {
         "en" : {
@@ -181,9 +178,6 @@
           }
         }
       }
-    },
-    "Aprender algo novo" : {
-
     },
     "Aqui, cada pequeno hábito conta \n para grandes transformações." : {
 
@@ -583,9 +577,6 @@
           }
         }
       }
-    },
-    "Iniciar tempo" : {
-
     },
     "Iniciar Tempo" : {
 
@@ -1021,11 +1012,14 @@
         }
       }
     },
-
     "Voçê tem certeza que deseja excluir esse hábito?" : {
 
     },
     "Voltar a editar" : {
+
+    },
+    "Zerar Tempo" : {
+
     }
   },
   "version" : "1.0"

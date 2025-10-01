@@ -20,7 +20,7 @@ struct AddHabitsView: View {
                     HabitsConfigView(viewModel: configsVMFactory.createPersonalizedHabits(rowPosition: rowPosition, colunmPosition: colunmPosition))
                 } label: {
                     Text("Hábito personalizado")
-                        .foregroundColor(.labelPrimary)
+                        .foregroundColor(.white)
                         .frame(width: 362, height: 52)
                         .background(.indigoCustom)
                         .cornerRadius(26)

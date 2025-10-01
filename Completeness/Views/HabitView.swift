@@ -25,14 +25,13 @@ struct HabitView: View {
                     HabitViewComponent(habit: habitWithPosition, refreshView: refreshView, day: viewModel.selectedDate)
                         .onTapGesture {
                             Task {
+                                viewModel.habitToVerifyIfIsRunning = habitWithPosition
                                 await viewModel.didTapHabit(habitWithPosition)
                                 refreshView.toggle()
-                                if habitWithPosition.habitCompleteness == .byTimer {
-                                    viewModel.isTimeStoped.toggle()
-                                }
                             }
                         }
                         .onLongPressGesture {
+                            viewModel.habitToVerifyIfIsRunning = habitWithPosition
                             viewModel.selectedHabit = habitWithPosition
                         }
                         .sheet(item: $viewModel.selectedHabit, onDismiss: {
@@ -41,7 +40,7 @@ struct HabitView: View {
                                 refreshView.toggle()
                             }
                         }) {  habit in
-                            HabitSheetView(isTimeStoped: $viewModel.isTimeStoped,
+                            HabitSheetView(isHabbitRunning: $viewModel.isHabbitWithIdRunning,
                                            resetHabitTimer: {Task{ await viewModel.resetHabitTimer(habit: habit) }; refreshView.toggle()},
                                            completeTheHabitAutomatically: { Task {await viewModel.completeHabitAutomatically(habit: habit);  refreshView.toggle()}},
                                            subtractOneStep: { Task { await viewModel.decreaseHabitSteps(habit: habit);  refreshView.toggle() }},

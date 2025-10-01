@@ -34,7 +34,10 @@ struct HabitsConfigView: View {
     @State var timesChoice: TimeOption = .oneMinute
     @State var typeOfRepetition: DaysRepeation = .allDays
     @State var showDeleteAlert = false
+    var dismissSheet: DismissAction? = nil
+    
     @Environment(\.dismiss) private var dismiss
+
     
     var body: some View {
         NavigationStack {
@@ -203,6 +206,7 @@ struct HabitsConfigView: View {
                                 .background(.indigoCustom)
                                 Button("Excluir hábito", role: .destructive) {
                                     Task { await viewModel.deleteHabitById()
+                                        dismissSheet?()
                                         dismiss()
                                         dismiss()
                                     }
@@ -275,7 +279,6 @@ struct HabitsConfigView: View {
         }
     }
 }
-
 
 //#Preview {
 //    @Previewable @Environment(\.modelContext) var context

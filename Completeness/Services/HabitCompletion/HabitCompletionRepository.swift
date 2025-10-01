@@ -153,7 +153,11 @@ class HabitCompletionRepository: HabitCompletionProtocol {
         }
     }
     
-    private var isRunning: [UUID: Bool] = [:]
+    var isRunning: [UUID: Bool] = [:]
+    
+    func isHabbitRunning(with id: UUID) -> Bool {
+        return isRunning[id] ?? false
+    }
     
     @MainActor
     func completeByTimer(id: UUID, on date: Date) async {
