@@ -56,11 +56,8 @@ class HabitCompletionRepository: HabitCompletionProtocol {
         
         // IF THE LOG WITH SAME DAY EXIST
         if let habitLog = habitToChange.habitLogs?.first(where: { Calendar.current.isDate($0.completionDate, inSameDayAs: targetDay)}) {
-            // IF IS COMPLETED, CHANGE TO FALSE
-            if habitLog.isCompleted {
-                habitLog.isCompleted = false
-                habitLog.howManyTimesItWasDone -= 1
-            } else {
+            // if habid is not complete, complete it.
+            if !habitLog.isCompleted {
                 habitLog.isCompleted = true
                 habitLog.howManyTimesItWasDone += 1
             }
@@ -87,33 +84,83 @@ class HabitCompletionRepository: HabitCompletionProtocol {
         
         // IF THE LOG WITH SAME DAY EXIST
         if let habitLog = habitToChange.habitLogs?.first(where: { Calendar.current.isDate($0.completionDate, inSameDayAs: targetDay)})  {
-            // if the habit is completed, mark as undone and
-            if habitLog.isCompleted {
-                habitLog.isCompleted = false
-                habitLog.howManyTimesItWasDone = 0
-                return
-            }
-            
             // if the habit isnt completed already, add one more
-            if habitLog.howManyTimesItWasDone < habitToChange.howManyTimesToToggle - 1 {
+            if habitLog.howManyTimesItWasDone < habitToChange.howManyTimesToToggle  {
                 habitLog.howManyTimesItWasDone += 1
                 try? context.save()
-            } else {
-                habitLog.isCompleted = true
-                habitLog.howManyTimesItWasDone += 1
-                try? context.save()
+                
+                if habitLog.howManyTimesItWasDone == habitToChange.howManyTimesToToggle  {
+                    habitLog.isCompleted = true
+                    try? context.save()
+                }
             }
         } else {
             // IF the log doenst not exist, create one.
             let newHabitLog = HabitLog(completionDate: targetDay)
             newHabitLog.howManyTimesItWasDone += 1
+            if habitToChange.howManyTimesToToggle == 1 {
+                newHabitLog.isCompleted = true
+            }
             logs.append(newHabitLog)
             habitToChange.habitLogs = logs
             try? context.save()
         }
     }
     
-    private var isRunning: [UUID: Bool] = [:]
+    func completeToggleAndMultipleToggleAutomatic(id: UUID, on date: Date)  async {
+        guard let habitToChange = await getHabitById(id: id) else { return }
+        let targetDay = Calendar.current.startOfDay(for: date)
+        var logs = habitToChange.habitLogs ?? []
+        
+        // IF THE LOG WITH SAME DAY EXIST
+        if let habitLog = habitToChange.habitLogs?.first(where: { Calendar.current.isDate($0.completionDate, inSameDayAs: targetDay)})  {
+            // if the habit is completed, mark as undone and
+            if habitLog.isCompleted {
+                habitLog.isCompleted = false
+                habitLog.howManyTimesItWasDone = 0
+                return
+            }
+            // complete habit automatically
+            if habitLog.howManyTimesItWasDone < habitToChange.howManyTimesToToggle  {
+                habitLog.howManyTimesItWasDone = habitToChange.howManyTimesToToggle
+                habitLog.isCompleted = true
+                try? context.save()
+            }
+        } else {
+            // IF the log doenst not exist, create one and complete it automatically.
+            let newHabitLog = HabitLog(completionDate: targetDay)
+            newHabitLog.howManyTimesItWasDone = habitToChange.howManyTimesToToggle
+            logs.append(newHabitLog)
+            habitToChange.habitLogs = logs
+            try? context.save()
+        }
+    }
+    
+    func decreaseHabitStep(id: UUID, on date: Date) async {
+        guard let habitToChange = await getHabitById(id: id) else { return }
+        let targetDay = Calendar.current.startOfDay(for: date)
+        
+        // IF THE LOG WITH SAME DAY EXIST
+        if let habitLog = habitToChange.habitLogs?.first(where: { Calendar.current.isDate($0.completionDate, inSameDayAs: targetDay)})  {
+            // if the habit is completed, mark as undone and decrease one step
+            if habitLog.isCompleted {
+                habitLog.isCompleted = false
+                habitLog.howManyTimesItWasDone -= 1
+                return
+            }
+            // if the habit isnt completed already, decrease one step
+            if habitLog.howManyTimesItWasDone < habitToChange.howManyTimesToToggle && habitLog.howManyTimesItWasDone > 0  {
+                habitLog.howManyTimesItWasDone -= 1
+                try? context.save()
+            }
+        }
+    }
+    
+    var isRunning: [UUID: Bool] = [:]
+    
+    func isHabbitRunning(with id: UUID) -> Bool {
+        return isRunning[id] ?? false
+    }
     
     @MainActor
     func completeByTimer(id: UUID, on date: Date) async {
@@ -126,14 +173,12 @@ class HabitCompletionRepository: HabitCompletionProtocol {
         }
         
         isRunning[id] = true
-
+        
         // se existir habitLog no dia
         if let habitLog = habitToChange.habitLogs?.first(where: { Calendar.current.isDate($0.completionDate, inSameDayAs: targetDay) }) {
             print("entrou no habitLog")
             //se o habitLog está completo
             if habitLog.isCompleted == true {
-                habitLog.isCompleted = false
-                habitLog.secondsElapsed = 0
                 return
             } else {
                 // se não está completo
@@ -175,6 +220,33 @@ class HabitCompletionRepository: HabitCompletionProtocol {
         }
     }
     
+    func restartHabitTimer(id: UUID, on date: Date) async {
+        guard let habitToChange = await getHabitById(id: id) else { return }
+        let targetDay = Calendar.current.startOfDay(for: date)
+        
+        if let habitLog = habitToChange.habitLogs?.first(where: { Calendar.current.isDate($0.completionDate, inSameDayAs: targetDay) }) {
+            if isRunning[id] == true {
+                isRunning[id] = false
+            }
+            
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
+            habitLog.secondsElapsed = 0
+            habitLog.isCompleted = false
+        }
+    }
+    
+    func deleteHabit(id: UUID) async {
+        
+        if isRunning[id] == true {
+            isRunning[id] = false
+        }
+        try? await Task.sleep(nanoseconds: 1_000_000_000)
+        
+        if let habitToDelete = await getHabitById(id: id) {
+            context.delete(habitToDelete)
+            try? context.save()
+        }
+    }
     
     /// Marks a habit as complete after a specified time interval.
     /// Useful for duration-based habits, like "Meditate for 5 minutes".

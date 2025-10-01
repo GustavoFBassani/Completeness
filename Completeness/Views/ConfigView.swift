@@ -19,6 +19,7 @@ struct ConfigView: View {
     @State private var showError = false
     @State private var errorMessage = ""
     @State private var showPrivacyPolicy = false
+    @State var settingsViewModel: SettingsViewModelProtocol
     
     var body: some View {
         Form {
@@ -43,25 +44,7 @@ struct ConfigView: View {
                 HStack {
                     Image(systemName: "faceid")
                         .foregroundStyle(.indigoCustom)
-                    Toggle("Face ID", isOn: Binding(
-                        get: { faceIDEnabled },
-                        set: { newValue in
-                    Task {
-                        if newValue {
-                            do {
-                                try await BiometricManager.shared.authenticate()
-                                    faceIDEnabled = true
-                            } catch {
-                                    faceIDEnabled = false
-                                    errorMessage = error.localizedDescription
-                                    showError = true
-                            }
-                                } else {
-                                    faceIDEnabled = false
-                            }
-                        }
-                    }
-                    ))
+                    Toggle("Face ID", isOn: $settingsViewModel.isBiometryEnabled)
                     .tint(.green)
                 }
                 
@@ -275,5 +258,4 @@ struct PrivacyPolicyView: View {
 }
 
 #Preview {
-    ConfigView()
 }

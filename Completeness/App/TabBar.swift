@@ -22,19 +22,20 @@ struct TabBar: View {
                                                          chartsService: ChartsService(modelContext: context),
                                                         ),
                               refreshView: $refreshView,
-                              configsVMFactory: HabitsConfigVMFactory(repositoryFactory: HabitRepositoryFactory(context: context)))
+                              configsVMFactory: HabitsConfigVMFactory(repositoryFactory: HabitRepositoryFactory(context: context),
+                                                                      completitionFactory: HabitCompletitionFactory(context: context)))
                 }
             }
             
-//            Tab("Resumo", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
-//                NavigationStack{
-//                    StatsView(viewModel: ChartsViewModel(chartsService: ChartsService(modelContext: context)))
-//                }
-//            }
+            Tab("Resumo", systemImage: "checkmark.arrow.trianglehead.counterclockwise"){
+                NavigationStack{
+                    StatsView(viewModel: ChartsViewModel(chartsService: ChartsService(modelContext: context)))
+                }
+            }
             
             Tab("Configurações", systemImage: "gearshape"){
                 NavigationStack{
-                    ConfigView()
+                    ConfigView(settingsViewModel: SettingsViewModel())
                 }
             }
         }

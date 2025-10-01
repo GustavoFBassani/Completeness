@@ -10,7 +10,6 @@ import SwiftData
 
 struct HabitView: View {
     @Bindable var viewModel: HabitsViewModel
-    @State private var habbitToEdit: Habit?
     @Binding var refreshView: Bool
     
     let configsVMFactory: HabitsConfigVMFactory
@@ -26,29 +25,31 @@ struct HabitView: View {
                     HabitViewComponent(habit: habitWithPosition, refreshView: refreshView, day: viewModel.selectedDate)
                         .onTapGesture {
                             Task {
+                                viewModel.habitToVerifyIfIsRunning = habitWithPosition
                                 await viewModel.didTapHabit(habitWithPosition)
                                 refreshView.toggle()
                             }
                         }
                         .onLongPressGesture {
-                            habbitToEdit = habitWithPosition
-                            print(habitWithPosition.howManyTimesToToggle)
+                            viewModel.habitToVerifyIfIsRunning = habitWithPosition
+                            viewModel.selectedHabit = habitWithPosition
                         }
-                        .sheet(item: $habbitToEdit, onDismiss: {
+                        .sheet(item: $viewModel.selectedHabit, onDismiss: {
                             Task {
                                 await viewModel.loadData()
                                 refreshView.toggle()
                             }
-                        }) { habit in
-                            HabitsConfigView(id: habit.id,
-                                             viewModel: configsVMFactory.editHabits(
-                                                habitName: habit.habitName,
-                                                scheduleDays: habit.scheduleDays,
-                                                habitSimbol: habit.habitSimbol,
-                                                habitCompleteness: habit.habitCompleteness,
-                                                howManySecondsToComplete: habit.howManySecondsToComplete,
-                                                howManyTimesToToggle: habit.howManyTimesToToggle,
-                                                habitDescription: habit.habitDescription))
+                        }) {  habit in
+                            HabitSheetView(isHabbitRunning: $viewModel.isHabbitWithIdRunning,
+                                           selectedDate: viewModel.selectedDate,
+                                           resetHabitTimer: {Task{ await viewModel.resetHabitTimer(habit: habit) }; refreshView.toggle()},
+
+                                           completeTheHabitAutomatically: { Task {await viewModel.completeHabitAutomatically(habit: habit);  refreshView.toggle()}},
+                                           subtractOneStep: { Task { await viewModel.decreaseHabitSteps(habit: habit);  refreshView.toggle() }},
+                                           increaseOneStepOrStopAndPauseTimer: { Task { await viewModel.didTapHabit(habit); refreshView.toggle()}},
+                                           habit: habit,
+                                           configsVMFactory: configsVMFactory)
+                                .presentationDetents([.medium])
                         }
                 } else {
                     EmptyCircle()
@@ -87,7 +88,7 @@ struct HabitView: View {
             .padding(.horizontal)
             
             WeekDayPicker(selectedDate: $viewModel.selectedDate)
-                .padding(.vertical, 16)
+//                .padding(.vertical, 16)
             
             Divider()
             
@@ -103,11 +104,9 @@ struct HabitView: View {
                             showHabitsRow(witch: row)
                         }
                     }
-                    .padding(.vertical, 16)
+                    .padding()
                 }
                 .defaultScrollAnchor(.top)
-                
-                
             default:
                 EmptyView()
             }
@@ -119,5 +118,6 @@ struct HabitView: View {
         .background(.backgroundSecondary)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .task { await viewModel.loadData() }
+//        .navigationTitle("Hábitos")
     }
 }

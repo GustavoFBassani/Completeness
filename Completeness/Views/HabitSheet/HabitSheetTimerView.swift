@@ -18,7 +18,6 @@ let maxValue = 5
             ZStack {
                 Text("Aprender algo novo")
                     .font(.system(size: 17, weight: .semibold))
-
                 HStack {
                     Button {
                         dismiss()
@@ -48,7 +47,7 @@ let maxValue = 5
                 }
             }
             Button {
-                        //
+                        
             }label: {
                 Text("Iniciar tempo")
                     .foregroundColor(.white)
@@ -74,9 +73,9 @@ let maxValue = 5
     }
 }
 
-#Preview {
-    HabitSheetView()
-}
+//#Preview {
+//    HabitSheetView()
+//}
 //import SwiftUI
 //
 //struct HabitSheetTimerView: View {

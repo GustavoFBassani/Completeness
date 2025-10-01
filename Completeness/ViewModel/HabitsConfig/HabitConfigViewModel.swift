@@ -8,13 +8,13 @@
 import Foundation
 
 @Observable
-class HabitConfigViewModel {
+class HabitConfigViewModel: HabitConfigViewModelProtocol {
     // MARK: HABIT - INFO
 //    var habits: [Habit] = []
     var id: UUID?
     var habitName = ""
     var selectedDays: [Int] = []
-    var habitsSymbol = "checkmark.circle"
+    var habitsSymbol = "checkmark.circle.fill"
     var newHabitDescription = ""
     //how to complete the habit
     var completenessType = CompletionHabit.byToggle
@@ -25,8 +25,13 @@ class HabitConfigViewModel {
     var habitColunmPosition = 0
     var newHabitDate = Date()
     
+    // UI feedback
+    var showSlotConflictAlert = false
+    var conflictMessage = ""
+    
     // services
     var habitService: HabitRepositoryProtocol
+    var habitCompletition: HabitCompletionProtocol
 
     // MARK: - INITS
     //create new Habit Predefined
@@ -35,13 +40,15 @@ class HabitConfigViewModel {
          completenessType: CompletionHabit,
          habitRowPosition: Int,
          habitColunmPosition: Int,
-         habitService: HabitRepository) {
+         habitService: HabitRepository,
+         habitCompletition: HabitCompletionProtocol) {
         self.habitName = habitName
         self.habitsSymbol = habitsSymbol
         self.completenessType = completenessType
         self.habitRowPosition = habitRowPosition
         self.habitColunmPosition = habitColunmPosition
         self.habitService = habitService
+        self.habitCompletition = habitCompletition
     }
     
     //create personalized habits
@@ -54,10 +61,11 @@ class HabitConfigViewModel {
          completenessType: CompletionHabit = .byToggle,
          timesChoice: Int = 0,
          howManyTimesToComplete: Int = 1,
-         habitRowPosition: Int ,
-         habitColunmPosition: Int ,
+         habitRowPosition: Int,
+         habitColunmPosition: Int,
          newHabitDate: Date = Date(),
-         habitService: HabitRepositoryProtocol) {
+         habitService: HabitRepositoryProtocol,
+         habitCompletition: HabitCompletionProtocol) {
 //        self.habits = habits
         self.id = id
         self.habitName = habitName
@@ -71,6 +79,8 @@ class HabitConfigViewModel {
         self.habitColunmPosition = habitColunmPosition
         self.newHabitDate = newHabitDate
         self.habitService = habitService
+        self.habitCompletition = habitCompletition
+
     }
 
     
@@ -84,7 +94,8 @@ class HabitConfigViewModel {
          habitRow: Int = 0,
          habitColunm: Int = 0,
          habitService: HabitRepository,
-         newHabitDescription: String) {
+         newHabitDescription: String,
+         habitCompletition: HabitCompletionProtocol) {
         self.habitName = habitName
         self.selectedDays = selectedDays
         self.habitsSymbol = habitsSymbol
@@ -95,34 +106,74 @@ class HabitConfigViewModel {
         self.habitColunmPosition = habitColunm
         self.habitService = habitService
         self.newHabitDescription = newHabitDescription
+        self.habitCompletition = habitCompletition
+
+    }
+    
+    // MARK: - Helper
+    private func isEveryday(_ days: [Int]) -> Bool {
+        let set = Set(days)
+        return days.isEmpty || set == Set(1...7)
     }
     
     // MARK: - FUNCTIONS
-//    func getAllHabits() async throws {
-//        do {
-//            habits = try await habitService.getAllHabits()
-//        } catch {
-//            print("cannot get all Habits, ERROR: \(error.localizedDescription)")
-//        }
-//    }
-
-    
-    func createNewHabit() async {
+    @discardableResult
+    func createNewHabit() async -> Bool {
+        // Validação de conflito antes de salvar/editar
         if let id {
-            if let habitWithID = await habitService.getHabitById(id: id) {
-                habitWithID.habitName = habitName
-                habitWithID.habitDescription = newHabitDescription
-                habitWithID.habitSimbol = habitsSymbol
-                habitWithID.habitCompleteness = completenessType
-                habitWithID.howManyTimesToToggle = howManyTimesToComplete
-                habitWithID.scheduleDays = selectedDays
-                habitWithID.howManySecondsToComplete = timesChoice
-                habitService.saveChanges()
+            // Edição: buscar o hábito para obter o slot atual e validar ignorando o próprio id
+            guard let habitWithID = await habitService.getHabitById(id: id) else {
+                return false
             }
+            
+            let conflict = await habitService.hasSlotConflict(
+                valuePosition: habitWithID.valuePosition,
+                indicePosition: habitWithID.indicePosition,
+                scheduleDays: selectedDays,
+                excludingHabitID: id
+            )
+            
+            if conflict {
+                showSlotConflictAlert = true
+                conflictMessage = isEveryday(selectedDays)
+                ? "Já existe um hábito nesse círculo que conflita com 'Todos os dias'."
+                : "Já existe um hábito nesse círculo para um ou mais dos dias selecionados."
+                return false
+            }
+            
+            // Sem conflito: aplicar alterações e salvar
+            habitWithID.habitName = habitName
+            habitWithID.habitDescription = newHabitDescription
+            habitWithID.habitSimbol = habitsSymbol
+            habitWithID.habitCompleteness = completenessType
+            habitWithID.howManyTimesToToggle = howManyTimesToComplete
+            habitWithID.scheduleDays = selectedDays
+            habitWithID.howManySecondsToComplete = timesChoice
+            habitService.saveChanges()
+            return true
         } else {
+            // Criação: validar no slot informado no VM
+            let conflict = await habitService.hasSlotConflict(
+                valuePosition: habitRowPosition,
+                indicePosition: habitColunmPosition,
+                scheduleDays: selectedDays,
+                excludingHabitID: nil
+            )
+            
+            if conflict {
+                showSlotConflictAlert = true
+                conflictMessage = isEveryday(selectedDays)
+                ? "Já existe um hábito nesse círculo que conflita com 'Todos os dias'."
+                : "Já existe um hábito nesse círculo para um ou mais dos dias selecionados."
+                return false
+            }
+            
+            // Sem conflito: criar e salvar
             let newHabit = Habit(
                 habitName: habitName,
                 habitDescription: newHabitDescription,
+                habitColor: "",
+                habitRecurrence: "",
                 habitSimbol: habitsSymbol,
                 habitCompleteness: completenessType,
                 howManyTimesToToggle: howManyTimesToComplete,
@@ -131,7 +182,8 @@ class HabitConfigViewModel {
                 indicePosition: habitColunmPosition,
                 howManySecondsToComplete: timesChoice
             )
-                await habitService.createHabit(habit: newHabit)
+            await habitService.createHabit(habit: newHabit)
+            return true
         }
     }
     
@@ -148,9 +200,10 @@ class HabitConfigViewModel {
     
     func deleteHabitById() async {
         if let id {
-            await habitService.deleteHabit(id: id)
+            await habitCompletition.deleteHabit(id: id)
             habitService.saveChanges()
             self.id = nil
         }
     }
 }
+

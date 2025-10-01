@@ -18,13 +18,13 @@ enum HabitsStates {
 
 // MARK: - ViewModel
 @Observable
-final class HabitsViewModel: HabitsProtocol, Sendable {
+final class HabitsViewModel: HabitsViewModelProtocol, Sendable {
     var state: HabitsStates = .idle
     var selectedDate: Date = .now {
         didSet {
-           filteredHabits = habits.filter {
-               $0.isScheduled(for: selectedDate)
-           }
+            filteredHabits = habits.filter {
+                $0.isScheduled(for: selectedDate)
+            }
         }
     }
     var errorMessage: String?
@@ -33,10 +33,13 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
     var habitService: HabitRepositoryProtocol
     var textField = ""
     var filteredHabits: [Habit] = []
+
     var notificationService: NotificationHelper
     var chartsService: ChartsService
-    
     var createHabbitWithPosition: Position?
+    var selectedHabit: Habit?
+    var isHabbitWithIdRunning: [UUID : Bool] = [:]
+    var habitToVerifyIfIsRunning: Habit?
     
     init(habitCompletionService: HabitCompletionProtocol,
          habitService: HabitRepositoryProtocol,
@@ -75,16 +78,6 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
     func editHabit() {
         habitService.saveChanges()
     }
-    
-//    func triggerNotifications() async {
-//        let allHabits = await chartsService.getNumberOfHabbits(inLastDays: 1)
-//        let countDoneHabitsPerDay = await chartsService.getNumberOfHabbitsCompleted(inLastDays: 1)
-//        
-//        notificationService.stopAllNotifications()
-//        notificationService.weeklyNotification(title: "Resumo da sua semana", body: "Veja como você se saiu nos seus hábitos nesta semana!")
-//        notificationService.nightlyNotification(title: "Resumo do seu dia", body: "Você completou \(countDoneHabitsPerDay) de \(allHabits) hábitos hoje, muito bom!")
-//        notificationService.dailyNotification(title: "Continue assim!", body: "Faltam \(allHabits - countDoneHabitsPerDay) hábitos para você concluir seu dia!")
-//    }
     
     func triggerNotifications() async {
         let allHabits = await chartsService.getNumberOfHabbits(inLastDays: 1)
@@ -125,29 +118,66 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
 
     
     
+
+    func isHabitRunning() {
+        if let habitToVerifyIfIsRunning {
+            let isRunning = habitCompletionService.isHabbitRunning(with: habitToVerifyIfIsRunning.id)
+            // Preserve existing running states for other habits and update only this habit's entry
+            isHabbitWithIdRunning[habitToVerifyIfIsRunning.id] = isRunning
+        }
+    }
+
     
     @MainActor
     func didTapHabit(_ habit: Habit) async {
         await triggerNotifications()
         await completeHabit(habit: habit, on: selectedDate)
         await loadData()
+        isHabitRunning()
+    }
+    //used at sheet --------
+    func didTapSelectedHabit(_ habit: Habit) async {
+        await completeHabit(habit: habit, on: selectedDate)
+        await loadData()
     }
     
-    @MainActor
-    func loadData() async {
-        do {
-            try await getAllHabits()
-
-            filteredHabits = habits.filter {
-                $0.isScheduled(for: selectedDate)
-            }
-            
-            print(filteredHabits)
-
-            state = .loaded
-        } catch {
-            errorMessage = "Error fetching products: \(error.localizedDescription)"
-            state = .error
-        }
+    func completeHabitAutomatically(habit: Habit) async {
+        await habitCompletionService.completeToggleAndMultipleToggleAutomatic(id: habit.id, on: selectedDate)
     }
+    
+    func decreaseHabitSteps(habit: Habit) async {
+        await habitCompletionService.decreaseHabitStep(id: habit.id, on: selectedDate)
+    }
+    
+    func resetHabitTimer(habit: Habit) async {
+        await habitCompletionService.restartHabitTimer(id: habit.id, on: selectedDate)
+        isHabitRunning()
+        
+    }
+    
+    func getHabitLog(habit: Habit) -> HabitLog? {
+        if let habitLog = habit.habitLogs?.first(where: {log in
+            log.completionDate == selectedDate }) {
+            return habitLog
+        }
+        return nil
+    }
+
+@MainActor
+func loadData() async {
+    do {
+        try await getAllHabits()
+        
+        filteredHabits = habits.filter {
+            $0.isScheduled(for: selectedDate)
+        }
+        
+        print(filteredHabits)
+        
+        state = .loaded
+    } catch {
+        errorMessage = "Error fetching products: \(error.localizedDescription)"
+        state = .error
+    }
+}
 }

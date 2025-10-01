@@ -10,55 +10,55 @@ import Testing
 @testable import Completeness
 
 struct SettingsTest {
-    var userDefaults: UserDefaults!
-    var mockBiometricManager: MockBiometricManager!
-    var viewModel: SettingsViewModel!
-    
-    init() {
-        userDefaults = UserDefaults(suiteName: "SettingsTest")
-        userDefaults.removePersistentDomain(forName: "SettingsTest")
+    struct SettingsViewModelTests {
+        var userDefaults: UserDefaults!
+        var mockBiometricManager: MockBiometricManager!
+        var viewModel: SettingsViewModel!
         
-        mockBiometricManager = MockBiometricManager()
+        init() {
+            let suiteName = "SettingsViewModelTests"
+            userDefaults = UserDefaults(suiteName: suiteName)
+            userDefaults?.removePersistentDomain(forName: suiteName)
+            
+            mockBiometricManager = MockBiometricManager()
+            
+            viewModel = SettingsViewModel(
+                biometricManager: mockBiometricManager,
+                userDefaults: userDefaults
+            )
+        }
         
-        viewModel = SettingsViewModel(
-            biometricManager: mockBiometricManager,
-            userDefaults: userDefaults
-        )
-    }
-    
-    @Test("Toggling isBiometryEnabled should save to UserDefaults")
-    func testToggleSavesToUserDefaults() {
-        viewModel.isBiometryEnabled = true
+        @Test("Toggling isBiometryEnabled should save to UserDefaults")
+        mutating func testToggleSavesToUserDefaults() {
+            #expect(viewModel.isBiometryEnabled == false, "Biometry must start as disabled")
+            
+            viewModel.isBiometryEnabled = true
+            
+            let savedValue = userDefaults.bool(forKey: viewModel.biometryKey)
+            #expect(savedValue == true, "True should have been saved")
+        }
         
-        let savedValue = userDefaults.bool(forKey: "isBiometryEnabled")
-        #expect(savedValue == true)
+        @Test("Enabling biometry with success should update property")
+        mutating func testEnableBiometry_Success() async {
+            mockBiometricManager.shouldSucceed = true
+            
+            await viewModel.enableBiometry()
+            
+            #expect(mockBiometricManager.authenticateCalled == true, "authtenticate() should be called")
+            #expect(viewModel.isBiometryEnabled == true, "Biometry should be enabled sucessfully")
+            #expect(viewModel.showPermissionAlert == false, "No alerts should be shown")
+        }
         
-        viewModel.isBiometryEnabled = false
-        
-        let savedValueAfterToggle = userDefaults.bool(forKey: "isBiometryEnabled")
-        #expect(savedValueAfterToggle == false)
-    }
-    
-    @Test("Enabling biometry with success should update property")
-    func testEnableBiometry_Success() async {
-        mockBiometricManager.shouldSucceed = true
-        
-        await viewModel.enableBiometry()
-        
-        #expect(mockBiometricManager.authenticateCalled == true, "A função authenticate() deveria ter sido chamada")
-        #expect(viewModel.isBiometryEnabled == true, "Biometria deveria estar habilitada após sucesso")
-        #expect(viewModel.showPermissionAlert == false, "Nenhum alerta deveria ser mostrado em caso de sucesso")
-    }
-    
-    @Test("Enabling biometry with failure should show an alert")
-    func testEnableBiometry_Failure() async {
-        mockBiometricManager.shouldSucceed = false
-        
-        await viewModel.enableBiometry()
-        
-        #expect(mockBiometricManager.authenticateCalled == true)
-        #expect(viewModel.isBiometryEnabled == false, "Biometria deveria permanecer desabilitada após falha")
-        #expect(viewModel.showPermissionAlert == true, "Um alerta deveria ser mostrado em caso de falha")
-        #expect(viewModel.alertMessage == BiometricManager.BiometricError.authenticationFailed.errorDescription)
+        @Test("Enabling biometry with failure should show an alert and disable biometry")
+        mutating func testEnableBiometry_Failure() async {
+            mockBiometricManager.shouldSucceed = false
+            
+            await viewModel.enableBiometry()
+            
+            #expect(mockBiometricManager.authenticateCalled == true)
+            #expect(viewModel.isBiometryEnabled == false, "Biometry should be disabled in case of failure")
+            #expect(viewModel.showPermissionAlert == true, "the alert should be shown")
+            #expect(viewModel.alertMessage == BiometricManager.BiometricError.authenticationFailed.errorDescription)
+        }
     }
 }

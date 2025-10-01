@@ -24,5 +24,4 @@ struct DeleteAllData: View {
 }
 
 #Preview {
-    ConfigView()
 }

@@ -33,7 +33,11 @@ struct HabitsConfigView: View {
     let weekDays = ["D", "S", "T", "Q", "Q", "S", "S"]
     @State var timesChoice: TimeOption = .oneMinute
     @State var typeOfRepetition: DaysRepeation = .allDays
+    @State var showDeleteAlert = false
+    var dismissSheet: DismissAction? = nil
+    
     @Environment(\.dismiss) private var dismiss
+
     
     var body: some View {
         NavigationStack {
@@ -69,14 +73,28 @@ struct HabitsConfigView: View {
                         }
                         .tint(.secondary)
                         
-                        DatePicker(selection: $viewModel.newHabitDate, displayedComponents: .date) {
+                        
+                        NavigationLink {
+                            IconPickerView(selectedIcon: $viewModel.habitsSymbol)
+                        } label: {
                             HStack {
-                                Image(systemName: "calendar")
+                                Image(systemName: viewModel.habitsSymbol)
                                     .foregroundStyle(Color.indigoCustom)
                                     .font(.system(size: 16))
-                                Text("Começa em")
+                                Text("Icone")
+                                
+                                Spacer()
                             }
                         }
+                        
+//                        DatePicker(selection: $viewModel.newHabitDate, displayedComponents: .date) {
+//                            HStack {
+//                                Image(systemName: "calendar")
+//                                    .foregroundStyle(Color.indigoCustom)
+//                                    .font(.system(size: 16))
+//                                Text("Começa em")
+//                            }
+//                        }
                         
                         Picker(selection: $typeOfRepetition) {
                             Text("Todos os dias").tag(DaysRepeation.allDays)
@@ -182,11 +200,8 @@ struct HabitsConfigView: View {
                     if let id {
                         Section {
                             Button {
+                                showDeleteAlert = true
                                 viewModel.id = id
-                                Task { await viewModel.deleteHabitById()
-                                    dismiss()
-                                    dismiss()
-                                }
                             } label: {
                                 Text("Excluir hábito")
                                     .frame(maxWidth: .infinity)
@@ -196,34 +211,27 @@ struct HabitsConfigView: View {
                                     .fontWeight(.semibold)
                                     .font(.system(size: 17))
                             }
+                            .alert("Voçê tem certeza que deseja excluir esse hábito?", isPresented: $showDeleteAlert) {
+                                Button(role: .cancel) {}
+                                label: {
+                                    Text("Voltar a editar")
+                                        .foregroundStyle(.white)
+                                }
+                                .background(.indigoCustom)
+                                Button("Excluir hábito", role: .destructive) {
+                                    Task { await viewModel.deleteHabitById()
+                                        dismissSheet?()
+                                        dismiss()
+                                        dismiss()
+                                    }
+                                }
+                            } message: { //alert's description
+                                Text("Ao excluir, você perderá todos os seus resumos e dados do seu hábito")
+                            }
                             .listRowInsets(EdgeInsets())
                             .listRowBackground(Color.clear)
                         }
                     }
-                    
-                    
-                    //                Section {
-                    //                    Toggle(isOn: .constant(true)) {
-                    //                        HStack {
-                    //                            Image(systemName: "app.badge")
-                    //                                .foregroundStyle(Color.indigoCustom)
-                    //                                .font(.system(size: 16))
-                    //                            Text("Avisos")
-                    //                        }
-                    //                    }
-                    //                    Toggle(isOn: .constant(true)) {
-                    //                        HStack {
-                    //                            Image(systemName: "bell.badge")
-                    //                                .foregroundStyle(Color.indigoCustom)
-                    //                                .font(.system(size: 16))
-                    //                            Text("Permitir notificações")
-                    //                        }
-                    //                    }
-                    //                }  header: {
-                    //                    Text("Notificações")
-                    //                        .font(.system(size: 22).bold())
-                    //                        .foregroundStyle(Color.labelSecondary)
-                    //                }
                 }
             .navigationTitle(title)
             .navigationBarTitleDisplayMode(.inline)
@@ -246,10 +254,13 @@ struct HabitsConfigView: View {
                         if let id {
                             viewModel.id = id
                         }
-                        Task { await viewModel.createNewHabit()
-                            viewModel.newHabitDescription = ""
-                            dismiss()
-                            dismiss()
+                        Task {
+                            let success = await viewModel.createNewHabit()
+                            if success {
+                                viewModel.newHabitDescription = ""
+                                dismiss()
+                                dismiss()
+                            }
                         }
                     }, label: {
                         Image(systemName: "checkmark")
@@ -258,19 +269,12 @@ struct HabitsConfigView: View {
                 }
             }
             .navigationBarBackButtonHidden()
+            // Alerta de conflito de posição/dias
+            .alert("Conflito de posição", isPresented: $viewModel.showSlotConflictAlert) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text(viewModel.conflictMessage)
+            }
         }
     }
 }
-
-
-//#Preview {
-//    @Previewable @Environment(\.modelContext) var context
-//
-//    AddHabitStepTwoView(
-//        viewModel: HabitsViewModel(
-//            habitCompletionService: HabitCompletionRepository(context: context),
-//            habitService: HabitRepository(context: context)
-//        ),
-//        title: "Novo Hábito"
-//    )
-//}
