@@ -288,6 +288,9 @@
     "Continuar" : {
 
     },
+    "Criar meu primeiro hábito" : {
+
+    },
     "Crie seu primeiro hábito e dê o \n primeiro passo para sua nova rotina." : {
 
     },
@@ -1027,11 +1030,14 @@
         }
       }
     },
-
     "Voçê tem certeza que deseja excluir esse hábito?" : {
 
     },
     "Voltar a editar" : {
+
+    },
+    "Zerar Tempo" : {
+
     }
   },
   "version" : "1.0"

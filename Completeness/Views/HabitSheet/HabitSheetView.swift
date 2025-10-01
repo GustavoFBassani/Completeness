@@ -13,6 +13,7 @@ struct HabitSheetView: View {
     @State var showEditView = false
     @Binding var isTimeStoped: Bool
     
+    var selectedDate: Date
     // coming from viewModel
     var resetHabitTimer: () -> Void
     //coming from viewModel
@@ -28,7 +29,7 @@ struct HabitSheetView: View {
     //should come from viewModel...
     private var habitProgress: Int {
         if let habitLog = habit.habitLogs?.first(where: { log in
-            log.completionDate == Calendar.current.startOfDay(for: Date()) }) {
+            log.completionDate == Calendar.current.startOfDay(for: selectedDate) }) {
             switch habit.habitCompleteness {
             case .byToggle, .byMultipleToggle:
                 return habitLog.howManyTimesItWasDone
@@ -55,7 +56,7 @@ struct HabitSheetView: View {
     }
     private var habitProgressTimer: String {
         if let habitLog = habit.habitLogs?.first(where: { log in
-            log.completionDate == Calendar.current.startOfDay(for: Date()) })
+            log.completionDate == Calendar.current.startOfDay(for: selectedDate) })
          {
             return habitLog.formattedTime
         }

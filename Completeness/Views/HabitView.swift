@@ -42,7 +42,7 @@ struct HabitView: View {
                             }
                         }) {  habit in
                             HabitSheetView(isTimeStoped: $viewModel.isTimeStoped,
-                                           resetHabitTimer: {Task{ await viewModel.resetHabitTimer(habit: habit) }; refreshView.toggle()},
+                                           selectedDate: viewModel.selectedDate, resetHabitTimer: {Task{ await viewModel.resetHabitTimer(habit: habit) }; refreshView.toggle()},
                                            completeTheHabitAutomatically: { Task {await viewModel.completeHabitAutomatically(habit: habit);  refreshView.toggle()}},
                                            subtractOneStep: { Task { await viewModel.decreaseHabitSteps(habit: habit);  refreshView.toggle() }},
                                            increaseOneStepOrStopAndPauseTimer: { Task { await viewModel.didTapHabit(habit); refreshView.toggle()}},
