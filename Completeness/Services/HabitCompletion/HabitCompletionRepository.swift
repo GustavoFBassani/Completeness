@@ -98,6 +98,9 @@ class HabitCompletionRepository: HabitCompletionProtocol {
             // IF the log doenst not exist, create one.
             let newHabitLog = HabitLog(completionDate: targetDay)
             newHabitLog.howManyTimesItWasDone += 1
+            if habitToChange.howManyTimesToToggle == 1 {
+                newHabitLog.isCompleted = true
+            }
             logs.append(newHabitLog)
             habitToChange.habitLogs = logs
             try? context.save()
@@ -225,6 +228,7 @@ class HabitCompletionRepository: HabitCompletionProtocol {
             if isRunning[id] == true {
                 isRunning[id] = false
             }
+            
             try? await Task.sleep(nanoseconds: 1_000_000_000)
             habitLog.secondsElapsed = 0
             habitLog.isCompleted = false
