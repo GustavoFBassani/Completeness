@@ -84,14 +84,14 @@ struct HabitsConfigView: View {
                             }
                         }
                         
-                        DatePicker(selection: $viewModel.newHabitDate, displayedComponents: .date) {
-                            HStack {
-                                Image(systemName: "calendar")
-                                    .foregroundStyle(Color.indigoCustom)
-                                    .font(.system(size: 16))
-                                Text("Começa em")
-                            }
-                        }
+//                        DatePicker(selection: $viewModel.newHabitDate, displayedComponents: .date) {
+//                            HStack {
+//                                Image(systemName: "calendar")
+//                                    .foregroundStyle(Color.indigoCustom)
+//                                    .font(.system(size: 16))
+//                                Text("Começa em")
+//                            }
+//                        }
                         
                         Picker(selection: $typeOfRepetition) {
                             Text("Todos os dias").tag(DaysRepeation.allDays)
