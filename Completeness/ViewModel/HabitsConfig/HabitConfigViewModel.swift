@@ -8,13 +8,13 @@
 import Foundation
 
 @Observable
-class HabitConfigViewModel {
+class HabitConfigViewModel: HabitConfigViewModelProtocol {
     // MARK: HABIT - INFO
 //    var habits: [Habit] = []
     var id: UUID?
     var habitName = ""
     var selectedDays: [Int] = []
-    var habitsSymbol = "checkmark.circle"
+    var habitsSymbol = "checkmark.circle.fill"
     var newHabitDescription = ""
     //how to complete the habit
     var completenessType = CompletionHabit.byToggle

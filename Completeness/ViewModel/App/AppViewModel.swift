@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-class AppViewModel {
+class AppViewModel: AppViewModelProtocol {
     var isAuthenticated = false
     var errorMessage: String?
 

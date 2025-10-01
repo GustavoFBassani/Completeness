@@ -18,7 +18,7 @@ enum HabitsStates {
 
 // MARK: - ViewModel
 @Observable
-final class HabitsViewModel: HabitsProtocol, Sendable {
+final class HabitsViewModel: HabitsViewModelProtocol, Sendable {
     var state: HabitsStates = .idle
     var selectedDate: Date = .now {
         didSet {
@@ -103,7 +103,7 @@ final class HabitsViewModel: HabitsProtocol, Sendable {
         isHabitRunning()
         
     }
-    // --------------------
+    
     func getHabitLog(habit: Habit) -> HabitLog? {
         if let habitLog = habit.habitLogs?.first(where: {log in
             log.completionDate == selectedDate }) {

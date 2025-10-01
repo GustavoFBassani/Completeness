@@ -73,14 +73,28 @@ struct HabitsConfigView: View {
                         }
                         .tint(.secondary)
                         
-                        DatePicker(selection: $viewModel.newHabitDate, displayedComponents: .date) {
+                        
+                        NavigationLink {
+                            IconPickerView(selectedIcon: $viewModel.habitsSymbol)
+                        } label: {
                             HStack {
-                                Image(systemName: "calendar")
+                                Image(systemName: viewModel.habitsSymbol)
                                     .foregroundStyle(Color.indigoCustom)
                                     .font(.system(size: 16))
-                                Text("Começa em")
+                                Text("Icone")
+                                
+                                Spacer()
                             }
                         }
+                        
+//                        DatePicker(selection: $viewModel.newHabitDate, displayedComponents: .date) {
+//                            HStack {
+//                                Image(systemName: "calendar")
+//                                    .foregroundStyle(Color.indigoCustom)
+//                                    .font(.system(size: 16))
+//                                Text("Começa em")
+//                            }
+//                        }
                         
                         Picker(selection: $typeOfRepetition) {
                             Text("Todos os dias").tag(DaysRepeation.allDays)

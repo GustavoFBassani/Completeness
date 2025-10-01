@@ -41,7 +41,9 @@ struct HabitView: View {
                             }
                         }) {  habit in
                             HabitSheetView(isHabbitRunning: $viewModel.isHabbitWithIdRunning,
+                                           selectedDate: viewModel.selectedDate,
                                            resetHabitTimer: {Task{ await viewModel.resetHabitTimer(habit: habit) }; refreshView.toggle()},
+
                                            completeTheHabitAutomatically: { Task {await viewModel.completeHabitAutomatically(habit: habit);  refreshView.toggle()}},
                                            subtractOneStep: { Task { await viewModel.decreaseHabitSteps(habit: habit);  refreshView.toggle() }},
                                            increaseOneStepOrStopAndPauseTimer: { Task { await viewModel.didTapHabit(habit); refreshView.toggle()}},
@@ -85,7 +87,7 @@ struct HabitView: View {
             .padding(.horizontal)
             
             WeekDayPicker(selectedDate: $viewModel.selectedDate)
-                .padding(.vertical, 16)
+//                .padding(.vertical, 16)
             
             Divider()
             
@@ -115,5 +117,6 @@ struct HabitView: View {
         .background(.backgroundSecondary)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .task { await viewModel.loadData() }
+//        .navigationTitle("Hábitos")
     }
 }
