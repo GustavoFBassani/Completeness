@@ -60,9 +60,6 @@ class HabitCompletionRepository: HabitCompletionProtocol {
             if !habitLog.isCompleted {
                 habitLog.isCompleted = true
                 habitLog.howManyTimesItWasDone += 1
-            } else {
-                habitLog.isCompleted = false
-                habitLog.howManyTimesItWasDone -= 1
             }
             
         } else {
