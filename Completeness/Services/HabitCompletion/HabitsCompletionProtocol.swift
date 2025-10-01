@@ -17,4 +17,5 @@ protocol HabitCompletionProtocol {
     func isHabbitRunning(with id: UUID) -> Bool
     func decreaseHabitStep(id: UUID, on date: Date) async
     func restartHabitTimer(id: UUID, on date: Date) async
+    func deleteHabit(id: UUID) async
 }

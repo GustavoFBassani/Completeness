@@ -235,6 +235,19 @@ class HabitCompletionRepository: HabitCompletionProtocol {
         }
     }
     
+    func deleteHabit(id: UUID) async {
+        
+        if isRunning[id] == true {
+            isRunning[id] = false
+        }
+        try? await Task.sleep(nanoseconds: 1_000_000_000)
+        
+        if let habitToDelete = await getHabitById(id: id) {
+            context.delete(habitToDelete)
+            try? context.save()
+        }
+    }
+    
     /// Marks a habit as complete after a specified time interval.
     /// Useful for duration-based habits, like "Meditate for 5 minutes".
     /// - Parameters:

@@ -46,10 +46,10 @@ class HabitRepository: HabitRepositoryProtocol {
     func saveChanges() {
         try? context.save()
     }
-    func deleteHabit(id: UUID) async {
-        if let habitToDelete = await getHabitById(id: id) {
-            context.delete(habitToDelete)
-            try? context.save()
-        }
-    }
+//    func deleteHabit(id: UUID) async {
+//        if let habitToDelete = await getHabitById(id: id) {
+//            context.delete(habitToDelete)
+//            try? context.save()
+//        }
+//    }
 }

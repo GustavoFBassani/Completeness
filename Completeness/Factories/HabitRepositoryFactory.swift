@@ -20,3 +20,11 @@ struct HabitRepositoryFactory: HabitRepositoryFactoryProtocol {
         HabitRepository(context: context)
     }
 }
+
+struct HabitCompletitionFactory {
+    let context: ModelContext
+    
+    func makeHabitRepository() -> HabitCompletionRepository {
+        HabitCompletionRepository(context: context)
+    }
+}

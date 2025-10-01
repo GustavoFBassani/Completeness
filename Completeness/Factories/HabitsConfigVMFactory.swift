@@ -9,6 +9,7 @@ import Foundation
 
 struct HabitsConfigVMFactory {
     let repositoryFactory: HabitRepositoryFactory
+    let completitionFactory: HabitCompletitionFactory
     
     func createPredefinedHabits(habitName: String,
                                 habitsSymbol: String,
@@ -20,13 +21,15 @@ struct HabitsConfigVMFactory {
                                     completenessType: completenessType,
                                     habitRowPosition: habitRowPosition,
                                     habitColunmPosition: habitColunmPosition,
-                                    habitService: repositoryFactory.makeHabitRepository())
+                                    habitService: repositoryFactory.makeHabitRepository(),
+                                    habitCompletition: completitionFactory.makeHabitRepository())
     }
     
     func createPersonalizedHabits(rowPosition: Int, colunmPosition: Int) -> HabitConfigViewModel {
         return HabitConfigViewModel(habitRowPosition: rowPosition,
                                     habitColunmPosition: colunmPosition,
-                                    habitService: repositoryFactory.makeHabitRepository())
+                                    habitService: repositoryFactory.makeHabitRepository(),
+                                    habitCompletition: completitionFactory.makeHabitRepository())
     }
     
     func editHabits(habitName: String,
@@ -43,6 +46,7 @@ struct HabitsConfigVMFactory {
                                                      timesChoice: howManySecondsToComplete,
                                                      howManyTimesToComplete: howManyTimesToToggle,
                                                      habitService: repositoryFactory.makeHabitRepository(),
-                                           newHabitDescription: habitDescription)
+                                                  newHabitDescription: habitDescription,
+                                                  habitCompletition: completitionFactory.makeHabitRepository())
     }
 }
