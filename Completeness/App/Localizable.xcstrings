@@ -257,6 +257,7 @@
       }
     },
     "Começa em" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
