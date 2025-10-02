@@ -68,29 +68,25 @@ struct Notification2Tests: View {
                 .padding(.horizontal)
                 Spacer()
             }
-//            .navigationTitle("Teste Notificação")
-            .onAppear {
-                NotificationHelper.requestNotificationPermissions()
-                NotificationHelper.requestNotificationPermissionsBadge()
+            .task {
+                _ = await NotificationHelper().requestNotificationPermissions()
             }
         }
     }
     
     //PARA QUEM FOR TIRAR DO TESTE, COLOCAR ESTA FUNÇÃO NA VIEWMODEL ESPECÍFICA
     private func buttonTapped() {
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: selectedTime)
-        let minute = calendar.component(.minute, from: selectedTime)
-        
-        if UserDefaults.standard.bool(forKey: "notificationEnabled") {
-            NotificationHelper.scheduledDailyNotification(
-                title: notificationTitle,
-                body: notificationBody,
-                hour: hour,
-                minute: minute,
-                weekdays: Array(selectedWeekdays)
-            )
-        }
+//        let calendar = Calendar.current
+//        let hour = calendar.component(.hour, from: selectedTime)
+//        let minute = calendar.component(.minute, from: selectedTime)
+//        
+//        NotificationHelper.scheduledDailyNotification(
+//                title: notificationTitle,
+//                body: notificationBody,
+//                hour: hour,
+//                minute: minute,
+//                weekdays: Array(selectedWeekdays)
+//            )
     }
 }
 
@@ -117,3 +113,4 @@ struct MultipleSelectionRow: View {
 #Preview {
     Notification2Tests()
 }
+

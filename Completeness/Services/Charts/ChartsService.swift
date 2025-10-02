@@ -112,6 +112,15 @@ class ChartsService: ChartsServiceProtocol {
         return totalCompletions
     }
     
+    ///get the count of the habits
+    /// - Parameter ()
+    /// - Returns: A `Int` representing the total of habits.
+    func getNumberOfHabbits(inLastDays days: Int) async -> Int {
+        guard let allHabits = await fetchAllHabbits(), !allHabits.isEmpty else { return 0}
+        
+        return allHabits.count
+    }
+    
     // The functions below are private helpers to avoid code repetition.
     private func fetchAllHabbits() async -> [Habit]? {
         let descriptor = FetchDescriptor<Habit>()

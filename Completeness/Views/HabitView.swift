@@ -60,6 +60,7 @@ struct HabitView: View {
                             Task {
                                 await viewModel.loadData()
                                 refreshView.toggle()
+                                _ = await NotificationHelper().requestNotificationPermissions()
                             }
                         }) { rowAndColunm in
                             AddHabitsView(configsVMFactory: configsVMFactory,

@@ -191,6 +191,16 @@
         }
       }
     },
+    "Acompanhe seu progresso semanal" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Track your weekly progress\n"
+          }
+        }
+      }
+    },
     "Agendar Notificação" : {
       "localizations" : {
         "en" : {
@@ -207,6 +217,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Now it's \nup to you!"
+          }
+        }
+      }
+    },
+    "Ao excluir, você perderá todos os seus resumos e dados do seu hábito" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When you delete, you will lose all your habit summaries and data."
           }
         }
       }
@@ -271,28 +291,6 @@
         }
       }
     },
-    "Avalie" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Evaluate"
-          }
-        }
-      }
-    },
-    "Avisos" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notices"
-          }
-        }
-      }
-    },
     "Bem-vindo a \n sua nova rotina" : {
       "localizations" : {
         "en" : {
@@ -343,13 +341,12 @@
         }
       }
     },
-    "Começa em" : {
-      "extractionState" : "stale",
+    "Começar" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Starts in"
+            "value" : "Begin"
           }
         }
       }
@@ -644,17 +641,6 @@
         }
       }
     },
-    "Face ID" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Face ID"
-          }
-        }
-      }
-    },
     "FaceID" : {
       "localizations" : {
         "en" : {
@@ -765,17 +751,6 @@
         }
       }
     },
-    "Hello, World!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hello, World!"
-          }
-        }
-      }
-    },
     "Horário" : {
       "localizations" : {
         "en" : {
@@ -812,18 +787,17 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Language"
+            "value" : "Icon"
           }
         }
       }
     },
-    "Inglês" : {
-      "extractionState" : "stale",
+    "Ícone" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "English"
+            "value" : "Icon"
           }
         }
       }
@@ -834,6 +808,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Begin time"
+          }
+        }
+      }
+    },
+    "Iniciar Tempo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Begin time"
+          }
+        }
+      }
+    },
+    "Lembrete diário" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily reminder"
           }
         }
       }
@@ -888,17 +882,6 @@
         }
       }
     },
-    "Nenhum hábito para este dia" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No habits for this day"
-          }
-        }
-      }
-    },
     "Nenhum hábito para exibir." : {
       "localizations" : {
         "en" : {
@@ -929,24 +912,12 @@
         }
       }
     },
-    "Notif" : {
-      "extractionState" : "stale",
+    "Notificações no App" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notification"
-          }
-        }
-      }
-    },
-    "Notificações" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notifications"
+            "value" : "App Notifications"
           }
         }
       }
@@ -957,6 +928,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "New Habit"
+          }
+        }
+      }
+    },
+    "O hábito não pode ser editado enquanto está em andamento. Por favor, pause-o para poder editá-lo." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The habit cannot be edited while it is in progress. Please pause it to edit it."
           }
         }
       }
@@ -1017,7 +998,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Allow notifications"
+            "value" : "Pause"
           }
         }
       }
@@ -1048,17 +1029,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "By time"
-          }
-        }
-      }
-    },
-    "Português" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Portuguese"
           }
         }
       }
@@ -1103,6 +1073,26 @@
         }
       }
     },
+    "Resumo diário" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily summary"
+          }
+        }
+      }
+    },
+    "Resumo semanal" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weekly summary"
+          }
+        }
+      }
+    },
     "Salvar" : {
       "localizations" : {
         "en" : {
@@ -1129,17 +1119,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Select a habit"
-          }
-        }
-      }
-    },
-    "Semanalmente" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weekly"
           }
         }
       }

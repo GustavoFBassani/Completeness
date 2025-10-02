@@ -57,7 +57,7 @@ struct Onboarding4: View {
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 40)
                         
-                        Button {
+                         Button {
                             hasSeenOnboarding = true
                         } label: {
                             Text("Criar meu primeiro hábito")

@@ -4,12 +4,14 @@
 //
 //  Created by Gustavo Ferreira bassani on 15/09/25.
 //
+
 import SwiftUI
 import SwiftData
 
 struct ConfigView: View {
-    @AppStorage("notificationEnabled") private var notificationEnabled = true
-    @AppStorage("badgeEnabled") private var badgeEnabled = true
+    @AppStorage("dailyNotification") private var dailyNotification = true
+    @AppStorage("nightlyNotification") private var nightlyNotification = true
+    @AppStorage("weeklyNotification") private var weeklyNotification = true
     @AppStorage("selectedTheme") private var selectedTheme = "system"
     @AppStorage("faceIDEnabled") private var faceIDEnabled = false
     @AppStorage("selectedLanguage") private var selectedLanguage = "pt"
@@ -64,20 +66,67 @@ struct ConfigView: View {
                 }
             }
             
-//            Section(header: Text("Notificações")) {
-//                HStack {
-//                    Image(systemName: "app.badge")
-//                        .foregroundStyle(.indigoCustom)
-//                    Toggle("Avisos", isOn: $badgeEnabled)
-//                }
-//                .tint(.green)
-//                HStack {
-//                    Image(systemName: "bell.badge")
-//                        .foregroundStyle(.indigoCustom)
-//                    Toggle("Permitir notificações", isOn: $notificationEnabled)
-//                }
-//                .tint(.green)
-//            }
+            Section(header: Text("Notificações no App")) {
+                HStack {
+                    Image(systemName: "bell.badge")
+                        .foregroundStyle(.indigoCustom)
+                    Toggle("Lembrete diário", isOn: Binding(
+                        get: { dailyNotification },
+                        set: { newValue in
+                            Task {
+                                if newValue {
+                                    dailyNotification = true
+                                    print("notificação de incentivo - on")
+                                } else {
+                                    dailyNotification = false
+                                    print("notificação incentivo - off")
+                                }
+                            }
+                        }
+                    ))
+                }
+                .tint(.green)
+                
+                HStack {
+                    Image(systemName: "clock.badge")
+                        .foregroundStyle(.indigoCustom)
+                    Toggle("Resumo diário", isOn: Binding(
+                        get: { nightlyNotification },
+                        set: { newValue in
+                            Task {
+                                if newValue {
+                                    nightlyNotification = true
+                                    print("notificação noturna - on")
+                                } else {
+                                    nightlyNotification = false
+                                    print("notificação noturna - off")
+                                }
+                            }
+                        }
+                    ))
+                }
+                .tint(.green)
+                
+                HStack {
+                    Image(systemName: "calendar.badge")
+                        .foregroundStyle(.indigoCustom)
+                    Toggle("Resumo semanal", isOn: Binding(
+                        get: { weeklyNotification },
+                        set: { newValue in
+                            Task {
+                                if newValue {
+                                    weeklyNotification = true
+                                    print("notificação semanal - on")
+                                } else {
+                                    weeklyNotification = false
+                                    print("notificação semanal - off")
+                                }
+                            }
+                        }
+                    ))
+                }
+                .tint(.green)
+            }
         
             Section(header: Text("Sobre nós")) {
 //                Link(destination: URL(string: "https://apps.apple.com")!) {
@@ -139,8 +188,6 @@ struct ConfigView: View {
         }
     }
 }
-
-
 
 struct PrivacyPolicyView: View {
     @Environment(\.dismiss) var dismiss
