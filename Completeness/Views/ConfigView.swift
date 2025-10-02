@@ -47,7 +47,7 @@ struct ConfigView: View {
 //                    Toggle("Face ID", isOn: $settingsViewModel.isBiometryEnabled)
 //                    .tint(.green)
 //                }
-//
+//                
                 HStack {
                     Image(systemName: "paintpalette.fill")
                         .foregroundStyle(.indigo)

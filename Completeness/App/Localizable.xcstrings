@@ -192,7 +192,14 @@
       }
     },
     "Acompanhe seu progresso semanal" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Track your weekly progress\n"
+          }
+        }
+      }
     },
     "Agendar Notificação" : {
       "localizations" : {
@@ -225,7 +232,14 @@
       }
     },
     "Ao excluir, você perderá todos os seus resumos e dados do seu hábito" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When you delete, you will lose all your habit summaries and data."
+          }
+        }
+      }
     },
     "Apagar dados" : {
       "localizations" : {
@@ -338,7 +352,14 @@
       }
     },
     "Começar" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Begin"
+          }
+        }
+      }
     },
     "Completar" : {
       "localizations" : {
@@ -741,10 +762,24 @@
       }
     },
     "Icone" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icon"
+          }
+        }
+      }
     },
     "Ícone" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icon"
+          }
+        }
+      }
     },
     "Idioma" : {
       "extractionState" : "stale",
@@ -798,7 +833,14 @@
       }
     },
     "Iniciar Tempo" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Begin time"
+          }
+        }
+      }
     },
     "Meta" : {
       "localizations" : {
@@ -931,7 +973,14 @@
       }
     },
     "Pausar" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause"
+          }
+        }
+      }
     },
     "Permitir notificações" : {
       "extractionState" : "stale",
