@@ -64,18 +64,36 @@ struct HabitViewComponent: View {
         VStack {
             ZStack {
                 Circle()
-                    .fill(circleColor)
+                    .fill(.foreground)
                     .frame(width: 130, height: 130)
                     .shadow(color: .black.opacity(0.25), radius: 12, x: 0, y: 4)
                     .animation(.easeInOut(duration: 0.4).delay(0.3), value: isCompleted)
+                    .foregroundStyle(
+                        isCompleted
+                            ?  AnyShapeStyle(
+                                LinearGradient(
+                                    colors: [Color.indigoCustomTertiary, Color.indigoCustomSecondary],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            : AnyShapeStyle(Color.textFieldBackground)
+                    )
                 
                 Circle()
                     .trim(from: 0, to: maxProgress > 0 ? min(1, CGFloat(progressDone) / CGFloat(maxProgress)) : 0)
-                    .stroke(Color.indigoCustom,
+                    .stroke(AnyShapeStyle(
+                                LinearGradient(
+                                    colors: [Color.indigoCustomTertiary, Color.indigoCustomSecondary],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            ),
                             style: StrokeStyle(lineWidth: 6, lineCap: .round))
                     .frame(width: 124, height: 124)
                     .rotationEffect(.degrees(90))
                     .animation(.easeInOut(duration: 0.4), value: progressDone)
+
                 
                 VStack {
                     Image(systemName: habit.habitSimbol)
@@ -110,3 +128,4 @@ struct HabitViewComponent: View {
 //#Preview {
 //    HabitViewComponent(habit: ...)
 //}
+
