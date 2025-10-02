@@ -24,7 +24,8 @@ class HabitConfigViewModel: HabitConfigViewModelProtocol {
     var habitRowPosition = 0
     var habitColunmPosition = 0
     var newHabitDate = Date()
-    
+    var timesChoiceEnum: TimeOption = .oneMinute
+
     // UI feedback
     var showSlotConflictAlert = false
     var conflictMessage = ""
@@ -80,9 +81,7 @@ class HabitConfigViewModel: HabitConfigViewModelProtocol {
         self.newHabitDate = newHabitDate
         self.habitService = habitService
         self.habitCompletition = habitCompletition
-
     }
-
     
     //edit an habit
     init(habitName: String,
@@ -107,7 +106,9 @@ class HabitConfigViewModel: HabitConfigViewModelProtocol {
         self.habitService = habitService
         self.newHabitDescription = newHabitDescription
         self.habitCompletition = habitCompletition
-
+        
+        self.timesChoiceEnum = .init(rawValue: timesChoice) ?? .oneMinute
+        
     }
     
     // MARK: - Helper
@@ -125,6 +126,7 @@ class HabitConfigViewModel: HabitConfigViewModelProtocol {
             guard let habitWithID = await habitService.getHabitById(id: id) else {
                 return false
             }
+            
             
             let conflict = await habitService.hasSlotConflict(
                 valuePosition: habitWithID.valuePosition,
@@ -149,6 +151,14 @@ class HabitConfigViewModel: HabitConfigViewModelProtocol {
             habitWithID.howManyTimesToToggle = howManyTimesToComplete
             habitWithID.scheduleDays = selectedDays
             habitWithID.howManySecondsToComplete = timesChoice
+            
+            habitWithID.habitLogs = habitWithID.habitLogs?.map({ log in
+                log.secondsElapsed = min(log.secondsElapsed, timesChoice)
+                if log.secondsElapsed == timesChoice {
+                    log.isCompleted = true
+                }
+                return log
+            })
             habitService.saveChanges()
             return true
         } else {
@@ -206,4 +216,3 @@ class HabitConfigViewModel: HabitConfigViewModelProtocol {
         }
     }
 }
-

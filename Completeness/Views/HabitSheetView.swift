@@ -13,6 +13,7 @@ struct HabitSheetView: View {
     @Environment(\.dismiss) var dismiss
     @State var showEditView: Bool
     @Binding var isHabbitRunning: [UUID:Bool]
+    @State var showAlertOfHabitRunning = false
     
     var selectedDate: Date
     // coming from viewModel
@@ -39,7 +40,7 @@ struct HabitSheetView: View {
          increaseOneStepOrStopAndPauseTimer: @escaping () -> Void,
          habit: Habit,
          configsVMFactory: HabitsConfigVMFactory) {
-        self._showEditView = State(initialValue: showEditView)
+        self._showEditView = State(initialValue: showEditView) //underline pq é binding...
         self._isHabbitRunning = isHabbitRunning
         self.selectedDate = selectedDate
         self.resetHabitTimer = resetHabitTimer
@@ -205,7 +206,11 @@ struct HabitSheetView: View {
 
             
             Button("Editar"){
-                showEditView = true
+                if isHabbitRunning[habit.id] ?? false {
+                    showAlertOfHabitRunning = true
+                } else {
+                    showEditView = true
+                }
             }
             .font(.system(size: 17, weight: .semibold))
             .font(.callout)
@@ -214,6 +219,17 @@ struct HabitSheetView: View {
             
             Spacer()
         }
+        .alert(
+            "Hábito em andamento",
+            isPresented: $showAlertOfHabitRunning,
+            actions: {
+                Button("OK", role: .cancel) { }
+            },
+            message: {
+                Text("O hábito não pode ser editado enquanto está em andamento. Por favor, pause-o para poder editá-lo.")
+            }
+        )
+        
         .sheet(isPresented: $showEditView, content: {
                 detailsView
                 .onAppear{
@@ -229,3 +245,4 @@ struct HabitSheetView: View {
 //#Preview {
 //    HabitSheetView()
 //}
+

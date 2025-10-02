@@ -12,7 +12,14 @@
       }
     },
     "%.0f%%" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.0f%%"
+          }
+        }
+      }
     },
     "%lld" : {
       "localizations" : {
@@ -25,7 +32,14 @@
       }
     },
     "%lld habitos feitos" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld habits done"
+          }
+        }
+      }
     },
     "🏆 Hábitos Mais Concluídos" : {
       "localizations" : {
@@ -118,7 +132,14 @@
       }
     },
     "20:00" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "20:00"
+          }
+        }
+      }
     },
     "30 min" : {
       "localizations" : {
@@ -140,8 +161,35 @@
         }
       }
     },
+    "A meta só pode ser mantida ou aumentada. Se quiser definir uma meta menor, crie um novo hábito." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A goal can only be maintained or increased. If you want to set a smaller goal, create a new habit."
+          }
+        }
+      }
+    },
     "Acompanhe\nseu progresso" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Track\nyour progress"
+          }
+        }
+      }
+    },
+    "Acompanhe seu progresso semanal" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Track your weekly progress\n"
+          }
+        }
+      }
     },
     "Acompanhe seu progresso semanal" : {
 
@@ -157,7 +205,24 @@
       }
     },
     "Agora é \n com você!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Now it's \nup to you!"
+          }
+        }
+      }
+    },
+    "Ao excluir, você perderá todos os seus resumos e dados do seu hábito" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When you delete, you will lose all your habit summaries and data."
+          }
+        }
+      }
     },
     "Ao excluir, você perderá todos os seus resumos e dados do seu hábito" : {
 
@@ -183,10 +248,24 @@
       }
     },
     "Aprender algo novo" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Learn something new\n"
+          }
+        }
+      }
     },
     "Aqui, cada pequeno hábito conta \n para grandes transformações." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Here, every little habit counts\ntowards big transformations."
+          }
+        }
+      }
     },
     "Automático" : {
       "localizations" : {
@@ -198,30 +277,15 @@
         }
       }
     },
-    "Avalie" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Evaluate"
-          }
-        }
-      }
-    },
-    "Avisos" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notices"
-          }
-        }
-      }
-    },
     "Bem-vindo a \n sua nova rotina" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome to\nyour new routine"
+          }
+        }
+      }
     },
     "Buscando dados..." : {
       "localizations" : {
@@ -234,7 +298,14 @@
       }
     },
     "Buscar" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
+          }
+        }
+      }
     },
     "Cancelar" : {
       "localizations" : {
@@ -256,13 +327,12 @@
         }
       }
     },
-    "Começa em" : {
-      "extractionState" : "stale",
+    "Começar" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Starts in"
+            "value" : "Begin"
           }
         }
       }
@@ -271,10 +341,24 @@
 
     },
     "Completar" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Complete"
+          }
+        }
+      }
     },
     "Conclua sua primeira semana de hábitos e você verá o resumo sobre sua evolução aqui." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Complete your first week of habits and you'll see your progress summary here."
+          }
+        }
+      }
     },
     "Configurações" : {
       "localizations" : {
@@ -287,16 +371,44 @@
       }
     },
     "Conflito de posição" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "position conflicts"
+          }
+        }
+      }
     },
     "Continuar" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "continue"
+          }
+        }
+      }
     },
     "Criar meu primeiro hábito" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create your first habit"
+          }
+        }
+      }
     },
     "Crie seu primeiro hábito e dê o \n primeiro passo para sua nova rotina." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create your first habit and take the first step toward your new routine."
+          }
+        }
+      }
     },
     "Data" : {
       "localizations" : {
@@ -359,7 +471,14 @@
       }
     },
     "Editar" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        }
+      }
     },
     "Editar nome do hábito" : {
       "localizations" : {
@@ -412,16 +531,44 @@
       }
     },
     "Essa semana você concluiu %.0f%% dos seus hábitos" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This week you completed %.0f%% of your habits"
+          }
+        }
+      }
     },
     "Essa semana você concluiu %.0f%% dos seus hábitos, você foi muito bem!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This week you completed %.0f%% of your habits, you did great!"
+          }
+        }
+      }
     },
     "Esse hábito apareceu pouco essa semana, podemos juntos melhorar!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This habit has only appeared a little this week, we can improve it together!"
+          }
+        }
+      }
     },
     "Esse hábito já está se tornando parte da sua rotina, continue assim!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This habit is already becoming part of your routine, keep it up!"
+          }
+        }
+      }
     },
     "Etapas" : {
       "localizations" : {
@@ -454,7 +601,14 @@
       }
     },
     "Excluir hábito" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete habit"
+          }
+        }
+      }
     },
     "Exemplo" : {
       "localizations" : {
@@ -462,16 +616,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Exemple"
-          }
-        }
-      }
-    },
-    "Face ID" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Face ID"
           }
         }
       }
@@ -516,14 +660,45 @@
         }
       }
     },
+    "Hábito em andamento" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Habit in progress"
+          }
+        }
+      }
+    },
     "Hábito feito %lld vezes" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Habit done %lld times"
+          }
+        }
+      }
     },
     "Hábito mais feito" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Most common habit"
+          }
+        }
+      }
     },
     "Hábito menos feito" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Less done habit"
+          }
+        }
+      }
     },
     "Hábito personalizado" : {
       "localizations" : {
@@ -546,15 +721,11 @@
       }
     },
     "Hábitos semanais" : {
-
-    },
-    "Hello, World!" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hello, World!"
+            "value" : "Weekly habits"
           }
         }
       }
@@ -581,24 +752,50 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Language"
+            "value" : "Icon"
           }
         }
       }
     },
-    "Inglês" : {
-      "extractionState" : "stale",
+    "Ícone" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "English"
+            "value" : "Icon"
           }
         }
       }
     },
     "Iniciar tempo" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Begin time"
+          }
+        }
+      }
+    },
+    "Iniciar Tempo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Begin time"
+          }
+        }
+      }
+    },
+    "Lembrete diário" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily reminder"
+          }
+        }
+      }
     },
     "Iniciar Tempo" : {
 
@@ -609,6 +806,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Goal"
+          }
+        }
+      }
+    },
+    "Meta não pode ser reduzida" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Target cannot be reduced"
           }
         }
       }
@@ -629,17 +836,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dark mode"
-          }
-        }
-      }
-    },
-    "Nenhum hábito para este dia" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No habits for this day"
           }
         }
       }
@@ -674,24 +870,12 @@
         }
       }
     },
-    "Notif" : {
-      "extractionState" : "stale",
+    "Notificações no App" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notification"
-          }
-        }
-      }
-    },
-    "Notificações" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notifications"
+            "value" : "App Notifications"
           }
         }
       }
@@ -702,6 +886,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "New Habit"
+          }
+        }
+      }
+    },
+    "O hábito não pode ser editado enquanto está em andamento. Por favor, pause-o para poder editá-lo." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The habit cannot be edited while it is in progress. Please pause it to edit it."
           }
         }
       }
@@ -717,7 +911,14 @@
       }
     },
     "Organize sua rotina de \n forma simples e intuitiva" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Organize your routine in a\nsimple and intuitive way"
+          }
+        }
+      }
     },
     "Painel de Teste" : {
       "localizations" : {
@@ -738,7 +939,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Allow notifications"
+            "value" : "Pause"
           }
         }
       }
@@ -773,19 +974,15 @@
         }
       }
     },
-    "Português" : {
-      "extractionState" : "stale",
+    "Pular" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Portuguese"
+            "value" : "Skip"
           }
         }
       }
-    },
-    "Pular" : {
-
     },
     "Quantas vezes" : {
       "localizations" : {
@@ -813,6 +1010,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Summary"
+          }
+        }
+      }
+    },
+    "Resumo diário" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily summary"
+          }
+        }
+      }
+    },
+    "Resumo semanal" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weekly summary"
           }
         }
       }
@@ -847,17 +1064,6 @@
         }
       }
     },
-    "Semanalmente" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weekly"
-          }
-        }
-      }
-    },
     "Settings" : {
       "localizations" : {
         "en" : {
@@ -869,7 +1075,14 @@
       }
     },
     "Seus hábitos\nem um só lugar" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your habits in one only place"
+          }
+        }
+      }
     },
     "Simples" : {
       "localizations" : {
@@ -1002,7 +1215,14 @@
       }
     },
     "Veja resumos semanais e gerais que mostram sua evolução" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See weekly and general summaries that show your progress"
+          }
+        }
+      }
     },
     "Ver mais" : {
       "localizations" : {
@@ -1035,13 +1255,34 @@
       }
     },
     "Voçê tem certeza que deseja excluir esse hábito?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to delete this habit?"
+          }
+        }
+      }
     },
     "Voltar a editar" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back to edit"
+          }
+        }
+      }
     },
     "Zerar Tempo" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset Time"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

@@ -107,6 +107,7 @@ struct HabitView: View {
                     .padding()
                 }
                 .defaultScrollAnchor(.top)
+                .scrollIndicators(.hidden)
             default:
                 EmptyView()
             }

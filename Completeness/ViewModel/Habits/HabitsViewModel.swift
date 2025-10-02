@@ -152,7 +152,6 @@ final class HabitsViewModel: HabitsViewModelProtocol, Sendable {
     func resetHabitTimer(habit: Habit) async {
         await habitCompletionService.restartHabitTimer(id: habit.id, on: selectedDate)
         isHabitRunning()
-        
     }
     
     func getHabitLog(habit: Habit) -> HabitLog? {

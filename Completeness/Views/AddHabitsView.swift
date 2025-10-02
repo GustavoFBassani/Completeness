@@ -17,7 +17,7 @@ struct AddHabitsView: View {
         NavigationStack {
             ScrollView {
                 NavigationLink {
-                    HabitsConfigView(viewModel: configsVMFactory.createPersonalizedHabits(rowPosition: rowPosition, colunmPosition: colunmPosition))
+                    HabitsConfigView(viewModel: configsVMFactory.createPersonalizedHabits(rowPosition: rowPosition, colunmPosition: colunmPosition), howManyTimesToToggle: 1)
                 } label: {
                     Text("Hábito personalizado")
                         .foregroundColor(.white)

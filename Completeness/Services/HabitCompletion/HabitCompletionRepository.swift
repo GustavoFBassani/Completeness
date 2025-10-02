@@ -114,12 +114,7 @@ class HabitCompletionRepository: HabitCompletionProtocol {
         
         // IF THE LOG WITH SAME DAY EXIST
         if let habitLog = habitToChange.habitLogs?.first(where: { Calendar.current.isDate($0.completionDate, inSameDayAs: targetDay)})  {
-            // if the habit is completed, mark as undone and
-            if habitLog.isCompleted {
-                habitLog.isCompleted = false
-                habitLog.howManyTimesItWasDone = 0
-                return
-            }
+
             // complete habit automatically
             if habitLog.howManyTimesItWasDone < habitToChange.howManyTimesToToggle  {
                 habitLog.howManyTimesItWasDone = habitToChange.howManyTimesToToggle
