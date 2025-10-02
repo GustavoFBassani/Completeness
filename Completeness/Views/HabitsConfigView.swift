@@ -37,7 +37,6 @@ struct HabitsConfigView: View {
     @State private var showGoalMeta = false
     var dismissSheet: DismissAction? = nil
     @Environment(\.dismiss) private var dismiss
-
     
     var body: some View {
         NavigationStack {

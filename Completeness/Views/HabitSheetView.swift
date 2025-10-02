@@ -100,7 +100,8 @@ struct HabitSheetView: View {
                 howManySecondsToComplete: habit.howManySecondsToComplete,
                 howManyTimesToToggle: habit.howManyTimesToToggle,
                 habitDescription: habit.habitDescription
-            )
+            ),
+            howManyTimesToToggle: habit.howManyTimesToToggle
         ))
     }
     
