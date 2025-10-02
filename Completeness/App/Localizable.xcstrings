@@ -140,6 +140,9 @@
         }
       }
     },
+    "A meta só pode ser mantida ou aumentada. Se quiser definir uma meta menor, crie um novo hábito." : {
+
+    },
     "Acompanhe\nseu progresso" : {
 
     },
@@ -516,6 +519,9 @@
         }
       }
     },
+    "Hábito em andamento" : {
+
+    },
     "Hábito feito %lld vezes" : {
 
     },
@@ -613,6 +619,9 @@
         }
       }
     },
+    "Meta não pode ser reduzida" : {
+
+    },
     "Modo claro" : {
       "localizations" : {
         "en" : {
@@ -705,6 +714,9 @@
           }
         }
       }
+    },
+    "O hábito não pode ser editado enquanto está em andamento. Por favor, pause-o para poder editá-lo." : {
+
     },
     "OK" : {
       "localizations" : {
