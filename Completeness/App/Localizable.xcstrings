@@ -942,6 +942,16 @@
         }
       }
     },
+    "O hábito não pode ser editado enquanto está em andamento. Por favor, pause-o para poder editá-lo." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The habit cannot be edited while it is in progress. Please pause it to edit it."
+          }
+        }
+      }
+    },
     "OK" : {
       "localizations" : {
         "en" : {
