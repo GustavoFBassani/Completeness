@@ -39,13 +39,13 @@ struct ConfigView: View {
 //                    .tint(.labelSecondary)
 //                }
                 
-                HStack {
-                    Image(systemName: "faceid")
-                        .foregroundStyle(.indigoCustom)
-                    Toggle("Face ID", isOn: $settingsViewModel.isBiometryEnabled)
-                    .tint(.green)
-                }
-                
+//                HStack {
+//                    Image(systemName: "faceid")
+//                        .foregroundStyle(.indigoCustom)
+//                    Toggle("Face ID", isOn: $settingsViewModel.isBiometryEnabled)
+//                    .tint(.green)
+//                }
+//                
                 HStack {
                     Image(systemName: "paintpalette.fill")
                         .foregroundStyle(.indigo)
@@ -92,12 +92,18 @@ struct ConfigView: View {
 //                    }
 //                }
                 Button {
-                    if let url = URL(string: "https://wa.me/5551983385200") {
+                    let to = "suportecompleteness@gmail.com"
+                    let subject = "Suporte - Completeness"
+                    let body = "Olá, preciso de ajuda com..."
+                    let encodedSubject = subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                    let encodedBody = body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                    if let url = URL(string: "mailto:\(to)?subject=\(encodedSubject)&body=\(encodedBody)"),
+                       UIApplication.shared.canOpenURL(url) {
                         UIApplication.shared.open(url)
                     }
                 } label: {
                     HStack {
-                        Image(systemName: "phone.fill")
+                        Image(systemName: "envelope.fill")
                             .foregroundStyle(.indigoCustom)
                         Text("Fale conosco")
                             .foregroundColor(.primary)

@@ -31,13 +31,12 @@ struct HabitsConfigView: View {
     //view variables
     var title = "Hábito Personalizado"
     let weekDays = ["D", "S", "T", "Q", "Q", "S", "S"]
-    @State var timesChoice: TimeOption = .oneMinute
+    @State var howManyTimesToToggle: Int
     @State var typeOfRepetition: DaysRepeation = .allDays
-    @State var showDeleteAlert = false
+    @State private var showDeleteAlert = false
+    @State private var showGoalMeta = false
     var dismissSheet: DismissAction? = nil
-    
     @Environment(\.dismiss) private var dismiss
-
     
     var body: some View {
         NavigationStack {
@@ -87,14 +86,7 @@ struct HabitsConfigView: View {
                             }
                         }
                         
-//                        DatePicker(selection: $viewModel.newHabitDate, displayedComponents: .date) {
-//                            HStack {
-//                                Image(systemName: "calendar")
-//                                    .foregroundStyle(Color.indigoCustom)
-//                                    .font(.system(size: 16))
-//                                Text("Começa em")
-//                            }
-//                        }
+
                         
                         Picker(selection: $typeOfRepetition) {
                             Text("Todos os dias").tag(DaysRepeation.allDays)
@@ -155,7 +147,7 @@ struct HabitsConfigView: View {
                                     return formatter
                                 }()
                                 
-                                TextField("", value: $viewModel.howManyTimesToComplete, formatter: numberFormatter)
+                                TextField("", value: $howManyTimesToToggle, formatter: numberFormatter)
                                     .keyboardType(.numberPad)
                                     .textFieldStyle(.roundedBorder)
                                     .frame(width: 60)
@@ -170,7 +162,7 @@ struct HabitsConfigView: View {
                     
                     if viewModel.completenessType == .byTimer {
                         Section {
-                            Picker(selection: $timesChoice) {
+                            Picker(selection: $viewModel.timesChoiceEnum) {
                                 Text("1 min").tag(TimeOption.oneMinute)
                                 Text("3 min").tag(TimeOption.threeMinutes)
                                 Text("5 min").tag(TimeOption.fiveMinutes)
@@ -250,17 +242,20 @@ struct HabitsConfigView: View {
                             viewModel.selectedDays = [1, 2, 3, 4, 5, 6, 7]
                         }
                         
-                        viewModel.timesChoice = timesChoice.rawValue
+                        viewModel.timesChoice = viewModel.timesChoiceEnum.rawValue
                         if let id {
                             viewModel.id = id
                         }
-                        Task {
-                            let success = await viewModel.createNewHabit()
-                            if success {
+                        if viewModel.howManyTimesToComplete <= howManyTimesToToggle {
+                            Task {
+                                viewModel.howManyTimesToComplete = howManyTimesToToggle
                                 viewModel.newHabitDescription = ""
+                                await viewModel.createNewHabit()
                                 dismiss()
                                 dismiss()
                             }
+                        } else {
+                            showGoalMeta = true
                         }
                     }, label: {
                         Image(systemName: "checkmark")
@@ -274,6 +269,11 @@ struct HabitsConfigView: View {
                 Button("OK", role: .cancel) { }
             } message: {
                 Text(viewModel.conflictMessage)
+            }
+            .alert("Meta não pode ser reduzida", isPresented: $showGoalMeta) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text("A meta só pode ser mantida ou aumentada. Se quiser definir uma meta menor, crie um novo hábito.")
             }
         }
     }
