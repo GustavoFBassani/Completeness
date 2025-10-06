@@ -148,11 +148,11 @@ struct HabitSheetView: View {
                         .stroke(Color.indigoCustomSecondary.opacity(0.3), lineWidth: 14)
                         .frame(width: 170, height: 170)
                     Circle()
-                        .trim(from: 0, to: habitMaxProgress > 0 ? CGFloat(habitProgress) / CGFloat(habitMaxProgress) : 0)
+                        .trim(from: 0, to: habitMaxProgress > 0 ? CGFloat(habitProgress) / CGFloat(habit.isCompleted(on: selectedDate) ? habitProgress :   habitMaxProgress) : 0)
                         .stroke(Color.indigoCustom, style: StrokeStyle(lineWidth: 14, lineCap: .round))
                         .rotationEffect(.degrees(90))
                         .frame(width: 170, height: 170)
-                    Text(isHabbitIsByTimer ? habitProgressTimer : "\(habitProgress)/\(habitMaxProgress)")
+                    Text(isHabbitIsByTimer ? habitProgressTimer : "\(habitProgress)/\(habit.isCompleted(on: selectedDate) ? habitProgress :   habitMaxProgress)")
                         .font(.system(size: 42.12, weight: .bold))
                 }
                 if !isHabbitIsByTimer {
@@ -167,7 +167,8 @@ struct HabitSheetView: View {
                     }
                 }
             }
-            if isHabbitRunning[habit.id] ?? false {
+            if isHabbitRunning[habit.id] ?? false &&
+                !habit.isCompleted(on: selectedDate){
                 HStack(spacing: 4) {
                     Button {
                         resetHabitTimer()
@@ -207,6 +208,10 @@ struct HabitSheetView: View {
 
             
             Button("Editar"){
+
+                if habit.isCompleted(on: selectedDate) {
+                    isHabbitRunning[habit.id] = false
+                }
                 if isHabbitRunning[habit.id] ?? false {
                     showAlertOfHabitRunning = true
                 } else {
