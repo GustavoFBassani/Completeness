@@ -26,13 +26,10 @@ struct HabitView: View {
                         .onTapGesture {
                             Task {
                                 viewModel.habitToVerifyIfIsRunning = habitWithPosition
-                                await viewModel.didTapHabit(habitWithPosition)
+                                viewModel.selectedHabit = habitWithPosition
+                                await viewModel.triggerNotifications()
                                 refreshView.toggle()
                             }
-                        }
-                        .onLongPressGesture {
-                            viewModel.habitToVerifyIfIsRunning = habitWithPosition
-                            viewModel.selectedHabit = habitWithPosition
                         }
                         .sheet(item: $viewModel.selectedHabit, onDismiss: {
                             Task {

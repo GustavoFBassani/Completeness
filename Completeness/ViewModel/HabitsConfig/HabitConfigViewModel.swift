@@ -109,6 +109,7 @@ class HabitConfigViewModel: HabitConfigViewModelProtocol {
         
         self.timesChoiceEnum = .init(rawValue: timesChoice) ?? .oneMinute
         
+        
     }
     
     // MARK: - Helper

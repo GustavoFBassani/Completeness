@@ -40,7 +40,7 @@ struct HabitViewComponent: View {
         }) {
             return habitLog.formattedTime
         }
-        return ""
+        return "00:00"
     }
     private var progressDone: Int {
         let habitLog = habit.habitLogs?.first(where: {

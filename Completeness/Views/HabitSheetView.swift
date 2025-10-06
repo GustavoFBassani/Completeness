@@ -87,7 +87,7 @@ struct HabitSheetView: View {
             }) {
                 return habitLog.formattedTime
             }
-            return ""
+            return "00:00"
         }()
 
         self._detailsView = State(initialValue: HabitsConfigView(

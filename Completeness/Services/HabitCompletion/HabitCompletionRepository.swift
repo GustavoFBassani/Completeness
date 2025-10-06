@@ -156,64 +156,76 @@ class HabitCompletionRepository: HabitCompletionProtocol {
     func isHabbitRunning(with id: UUID) -> Bool {
         return isRunning[id] ?? false
     }
-    
+    var runningStart: [UUID: Date] = [:]
+    var timers: [UUID: Task<Void, Never>] = [:]
+
     @MainActor
     func completeByTimer(id: UUID, on date: Date) async {
         guard let habitToChange = await getHabitById(id: id) else { return }
         let targetDay = Calendar.current.startOfDay(for: date)
-        
+
+        // Se já estava rodando -> PAUSAR
         if isRunning[id] == true {
             isRunning[id] = false
-            return
-        }
-        
-        isRunning[id] = true
-        
-        // se existir habitLog no dia
-        if let habitLog = habitToChange.habitLogs?.first(where: { Calendar.current.isDate($0.completionDate, inSameDayAs: targetDay) }) {
-            print("entrou no habitLog")
-            //se o habitLog está completo
-            if habitLog.isCompleted == true {
-                return
-            } else {
-                // se não está completo
-                Task { @MainActor in
-                    while habitLog.secondsElapsed < habitToChange.howManySecondsToComplete && isRunning[id] == true {
-                        try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 segundo
-                        habitLog.secondsElapsed += 1
-                        try? context.save()
-                    }
-                    
-                    if habitLog.secondsElapsed == habitToChange.howManySecondsToComplete  {
+
+            timers[id]?.cancel()
+            timers[id] = nil
+
+            if let habitLog = habitToChange.habitLogs?.first(where: {
+                Calendar.current.isDate($0.completionDate, inSameDayAs: targetDay)
+            }) {
+                if let startDate = runningStart[id] {
+                    let diff = Int(Date().timeIntervalSince(startDate))
+                    habitLog.secondsElapsed += diff
+                    if habitLog.secondsElapsed >= habitToChange.howManySecondsToComplete {
                         habitLog.isCompleted = true
-                        try? context.save()
                     }
-                    isRunning[id] = false
+                    try? context.save()
                 }
             }
+            runningStart[id] = nil
+            return
+        }
+
+        // Se não estava rodando -> PLAY
+        isRunning[id] = true
+        runningStart[id] = Date()
+
+        let habitLog: HabitLog
+        if let existingLog = habitToChange.habitLogs?.first(where: {
+            Calendar.current.isDate($0.completionDate, inSameDayAs: targetDay)
+        }) {
+            if existingLog.isCompleted { return }
+            habitLog = existingLog
         } else {
-            //se não existir, cria um novo e começa
             var logs = habitToChange.habitLogs ?? []
             let newLog = HabitLog(completionDate: targetDay)
             logs.append(newLog)
             habitToChange.habitLogs = logs
-            
-            Task { @MainActor in
-                while newLog.secondsElapsed < habitToChange.howManySecondsToComplete && isRunning[id] == true {
-                    try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 segundo
-                    newLog.secondsElapsed += 1
-                    try? context.save()
+            habitLog = newLog
+            try? context.save()
+        }
+
+        // LOOP em tempo real (pra UI)
+        timers[id] = Task { @MainActor in
+            while isRunning[id] == true && habitLog.secondsElapsed < habitToChange.howManySecondsToComplete {
+                try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 segundo
+                // diferença real desde startDate
+                if let startDate = runningStart[id] {
+                    let diff = Int(Date().timeIntervalSince(startDate))
+                    habitLog.secondsElapsed += diff
+                    runningStart[id] = Date() // zera pro próximo ciclo
                 }
-                
-                // Completar o hábito
-                if newLog.secondsElapsed == habitToChange.howManySecondsToComplete {
-                    newLog.isCompleted = true
-                    try? context.save()
+                if habitLog.secondsElapsed >= habitToChange.howManySecondsToComplete {
+                    habitLog.isCompleted = true
+                    isRunning[id] = false
                 }
-                isRunning[id] = false
+                try? context.save()
             }
+            timers[id] = nil
         }
     }
+
     
     func restartHabitTimer(id: UUID, on date: Date) async {
         guard let habitToChange = await getHabitById(id: id) else { return }
