@@ -191,16 +191,6 @@
         }
       }
     },
-    "Acompanhe seu progresso semanal" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track your weekly progress\n"
-          }
-        }
-      }
-    },
     "Agendar Notificação" : {
       "localizations" : {
         "en" : {
@@ -217,16 +207,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Now it's \nup to you!"
-          }
-        }
-      }
-    },
-    "Ao excluir, você perderá todos os seus resumos e dados do seu hábito" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When you delete, you will lose all your habit summaries and data."
           }
         }
       }
@@ -337,16 +317,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Light"
-          }
-        }
-      }
-    },
-    "Começar" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Begin"
           }
         }
       }
@@ -792,16 +762,6 @@
         }
       }
     },
-    "Ícone" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Icon"
-          }
-        }
-      }
-    },
     "Iniciar tempo" : {
       "localizations" : {
         "en" : {
@@ -828,16 +788,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Daily reminder"
-          }
-        }
-      }
-    },
-    "Iniciar Tempo" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Begin time"
           }
         }
       }
@@ -928,16 +878,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "New Habit"
-          }
-        }
-      }
-    },
-    "O hábito não pode ser editado enquanto está em andamento. Por favor, pause-o para poder editá-lo." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The habit cannot be edited while it is in progress. Please pause it to edit it."
           }
         }
       }

@@ -5,38 +5,35 @@ struct StatsView: View {
     @State var viewModel: ChartsViewModelProtocol
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                if viewModel.mostCompletedHabits.isEmpty {
-                    StatsEmptyView()
-                        .containerRelativeFrame(.vertical)
-                } else {
-                    OverallChart(viewModel: $viewModel)
+        VStack(spacing: 16) {
+            if viewModel.mostCompletedHabits.isEmpty {
+                StatsEmptyView()
+                    .containerRelativeFrame(.vertical)
+            } else {
+                OverallChart(viewModel: $viewModel)
+                
+                if let mostCompleted = viewModel.mostCompletedHabits.first,
+                   let leastCompleted = viewModel.leastCompletedHabits.first {
+                    HabitStatCard(
+                        viewModel: $viewModel,
+                        habitCartType: .mostDone
+                    )
                     
-                    if let mostCompleted = viewModel.mostCompletedHabits.first,
-                       let leastCompleted = viewModel.leastCompletedHabits.first {
+                    if mostCompleted.id != leastCompleted.id {
                         HabitStatCard(
                             viewModel: $viewModel,
-                            habitCartType: .mostDone
+                            habitCartType: .leastDone
                         )
-                        
-                        if mostCompleted.id != leastCompleted.id {
-                            HabitStatCard(
-                                viewModel: $viewModel,
-                                habitCartType: .leastDone
-                            )
-                        }
                     }
                 }
             }
         }
+        .navigationTitle("Resumo")
         .padding()
         .frame(maxWidth: .infinity)
-        .background(Color.backgroundSecondary)
         .task {
             await viewModel.fetchChartBy7Days()
         }
-        .navigationTitle("Resumo")
     }
 }
 

@@ -119,7 +119,7 @@ struct HabitViewComponent: View {
             
             Text(habit.habitName)
                 .padding(.top, 6)
-                .font(.system(size: 12.8, weight: .semibold))
+                .font(.system(size: 12.8, weight: .bold))
                 .foregroundColor(.labelPrimary)
         }
     }

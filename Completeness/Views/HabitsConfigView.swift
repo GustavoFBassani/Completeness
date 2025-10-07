@@ -100,11 +100,13 @@ struct HabitsConfigView: View {
                             }
                         }
                         .tint(.secondary)
+                        
                     } header: {
                         Text("Geral")
                             .font(.system(size: 22).bold())
                             .foregroundStyle(Color.labelSecondary)
                     }
+                    
                     
                     if typeOfRepetition == .personalized {
                         Section{
@@ -264,7 +266,6 @@ struct HabitsConfigView: View {
                 }
             }
             .navigationBarBackButtonHidden()
-            // Alerta de conflito de posição/dias
             .alert("Conflito de posição", isPresented: $viewModel.showSlotConflictAlert) {
                 Button("OK", role: .cancel) { }
             } message: {

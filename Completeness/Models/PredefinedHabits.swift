@@ -168,6 +168,49 @@ enum PredefinedHabits: String, CaseIterable, Identifiable {
         }
     }
     
+    
+    var categories: Categories {
+        switch self {
+        // MARK: - Health
+        case .drinkWater, .meditate, .vitamins, .stretch, .skincare,
+             .eatHealthy, .tea, .brushTeeth, .coldShower, .noSmoking,
+             .breathing, .mobility, .washHands, .refillBottle, .fixPosture,
+             .meditation, .yoga, .rest, .sleep, .walking, .running:
+            return .health
+        
+        // MARK: - Work
+        case .checkAgenda, .checkEmails, .trackExpenses, .pomodoro:
+            return .work
+        
+        // MARK: - Hobby
+        case .journal, .takePhotos, .write, .draw, .reading,
+             .listenMusic, .creativity, .podcast, .takeStairs:
+            return .hobby
+        
+        // MARK: - Sports
+        case .walk, .steps:
+            return .sports
+        
+        // MARK: - Studies
+        case .readPages, .ideas, .learnNew, .study, .learnLanguages:
+            return .studies
+        
+        // MARK: - Home
+        case .makeBed, .cook, .cleaning, .organize, .petCare:
+            return .home
+        
+        // MARK: - Faith
+        case .gratitude, .beGrateful:
+            return .feith
+        
+        // MARK: - Other
+        case .noSocialMedia, .callFriends, .hug, .noScreens,
+             .smile, .sendAudio, .drinkCoffee, .familyTime,
+             .noScreensAlt, .outdoors:
+            return .other
+        }
+    }
+    
     var habitSimbol: String {
         switch self {
         case .drinkWater: return "drop.fill"
