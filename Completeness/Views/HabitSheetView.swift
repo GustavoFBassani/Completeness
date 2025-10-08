@@ -14,6 +14,7 @@ struct HabitSheetView: View {
     @State var showEditView: Bool
     @Binding var isHabbitRunning: [UUID:Bool]
     @State var showAlertOfHabitRunning = false
+    @State var hapictTrigger = 0
     
     var selectedDate: Date
     // coming from viewModel
@@ -153,12 +154,16 @@ struct HabitSheetView: View {
                         .stroke(Color.indigoCustom, style: StrokeStyle(lineWidth: 14, lineCap: .round))
                         .rotationEffect(.degrees(90))
                         .frame(width: 170, height: 170)
-                    Text(isHabbitIsByTimer ? habitProgressTimer : "\(habitProgress)/\(habit.isCompleted(on: selectedDate) ? habitProgress:   habitMaxProgress)")
+                    Text(isHabbitIsByTimer ? habitProgressTimer : "\(habitProgress)/\(habit.isCompleted(on: selectedDate) ? habitProgress :  habitMaxProgress)")
                         .font(.system(size: 42.12, weight: .bold))
                 }
                 if !isHabbitIsByTimer {
                     Button {
                         increaseOneStepOrStopAndPauseTimer()
+                        
+                        if ((habitProgress + 1) / habitMaxProgress == 1) {
+                            hapictTrigger += 1
+                        }
                     } label: {
                         Image(systemName: "plus")
                             .font(.system(size: 21.06, weight: .medium))
@@ -166,6 +171,7 @@ struct HabitSheetView: View {
                             .background(Color.indigoCustom, in: Circle())
                             .foregroundColor(.white)
                     }
+                    .sensoryFeedback(.impact(weight: .light, intensity: 2.0), trigger: hapictTrigger)
                 }
             }
             if isHabbitRunning[habit.id] ?? false &&
@@ -194,8 +200,10 @@ struct HabitSheetView: View {
                 Button {
                     if isHabbitIsByTimer {
                         increaseOneStepOrStopAndPauseTimer()
+                        hapictTrigger += 1
                     } else {
                         completeTheHabitAutomatically()
+                        hapictTrigger += 1
                     }
                 }label: {
                     Text(isHabbitIsByTimer ? "Iniciar Tempo" : "Completar")
@@ -205,6 +213,7 @@ struct HabitSheetView: View {
                         .cornerRadius(26)
                         .font(.system(size: 17, weight: .semibold))
                 }
+                .sensoryFeedback(.impact(weight: .light), trigger: hapictTrigger)
             }
 
             

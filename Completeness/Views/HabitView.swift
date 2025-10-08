@@ -12,6 +12,8 @@ struct HabitView: View {
     @Bindable var viewModel: HabitsViewModel
     @Binding var refreshView: Bool
     
+    @State var hapticTrigger = 0
+    
     let configsVMFactory: HabitsConfigVMFactory
     
     func showHabitsRow(witch row: Int) -> some View {
@@ -22,8 +24,9 @@ struct HabitView: View {
                 if let habitWithPosition = viewModel.habits.first(where: {habit in
                     habit.valuePosition == row && habit.indicePosition == colunm &&
                     viewModel.filteredHabits.contains(habit) }) {
-                    HabitViewComponent(habit: habitWithPosition, refreshView: refreshView, day: viewModel.selectedDate)
+                    HabitViewComponent(habit: habitWithPosition, refreshView: refreshView, day: viewModel.selectedDate, hapticActive: $hapticTrigger)
                         .onTapGesture {
+                            hapticTrigger += 1
                             Task {
                                 viewModel.habitToVerifyIfIsRunning = habitWithPosition
                                 viewModel.selectedHabit = habitWithPosition
@@ -49,8 +52,9 @@ struct HabitView: View {
                                 .presentationDetents([.medium])
                         }
                 } else {
-                    EmptyCircle()
+                    EmptyCircle(hapticTrigger: $hapticTrigger)
                         .onTapGesture {
+                            hapticTrigger += 1
                             viewModel.createHabbitWithPosition = Position(row: row, column: colunm)
                         }
                         .sheet(item: $viewModel.createHabbitWithPosition, onDismiss: {
@@ -72,7 +76,7 @@ struct HabitView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            WeekDayPicker(selectedDate: $viewModel.selectedDate)
+            WeekDayPicker(selectedDate: $viewModel.selectedDate, hapticTrigger: $hapticTrigger)
 //                .padding(.vertical, 16)
             
             Divider()

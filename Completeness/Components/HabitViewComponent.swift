@@ -12,6 +12,8 @@ struct HabitViewComponent: View {
     var refreshView = false
     let day: Date
     
+    @Binding var hapticActive: Int
+    
     private var maxProgress: Int {
         switch habit.habitCompleteness {
         case .byToggle, .byMultipleToggle:
@@ -122,6 +124,7 @@ struct HabitViewComponent: View {
                 .font(.system(size: 12.8, weight: .bold))
                 .foregroundColor(.labelPrimary)
         }
+        .sensoryFeedback(.impact(weight: .heavy), trigger: hapticActive)
     }
 }
 

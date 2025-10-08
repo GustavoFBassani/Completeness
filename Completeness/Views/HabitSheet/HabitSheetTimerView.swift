@@ -46,9 +46,7 @@ let maxValue = 5
                         .font(.system(size: 42.12, weight: .bold))
                 }
             }
-            Button {
-                        
-            }label: {
+            Button {}label: {
                 Text("Iniciar tempo")
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, minHeight: 52)
