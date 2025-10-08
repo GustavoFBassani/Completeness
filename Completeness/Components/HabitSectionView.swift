@@ -35,6 +35,7 @@ struct HabitSectionView: View {
                                                                                         completenessType: habit.completionType,
                                                                                         habitRowPosition: rowPosition,
                                                                                         habitColunmPosition: colunmPosition),
+                                     title: habit.habitName,
                                      howManyTimesToToggle: 1)
                 } label: {
                     HStack {

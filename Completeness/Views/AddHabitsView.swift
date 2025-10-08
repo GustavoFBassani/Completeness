@@ -28,25 +28,56 @@ struct AddHabitsView: View {
                 }
                 .padding(.vertical)
                 
+                                
                 VStack(spacing: 20) {
                     // Seções dinâmicas
-                    HabitSectionView(title: "Hábitos simples",
+                    HabitSectionView(title: "Saúde",
                                      rowPosition: rowPosition,
                                      colunmPosition: colunmPosition,
-                                     habits: PredefinedHabits.allCases.filter { $0.completionType == .byToggle },
+                                     habits: PredefinedHabits.allCases.filter { $0.categories == .health },
                                      configsVMFactory: configsVMFactory)
-                    HabitSectionView(
-                        title: "Hábitos múltiplos",
-                        rowPosition: rowPosition,
-                        colunmPosition: colunmPosition,
-                        habits: PredefinedHabits.allCases.filter { $0.completionType == .byMultipleToggle },
-                        configsVMFactory: configsVMFactory)
-                    HabitSectionView(
-                        title: "Hábitos por tempo",
-                        rowPosition: rowPosition,
-                        colunmPosition: colunmPosition,
-                        habits: PredefinedHabits.allCases.filter { $0.completionType == .byTimer },
-                        configsVMFactory: configsVMFactory)
+
+                    HabitSectionView(title: "Trabalho",
+                                     rowPosition: rowPosition,
+                                     colunmPosition: colunmPosition,
+                                     habits: PredefinedHabits.allCases.filter { $0.categories == .work },
+                                     configsVMFactory: configsVMFactory)
+
+                    HabitSectionView(title: "Hobbies",
+                                     rowPosition: rowPosition,
+                                     colunmPosition: colunmPosition,
+                                     habits: PredefinedHabits.allCases.filter { $0.categories == .hobby },
+                                     configsVMFactory: configsVMFactory)
+
+                    HabitSectionView(title: "Esportes",
+                                     rowPosition: rowPosition,
+                                     colunmPosition: colunmPosition,
+                                     habits: PredefinedHabits.allCases.filter { $0.categories == .sports },
+                                     configsVMFactory: configsVMFactory)
+
+                    HabitSectionView(title: "Estudos",
+                                     rowPosition: rowPosition,
+                                     colunmPosition: colunmPosition,
+                                     habits: PredefinedHabits.allCases.filter { $0.categories == .studies },
+                                     configsVMFactory: configsVMFactory)
+
+                    HabitSectionView(title: "Casa",
+                                     rowPosition: rowPosition,
+                                     colunmPosition: colunmPosition,
+                                     habits: PredefinedHabits.allCases.filter { $0.categories == .home },
+                                     configsVMFactory: configsVMFactory)
+
+                    HabitSectionView(title: "Fé",
+                                     rowPosition: rowPosition,
+                                     colunmPosition: colunmPosition,
+                                     habits: PredefinedHabits.allCases.filter { $0.categories == .feith },
+                                     configsVMFactory: configsVMFactory)
+
+                    HabitSectionView(title: "Outros",
+                                     rowPosition: rowPosition,
+                                     colunmPosition: colunmPosition,
+                                     habits: PredefinedHabits.allCases.filter { $0.categories == .other },
+                                     configsVMFactory: configsVMFactory)
                     Spacer()
                 }
             }

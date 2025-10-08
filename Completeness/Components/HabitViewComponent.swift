@@ -40,7 +40,7 @@ struct HabitViewComponent: View {
         }) {
             return habitLog.formattedTime
         }
-        return ""
+        return "00:00"
     }
     private var progressDone: Int {
         let habitLog = habit.habitLogs?.first(where: {
@@ -81,7 +81,7 @@ struct HabitViewComponent: View {
                     )
                 
                 Circle()
-                    .trim(from: 0, to: maxProgress > 0 ? min(1, CGFloat(progressDone) / CGFloat(maxProgress)) : 0)
+                    .trim(from: 0, to: maxProgress > 0 ? min(1, CGFloat(progressDone) / CGFloat(habit.isCompleted(on: day) ? progressDone : maxProgress)) : 0)
                     .stroke(AnyShapeStyle(
                                 LinearGradient(
                                     colors: [Color.indigoCustomTertiary, Color.indigoCustomSecondary],
@@ -103,13 +103,13 @@ struct HabitViewComponent: View {
                         .animation(.easeInOut(duration: 0.4).delay(0.3), value: isCompleted)
                         .frame(width: 58, height: 58)
                     
-                    if progressDone < maxProgress {
+                    if progressDone < maxProgress && !habit.isCompleted(on: day) {
                         Text( habbitIsByTimer ? progressTimer : "\(progressDone)/\(maxProgress)")
                             .font(.system(size: 12.8, weight: .semibold))
                             .foregroundColor(.labelSecondary)
                     }
                     
-                    if progressDone == maxProgress {
+                    if habit.isCompleted(on: day) {
                         Text("Feito!")
                             .font(.system(size: 12.8, weight: .semibold))
                             .foregroundColor(.white)
@@ -119,7 +119,7 @@ struct HabitViewComponent: View {
             
             Text(habit.habitName)
                 .padding(.top, 6)
-                .font(.system(size: 12.8, weight: .semibold))
+                .font(.system(size: 12.8, weight: .bold))
                 .foregroundColor(.labelPrimary)
         }
     }

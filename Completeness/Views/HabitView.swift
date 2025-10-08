@@ -26,13 +26,10 @@ struct HabitView: View {
                         .onTapGesture {
                             Task {
                                 viewModel.habitToVerifyIfIsRunning = habitWithPosition
-                                await viewModel.didTapHabit(habitWithPosition)
+                                viewModel.selectedHabit = habitWithPosition
+                                await viewModel.triggerNotifications()
                                 refreshView.toggle()
                             }
-                        }
-                        .onLongPressGesture {
-                            viewModel.habitToVerifyIfIsRunning = habitWithPosition
-                            viewModel.selectedHabit = habitWithPosition
                         }
                         .sheet(item: $viewModel.selectedHabit, onDismiss: {
                             Task {
@@ -75,18 +72,6 @@ struct HabitView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Text("Hábitos")
-                    .font(.largeTitle).bold()
-                
-                Spacer()
-                
-                //                AddHabitButton {
-                //                    showingAddHabit = true
-                //                }
-            }
-            .padding(.horizontal)
-            
             WeekDayPicker(selectedDate: $viewModel.selectedDate)
 //                .padding(.vertical, 16)
             
@@ -115,10 +100,8 @@ struct HabitView: View {
         .onAppear {
             viewModel.selectedDate = Calendar.current.startOfDay(for: Date())
         }
-        
-        .background(.backgroundSecondary)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .task { await viewModel.loadData() }
-//        .navigationTitle("Hábitos")
+        .navigationTitle("Hábitos")
     }
 }

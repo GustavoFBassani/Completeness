@@ -38,7 +38,7 @@ final class HabitsViewModel: HabitsViewModelProtocol, Sendable {
     var chartsService: ChartsService
     var createHabbitWithPosition: Position?
     var selectedHabit: Habit?
-    var isHabbitWithIdRunning: [UUID : Bool] = [:]
+    var isHabbitWithIdRunning: [UUID: Bool] = [:]
     var habitToVerifyIfIsRunning: Habit?
     
     init(habitCompletionService: HabitCompletionProtocol,
@@ -116,9 +116,6 @@ final class HabitsViewModel: HabitsViewModelProtocol, Sendable {
         }
     }
 
-    
-    
-
     func isHabitRunning() {
         if let habitToVerifyIfIsRunning {
             let isRunning = habitCompletionService.isHabbitRunning(with: habitToVerifyIfIsRunning.id)
@@ -127,7 +124,6 @@ final class HabitsViewModel: HabitsViewModelProtocol, Sendable {
         }
     }
 
-    
     @MainActor
     func didTapHabit(_ habit: Habit) async {
         await triggerNotifications()

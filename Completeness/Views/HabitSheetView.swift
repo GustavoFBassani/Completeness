@@ -32,14 +32,14 @@ struct HabitSheetView: View {
     @State var detailsView: HabitsConfigView
     // swiftlint:disable:next line_length
     init(showEditView: Bool = false,
-         isHabbitRunning: Binding<[UUID:Bool]>,
+         isHabbitRunning: Binding<[UUID: Bool]>,
          selectedDate: Date,
          resetHabitTimer: @escaping () -> Void,
          completeTheHabitAutomatically: @escaping () -> Void,
          subtractOneStep: @escaping () -> Void,
          increaseOneStepOrStopAndPauseTimer: @escaping () -> Void,
          habit: Habit,
-         configsVMFactory: HabitsConfigVMFactory) {
+         configsVMFactory: HabitsConfigVMFactory){
         self._showEditView = State(initialValue: showEditView) //underline pq é binding...
         self._isHabbitRunning = isHabbitRunning
         self.selectedDate = selectedDate
@@ -87,7 +87,7 @@ struct HabitSheetView: View {
             }) {
                 return habitLog.formattedTime
             }
-            return ""
+            return "00:00"
         }()
 
         self._detailsView = State(initialValue: HabitsConfigView(
@@ -101,6 +101,7 @@ struct HabitSheetView: View {
                 howManyTimesToToggle: habit.howManyTimesToToggle,
                 habitDescription: habit.habitDescription
             ),
+            title: habit.habitName,
             howManyTimesToToggle: habit.howManyTimesToToggle
         ))
     }
@@ -148,11 +149,11 @@ struct HabitSheetView: View {
                         .stroke(Color.indigoCustomSecondary.opacity(0.3), lineWidth: 14)
                         .frame(width: 170, height: 170)
                     Circle()
-                        .trim(from: 0, to: habitMaxProgress > 0 ? CGFloat(habitProgress) / CGFloat(habitMaxProgress) : 0)
+                        .trim(from: 0, to: habitMaxProgress > 0 ? CGFloat(habitProgress) / CGFloat(habit.isCompleted(on: selectedDate) ? habitProgress:   habitMaxProgress) : 0)
                         .stroke(Color.indigoCustom, style: StrokeStyle(lineWidth: 14, lineCap: .round))
                         .rotationEffect(.degrees(90))
                         .frame(width: 170, height: 170)
-                    Text(isHabbitIsByTimer ? habitProgressTimer : "\(habitProgress)/\(habitMaxProgress)")
+                    Text(isHabbitIsByTimer ? habitProgressTimer : "\(habitProgress)/\(habit.isCompleted(on: selectedDate) ? habitProgress:   habitMaxProgress)")
                         .font(.system(size: 42.12, weight: .bold))
                 }
                 if !isHabbitIsByTimer {
@@ -167,7 +168,8 @@ struct HabitSheetView: View {
                     }
                 }
             }
-            if isHabbitRunning[habit.id] ?? false {
+            if isHabbitRunning[habit.id] ?? false &&
+                !habit.isCompleted(on: selectedDate){
                 HStack(spacing: 4) {
                     Button {
                         resetHabitTimer()
@@ -207,6 +209,10 @@ struct HabitSheetView: View {
 
             
             Button("Editar"){
+
+                if habit.isCompleted(on: selectedDate) {
+                    isHabbitRunning[habit.id] = false
+                }
                 if isHabbitRunning[habit.id] ?? false {
                     showAlertOfHabitRunning = true
                 } else {
@@ -230,7 +236,6 @@ struct HabitSheetView: View {
                 Text("O hábito não pode ser editado enquanto está em andamento. Por favor, pause-o para poder editá-lo.")
             }
         )
-        
         .sheet(isPresented: $showEditView, content: {
                 detailsView
                 .onAppear{
@@ -242,8 +247,3 @@ struct HabitSheetView: View {
         .presentationDragIndicator(.visible)
     }
 }
-
-//#Preview {
-//    HabitSheetView()
-//}
-
