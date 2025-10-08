@@ -37,17 +37,9 @@ struct CompletenessAppContentView: View {
             NavigationStack {
                 Onboarding1()
             }
-        } else if appViewModel.isAuthenticated {
+        } else {
             TabBar()
                 .preferredColorScheme(getColorScheme())
-        } else {
-            VStack {
-                Text("FaceID")
-                ProgressView()
-            }
-            .task {
-                await appViewModel.autenticateIfNeeded()
-            }
         }
     }
     

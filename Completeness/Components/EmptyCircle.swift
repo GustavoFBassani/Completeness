@@ -10,6 +10,8 @@ import SwiftUI
 struct EmptyCircle: View {
     var habit: Habit? = nil
 
+    @Binding var hapticTrigger: Int
+    
     var body: some View {
         VStack(alignment: .center, spacing: 6) {
             Image(systemName: habit?.habitSimbol ?? "plus")
@@ -25,9 +27,10 @@ struct EmptyCircle: View {
                 .foregroundStyle(habit?.habitName != nil ? .labelPrimary : .labelSecondary)
                 .fontWeight(.semibold)
         }
+        .sensoryFeedback(.impact(weight: .light), trigger: hapticTrigger)
     }
 }
 
-#Preview {
-    EmptyCircle()
-}
+//#Preview {
+//    EmptyCircle()
+//}

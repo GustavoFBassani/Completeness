@@ -612,6 +612,7 @@
       }
     },
     "FaceID" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

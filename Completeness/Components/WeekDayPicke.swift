@@ -11,7 +11,8 @@ struct WeekDayPicker: View {
     
     // Alcance de semanas navegáveis
     private let weeksRange: ClosedRange<Int> = -52...52
-    @State private var currentWeekOffset: Int = 0
+    @State private var currentWeekOffset = 0
+    @Binding var hapticTrigger: Int
     private var calendar: Calendar { Calendar.current }
     
     var body: some View {
@@ -42,8 +43,10 @@ struct WeekDayPicker: View {
                             }
                         )
                         .onTapGesture {
+                            hapticTrigger += 1
                             selectedDate = date
                         }
+                        .sensoryFeedback(.impact(weight: .light), trigger: hapticTrigger)
                     }
                 }
 
