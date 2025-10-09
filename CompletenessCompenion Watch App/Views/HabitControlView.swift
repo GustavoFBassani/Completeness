@@ -25,7 +25,7 @@ struct HabitControlView: View {
                 HStack(spacing: 15) {
                     if #available(watchOS 26.0, *) {
                         Button() {
-                            
+                          //
                         } label: {
                             Image(systemName: "minus")
                                 .font(.system(size: 24).bold())
@@ -35,7 +35,9 @@ struct HabitControlView: View {
                         .frame(width: 44.5, height: 44.5)
                         .glassEffect()
                     } else {
-                        Button() {} label: {
+                        Button() {
+                            //
+                        } label: {
                             Image(systemName: "minus")
                                 .font(.system(size: 24).bold())
                         }
@@ -117,8 +119,6 @@ struct HabitControlView: View {
             }
             .frame(maxWidth: .infinity)
         }
-        
-        
     }
 }
 
