@@ -11,7 +11,8 @@ import SwiftUI
 struct CompletenessCompenion_Watch_AppApp: App {
     var body: some Scene {
         WindowGroup {
-            HabitControlView()
+            ContentView()
         }
+        .modelContainer(for: [Habit.self, HabitLog.self])
     }
 }

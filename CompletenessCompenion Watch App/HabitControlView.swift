@@ -8,14 +8,35 @@
 import SwiftUI
 
 struct HabitControlView: View {
-    @State var progresso = 2
-    @State var maxProgresso = 5
+    @Binding var habit: Habit
     
+    private var progressDone: Int {
+        let habitLog = habit.habitLogs?.first(where: {
+            Calendar.current.isDate($0.completionDate, inSameDayAs: .now)
+        })
+        switch habit.habitCompleteness {
+        case .byToggle, .byMultipleToggle:
+            return habitLog?.howManyTimesItWasDone ?? 0
+        case .byTimer:
+            return habitLog?.secondsElapsed ?? 0
+        case .none:
+            return 0
+        }
+    }
+    
+    private var progressTimer: String {
+        if let habitLog = habit.habitLogs?.first(where: {
+            Calendar.current.isDate($0.completionDate, inSameDayAs: .now)
+        }) {
+            return habitLog.formattedTime
+        }
+        return "00:00"
+    }
     
     var body: some View {
         NavigationStack {
             VStack {
-                Text("Ler páginas")
+                Text(habit.habitName)
                     .font(.system(size: 17, weight: .medium))
                     .foregroundStyle(.indigo)
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -45,7 +66,7 @@ struct HabitControlView: View {
                     }
                     
                     VStack{
-                        Text("\(progresso)/\(maxProgresso)")
+                        Text(habit.habitCompleteness == .byTimer ? progressTimer : "\(progressDone)/\(habit.howManyTimesToToggle)")
                             .font(.title.bold())
                             .foregroundStyle(.primary)
                         
@@ -55,7 +76,7 @@ struct HabitControlView: View {
                             
                             RoundedRectangle(cornerRadius: 10)
                                 .foregroundStyle(.indigo)
-                                .frame(width: 64 * (Double(progresso) / Double(maxProgresso)))
+                                .frame(width: 64 * (Double(progressDone) / Double(habit.habitCompleteness == .byTimer ? habit.howManySecondsToComplete : habit.howManyTimesToToggle)))
                         }
                         .frame(width: 64, height: 5)
                         .padding(-8)
@@ -120,8 +141,4 @@ struct HabitControlView: View {
         
         
     }
-}
-
-#Preview {
-    HabitControlView()
 }

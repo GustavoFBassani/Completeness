@@ -75,6 +75,10 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				App/Assets.xcassets,
+				Models/Categories.swift,
+				Models/CompletionHabit.swift,
+				Models/HabbitLog.swift,
+				Models/Habit.swift,
 			);
 			target = C4885F142E720C4700CE01BD /* CompletenessCompenion Watch App */;
 		};
@@ -489,6 +493,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = W35YJ39H5L;
 				"DEVELOPMENT_TEAM[sdk=watchos*]" = W35YJ39H5L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -505,7 +510,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.academy.Completeness.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = CompletenessWatchOSProfile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = applewatchcomICLOUDDDD;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = applewatchcomICLOUDDDD;
+				REGISTER_APP_GROUPS = YES;
 				RESOURCES_TARGETED_DEVICE_FAMILY = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -546,6 +553,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = CompletenessWatchOSProfile;
+				REGISTER_APP_GROUPS = YES;
 				RESOURCES_TARGETED_DEVICE_FAMILY = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
