@@ -31,6 +31,18 @@ struct HabitsConfigView: View {
     //view variables
     var title = "Hábito Personalizado"
     let weekDays = ["D", "S", "T", "Q", "Q", "S", "S"]
+    
+    var habitCompletenessDescription: String {
+            switch viewModel.completenessType {
+            case .byToggle:
+                return "Toque único para marcar o hábito como feito."
+            case .byMultipleToggle:
+                return "Cada toque avança o contador até o objetivo."
+            case .byTimer:
+                return "Inicie um cronômetro e o hábito se completa quando o tempo acabar."
+            }
+        }
+    
     @State var howManyTimesToToggle: Int
     @State var typeOfRepetition: DaysRepeation = .allDays
     @State private var showDeleteAlert = false
@@ -40,6 +52,7 @@ struct HabitsConfigView: View {
     
     var body: some View {
         NavigationStack {
+            VStack{
                 Form {
                     Section {
                         TextField("Ex: Tomar água", text: $viewModel.habitName)
@@ -86,7 +99,7 @@ struct HabitsConfigView: View {
                             }
                         }
                         
-
+                        
                         
                         Picker(selection: $typeOfRepetition) {
                             Text("Todos os dias").tag(DaysRepeation.allDays)
@@ -100,13 +113,16 @@ struct HabitsConfigView: View {
                             }
                         }
                         .tint(.secondary)
-                        
                     } header: {
                         Text("Geral")
                             .font(.system(size: 22).bold())
                             .foregroundStyle(Color.labelSecondary)
+                    } footer: {
+                        Text(habitCompletenessDescription)
+                            .font(.footnote)
+                            .foregroundStyle(Color.labelSecondary)
+                            .padding(.top, 4)
                     }
-                    
                     
                     if typeOfRepetition == .personalized {
                         Section{
@@ -227,8 +243,12 @@ struct HabitsConfigView: View {
                         }
                     }
                 }
+                
+                Spacer()
+            }
             .navigationTitle(title)
             .navigationBarTitleDisplayMode(.inline)
+            .background(Color.backgroundSecondary)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(action: {
