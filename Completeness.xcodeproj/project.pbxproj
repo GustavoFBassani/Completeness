@@ -71,6 +71,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6494C30F2E96EA0200798843 /* Exceptions for "Completeness" folder in "CompletenessCompenion Watch App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				App/Assets.xcassets,
+			);
+			target = C4885F142E720C4700CE01BD /* CompletenessCompenion Watch App */;
+		};
 		C49112352E74989600B988F5 /* Exceptions for "CompletenessWidgets" folder in "CompletenessWidgetsExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -110,6 +117,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				C4CFA3512E70416A00140530 /* Exceptions for "Completeness" folder in "Completeness" target */,
+				6494C30F2E96EA0200798843 /* Exceptions for "Completeness" folder in "CompletenessCompenion Watch App" target */,
 			);
 			path = Completeness;
 			sourceTree = "<group>";
