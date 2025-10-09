@@ -5,59 +5,6 @@
 //  Created by Gustavo Melleu on 09/10/25.
 //
 //
-//import SwiftUI
-//
-//struct HabitWatch: View {
-//    var habits = [
-//        "Ler páginas",
-//        "Yoga",
-//        "Dormir cedo",
-//        "Beber água",
-//        "Estudar SwiftUI"
-//    ]
-//    
-//    @State private var isBolView = false
-//
-//    var body: some View {
-//        NavigationStack {
-//            ScrollView {
-//                VStack(spacing: 3.5) { // espaço entre cards
-//                    ForEach(habits, id: \.self) { habit in
-//                        NavigationLink(destination: HabitControlView()) {
-//                            if isBolView {
-//                                HabitsComponentBol()
-//                            } else {
-//                                HabitsComponent()
-//                            }
-//                        }
-//                        .buttonStyle(.plain)
-//                    }
-//                }
-//                .padding(.vertical, 6)
-//            }
-//            .navigationTitle("Hábitos")
-//            .navigationBarTitleDisplayMode(.inline)
-//            .toolbar {
-//                ToolbarItem(placement: .topBarLeading) {
-//                    Button {
-//                        withAnimation(.easeInOut) {
-//                            isBolView.toggle()
-//                        }
-//                    } label: {
-//                        Image(systemName: isBolView ? "list.bullet" : "circle.hexagongrid.fill")
-//                            .font(.system(size: 17, weight: .semibold))
-//                            .foregroundStyle(.white)
-//                    }
-//                }
-//            }
-//            .toolbarRole(.navigationStack)
-//        }
-//    }
-//}
-//
-//#Preview {
-//    HabitWatch()
-//}
 import SwiftUI
 
 struct HabitWatch: View {
