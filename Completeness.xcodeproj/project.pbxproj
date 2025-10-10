@@ -533,7 +533,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.academy.Completeness.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = applewatchcomICLOUDDDD;
+
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = PPVitor;
 				RESOURCES_TARGETED_DEVICE_FAMILY = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;

@@ -70,7 +70,7 @@ struct OverallChart: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 26)
-                .foregroundStyle(.backgroundPrimary)
+                .foregroundStyle(Color.backgroundPrimary)
         )
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {

@@ -26,11 +26,13 @@ struct StatsView: View {
                         )
                     }
                 }
+                
+                Spacer()
             }
         }
         .navigationTitle("Resumo")
         .padding()
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .task {
             await viewModel.fetchChartBy7Days()
         }
