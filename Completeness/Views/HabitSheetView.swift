@@ -175,7 +175,7 @@ struct HabitSheetView: View {
                 }
             }
             if isHabbitRunning[habit.id] ?? false &&
-                !habit.isCompleted(on: selectedDate){
+                !habit.isCompleted(on: selectedDate) {
                 HStack(spacing: 4) {
                     Button {
                         resetHabitTimer()

@@ -9,6 +9,13 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>CompletenessCompenion Watch App 1.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>CompletenessCompenion Watch App.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -16,6 +23,8 @@
 		</dict>
 		<key>CompletenessWidgetsExtension.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
@@ -23,6 +32,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>C4885F142E720C4700CE01BD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C491121F2E74989400B988F5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
