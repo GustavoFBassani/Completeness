@@ -7,7 +7,9 @@
 
 import Foundation
 import UserNotifications
+#if canImport(UIKit)
 import UIKit
+#endif
 
  class NotificationHelper: NSObject {
     private let center = UNUserNotificationCenter.current()
@@ -147,8 +149,12 @@ import UIKit
         content.title = title
         content.body = body
 
+        #if os(iOS)
         let current = UIApplication.shared.applicationIconBadgeNumber
         content.badge = NSNumber(value: max(0, current) + 1)
+        #else
+        // Badges and UIApplication are unavailable on watchOS. Skip badge increment.
+        #endif
 
         content.sound = .default
         return content

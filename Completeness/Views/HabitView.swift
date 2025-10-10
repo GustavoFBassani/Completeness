@@ -45,7 +45,7 @@ struct HabitView: View {
                                            resetHabitTimer: {Task{ await viewModel.resetHabitTimer(habit: habit) }; refreshView.toggle()},
 
                                            completeTheHabitAutomatically: { Task {await viewModel.completeHabitAutomatically(habit: habit);  refreshView.toggle()}},
-                                           subtractOneStep: { Task { await viewModel.decreaseHabitSteps(habit: habit);  refreshView.toggle() }},
+                                           subtractOneStep: { Task { await viewModel.decreaseHabitSteps(habit: habit, date: viewModel.selectedDate);  refreshView.toggle() }},
                                            increaseOneStepOrStopAndPauseTimer: { Task { await viewModel.didTapHabit(habit); refreshView.toggle()}},
                                            habit: habit,
                                            configsVMFactory: configsVMFactory)

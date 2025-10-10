@@ -6,16 +6,18 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
+    @Query var habits: [Habit]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ScrollView(.vertical) {
+            ForEach(habits) { habit in
+                HabitsComponent(habit: habit)
+            }
+            .padding()
         }
-        .padding()
     }
 }
 

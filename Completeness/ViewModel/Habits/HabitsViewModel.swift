@@ -18,7 +18,7 @@ enum HabitsStates {
 
 // MARK: - ViewModel
 @Observable
-final class HabitsViewModel: HabitsViewModelProtocol, Sendable {
+final class HabitsViewModel: /*HabitsViewModelProtocol,*/ Sendable {
     var state: HabitsStates = .idle
     var selectedDate: Date = .now {
         didSet {
@@ -123,6 +123,12 @@ final class HabitsViewModel: HabitsViewModelProtocol, Sendable {
             isHabbitWithIdRunning[habitToVerifyIfIsRunning.id] = isRunning
         }
     }
+    
+    func isHabitFromWatchRuning(habit: Habit) {
+        let isRunning = habitCompletionService.isHabbitRunning(with: habit.id)
+        // Preserve existing running states for other habits and update only this habit's entry
+        isHabbitWithIdRunning[habit.id] = isRunning
+    }
 
     @MainActor
     func didTapHabit(_ habit: Habit) async {
@@ -130,6 +136,7 @@ final class HabitsViewModel: HabitsViewModelProtocol, Sendable {
         await completeHabit(habit: habit, on: selectedDate)
         await loadData()
         isHabitRunning()
+        isHabitFromWatchRuning(habit: habit)
     }
     //used at sheet --------
     func didTapSelectedHabit(_ habit: Habit) async {
@@ -141,8 +148,8 @@ final class HabitsViewModel: HabitsViewModelProtocol, Sendable {
         await habitCompletionService.completeToggleAndMultipleToggleAutomatic(id: habit.id, on: selectedDate)
     }
     
-    func decreaseHabitSteps(habit: Habit) async {
-        await habitCompletionService.decreaseHabitStep(id: habit.id, on: selectedDate)
+    func decreaseHabitSteps(habit: Habit, date: Date) async {
+        await habitCompletionService.decreaseHabitStep(id: habit.id, on: date)
     }
     
     func resetHabitTimer(habit: Habit) async {
