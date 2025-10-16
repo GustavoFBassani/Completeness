@@ -42,6 +42,7 @@ struct HabitView: View {
                         }) {  habit in
                             HabitSheetView(isHabbitRunning: $viewModel.isHabbitWithIdRunning,
                                            selectedDate: viewModel.selectedDate,
+                                          
                                            resetHabitTimer: {Task{ await viewModel.resetHabitTimer(habit: habit) }; refreshView.toggle()},
 
                                            completeTheHabitAutomatically: { Task {await viewModel.completeHabitAutomatically(habit: habit);  refreshView.toggle()}},

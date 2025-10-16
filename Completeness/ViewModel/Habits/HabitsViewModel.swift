@@ -1,11 +1,7 @@
-////
-////  HabitsViewModel.swift
-////  Completeness
-////
-////  Created by Gustavo Ferreira bassani on 16/09/25.
-////
-
 import SwiftUI
+#if canImport(ActivityKit)
+import ActivityKit
+#endif
 import Observation
 import Combine
 
@@ -33,13 +29,18 @@ final class HabitsViewModel: /*HabitsViewModelProtocol,*/ Sendable {
     var habitService: HabitRepositoryProtocol
     var textField = ""
     var filteredHabits: [Habit] = []
-
+    
     var notificationService: NotificationHelper
     var chartsService: ChartsService
     var createHabbitWithPosition: Position?
     var selectedHabit: Habit?
     var isHabbitWithIdRunning: [UUID: Bool] = [:]
     var habitToVerifyIfIsRunning: Habit?
+    
+    #if canImport(ActivityKit)
+    var timerActivity: Activity<timerActivityAttributes>?
+    #endif
+    var habitTimerForActivity: Timer?
     
     init(habitCompletionService: HabitCompletionProtocol,
          habitService: HabitRepositoryProtocol,
@@ -115,7 +116,7 @@ final class HabitsViewModel: /*HabitsViewModelProtocol,*/ Sendable {
             notificationService.removeDailyNotification()
         }
     }
-
+    
     func isHabitRunning() {
         if let habitToVerifyIfIsRunning {
             let isRunning = habitCompletionService.isHabbitRunning(with: habitToVerifyIfIsRunning.id)
@@ -129,13 +130,30 @@ final class HabitsViewModel: /*HabitsViewModelProtocol,*/ Sendable {
         // Preserve existing running states for other habits and update only this habit's entry
         isHabbitWithIdRunning[habit.id] = isRunning
     }
-
+    
     @MainActor
     func didTapHabit(_ habit: Habit) async {
         await triggerNotifications()
         await completeHabit(habit: habit, on: selectedDate)
         await loadData()
+        habitToVerifyIfIsRunning = habit
         isHabitRunning()
+        
+        #if canImport(ActivityKit)
+        if habit.habitCompleteness == .byTimer {
+            if isHabbitWithIdRunning[habit.id] ?? false {
+                if timerActivity == nil {
+                    
+                    startTimerActivity(for: habit)
+                }
+                startInternalTimerForActivity(for: habit)
+            } else {
+                stopInternalTimer()
+                endTimerActivity(for: habit)
+            }
+        }
+        #endif
+        
         isHabitFromWatchRuning(habit: habit)
     }
     //used at sheet --------
@@ -154,6 +172,12 @@ final class HabitsViewModel: /*HabitsViewModelProtocol,*/ Sendable {
     
     func resetHabitTimer(habit: Habit) async {
         await habitCompletionService.restartHabitTimer(id: habit.id, on: selectedDate)
+        
+        #if canImport(ActivityKit)
+        stopInternalTimer()
+        endTimerActivity(for: habit)
+        #endif
+        
         isHabitRunning()
     }
     
@@ -164,22 +188,92 @@ final class HabitsViewModel: /*HabitsViewModelProtocol,*/ Sendable {
         }
         return nil
     }
-
-@MainActor
-func loadData() async {
-    do {
-        try await getAllHabits()
-        
-        filteredHabits = habits.filter {
-            $0.isScheduled(for: selectedDate)
+    
+    @MainActor
+    func loadData() async {
+        do {
+            try await getAllHabits()
+            
+            filteredHabits = habits.filter {
+                $0.isScheduled(for: selectedDate)
+            }
+            
+            print(filteredHabits)
+            
+            state = .loaded
+        } catch {
+            errorMessage = "Error fetching products: \(error.localizedDescription)"
+            state = .error
         }
-        
-        print(filteredHabits)
-        
-        state = .loaded
-    } catch {
-        errorMessage = "Error fetching products: \(error.localizedDescription)"
-        state = .error
     }
-}
+    
+    #if canImport(ActivityKit)
+    func startTimerActivity(for habit: Habit) {
+        guard timerActivity == nil else { return }
+        
+        let activityAttributes = timerActivityAttributes(habitName: habit.habitName, habitDuration: habit.howManySecondsToComplete, habitIcon: habit.habitSimbol)
+        
+        guard let progress = getHabitLog(habit: habit)?.secondsElapsed else { return }
+        let initalState = timerActivityAttributes.ContentState(timePassed: progress, isRunning: true)
+        
+        do {
+            timerActivity = try Activity<timerActivityAttributes>.request(
+                attributes: activityAttributes,
+                contentState: initalState,
+                pushType: nil)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func endTimerActivity(for habit: Habit) {
+        guard !(timerActivity == nil) else { return }
+        guard let progress = getHabitLog(habit: habit)?.secondsElapsed else { return }
+        let finalState = timerActivityAttributes.ContentState(timePassed: progress, isRunning: false)
+        
+        Task {
+            await timerActivity?.end(using: finalState, dismissalPolicy: .default)
+            timerActivity = nil
+        }
+    }
+    
+    func updateTimerActivity(for habit: Habit) {
+        guard !(timerActivity == nil) else { return }
+        guard let progress = getHabitLog(habit: habit)?.secondsElapsed else { return }
+        
+        let newState = timerActivityAttributes.ContentState(timePassed: progress, isRunning: true)
+        
+        Task {
+            await timerActivity?.update(using: newState)
+        }
+    }
+    #endif
+    
+    func startInternalTimerForActivity(for habit: Habit) {
+        habitTimerForActivity?.invalidate()
+        
+        self.habitTimerForActivity = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            guard let self = self else {return}
+            
+            Task {
+                await self.loadData()
+                
+                #if canImport(ActivityKit)
+                if let updatedHabit = self.habits.first(where: { $0.id == habit.id }) {
+                    self.updateTimerActivity(for: habit)
+                    
+                    if habit.isCompleted(on: self.selectedDate) {
+                        self.stopInternalTimer()
+                        self.endTimerActivity(for: updatedHabit)
+                    }
+                }
+                #endif
+            }
+        }
+    }
+    
+    func stopInternalTimer() {
+        self.habitTimerForActivity?.invalidate()
+        self.habitTimerForActivity = nil
+    }
 }

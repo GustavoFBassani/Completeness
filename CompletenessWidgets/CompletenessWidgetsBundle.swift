@@ -12,5 +12,6 @@ import SwiftUI
 struct CompletenessWidgetsBundle: WidgetBundle {
     var body: some Widget {
         CompletenessWidgets()
+        timerLiveActivityWidget()
     }
 }
