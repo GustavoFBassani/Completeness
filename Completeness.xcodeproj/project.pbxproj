@@ -10,7 +10,6 @@
 		C49112232E74989400B988F5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C49112222E74989400B988F5 /* WidgetKit.framework */; };
 		C49112252E74989400B988F5 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C49112242E74989400B988F5 /* SwiftUI.framework */; };
 		C49112312E74989600B988F5 /* CompletenessWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C49112202E74989400B988F5 /* CompletenessWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		C4B04F732E9830FF00BDAE10 /* CompletenessCompenion Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C4885F152E720C4700CE01BD /* CompletenessCompenion Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,13 +34,6 @@
 			remoteGlobalIDString = C491121F2E74989400B988F5;
 			remoteInfo = CompletenessWidgetsExtension;
 		};
-		C4B04F742E9830FF00BDAE10 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C4CFA33C2E70416900140530 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C4885F142E720C4700CE01BD;
-			remoteInfo = "CompletenessCompenion Watch App";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,9 +41,8 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
-			dstSubfolderSpec = 16;
+			dstSubfolderSpec = 0;
 			files = (
-				C4B04F732E9830FF00BDAE10 /* CompletenessCompenion Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,7 +290,6 @@
 			dependencies = (
 				C4885F1E2E720C4800CE01BD /* PBXTargetDependency */,
 				C491122F2E74989600B988F5 /* PBXTargetDependency */,
-				C4B04F752E9830FF00BDAE10 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				C4CFA3462E70416900140530 /* Completeness */,
@@ -458,11 +448,6 @@
 			target = C491121F2E74989400B988F5 /* CompletenessWidgetsExtension */;
 			targetProxy = C491122E2E74989600B988F5 /* PBXContainerItemProxy */;
 		};
-		C4B04F752E9830FF00BDAE10 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C4885F142E720C4700CE01BD /* CompletenessCompenion Watch App */;
-			targetProxy = C4B04F742E9830FF00BDAE10 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -533,8 +518,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.academy.Completeness.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = PPVitor;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = applewatchcomICLOUDDDD;
 				RESOURCES_TARGETED_DEVICE_FAMILY = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -662,9 +646,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Completeness/Completeness.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W35YJ39H5L;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = W35YJ39H5L;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -686,6 +672,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.academy.Completeness;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = CompletenessiOSProfile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

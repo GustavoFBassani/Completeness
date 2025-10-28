@@ -101,6 +101,7 @@ struct HabitView: View {
                 EmptyView()
             }
         }
+        .background(.backgroundSecondary)
         .onAppear {
             viewModel.selectedDate = Calendar.current.startOfDay(for: Date())
         }
